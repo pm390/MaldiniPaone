@@ -17,8 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
-					"defaultDiagram": true
+					"name": "Main"
 				}
 			]
 		},
@@ -37,6 +36,7 @@
 						"$ref": "AAAAAAFuHVXADj3MpSU="
 					},
 					"name": "UseCaseDiagram1",
+					"defaultDiagram": true,
 					"ownedViews": [
 						{
 							"_type": "UMLActorView",
@@ -3057,6 +3057,19 @@
 							},
 							"lineStyle": 1,
 							"points": "281:522;461:483"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFuIbdQ/54R2+c=",
+							"_parent": {
+								"$ref": "AAAAAAFuHVXADj3NLEo="
+							},
+							"font": "Arial;13;0",
+							"left": 800,
+							"top": 80,
+							"width": 104,
+							"height": 88,
+							"text": "Server is a part of SafeStreet. Maybe we can remove it."
 						}
 					]
 				},

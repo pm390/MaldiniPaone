@@ -17,8 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
-					"defaultDiagram": true
+					"name": "Main"
 				}
 			]
 		},
@@ -37,6 +36,7 @@
 						"$ref": "AAAAAAFuHOpgzf5Awos="
 					},
 					"name": "UseCaseDiagram1",
+					"defaultDiagram": true,
 					"ownedViews": [
 						{
 							"_type": "UMLActorView",
@@ -5046,6 +5046,19 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAFuHVJkeU/LVdo="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFuIbVC/VKK4+Q=",
+							"_parent": {
+								"$ref": "AAAAAAFuHOpgzv5BgtQ="
+							},
+							"font": "Arial;13;0",
+							"left": 728,
+							"top": 360,
+							"width": 124.04443359375,
+							"height": 129,
+							"text": "maybe more generically should say mapping API and not google maps(google maps may be specified in DesignDocument)"
 						}
 					]
 				},
