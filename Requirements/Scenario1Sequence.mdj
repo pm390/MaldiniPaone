@@ -17,7 +17,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main"
+					"name": "Main",
+					"defaultDiagram": true
 				}
 			]
 		},
@@ -44,7 +45,6 @@
 								"$ref": "AAAAAAFuHgnEx53cWx8="
 							},
 							"name": "SequenceDiagram1",
-							"defaultDiagram": true,
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -2155,9 +2155,9 @@
 												"$ref": "AAAAAAFuHh7mwp+yE20="
 											},
 											"font": "Arial;13;0",
-											"left": 561,
+											"left": 576,
 											"top": 584,
-											"width": 117.80615234375,
+											"width": 86.72802734375,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -2165,7 +2165,7 @@
 												"$ref": "AAAAAAFuHh7mwp+zRXg="
 											},
 											"edgePosition": 1,
-											"text": "13 : Sendnotification"
+											"text": "13 : Sendnotify"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -2377,9 +2377,9 @@
 												"$ref": "AAAAAAFuHiToRaAqoDo="
 											},
 											"font": "Arial;13;0",
-											"left": 535,
+											"left": 536,
 											"top": 704,
-											"width": 100,
+											"width": 99.72802734375,
 											"height": 13,
 											"alpha": 2.2455360738965457,
 											"distance": 32.01562118716424,
@@ -2803,7 +2803,6 @@
 									}
 								},
 								{
-<<<<<<< HEAD
 									"_type": "UMLCombinedFragmentView",
 									"_id": "AAAAAAFuMLyA2E+NfNU=",
 									"_parent": {
@@ -2904,35 +2903,6 @@
 									"operandCompartment": {
 										"$ref": "AAAAAAFuMLyA2E+QNPg="
 									}
-=======
-									"_type": "UMLNoteView",
-									"_id": "AAAAAAFuIbMlKDENIB8=",
-									"_parent": {
-										"$ref": "AAAAAAFuHgnEx53d7rw="
-									},
-									"font": "Arial;13;0",
-									"left": 672,
-									"top": 448,
-									"width": 225,
-									"height": 51,
-									"text": "should statics be updated every time(very resource consuming) or only once every hour/ N violations"
-								},
-								{
-									"_type": "UMLNoteLinkView",
-									"_id": "AAAAAAFuIbPv2TEUuGI=",
-									"_parent": {
-										"$ref": "AAAAAAFuHgnEx53d7rw="
-									},
-									"font": "Arial;13;0",
-									"head": {
-										"$ref": "AAAAAAFuHjadDqNTwwE="
-									},
-									"tail": {
-										"$ref": "AAAAAAFuIbMlKDENIB8="
-									},
-									"lineStyle": 1,
-									"points": "671:474;560:474"
->>>>>>> cb8f64ad8da24a52cfaf4651e9894c4e9ed25703
 								}
 							]
 						}
@@ -3115,7 +3085,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFuHgnEx53cWx8="
 							},
-							"name": "Sendnotification",
+							"name": "Sendnotify",
 							"source": {
 								"$ref": "AAAAAAFuHg0XXp4zHKs="
 							},
