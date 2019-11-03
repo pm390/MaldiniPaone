@@ -1,18 +1,14 @@
-abstract sig User{}
+abstract sig User{
+	credentials: one Credentials
+}
 sig Username{}
 sig Password{} 
 sig Credentials{
 	username: one Username,
 	password: one Password
 }
-
-sig  Location
+sig  Location //we represent areas instead of precise points
 {
-	long: one Int,
-	lat: one Int
-}
-{	//for simplicity we use -6,6,-3,3 as bounds instead of -180,180,-90,90
-	long>=-6 and long<=6 and lat>=-3 and lat<=3
 }
 fact UnivoqueCredentials
 {
@@ -20,49 +16,49 @@ all disj c,c1:Credentials| c.username!=c1.username
 }
 sig Citizen extends User
 {
-	credentials: lone Credentials
 }
-
 sig Authority extends User
 {
-	credentials : one Credentials,
-	location: one Location
+	location: one Location,
+	authored : one Municipality
 }
 sig Municipality extends User
 {
-	credentials : one Credentials,
 	location: one Location
 }
-
-fact OnlyOneUserForAccount//both only one account type for each credential and one user of that type for each credential
+fact NoAuthorityOutOfMunicipalityBounds
 {
-all c:Credentials | let ci= c in Citizen.credentials | let au= c in Authority.credentials| let mu = c in Municipality.credentials|
-//check if only one kind of user has those credentials
-	(((ci and not (au or mu))or
-	(au and not(ci or mu))or
-	(mu and not (au or ci))))
-//only one user for each credential
-all c:Credentials |one  citizen:Citizen | citizen.credentials=c  or
-			   one   authority:Authority | authority.credentials=c or
-			   one   municipality:Municipality | municipality.credentials=c
+all au:Authority | au.location=au.authored.location
+}
+fact OnlyOneUserForAccount// only one user for each credential
+{
+all disj u,u1:User|  u.credentials!=u1.credentials
+all c:Credentials| c in User.credentials //all credentials associated to a User
 }
 abstract sig Status{}
 sig Pending extends Status{}
 sig Accepted extends Status{}
 sig Resolved extends Status{}
 
-sig report
+sig Report
 {
 	location: one Location,
 	taken_care_by: lone Authority,
 	state: one Status
 }
 {
- 	(state=Pending and taken_care_by=none) or ((state=Accepted or state=Resolved) and taken_care_by!=none)
-	#taken_care_by=1
-
+ 	(state = Pending and taken_care_by = none) or ((state = Accepted or state = Resolved) and taken_care_by! = none)
+}
+sig Suggestion
+{
+	municipality: one Municipality
+}
+fact SuggestionGeneratedWhenThereAreLotOfViolations //Reports of violations //TODO fix this costraint
+{
+	all m:Municipality,s:Suggestion| some r:Report| ((s.municipality=m) implies (r.location=m.location))
 }
 pred show(){}
-run show for 4
+run show for 6
+//TODO check what is wrong
 
 
