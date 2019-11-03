@@ -2222,7 +2222,7 @@
 											"left": 708,
 											"top": 600,
 											"width": 14,
-											"height": 361
+											"height": 201
 										}
 									],
 									"font": "Arial;13;0",
@@ -2801,6 +2801,108 @@
 									"activation": {
 										"$ref": "AAAAAAFuHjRTO6Mtslg="
 									}
+								},
+								{
+									"_type": "UMLCombinedFragmentView",
+									"_id": "AAAAAAFuMLyA2E+NfNU=",
+									"_parent": {
+										"$ref": "AAAAAAFuHgnEx53d7rw="
+									},
+									"model": {
+										"$ref": "AAAAAAFuMLyA2E+LXSI="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFuMLyA2E+OHM8=",
+											"_parent": {
+												"$ref": "AAAAAAFuMLyA2E+NfNU="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"left": 256.72998046875,
+											"top": 829,
+											"width": 1,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFuMLyA2E+PjQU=",
+											"_parent": {
+												"$ref": "AAAAAAFuMLyA2E+NfNU="
+											},
+											"font": "Arial;13;1",
+											"left": 237,
+											"top": 829,
+											"width": 14.72998046875,
+											"height": 13,
+											"text": "alt"
+										},
+										{
+											"_type": "UMLInteractionOperandCompartmentView",
+											"_id": "AAAAAAFuMLyA2E+QNPg=",
+											"_parent": {
+												"$ref": "AAAAAAFuMLyA2E+NfNU="
+											},
+											"model": {
+												"$ref": "AAAAAAFuMLyA2E+LXSI="
+											},
+											"subViews": [
+												{
+													"_type": "UMLInteractionOperandView",
+													"_id": "AAAAAAFuMLyBLU+cEWw=",
+													"_parent": {
+														"$ref": "AAAAAAFuMLyA2E+QNPg="
+													},
+													"model": {
+														"$ref": "AAAAAAFuMLyA2E+Mdl4="
+													},
+													"subViews": [
+														{
+															"_type": "LabelView",
+															"_id": "AAAAAAFuMLyBLU+dJ3A=",
+															"_parent": {
+																"$ref": "AAAAAAFuMLyBLU+cEWw="
+															},
+															"font": "Arial;13;0",
+															"left": 252,
+															"top": 862,
+															"width": 240.59521484375,
+															"height": 13,
+															"text": "[If the assignment is terminated correctly ]"
+														}
+													],
+													"font": "Arial;13;0",
+													"left": 232,
+													"top": 847,
+													"width": 456,
+													"height": 43,
+													"guardLabel": {
+														"$ref": "AAAAAAFuMLyBLU+dJ3A="
+													}
+												}
+											],
+											"font": "Arial;13;0",
+											"left": 232,
+											"top": 847,
+											"width": 456,
+											"height": 43
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 232,
+									"top": 824,
+									"width": 456,
+									"height": 112,
+									"nameLabel": {
+										"$ref": "AAAAAAFuMLyA2E+OHM8="
+									},
+									"frameTypeLabel": {
+										"$ref": "AAAAAAFuMLyA2E+PjQU="
+									},
+									"operandCompartment": {
+										"$ref": "AAAAAAFuMLyA2E+QNPg="
+									}
 								}
 							]
 						}
@@ -3152,6 +3254,25 @@
 									"guard": " Check if there are valid violations already"
 								}
 							]
+						},
+						{
+							"_type": "UMLCombinedFragment",
+							"_id": "AAAAAAFuMLyA2E+LXSI=",
+							"_parent": {
+								"$ref": "AAAAAAFuHgnEx53cWx8="
+							},
+							"interactionOperator": "alt",
+							"operands": [
+								{
+									"_type": "UMLInteractionOperand",
+									"_id": "AAAAAAFuMLyA2E+Mdl4=",
+									"_parent": {
+										"$ref": "AAAAAAFuMLyA2E+LXSI="
+									},
+									"name": "Operand1",
+									"guard": "If the assignment is terminated correctly "
+								}
+							]
 						}
 					]
 				}
@@ -3163,7 +3284,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHgnExp3bwXo="
 					},
-					"name": "Role1"
+					"name": "Role1",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3171,7 +3293,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHgnExp3bwXo="
 					},
-					"name": "Role2"
+					"name": "Role2",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3179,7 +3302,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHgnExp3bwXo="
 					},
-					"name": "Role3"
+					"name": "Role3",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3187,7 +3311,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHgnExp3bwXo="
 					},
-					"name": "Role4"
+					"name": "Role4",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -3195,7 +3320,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHgnExp3bwXo="
 					},
-					"name": "Role5"
+					"name": "Role5",
+					"type": ""
 				}
 			]
 		}
