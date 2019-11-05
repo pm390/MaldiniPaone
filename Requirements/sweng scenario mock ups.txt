@@ -1,0 +1,21 @@
+4.x Scenario x 
+Fred asks to his friend Manuel if he wants to join him for dinner this evening. Unfortunately
+Fred's car is blocked by a car parked in front of his garage, that car was there several days every month.
+Normally Fred working nearby has no problem but his friends lives 30 minutes by car from his home.
+John picks up his smartphone and downloads SafeStreets app.
+John provides his information to the system , once registered he logs in and sends a notification to authorities.
+One hour before leaving home he notices the car has been moved. From that day on the car owner stopped parking there.
+4.x+1 Scenario x+1
+Today in Milan there are lot of violations and authorities aren't enough to check every violation. The violations not taken care
+after some time goes down in the list of assignments of authorities. Agent Carlo is checking the areas between Milano Piola and Milano Lambrate.
+Lot of violations are notified by users in those areas. By the time he finishes to check some violations other violations become less 
+visible due to the great amount of notification.When a violation is notified for the same licence plate from different users in the same area
+those violations become more visible in the list of assignments of authorities. Carlo thanks to this feature is able to first adress
+issues affecting more people
+4.x+2 Negative Use Scenario 1
+Fernand got his car fined after parking in a forbidden area. He has been doing it for years and he notices that people in that area started
+using SafeStreets app and thinks the app is the cause of the fine and doesn't relize his behaviour is the cause. He decides to "take revenge"
+subscribing to the app and sending several false notifications. After several random photos sent to the system without any visible licence plate
+the system signs the assignments given by Fernand account as "possibly unsafe" and after agents checks that no violation is actually in any of 
+the photos sent to the system his account gets blocked and Fernand can no longer interfere with the normal activities of authorities using
+the app. After being blocked Fernand stops complaining about the app and a week later he finds a parking area to replace his former parking spot. 
