@@ -2207,9 +2207,9 @@
 											"font": "Arial;13;1",
 											"left": 613,
 											"top": 509,
-											"width": 106.90087890625,
+											"width": 127.13720703125,
 											"height": 13,
-											"text": "Google Maps'API"
+											"text": "Mapping system API"
 										},
 										{
 											"_type": "LabelView",
@@ -2242,7 +2242,7 @@
 									"font": "Arial;13;0",
 									"left": 608,
 									"top": 502,
-									"width": 116.90087890625,
+									"width": 137.13720703125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuHT/iiQmXC+I="
@@ -2326,7 +2326,7 @@
 							"containerChangeable": true,
 							"left": 608,
 							"top": 448,
-							"width": 116.90087890625,
+							"width": 137.13720703125,
 							"height": 80,
 							"nameCompartment": {
 								"$ref": "AAAAAAFuHT/iiQmWxfI="
@@ -2661,8 +2661,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 552,
-									"top": 522,
+									"left": 553,
+									"top": 524,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2682,8 +2682,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 545,
-									"top": 509,
+									"left": 546,
+									"top": 511,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2703,8 +2703,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 565,
-									"top": 549,
+									"left": 566,
+									"top": 551,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2724,8 +2724,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 528,
-									"top": 535,
+									"left": 530,
+									"top": 536,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -2745,8 +2745,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 523,
-									"top": 522,
+									"left": 526,
+									"top": 523,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -2766,8 +2766,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 536,
-									"top": 561,
+									"left": 538,
+									"top": 562,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -2788,7 +2788,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 577,
-									"top": 509,
+									"top": 513,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -2807,8 +2807,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 568,
-									"top": 499,
+									"left": 569,
+									"top": 502,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -2828,7 +2828,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 593,
-									"top": 532,
+									"top": 535,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -2873,7 +2873,7 @@
 								"$ref": "AAAAAAFuHUD1VQ0LB0M="
 							},
 							"lineStyle": 1,
-							"points": "512:567;607:517",
+							"points": "514:567;607:521",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFuHUIJEhCdibg="
@@ -5046,19 +5046,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAFuHVJkeU/LVdo="
 							}
-						},
-						{
-							"_type": "UMLNoteView",
-							"_id": "AAAAAAFuIbVC/VKK4+Q=",
-							"_parent": {
-								"$ref": "AAAAAAFuHOpgzv5BgtQ="
-							},
-							"font": "Arial;13;0",
-							"left": 728,
-							"top": 360,
-							"width": 124.04443359375,
-							"height": 129,
-							"text": "maybe more generically should say mapping API and not google maps(google maps may be specified in DesignDocument)"
 						}
 					]
 				},
@@ -5323,7 +5310,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHOpgzf5Awos="
 					},
-					"name": "Google Maps'API"
+					"name": "Mapping system API"
 				},
 				{
 					"_type": "UMLUseCase",
