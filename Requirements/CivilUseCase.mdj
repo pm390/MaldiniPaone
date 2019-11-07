@@ -176,7 +176,7 @@
 											"top": 269,
 											"width": 59.97265625,
 											"height": 13,
-											"text": "Civil User"
+											"text": "User"
 										},
 										{
 											"_type": "LabelView",
@@ -3791,7 +3791,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHJ07IOBZokA="
 					},
-					"name": "Civil User",
+					"name": "User",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
