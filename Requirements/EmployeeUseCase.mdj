@@ -81,7 +81,7 @@
 											"top": 253,
 											"width": 109.0908203125,
 											"height": 13,
-											"text": "council employee"
+											"text": "Municipality"
 										},
 										{
 											"_type": "LabelView",
@@ -2025,7 +2025,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHVXADj3MpSU="
 					},
-					"name": "council employee",
+					"name": "Municipality",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
