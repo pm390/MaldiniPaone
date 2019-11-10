@@ -133,7 +133,7 @@ fact AllCitizenLocationAreAvailableAndCorrect
 all c:Citizen| FindCitizen[c]!=none and (all re:c.report | re.city=FindCitizen[c])
 }
 
-//Requirements 
+
 fact EveryRightAuthoritiesAreNotified //R3
 {
 all re:Report,au:Authority| (re.city=au.city) <=>re in au.notifications
@@ -177,7 +177,7 @@ some as1:Assignment |as1.state=Pending
 }
 //run world2 for 8
 
-pred world3() //Statistics are associated with ended assignments and no statistics assigned to Pending and Accepted Assignment
+pred world3() //a more generic world with all possible states of assignments
 {
 #(Assignment)=4
 #(Authority)=2
@@ -186,7 +186,5 @@ some as1:Assignment |as1.state=Pending
 some as1:Assignment |as1.state=Accepted
 }
 run world3 for 5
-pred world4()
-{
-}
+
 

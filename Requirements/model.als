@@ -54,10 +54,15 @@ sig Assignment
 }
 
 sig Notification { 
+	madeBy: one Citizen,
 	assignment: one Assignment,
 	receivers: set Authority
 }
-
+//fact noAssignmentWithoutNotification{all as1:Assignment | some n:Notification | n.assignment=as1}
+fact noDuplicateNotificationFromSameCitizenForSameAssignment
+{
+no disj n1,n2:Notification|n1.madeBy=n2.madeBy and n1.assignment=n2.assignment
+}
 
 
 fact AuthorityTakesCareOfOneAssignmentAtTheTime
@@ -74,14 +79,14 @@ a in Assignment.taken_care_by
 }
 pred canTakeAssignment[a:Authority, as1:Assignment]
 {
-! AuthorityIsWorking[a] and as1.state=Pending //TODO add is notified???
+! AuthorityIsWorking[a] and as1.state=Pending and a.location=as1.location
 }
 
 
 //Domain Assumpitions
 fact AuthorityRespectDutyOfCare	//D7 if there are no Pending Assignments authority can't work on an assignment
 {
-all a:Authority| (no as1:Assignment| as1.location=a.location and as1.state=Pending) => !AuthorityIsWorking[a]  
+all a:Authority| (no as1:Assignment| as1.location=a.location and as1.state=Pending) <= !AuthorityIsWorking[a]  
 }
 fact UsernameAreUnique	// D2 only one user for each credential
 {
@@ -104,17 +109,19 @@ fact SuggestionGeneratedOnlyWhenThereAreViolations //Reports of violations
 }
 
 //Goals 
-assert AuthorityCanTakeAssignments
+assert AuthorityMustTakeAssignments
 {
-all a:Authority,as1:Assignment | ((as1.state=Pending) and (a.location=as1.location) and (!AuthorityIsWorking[a]) )implies canTakeAssignment[a,as1] 
+all a:Authority|  (AuthorityIsWorking[a]) or (no as1:Assignment| as1.location=a.location and as1.state=Pending)
 }
 
 
 
 
-pred show(){}
-check  AuthorityCanTakeAssignments for 6
+pred show(){
+}
+//check  AuthorityMustTakeAssignments for 6
 run show for 6
-//TODO check what is wrong
+//TODO check what is wrong 
+//TODO check notifiction=1 and assignment=1
 
 

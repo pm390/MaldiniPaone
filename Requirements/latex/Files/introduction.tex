@@ -1,0 +1,154 @@
+\begin{itemize}
+\item
+Revision history
+\item
+Reference Documents 
+\item
+Document Structure
+\end{itemize}
+Below you see how to define the header for a subsection.
+%---------------------------------------------------
+\subsection{Purpose}
+This document represents the Requirement Analysis and Specification Document (RASD). Goals of
+this document are to completely describe the system-to-be in terms of functional and non-functional
+requirements, analyse the real needs of the users in order to model the system, show the constraints
+and the limit of the software and indicate the typical use cases that will occur after the release. This
+document is addressed to the developers who have to implement the requirements and could be used as
+a contractual basis. 
+%---------------------------------------------------
+\subsubsection{Goals}
+\begin{itemize}
+\item	USER:
+\begin{itemize}
+\item[G1] Notify authorities about traffic violations
+\begin{itemize}
+\item[G1-1] Send picture of violation
+\item[G1-2] Send Position of the violation
+\end{itemize}
+\item[G2] Authorities must be able to take an assignment if they are free
+\item[G3] allow authorities to report a finished assignment
+\item[G4] allow all actors to visualize update statistics
+\item[G5] Allow the system manager to register Municipality to the service
+\end{itemize}
+\item	SafeStreets:
+\begin{itemize}
+\item[G6] Allow a Visitor to join the system registering him/herself to ensure reliability of the information provided by them
+\item[G7] Store information about violations provided by users:
+\begin{itemize}
+\item[G7-1] Complete it with metadata
+\item[G7-2] Mine information
+\end{itemize}
+\item[G8] Identify potentially unsafe areas:
+\begin{itemize}
+\item[G8-1] Suggest possible interventions
+\end{itemize}
+\item[G9] Allow municipality to register Authorities to the service
+\end{itemize}
+\item	Security Goals:
+\begin{itemize}
+\item[S1] Offer different levels of visibility to different type of users
+\item[S2] Personal data of users are stored respecting current security standards
+\end{itemize}
+\end{itemize}
+%---------------------------------------------------
+\subsection{Scope}
+\subsubsection{Description of the given problem}
+SafeStreets is a crowd-sourced application whose intention is to notify the authorities when traffic violations occur. The system should provide the possibility for users to give all needed information for authorities to take actions against the violations and improve the service provided by authorities taking care of violations notification from the user notifying it until the violation is resolved. 
+The sources of notifications are the Citizens which takes photos of violations and sends them to the authorities through the application.
+The information provided by users are integrated with other suitable information and are stored by the service.
+The system also runs an algorithm to read the license plate of the vehicle in the photos. All collected data can be mined by Citizens and authorities to find which streets are the safest. Users can have different levels of visibility authorities must be able to know the license plates of vehicles in the photos while normal users can only see data in the form of statistics.
+Moreover, data is sent to the municipal district so that important information can be extracted through statistics in order to make decisions to improve the safety of the area.
+Ultimately, the system will have to be easy to use, reliable and highly scalable to fit perfectly with the mutable context in which it will end to be used.
+
+%---------------------------------------------------
+\subsubsection{Phenomena}
+\begin{itemize}
+\item
+World phenomena:
+\begin{enumerate}
+\item
+Violation
+\item
+Intervention of authorities
+\item
+Municipality put into effect interventions to improve safety
+\end{enumerate}
+\item
+Machine phenomena:	
+\begin{enumerate}
+\item
+Shortest path calculation for authority’s intervention
+\item
+the creation of an object of type violation
+\item
+run algorithm to identify the license plate/s in the photos
+\item
+database queries
+\item
+schedule most efficient path to look up the notified violations
+\item
+periodically run algorithm to suggest possible interventions to municipality
+\end{enumerate}
+\item
+Shared phenomena:
+\begin{enumerate}
+\item
+user notify the system about violation (observed by the system controlled by the world)
+\item
+send notification to authorities (controlled by system observed by world)
+\end{enumerate}
+\end{itemize}
+%---------------------------------------------------
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsubsection {Definitions}
+\begin{itemize}
+\item	Violation: parking violations which can be notified by Citizens to authorities
+\item	Mapping System: external software that provides maps and directions to reach the position of a violation
+\item	Licence plate Recognition Algorithm: calculation process that identify the alphanumeric number on license plate
+\item	Spam: a series of message that are undesired
+\item	App: application software 
+\item	Blocked: means that the account is banned for a given period
+\item	Metadata: data about a violation. Position , date,  time and the username of Citizen. 
+\item	Assignment : Work Request for authorities generated upon the receiving of a notification made by Citizens.
+\end{itemize}
+%---------------------------------------------------
+\subsubsection {Acronyms}
+\begin{itemize}
+\item	RASD: Requirement Analysis and Specification Document.
+\item	API: Application Programming Interface
+\item	GPS: Global positioning system
+
+\end{itemize}
+%---------------------------------------------------
+\subsubsection {Abbreviations}
+\begin{itemize}
+\item	[Gn]: n-th goal.
+\item	[Dn]: n-th domain assumption.
+\item	[Rn]: n-th requirement.
+\end{itemize}
+%---------------------------------------------------
+\subsection {Revision History}
+\begin{itemize}
+\item	RASDv1.0 delivered on 10/11/2019
+\end{itemize}
+%---------------------------------------------------
+\subsection {Reference Documents}
+\begin{itemize}
+\item	Specification Document: “Assignments AA 2019-2020.pdf”.
+\item	\href{http://homepage.cs.uiowa.edu/~tinelli/classes/181/Spring10/Notes/09-dynamic-models.pdf }{Alloy Dynamic Model example} 
+\item	IEEE Std 830-1993 - IEEE Guide to Software Requirements Specifications.
+\item	IEEE Std 830-1998 - IEEE Recommended Practice for Software Requirements Specifications.
+
+\end{itemize}
+%---------------------------------------------------
+\subsection{Document Structure}
+This chapter debates about contents and structure of RASD, indeed this document, based on standards IEEE, is divided in six different sections:
+\begin{enumerate}
+\item	The Introduction provides a general appearance of the systems defining which are the goals to reach, describing the problem and introducing the world and shared phenomena.
+\item The Overall Description provides the description of the relevant components that system needs, the involved actors’ characteristics, and the assumptions to better clarify the needs and the boundaries of the system. 
+\item Specific Requirements contains the goals, the functional and non-functional requirements of the system are presented. In addition, a mock-up representation of the application expslain and gives a feeling on how the app will look like and show the main actions it can perform.
+\item Scenarios describe the usefulness of SafeStreet and its features in some situations that could happen.
+\item UML Modelling contains the diagrams that are referred to the functionality of the system, they explain the workflow of some scenarios, the actions and the structure of the actors and the state that system assumes. These features are represented by Use Case diagram, Sequence diagram, Class diagram and Activity diagram.
+\item Alloy Modelling allows to explain the world models through Alloy model of system. The mocks-up generated by the Alloy modelling grants that given requirements and domain assumption the goals are satisfied.
+
+\end{enumerate}
