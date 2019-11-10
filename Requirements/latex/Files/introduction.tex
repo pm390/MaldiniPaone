@@ -18,13 +18,13 @@ a contractual basis.
 \item[G1-2] Send Position of the violation
 \end{itemize}
 \item[G2] Authorities must be able to take an assignment if they are free
-\item[G3] allow authorities to report a finished assignment
-\item[G4] allow all actors to visualize update statistics
+\item[G3] Allow authorities to report a finished assignment
+\item[G4]Allow all actors to visualize update statistics
 \item[G5] Allow the system manager to register Municipality to the service
 \end{itemize}
 \item	SafeStreets:
 \begin{itemize}
-\item[G6] Allow a Visitor to join the system registering him/herself to ensure reliability of the information provided by them
+\item[G6] Allow a Visitor to join the system registering him/herself to ensure reliability of the information provided by him/her
 \item[G7] Store information about violations provided by users:
 \begin{itemize}
 \item[G7-1] Complete it with metadata
@@ -45,12 +45,19 @@ a contractual basis.
 %---------------------------------------------------
 \subsection{Scope}
 \subsubsection{Description of the given problem}
-SafeStreets is a crowd-sourced application whose intention is to notify the authorities when traffic violations occur. The system should provide the possibility for users to give all needed information for authorities to take actions against the violations and improve the service provided by authorities taking care of violations notification from the user notifying it until the violation is resolved. 
-The sources of notifications are the Citizens which takes photos of violations and sends them to the authorities through the application.
-The information provided by users are integrated with other suitable information and are stored by the service.
-The system also runs an algorithm to read the license plate of the vehicle in the photos. All collected data can be mined by Citizens and authorities to find which streets are the safest. Users can have different levels of visibility authorities must be able to know the license plates of vehicles in the photos while normal users can only see data in the form of statistics.
-Moreover, data is sent to the municipal district so that important information can be extracted through statistics in order to make decisions to improve the safety of the area.
-Ultimately, the system will have to be easy to use, reliable and highly scalable to fit perfectly with the mutable context in which it will end to be used.
+SafeStreets is a crowd-sourced application whose intention is to notify the authorities when traffic
+violations occur. Citizens, thanks to the system, will be able to send information about violations to the
+authorities who will take actions against them. In this way, the service provided by the authorities can be
+improved because they will receive notifications through the app. The sources of notifications are the
+Citizens who take photos of violations and send them to the authorities through
+the application. The information provided by users are integrated with other suitable information and are
+stored by the service. The system also runs an algorithm to read the license plate of the vehicle in the
+photos. All collected data can be seen by Citizens and authorities to find which streets are the safest.
+Users can have different levels of visibility: authorities must be able to know the license plates of vehicles
+in the photos, while normal users can only see data in the form of statistics. Moreover, data are sent to
+the municipal district so that important information can be extracted through statistics in order to make
+decisions to improve the safety of the area. Finally, the system will have to be easy to use, reliable
+and highly scalable to fit perfectly with the mutable context in which it will be used.
 
 %---------------------------------------------------
 \subsubsection{Phenomena}
@@ -95,8 +102,8 @@ send notification to authorities (controlled by system observed by world)
 \item	Violation: parking violations which can be notified by Citizens to authorities
 \item	Report: Notification sent by Citizens to the system
 \item	Mapping System: external software that provides maps and directions to reach the position of a violation
-\item	Licence plate Recognition Algorithm: calculation process that identify the alphanumeric number on license plate
-\item	Spam: a series of message that are undesired
+\item	Licence plate Recognition Algorithm: calculation process that identifies the alphanumeric number on license plate
+\item	Spam: a series of messages that are undesired
 \item	App: application software 
 \item	Blocked: means that the account is banned for a given period
 \item	Metadata: data about a violation. Position , date,  time and the username of Citizen. 
@@ -143,6 +150,6 @@ This chapter debates about contents and structure of RASD, indeed this document,
 \item Specific Requirements contains the goals, the functional and non-functional requirements of the system are presented. In addition, a mock-up representation of the application expslain and gives a feeling on how the app will look like and show the main actions it can perform.
 \item Scenarios describe the usefulness of SafeStreet and its features in some situations that could happen.
 \item UML Modelling contains the diagrams that are referred to the functionality of the system, they explain the workflow of some scenarios, the actions and the structure of the actors and the state that system assumes. These features are represented by Use Case diagram, Sequence diagram, Class diagram and Activity diagram.
-\item Alloy Modelling allows to explain the world models through Alloy model of system. The mocks-up generated by the Alloy modelling grants that given requirements and domain assumption the goals are satisfied.
+\item Alloy Modelling allows to explain the world models through Alloy model of system. The mockups generated by the Alloy modelling grants that, given requirements and domain assumption, the goals are satisfied.
 
 \end{enumerate}

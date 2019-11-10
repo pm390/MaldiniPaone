@@ -1,4 +1,6 @@
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{External Interface Requirements}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{User Interfaces}
 
 
@@ -44,17 +46,20 @@
 \caption{\label{fig:ComWI}Common web Interfaces}
 \end{figure}
 
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Hardware Interfaces}
 There are no hardware interfaces to be implemented
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Software Interfaces}
-Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed to make S2B communicate with external systems.
+Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed 
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Communication Interfaces }
 To communicate the various internal parts of the S2B use HTTP and HTTPS protocol. No specific communication interface must be implemented.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Functional Requirements}
-3.2. Functional requirements 
 \begin{itemize}
 
- \item R1) Authority’s location must be known by the system when they are in service
+ \item R1) Authorities’ location must be known by the system when they are in service
 \item  R2) Data relative to the violation sent by the user must be clear
  \item R3) The right authorities are notified about violations
  \item R4) Authority must be able to provide the system how the assignment finished: resolved, no intervention needed when arrived, false report.
@@ -66,6 +71,7 @@ To communicate the various internal parts of the S2B use HTTP and HTTPS protocol
  \item R10) A citizen must be able to correctly report violations details
  \item R11) Authority must be able to correctly finish their assignments and specify how the violation was resolved and the correctness or non-correctness of the report
 \end{itemize}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Scenrarios}
 \begin{itemize}
 \item Scenario 1:
@@ -90,7 +96,7 @@ Pietro is an agent who has just been employed in Alserio police; his method of s
 \newline
 Fernand got his car fined after having parked in a forbidden area. He has been doing it for years, but now he notices that people in that area started using SafeStreets app and thinks that he was fined because of it instead of his behaviour. He decides to "take revenge" subscribing to the app and sending several false notifications. Since he has sent several random photos without any visible licence plate, the system signs the assignments given by Fernand account as "possibly unsafe". After that some agents have checked that no violation is actually in any of the photos sent to the system, his account gets blocked and Fernand can no longer interfere with the normal activities of authorities using the app. After being blocked, Fernand stops complaining about the app and a week later he finds a parking area to replace his former parking spot.
 \end{itemize}
-%-------------------------------------------------------------------------------------
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \newpage
 \subsubsection{Use Case Diagrams}
 \begin{figure}[h]
@@ -118,7 +124,7 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
 \includegraphics{Images/usecase_system_manager.png}
 \caption{\label{fig:SMUC}System Manager Use Case }
 \end{figure}
-%-------------------------------------------------------------------------------------
+%.--------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Use Case Descriptions}
 \begin{figure}[h]
 \centering
@@ -165,7 +171,7 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
 \includegraphics[width=\textwidth]{Images/common_use_case2.png}
 \caption{\label{fig:CUC2}Common Use Case  Description 2}
 \end{figure}
-%---------------------------------------------------------------------------------------------
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Sequence  Diagrams}
 \begin{figure}[h]
 \centering
@@ -188,11 +194,12 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
 \caption{\label{fig:SDAR}Sequence Diagram Agent Registrtion} 
 \end{figure}
 
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Mapping of Requirements and Domain Assumptions to their relative goal}
 \begin{itemize}
 \item G1) Notify authorities about traffic violations
 \begin{itemize}
- \item R1) Authority’s location must be known by the system when they are in service
+ \item R1) Authorities’ location must be known by the system when they are in service
 \item  R2) Data relative to the violation sent by the user must be clear
  \item D1) For each notification data and metadata about the violation are correct
  \item D4) Information about authorities’ location are always available through  GPS 
@@ -205,13 +212,13 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
  \item D4) Information about authorities’ location are always available through  GPS 
  \item D7) System Manager, Municipality and authorities respects their duty of care
 \end{itemize}
-\item G3) allow authorities to report a finished assignment
+\item G3) Allow authorities to report a finished assignment
 \begin{itemize}
  \item R4) Authority must be able to provide the system how the assignment finished: resolved, no intervention needed when arrived, false report.
  \item D7) System Manager, Municipality and authorities respects their duty of care
  \item D9) Information provided by authority are correct and no false report is ignored.
 \end{itemize}
-\item G4) allow all actors to visualize updated statistics
+\item G4) Allow all actors to visualize updated statistics
 \begin{itemize}
  \item R5) The system must make data available when asked.
  \item R6) Data and statistics are always updated when an event happens.  
@@ -222,7 +229,7 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
 \item R7) System Manager must fill correctly the form with Municipality’s data
 \item D7) System Manager, Municipality and authorities respects their duty of care
 \end{itemize}
-\item G6) Allow a Visitor to join the system registering him/herself to ensure reliability of the information provided by them
+\item G6) Allow a Visitor to join the system registering him/herself to ensure reliability of the information provided by him/her
 \begin{itemize}
  \item R8) A visitor must be able to begin sign up process in the SafeStreets App.
  \item R9) When the creation is successful the system must notify the Visitor 
@@ -243,19 +250,32 @@ Fernand got his car fined after having parked in a forbidden area. He has been d
 \end{itemize}
 \item G9) Allow municipality to register Authorities to the service
 \begin{itemize}
-		\item R12) Municipality must fill correctly the form with Agent’s data
+\item R12) Municipality must fill correctly the form with Agent’s data
 \item D7) System Manager, Municipality and authorities respects their duty of care
 \item D11) The Agent must be contactable from municipality  
 \item D12) Information of authority are known by municipality
 \end{itemize}
 \end{itemize}
 
-
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Performance Requirements}
-The system should be able to respond to a possibly great number of simultaneous requests. Based on data about Milan there are over 100.000 parking violations a day, the system should be able to keep track of at least 10 times that number of notifications a day. The number of violations that could be taken care using the app could grow eventually to cover even special cases like when there are strikes of public transports when the load of violation considerably increases.
+The system should be able to respond to a possibly great number of simultaneous requests. Based on 
+data about Milan, there are over 100.000 parking violations a day, so the system should be able to keep 
+track of at least 10 times that number of notifications a day. In some special cases, like public transport 
+strikes, the number of violations could increase sensibly and the server could have to manage a lot of 
+requests.
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Design Constraints}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Standards compliance }
-SafeStreets aims to become the smartest and quickest way to report violations in Italy. The current systems are phone calls which can take lot of time, take up the phone lines for more critical events and lacs evidence of the violation or other system like the site www.poliziamunicipale-online.it which is similar to phone calls , is more strict , the interface is not user friendly and it lacs possibility to give evidence of violations too. The idea of our service is not unique there are already similar services in other countries, like in India they have “Public Eye. OFFICIAL BTP APP” 
+SafeStreets aims to become the smartest and quickest way to report violations in Italy. 
+Nowadays, citizens who want to send a report can contact the authorities by calling an emergency number, 
+but this can take a lot of time. Moreover, during critical events, phone lines could be unavailable. 
+You can also use police website, but its interface is not user-friendly. In any case, you can’t send any 
+evidence of the violation to the authorities. Anyway, the idea of our service is not unique: there are already 
+similar services in other countries, like in India where there is “Public Eye. OFFICIAL BTP APP”.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Hardware limitations}
 \begin{itemize}
 \item Mobile App
@@ -269,21 +289,33 @@ SafeStreets aims to become the smartest and quickest way to report violations in
 \item Modern browser able to retrieve user's location
 \end{itemize}
 \end{itemize}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Software System Attributes}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Availability}
-The system should be available 99,99\% of time. Considering only one state also gives a time range in which notifications will be considerably reduced (the night-time where citizen will less likely report a violation) and so reliability constraint for night-time could be reduced to 99\% time also reducing resources allocated to the system.
+The system should be available 99,99\% of time. Considering only one State, there will be a time range 
+in which notifications are considerably reduced (the night-time when citizen will less likely report 
+a violation) and so reliability constraint for night-time could be reduced up to 99\% reducing also some 
+resources allocated to the system.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Reliability}
 There are no strict costraints of Reliability if Availability costraints are respected
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Security}
 
 Users credentials will be stored. Security of the data and of the communications user-system is a primary concern.
 
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection {Maintainability}
 The system must be developed in a modular way so that new feature can be added.
 Using a modular approach it is also possible to test the functionality of the single parts making it simpler to maintain.
 Documentation must be also always updated in case of modifications of the system to always keep documentation aligned to the system.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Scalability}
-This system is designed to be optimized in Italy. It is possible later to expand it choosing a more suitable algorithm to recognize licence plates and dividing computation of different states on different servers so that reliability analysis made for Italy are still true for every single state. Information about boundaries of states should be replicated in both states making the transition from one server to the other smoother.
+This system is designed to be optimized in Italy. It is possible to expand it later by choosing a more suitable
+algorithm to recognize licence plates and by dividing computation of different states on different servers, so that reliability analysis made for Italy are still true for every single state. Information about boundaries
+of states should be replicated in both states making the transition from one server to the other smoother.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Accuracy}
 Accuracy of the position of authorities and violations has to be the best possible. All the sensors used must provide positions' data with an error lower than 20 meters. We can consider a larger bound of accuracy because authorities work on a given area so from a well taken photo, they should be able to recognize the place of the violation even if the position given by the GPS is not too accurate.
 
