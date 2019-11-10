@@ -81,7 +81,7 @@
 											"top": 253,
 											"width": 109.0908203125,
 											"height": 13,
-											"text": "Municipality"
+											"text": "System Manager"
 										},
 										{
 											"_type": "LabelView",
@@ -347,7 +347,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -208,
+											"left": -256,
 											"top": 272,
 											"height": 13
 										},
@@ -358,11 +358,11 @@
 												"$ref": "AAAAAAFuHVlxij4epLQ="
 											},
 											"font": "Arial;13;1",
-											"left": 479,
+											"left": 462,
 											"top": 307.5,
-											"width": 115,
+											"width": 149,
 											"height": 13,
-											"text": "Register an agent"
+											"text": "Register a Municipality"
 										},
 										{
 											"_type": "LabelView",
@@ -372,7 +372,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -208,
+											"left": -256,
 											"top": 272,
 											"width": 80.9072265625,
 											"height": 13,
@@ -386,16 +386,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -208,
+											"left": -256,
 											"top": 272,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 474,
+									"left": 457,
 									"top": 300.5,
-									"width": 125,
+									"width": 159,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuHVlxij4fQ+Q="
@@ -421,7 +421,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
+									"left": -128,
 									"top": 136,
 									"width": 10,
 									"height": 10
@@ -437,7 +437,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
+									"left": -128,
 									"top": 136,
 									"width": 10,
 									"height": 10
@@ -453,7 +453,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
+									"left": -128,
 									"top": 136,
 									"width": 10,
 									"height": 10
@@ -469,7 +469,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
+									"left": -128,
 									"top": 136,
 									"width": 10,
 									"height": 10
@@ -485,7 +485,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -104,
+									"left": -128,
 									"top": 136,
 									"width": 10,
 									"height": 10
@@ -493,9 +493,9 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 448,
+							"left": 424,
 							"top": 296,
-							"width": 177,
+							"width": 225,
 							"height": 35,
 							"nameCompartment": {
 								"$ref": "AAAAAAFuHVlxij4epLQ="
@@ -2025,7 +2025,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHVXADj3MpSU="
 					},
-					"name": "Municipality",
+					"name": "System Manager",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -2097,7 +2097,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHVXADj3MpSU="
 					},
-					"name": "Register an agent",
+					"name": "Register a Municipality",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

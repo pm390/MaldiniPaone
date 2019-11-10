@@ -1519,7 +1519,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 390.97900390625,
-											"top": 5,
+											"top": 13,
 											"width": 76.15625,
 											"height": 13,
 											"text": "Citizen Login"
@@ -1532,7 +1532,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 325,
-											"top": 5,
+											"top": 13,
 											"width": 60.97900390625,
 											"height": 13,
 											"text": "interaction"
@@ -1540,6 +1540,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 320,
+									"top": 8,
 									"width": 695,
 									"height": 595,
 									"nameLabel": {
@@ -3139,8 +3140,8 @@
 												"$ref": "AAAAAAFuQQnp3oRr/UQ="
 											},
 											"font": "Arial;13;0",
-											"left": 75.97900390625,
-											"top": 5,
+											"left": 134.97900390625,
+											"top": 13,
 											"width": 226.443359375,
 											"height": 13,
 											"text": "Municipality Statistics and  suggestions"
@@ -3152,17 +3153,18 @@
 												"$ref": "AAAAAAFuQQnp3oRr/UQ="
 											},
 											"font": "Arial;13;1",
-											"left": 10,
-											"top": 5,
+											"left": 69,
+											"top": 13,
 											"width": 60.97900390625,
 											"height": 13,
 											"text": "interaction"
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 5,
-									"width": 780,
-									"height": 595,
+									"left": 64,
+									"top": 8,
+									"width": 569,
+									"height": 409,
 									"nameLabel": {
 										"$ref": "AAAAAAFuQQnp3oRsusE="
 									},

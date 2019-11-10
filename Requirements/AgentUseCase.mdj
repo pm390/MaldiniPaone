@@ -3540,7 +3540,7 @@
 											"top": 563.5,
 											"width": 96,
 											"height": 13,
-											"text": "View the details"
+											"text": "View details"
 										},
 										{
 											"_type": "LabelView",
@@ -3573,7 +3573,7 @@
 									"font": "Arial;13;0",
 									"left": 398.5,
 									"top": 556.5,
-									"width": 107.296875,
+									"width": 106,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFuHVGLvkzA8JE="
@@ -4770,7 +4770,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFuHOpgzf5Awos="
 					},
-					"name": "View the details"
+					"name": "View details"
 				},
 				{
 					"_type": "UMLUseCase",
