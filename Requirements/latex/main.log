@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.11.9)  10 NOV 2019 18:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7200 64-bit) (preloaded format=pdflatex 2019.11.9)  10 NOV 2019 20:27
 entering extended mode
 **./main.tex
 (main.tex
@@ -862,10 +862,38 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.12 
-     
+l.12 \usepackage
+                [dvipsnames]{xcolor}
 ? 
-(main.aux
+
+("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings
+.sty"
+\lst@mode=\count146
+\lst@gtempboxa=\box54
+\lst@token=\toks46
+\lst@length=\count147
+\lst@currlwidth=\dimen262
+\lst@column=\count148
+\lst@pos=\count149
+\lst@lostspace=\dimen263
+\lst@width=\dimen264
+\lst@newlines=\count150
+\lst@lineno=\count151
+\lst@maxwidth=\dimen265
+
+("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstmisc.
+sty"
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count152
+\lst@skipnumbers=\count153
+\lst@framebox=\box55
+)
+("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\listings
+.cfg"
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+ (alloy-style.sty) (main.aux
 
 LaTeX Warning: Label `fig:CUC' multiply defined.
 
@@ -875,21 +903,21 @@ LaTeX Warning: Label `sect:effort' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 14
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 16
 .
  ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1ptm.fd"
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -932,17 +960,17 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-
 pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count146
-\scratchdimen=\dimen262
-\scratchbox=\box54
-\nofMPsegments=\count147
-\nofMParguments=\count148
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count149
-\MPscratchDim=\dimen263
-\MPnumerator=\count150
-\makeMPintoPDFobject=\count151
-\everyMPtoPDFconversion=\toks47
+\scratchcounter=\count154
+\scratchdimen=\dimen266
+\scratchbox=\box56
+\nofMPsegments=\count155
+\nofMParguments=\count156
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count157
+\MPscratchDim=\dimen267
+\MPnumerator=\count158
+\makeMPintoPDFobject=\count159
+\everyMPtoPDFconversion=\toks48
 )
 ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf
 -base.sty"
@@ -961,9 +989,10 @@ G,.JBIG2,.JB2,.eps]
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring ON on input line 14.
+\AtBeginShipoutBox=\box57
+Package hyperref Info: Link coloring ON on input line 16.
 
 ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.
 sty"
@@ -973,25 +1002,26 @@ Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 lestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count152
+\c@section@level=\count160
 )
-LaTeX Info: Redefining \ref on input line 14.
-LaTeX Info: Redefining \pageref on input line 14.
-LaTeX Info: Redefining \nameref on input line 14.
+LaTeX Info: Redefining \ref on input line 16.
+LaTeX Info: Redefining \pageref on input line 16.
+LaTeX Info: Redefining \nameref on input line 16.
  ABD: EveryShipout initializing macros
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 25
+\c@lstlisting=\count161
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 27
 .
 
 ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/wasysym\uwasy.fd"
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 
  ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd
 "
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
 
 
 ("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
@@ -999,17 +1029,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 File: Images/PolimiLogo.png Graphic file (type png)
 <use Images/PolimiLogo.png>
-Package pdftex.def Info: Images/PolimiLogo.png  used on input line 28.
+Package pdftex.def Info: Images/PolimiLogo.png  used on input line 30.
 (pdftex.def)             Requested size: 202.75699pt x 62.7342pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--31
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
  []
 
 <Images/SafeStreets.png, id=7, 542.025pt x 963.6pt>
 File: Images/SafeStreets.png Graphic file (type png)
 <use Images/SafeStreets.png>
-Package pdftex.def Info: Images/SafeStreets.png  used on input line 40.
+Package pdftex.def Info: Images/SafeStreets.png  used on input line 42.
 (pdftex.def)             Requested size: 597.52782pt x 845.07408pt.
 [1{C:/Users/pietro/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
@@ -1023,10 +1053,10 @@ We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
 
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 67.
 [2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 67.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 69.
  (main.toc [3])
 \tf@toc=\write4
 \openout4 = `main.toc'.
@@ -1291,98 +1321,78 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 /Images/sequence_login.png>] [30 <./Images/sequence_agent_register.png>]
 [31
 
-] [32]) [33] (Files/alloy.tex [34
+] [32]) [33] (Files/alloy.tex
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 6.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
+.
+
+("C:\Users\pietro\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+(Files/model.als
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <8> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2.
+ [34
 
 ]
-<Images/alsignatures.png, id=372, 202.50656pt x 519.44063pt>
-File: Images/alsignatures.png Graphic file (type png)
-<use Images/alsignatures.png>
-Package pdftex.def Info: Images/alsignatures.png  used on input line 8.
-(pdftex.def)             Requested size: 202.50604pt x 519.43936pt.
-<Images/alfacts.png, id=373, 495.35063pt x 682.04813pt>
-File: Images/alfacts.png Graphic file (type png)
-<use Images/alfacts.png>
-Package pdftex.def Info: Images/alfacts.png  used on input line 18.
-(pdftex.def)             Requested size: 495.34943pt x 682.04646pt.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Overfull \hbox (40.10532pt too wide) in paragraph at lines 17--19
- [] 
- []
+ [35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-LaTeX Warning: Float too large for page by 2.16557pt on input line 19.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Images/algoal.png, id=374, 597.73312pt x 275.52937pt>
-File: Images/algoal.png Graphic file (type png)
-<use Images/algoal.png>
-Package pdftex.def Info: Images/algoal.png  used on input line 24.
-(pdftex.def)             Requested size: 455.24411pt x 209.85013pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Images/alworlds.png, id=375, 458.46281pt x 381.67593pt>
-File: Images/alworlds.png Graphic file (type png)
-<use Images/alworlds.png>
-Package pdftex.def Info: Images/alworlds.png  used on input line 31.
-(pdftex.def)             Requested size: 455.24411pt x 379.01347pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[35 <./Images/alsignatures.png>] [36 <./Images/alfacts.png>] [37 <./Images/algo
-al.png> <./Images/alworlds.png>]
-<Images/alexecutionstatus.png, id=395, 280.04625pt x 303.38344pt>
+ [36])
+<Images/alexecutionstatus.png, id=579, 280.04625pt x 303.38344pt>
 File: Images/alexecutionstatus.png Graphic file (type png)
 <use Images/alexecutionstatus.png>
-Package pdftex.def Info: Images/alexecutionstatus.png  used on input line 38.
+Package pdftex.def Info: Images/alexecutionstatus.png  used on input line 12.
 (pdftex.def)             Requested size: 455.24411pt x 493.20518pt.
-<Images/alworld1.png, id=396, 755.07094pt x 411.03563pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Images/alworld1.png, id=580, 755.07094pt x 411.03563pt>
 File: Images/alworld1.png Graphic file (type png)
 <use Images/alworld1.png>
-Package pdftex.def Info: Images/alworld1.png  used on input line 43.
+Package pdftex.def Info: Images/alworld1.png  used on input line 17.
 (pdftex.def)             Requested size: 455.24411pt x 247.82121pt.
-
 ! Undefined control sequence.
-l.45 \textaf
+l.19 \textaf
             {This world represents the borderline case in which no notificat...
 
 ? 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld2.png, id=397, 704.6325pt x 379.4175pt>
+<Images/alworld2.png, id=581, 704.6325pt x 379.4175pt>
 File: Images/alworld2.png Graphic file (type png)
 <use Images/alworld2.png>
-Package pdftex.def Info: Images/alworld2.png  used on input line 49.
+Package pdftex.def Info: Images/alworld2.png  used on input line 23.
 (pdftex.def)             Requested size: 455.24411pt x 245.13055pt.
 ! Undefined control sequence.
-l.51 \textaf
+l.25 \textaf
             {This world represent the case in which no assignment is complet...
 
 ? 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld3.png, id=398, 552.56438pt x 427.5975pt>
+<Images/alworld3.png, id=582, 552.56438pt x 427.5975pt>
 File: Images/alworld3.png Graphic file (type png)
 <use Images/alworld3.png>
-Package pdftex.def Info: Images/alworld3.png  used on input line 57.
+Package pdftex.def Info: Images/alworld3.png  used on input line 31.
 (pdftex.def)             Requested size: 455.24411pt x 352.28294pt.
 ! Undefined control sequence.
-l.59 \textaf
+l.33 \textaf
             {This world represents a more generic world where assignments pe...
 
 ? 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [38
-
- <./Images/alexecutionstatus.png>] [39 <./Images/alworld1.png> <./Images/alworl
-d2.png>] [40 <./Images/alworld3.png>] (Files/effort.tex
-<Images/effort.png, id=416, 617.30624pt x 424.58624pt>
+) [37] [38 <./Images/alexecutionstatus.png>] [39 <./Images/alworld1.png> <./Ima
+ges/alworld2.png>] [40 <./Images/alworld3.png>] (Files/effort.tex
+<Images/effort.png, id=621, 617.30624pt x 424.58624pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
@@ -1392,33 +1402,41 @@ Package pdftex.def Info: Images/effort.png  used on input line 3.
  <./Images/effort.png>] (Files/Reference.tex) [42
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 111.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 111.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 113.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 113.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 111.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 111.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 113.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 113.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 111.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 113.
  ) 
 Here is how much of TeX's memory you used:
- 21446 strings out of 492453
- 401807 string characters out of 3119609
- 470941 words of memory out of 3000000
- 25182 multiletter control sequences out of 15000+200000
- 30645 words of font info for 53 fonts, out of 3000000 for 9000
+ 23456 strings out of 492453
+ 428493 string characters out of 3119609
+ 666536 words of memory out of 3000000
+ 26963 multiletter control sequences out of 15000+200000
+ 34106 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,20n,69p,893b,607s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
-c}<C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb><C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-urw/times/utmb8a.pfb><C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/t
-ype1/urw/times/utmr8a.pfb>
-Output written on main.pdf (42 pages, 4265705 bytes).
+ 66i,20n,69p,893b,2047s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.e
+nc}{C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.e
+nc}<C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmmi8.pfb><C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr8.pfb><C:/Users/pietro/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/pietro/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/pietro/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Users/pietro/Ap
+pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt8.pfb><C:/Users/pietr
+o/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/Users
+/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/
+Users/pietro/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb
+>
+Output written on main.pdf (42 pages, 4268431 bytes).
 PDF statistics:
- 652 PDF objects out of 1000 (max. 8388607)
- 157 named destinations out of 1000 (max. 500000)
- 667 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 918 PDF objects out of 1000 (max. 8388607)
+ 362 named destinations out of 1000 (max. 500000)
+ 647 words of extra memory for PDF output out of 10000 (max. 10000000)
 
