@@ -151,12 +151,12 @@ all au:Authority| !IsWorking[au] implies (no re:Report| re in au.notifications a
  (some as1:Assignment| re.assignment=as1 and as1.state=Pending))
 }
 
-fact AllCitizenLocationAreAvailableAndCorrect
+fact AllCitizenLocationAreAvailableAndCorrect//D10
 {
 all c:Citizen| FindCitizen[c]!=none and (all re:c.report | re.city=FindCitizen[c])
 }
 
-
+//Requirements
 fact EveryRightAuthoritiesAreNotified //R3
 {
 all re:Report,au:Authority| (re.city=au.city) iff re in au.notifications
