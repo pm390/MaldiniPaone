@@ -17,8 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
-					"defaultDiagram": true
+					"name": "Main"
 				}
 			]
 		},
@@ -45,6 +44,7 @@
 								"$ref": "AAAAAAFuHgnEx53cWx8="
 							},
 							"name": "SequenceDiagram1",
+							"defaultDiagram": true,
 							"ownedViews": [
 								{
 									"_type": "UMLFrameView",
@@ -63,9 +63,9 @@
 												"$ref": "AAAAAAFuHgnEx53eh60="
 											},
 											"font": "Arial;13;0",
-											"left": 75.97900390625,
+											"left": 71.58642578125,
 											"top": 5,
-											"width": 115.9052734375,
+											"width": 102.791015625,
 											"height": 13,
 											"text": "SequenceDiagram1"
 										},
@@ -78,7 +78,7 @@
 											"font": "Arial;13;1",
 											"left": 10,
 											"top": 5,
-											"width": 60.97900390625,
+											"width": 56.58642578125,
 											"height": 13,
 											"text": "interaction"
 										}
@@ -1379,7 +1379,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 216.72998046875,
+											"left": 215.99365234375,
 											"top": 381,
 											"width": 1,
 											"height": 13
@@ -1393,7 +1393,7 @@
 											"font": "Arial;13;1",
 											"left": 197,
 											"top": 381,
-											"width": 14.72998046875,
+											"width": 13.99365234375,
 											"height": 13,
 											"text": "alt"
 										},
@@ -1426,7 +1426,7 @@
 															"font": "Arial;13;0",
 															"left": 212,
 															"top": 414,
-															"width": 247.84423828125,
+															"width": 229.93115234375,
 															"height": 13,
 															"text": "[ Check if there are valid violations already]"
 														}
@@ -2820,7 +2820,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 256.72998046875,
+											"left": 255.99365234375,
 											"top": 829,
 											"width": 1,
 											"height": 13
@@ -2834,7 +2834,7 @@
 											"font": "Arial;13;1",
 											"left": 237,
 											"top": 829,
-											"width": 14.72998046875,
+											"width": 13.99365234375,
 											"height": 13,
 											"text": "alt"
 										},
@@ -2867,7 +2867,7 @@
 															"font": "Arial;13;0",
 															"left": 252,
 															"top": 862,
-															"width": 240.59521484375,
+															"width": 221.64111328125,
 															"height": 13,
 															"text": "[If the assignment is terminated correctly ]"
 														}
