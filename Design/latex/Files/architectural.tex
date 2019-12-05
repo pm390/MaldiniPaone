@@ -13,22 +13,26 @@ The Application layer communicates with data access layer synchronously to retri
 This kind of architecture allows the server nodes to be replicated to improve the system scalability.
 Replicating nodes adds the need for a new component in the architecture , the load balancer, this component is responsible for distributing the working load among the replicated nodes, this approach also increases the fault tolerance of the service since a fault in a node doesn't affect the service availability. A fault in the system may increase the work load for the other nodes, the number of replications should be decided considering also this possibility to avoid the creation of a bottleneck due to a fault of the server.
 To assure security of data managed by the system the server has two firewalls to check packages exchanged with users. Both filters packages incoming and going out of the application logic one towards user devices and the other towards the data access layer.
-//TODO imm(trans( coi firewall))
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolderTODO immagine coi firewall}
+\end{figure}
 Citizen and authorities are provided of mobile applications to access the functionalities offered by safestreets. Municipalities and system managers communicates with safestreets using a web application.
 The Application layer is divided in two parts, one which sends static data (HTML,CSS,JAVASCRIPT) to web application and another part which communicates with database and provides users dynamic contents.
 Our system uses only few caching capabilities because lot of data is dynamic and chages continuosly. The only informations we cache are informations of the violations when an authority takes the corresponding assignment ,citizens have in cache the list of reports they have done and can choose how long that list is kept in memory.
 Safestreets uses a relational database to store data about users and violations , the technology used in municipalities' databases depends on the municipality, a different interface may be used to communicate with each of them. For scaling purpouse a non relational database could be used in later releases to collect data from different databases with different structures and then uses mining techniques to find useful information and pattern in recurrent violations and information useful for building statistics may be queried on a regular basis and stored in a location which is faster to access for our system , reducing the number of queries to be done to external databases. 
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
-\caption{\label{fig:ComWI}PlaceHolder}
-\end{figure}
+
 %TODO change image
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component view}
 In this section we present the components of SafeStreets we start from a generic point of view showing the main parts which composes our system and then we divide the system in smaller parts to analyse the behaviour of the single components and their subcomponents.
-TODO foto component generico
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder TODO generic component diagram}
+\end{figure}
 In this diagram we represent a high level logic view on Subsystems and components. We show the interaction between the server and mobile app,web application, email provider and databases.
 The server is composed of five SubSystems and components:
 \begin{itemize}
@@ -42,16 +46,28 @@ SafeStreets Servlets communicates using SMTP protocol to send email to users who
 The server also communicates with databases to retrieve and save data about violations, users and accidents.
 Mobile application and web application both communicates with Google maps API  to get maps to show to users. Mobile app also needs to communicate with functionalities given by the device such as taking Photos and retrieving position using GPS.
 \end{itemize}
-TODO immagine application component
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder TODO mobile app component diagram}
+\end{figure}
 In this image we show how Mobile Apllication Subsystem can be seen in more detail.
 There are two main components : 
 \begin{itemize}
 \item Utils:  this component takes care of the communication of the application with SafeStreets Server and Google Maps mapping API.
 \item Services: this component communicates with Mobile phone's services which are needed for our application. Those components are GPS which is used to retrieve user position, the phone camera user to take photos of the violations and cache storage used to save locally some useful informations both for Citizens and Authorities.
 \end{itemize}
-TODO Web Application
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder TODO web application component diagram}
+\end{figure}
 Web Application works in a similar way to the mobile app. It must retrieve static data from webServer differently from mobile app.
-TODO immagine Servlets e descrizione funzionalita servlets
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder TODO Servlets compent show functionalities to the users}
+\end{figure}
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Deployment view}
 Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed 
