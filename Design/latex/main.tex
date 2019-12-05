@@ -1,0 +1,113 @@
+\input{commandsFile}
+
+
+\usepackage{eso-pic,graphicx}
+
+\usepackage[dvipsnames]{xcolor}
+    \usepackage{listings}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks,breaklinks,linkcolor=black,urlcolor=blue}
+\begin{document}
+
+%TITLE PAGE
+
+\begin{titlepage}
+
+
+
+
+{\begin{table}[t!]
+\centering
+\begin{tabu} to \textwidth { X[1.3,r,p] X[1.7,l,p] }
+\textcolor{Blue}
+{\textbf{\small{Computer science and engineering Software engineering 2 - Project 2019/2020}}} & \includegraphics[scale=0.5]{Images/PolimiLogo}
+\end{tabu}
+\end{table}}~\\ [7cm]
+
+
+\begin{flushleft}
+
+
+
+\end{flushleft}
+\AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{Images/SafeStreets.png}}
+\end{titlepage}
+
+
+\begin{table}[h!]
+\begin{tabu} to \textwidth { X[0.3,r,p] X[0.7,l,p] }
+\hline
+
+\textbf{Deliverable:} & DD\\
+\textbf{Title:} & Design Document \\
+\textbf{Authors:} & Maldini Pietro , Paone Angelo \\
+\textbf{Version:} & 1.0 \\ 
+\textbf{Date:} & 9-December-2019 \\
+\textbf{Download page:} & https://github.com/pm390/MaldiniPaone\\
+\textbf{Copyright:} & Copyright © 2019, Maldini Pietro, Paone Angelo – All rights reserved \\
+\hline
+\end{tabu}
+\end{table}
+
+
+
+
+\setcounter{page}{2}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\newpage
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Introduction}}}
+\label{sect:introduction}
+\input{Files/introduction}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Architectural Design}}}
+\label{sect:archituctural design}
+\input{Files/architectural}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{User Interface Design}}}
+\label{sect:user interface design}
+\input{Files/user}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Requirements Traceability}}}
+\label{sect:requirements traceability}
+\input{Files/requirements}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Implementation, Integration and Test Plan}}}
+\label{sect:implementation, integration and test plan}
+\input{Files/implementation}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Effort Spent}}}
+\label{sect:effort spent}
+\input{Files/effort}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{References}}}
+\label{sect:reference}
+\input{Files/references}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+\end{document}

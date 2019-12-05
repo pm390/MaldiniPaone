@@ -1,0 +1,91 @@
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Overview: High-level component and their interaction}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+The SafeStreets application is a distributed application with three logic software layers.
+The Presentation layer wich manages the interaction of the user with the system and is responsible of maintaining the GUI, 
+the Application layer which handles the logic of the application and its functionalities the last layer is the Data access layer which manages the accesses to the database and allows the separation of concerns between business logic and data.
+This so called three-tier architecture is thought to be divided on three different hardware layers that represents a group of machines so that every logic layer has a dedicated hardware. This architecture makes it possible to guarantee scalability and flexibility of the system and also lighten the computational load of the server splitting it in two different nodes.
+This architecture improves also security of data since users can't access directly data layer but must communicate with application layer that will retrieve only the necessary data.
+Citizens accesses the system using their mobile phone app , the app communicates with the application layer to send reports and get statistics , authorities can access the application in the same wway as citizens but they can also receive assignments, see reports and also take on assignments and finish them.
+The server of the application layer sends push notifications in asynchronous way to authorities to warn them about violations in the area.
+Municipality and System manager communicates with application layer to add new municipality and authorities to the system but also to retrieve statistics and to read suggestions for improving safety on streets.
+The Application layer communicates with data access layer synchronously to retrieve information and asynchronously to store information about violations.
+This kind of architecture allows the server nodes to be replicated to improve the system scalability.
+Replicating nodes adds the need for a new component in the architecture , the load balancer, this component is responsible for distributing the working load among the replicated nodes, this approach also increases the fault tolerance of the service since a fault in a node doesn't affect the service availability. A fault in the system may increase the work load for the other nodes, the number of replications should be decided considering also this possibility to avoid the creation of a bottleneck due to a fault of the server.
+To assure security of data managed by the system the server has two firewalls to check packages exchanged with users. Both filters packages incoming and going out of the application logic one towards user devices and the other towards the data access layer.
+//TODO imm(trans( coi firewall))
+Citizen and authorities are provided of mobile applications to access the functionalities offered by safestreets. Municipalities and system managers communicates with safestreets using a web application.
+The Application layer is divided in two parts, one which sends static data (HTML,CSS,JAVASCRIPT) to web application and another part which communicates with database and provides users dynamic contents.
+Our system uses only few caching capabilities because lot of data is dynamic and chages continuosly. The only informations we cache are informations of the violations when an authority takes the corresponding assignment ,citizens have in cache the list of reports they have done and can choose how long that list is kept in memory.
+Safestreets uses a relational database to store data about users and violations , the technology used in municipalities' databases depends on the municipality, a different interface may be used to communicate with each of them. For scaling purpouse a non relational database could be used in later releases to collect data from different databases with different structures and then uses mining techniques to find useful information and pattern in recurrent violations and information useful for building statistics may be queried on a regular basis and stored in a location which is faster to access for our system , reducing the number of queries to be done to external databases. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder}
+\end{figure}
+%TODO change image
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Component view}
+In this section we present the components of SafeStreets we start from a generic point of view showing the main parts which composes our system and then we divide the system in smaller parts to analyse the behaviour of the single components and their subcomponents.
+TODO foto component generico
+In this diagram we represent a high level logic view on Subsystems and components. We show the interaction between the server and mobile app,web application, email provider and databases.
+The server is composed of five SubSystems and components:
+\begin{itemize}
+\item SafeStreets Servlets: this contains all the Servlets which allows the user to communicate with the server.To retrieve and save data this component communciates with the Database Connection subsystem. All response to the user are sent in JSON format. 
+\item Web Application Server: this component provides the web application the static data of the application (HTML,CSS,JAVASCRIPT), this part is separated from SafeStreets Servlets for the sake of separation of concerns, dynamic content and static contents are different so different components should get request to retrieve them.
+\item DataBase Connection: this component acts as a facade which separates servlets from data access logic. This component communicates with SafeStreets servlets providing them the functionalities to access data.
+It communicates to Connection subsystems which communicates with SafeStreets Database and with External Databases to get data which is required by users.
+\item SafeStreesDataBaseConnection: this component communicates with SafeStrees database executing query to update and read data from it and provide data to DataBase connection component. 
+\item ExternalDatabaseConnection: this component communicates with External databases executing query to read data from it and provide them to DataBase connection component
+SafeStreets Servlets communicates using SMTP protocol to send email to users who creates new account or forgets credentials. It also communicates with Mobile App and Web application providing them Access to their acoount data, the possibility to make reports for Citizens , to take assignments for the Authorities, to read suggestions for Municipalities and to see statistics for every type of users and visitors.
+The server also communicates with databases to retrieve and save data about violations, users and accidents.
+Mobile application and web application both communicates with Google maps API  to get maps to show to users. Mobile app also needs to communicate with functionalities given by the device such as taking Photos and retrieving position using GPS.
+\end{itemize}
+TODO immagine application component
+In this image we show how Mobile Apllication Subsystem can be seen in more detail.
+There are two main components : 
+\begin{itemize}
+\item Utils:  this component takes care of the communication of the application with SafeStreets Server and Google Maps mapping API.
+\item Services: this component communicates with Mobile phone's services which are needed for our application. Those components are GPS which is used to retrieve user position, the phone camera user to take photos of the violations and cache storage used to save locally some useful informations both for Citizens and Authorities.
+\end{itemize}
+TODO Web Application
+Web Application works in a similar way to the mobile app. It must retrieve static data from webServer differently from mobile app.
+TODO immagine Servlets e descrizione funzionalita servlets
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Deployment view}
+Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed 
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Runtime view}
+To communicate the various internal parts of the S2B use HTTP and HTTPS protocol. No specific communication interface must be implemented.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Component interfaces}
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Selected architectural styles and patterns}
+Multiple Servlet server
+\newline
+We choose to use a server which provides multiple servlets to create different access points to the server for different requests. This choice allows us to create separation of concerns SafeStreets Server which is composed of components with few functionalities and a reduced amount of interactions between them. This approach allows the implementation and testing of components in parallel. The only components which must be developed in advance and tested are Database and database access components. Once those components  are completed  and their functionalities are tested it is possibile to develop different functionalities of the server in parallel, the components must be tested and then integrated with database access components. This approach allows also to make the system scalable , the different functionalities may be separated in different harware and a routing device may be used to send the request to the right machine which can answer to the request. The system can also be expanded in a really simple way since to add a new functionality a new independent servelt may be added to handle it and then a new manager to handle the request and send it correctly to the database connection components in some cases an  already existing component may be expanded to handle it.
+Since different functions of the server are separated in case the system needs to be checked because some functionalities aren't working in the correct way it is possible to pinpoint the parts of the system which aren't correctly working and fix them. For this approach to work it is really important that the Database access components are working correctly since a bug in that component will affect the overall application making later application maintanance more costly, it is really important that this part is tested in all its functionalities and documentation must be as clear as possible to allow future maintenance and expansions the more simple as possible.
+TODO check grammar
+
+Three Tier Client-Server
+\newline
+The separation of the system in three different layers allows to makes the system more flexible and reusable.
+Together with the multiple Servlet approach it allows to add functionalities and modifing them without affecing the entire application.
+This also allows the separation of the presentation of data to the user from data access using the application layer to block access to informations that a user should not access(I.e. a citizen should not access photos of violations or assignment lists)
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Other design decisions}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

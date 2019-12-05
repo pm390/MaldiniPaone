@@ -1,0 +1,93 @@
+
+%---------------------------------------------------
+\subsection{Purpose}
+The purpose of this document is going more in the technical details than the RASD concerning SafeStreets application.
+\newline
+The Design Document gives more details about the design giving guidelines over the overall architecture of the system.
+This document  aims to identify the core design choices for developing the system:
+\begin{itemize}
+\item The high level architecture
+\item The components and their interfaces
+\item The design patterns
+\item The Interaction between the components
+\item Planning for implementation, integration and testing of the system
+\end{itemize}
+A mapping of the requirements to the architecture's components is also given//TODO chiudere questa frase 
+
+%---------------------------------------------------
+\subsection{Scope}
+\subsubsection{Description of the given problem}
+SafeStreets is a crowd-sourced application whose intention is to notify the authorities when traffic
+violations occur. Citizens, thanks to the system, will be able to send information about violations to the
+authorities who will take actions against them. In this way, the service provided by the authorities can be
+improved because they will receive notifications through the app. The sources of notifications are the
+Citizens who take photos of violations and send them to the authorities through
+the application. The information provided by users are integrated with other suitable information and are
+stored by the service. The system also runs an algorithm to read the license plate of the vehicle in the
+photos. All collected data can be seen by Citizens and authorities to find which streets are the safest.
+Users can have different levels of visibility: authorities must be able to know the license plates of vehicles
+in the photos, while normal users can only see data in the form of statistics. Moreover, data are sent to
+the municipal district so that important information can be extracted through statistics in order to make
+decisions to improve the safety of the area. Finally, the system will have to be easy to use, reliable
+and highly scalable to fit perfectly with the mutable context in which it will be used.
+
+
+%---------------------------------------------------
+\subsection{Definitions, Acronyms, Abbreviations}
+%-----------------------------------------------------------------
+\subsubsection {Definitions}
+\begin{itemize}
+\item	Violation: parking violations which can be notified by Citizens to authorities
+\item	Report: Notification sent by Citizens to the system
+\item	Mapping System: external software that provides maps and directions to reach the position of a violation
+\item	Licence plate Recognition Algorithm: calculation process that identifies the alphanumeric number on license plate
+\item	Spam: a series of messages that are undesired
+\item	App: application software 
+\item	Blocked: means that the account is banned for a given period
+\item	Metadata: data about a violation. Position , date,  time and the username of Citizen. 
+\item	Assignment : Work Request for authorities generated upon the receiving of a notification made by Citizens.
+\end{itemize}
+%---------------------------------------------------
+	\subsubsection {Acronyms}
+\begin{itemize}
+\item	RASD: Requirement Analysis and Specification Document.
+\item      DD: Design Document
+\item	API: Application Programming Interface
+\item	GPS: Global positioning system
+\item	HTTP: HyperText Transfer Protocol
+\item	HTTPS: HyperText Transfer Protocol over Secure Socket Layers
+\item	UML: Unified Modeling Language
+\item 	JSON: JavaScript Object Notation
+\item 	UI: User Iterface
+\item 	SQL:Structured Query Language
+
+\end{itemize}
+%---------------------------------------------------
+	\subsubsection {Abbreviations}
+\begin{itemize}
+\item	[Rn]: n-th requirement.
+\end{itemize}
+%---------------------------------------------------
+\subsection {Revision History}
+\begin{itemize}
+\item	DDv1.0 delivered on 9/12/2019
+\end{itemize}
+%---------------------------------------------------
+\subsection {Reference Documents}
+\begin{itemize}
+\item 	RASD versione 1
+\item	Specification Document: “Assignments AA 2019-2020.pdf”.
+\item	IEEE Standard for Information Technology—Systems Design—Software Design Descriptions
+\end{itemize}
+%---------------------------------------------------
+\subsection{Document Structure}
+This chapter debates about contents and structure of DD, indeed this document is divided in seven different sections:
+\begin{enumerate}
+\item	The Introduction provides a general appearance of the systems defining which are the goals to reach, describing the problem.
+\item The Architectural Design
+\item The User Interface Design
+\item The Requirements Traceability
+\item The implementation, integration and test plan
+\item The Effort Spent
+\item The Reference
+\end{enumerate}
