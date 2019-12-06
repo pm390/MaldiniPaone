@@ -73,6 +73,7 @@ Web Application works in a similar way to the mobile app. It must retrieve stati
 \end{figure}
  SafeStreets Servlets component is composed of 5 Managers:
 \begin{itemize}
+\item Mail Manager: this component allows the system to send email to Users when they create account or they modify their credentials. This component is associated with user manager which informs it when an account creation or modification is successful.
 \item User Manager: this component allows users to create handle their account informations.They can create a new account, modify their data and Login. To allow thees functionalities this component must be able to both save data and retrieve data from database.
 \item Report Manager: this component allows citizens to create reports and manage them, and also allows Authorities to take assignments and terminate them. It communicates to the notification manager when new Assignments are created.
 \item Notification Manager:This component sends notificiations to authorities about new violations. This component requires that the Mobile application opens a websocket to communicate. 
@@ -82,7 +83,23 @@ Web Application works in a similar way to the mobile app. It must retrieve stati
 All components takes data and saves data using interfaces exposed by DataBase Connection componet
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Deployment view}
-Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed 
+In the following image the deployment diagram for SafeStreets shows the distribution of the system components and the different deployment nodes. We used a different color to represent External Database servers to show that the node is different, that's because the system should not implement these node but should only communicate with it.
+Google Maps API and Email Provider are not shown in this diagram to simplify it and because their interaction with our system are described in component view.
+\newline
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\caption{\label{fig:ComWI}PlaceHolder TODO Deployment diagram}
+\end{figure}
+This Diagram is divided in three sections to show clearly the separation of the different layers of the Application:
+\begin{itemize}
+\item Presentation : this layer containts the presentation logic. Users to access data must be provided with mobile application for Citizens and Authorities, with web application accessible by a web browser for municipalities and system managers.
+Mobile application must be available for both Android and iOS but not just newer versions to make the application the more accessible as possible, for the same reason web application should be compatible with major desktop web Browsers  : Google Chrome, Mozzilla Firefox, Safari and Microsoft Edge(at the time this document is being written).
+Communication happens using HTTP and HTTPS for both devices while it also happens through WebSockets for mobile application push notifications
+\item BusinessLogic: this layer is divided in 2 different nodes types. Web Server communicates with webapplication and sends it static data needed to render static components(HTML,CSS,JS). App Server instead allows users of both type of application to access dynamic data acting as an intermediary to separate presentation and data but also to control access to data.
+\item Data Access: This layer excecutes a relational DBMS and provides functionalities to the Business logic to access data requested by users. We show in this layer also the external databases which are another important source of data for SafeStrees.
+regarding this component at an initial phase the server will access using the provided interfaces those external databases. When the application will grow a different approach must be implemented to preserve performances by reducing requests to external systems. To reduce this burden a non relational Database internal to safeStreets may be used to store information from external databases using those as sources to create datamarts and use technologies optimized for Big Data. Using this approach will add a recurring activity to be performed which is mining this non relational Database to build suggestions for municipalities.
+\end{itemize}
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Runtime view}
 To communicate the various internal parts of the S2B use HTTP and HTTPS protocol. No specific communication interface must be implemented.
