@@ -1,9 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.3)  5 DEC 2019 18:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.3)  6 DEC 2019 14:29
 entering extended mode
-**./main.tex
-(main.tex
+**"C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/mai
+n.tex"
+
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/main
+.tex"
 LaTeX2e <2019-10-01> patch level 3
-(commandsFile.tex
+
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\comm
+andsFile.tex"
 ("C:\Users\MaurizioMaldini\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\art
 icle.cls"
 Document Class: article 2019/10/25 v1.4k Standard LaTeX document class
@@ -551,7 +556,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
 \Hy@SectionHShift=\skip94
-) (util/highlight.tex
+)
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\util
+/highlight.tex"
 ("C:\Users\MaurizioMaldini\AppData\Local\Programs\MiKTeX 2.9\tex/latex/soul\sou
 l.sty"
 Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
@@ -905,7 +912,8 @@ braries/decorations\pgflibrarydecorations.pathmorphing.code.tex"))
 \highlight@previous=\dimen260
 \highlight@current=\dimen261
 )
-(util/abbrev.tex))
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\util
+/abbrev.tex"))
 ("C:\Users\MaurizioMaldini\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eso-pic\
 eso-pic.sty"
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
@@ -939,384 +947,20 @@ File: listings.cfg 2019/09/10 1.8c listings configuration
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
 Package hyperref Info: Option `colorlinks' set `true' on input line 10.
 Package hyperref Info: Option `breaklinks' set `true' on input line 10.
- (main.aux
 
-LaTeX Warning: Label `fig:CUC' multiply defined.
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\main
+.aux"
+
+LaTeX Warning: Label `fig:ls' multiply defined.
 
 
 LaTeX Warning: Label `fig:ls' multiply defined.
 
 
-LaTeX Warning: Label `fig:CI' multiply defined.
-
-
-LaTeX Warning: Label `fig:AI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComI' multiply defined.
-
-
-LaTeX Warning: Label `fig:MI' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComWI' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDS1' multiply defined.
-
-
-LaTeX Warning: Label `fig:SR' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDL' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDAR' multiply defined.
-
-
 LaTeX Warning: Label `fig:ls' multiply defined.
 
 
-LaTeX Warning: Label `fig:CI' multiply defined.
-
-
-LaTeX Warning: Label `fig:AI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComI' multiply defined.
-
-
-LaTeX Warning: Label `fig:MI' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComWI' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDS1' multiply defined.
-
-
-LaTeX Warning: Label `fig:SR' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDL' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDAR' multiply defined.
-
-
 LaTeX Warning: Label `fig:ls' multiply defined.
-
-
-LaTeX Warning: Label `fig:CI' multiply defined.
-
-
-LaTeX Warning: Label `fig:AI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComI' multiply defined.
-
-
-LaTeX Warning: Label `fig:MI' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComWI' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDS1' multiply defined.
-
-
-LaTeX Warning: Label `fig:SR' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDL' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDAR' multiply defined.
-
-
-LaTeX Warning: Label `fig:ls' multiply defined.
-
-
-LaTeX Warning: Label `fig:CI' multiply defined.
-
-
-LaTeX Warning: Label `fig:AI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComI' multiply defined.
-
-
-LaTeX Warning: Label `fig:MI' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComWI' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDS1' multiply defined.
-
-
-LaTeX Warning: Label `fig:SR' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDL' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDAR' multiply defined.
-
-
-LaTeX Warning: Label `fig:ls' multiply defined.
-
-
-LaTeX Warning: Label `fig:CI' multiply defined.
-
-
-LaTeX Warning: Label `fig:AI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComI' multiply defined.
-
-
-LaTeX Warning: Label `fig:MI' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMI' multiply defined.
-
-
-LaTeX Warning: Label `fig:ComWI' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:VUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:AUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:MUCD2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SMUCD' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC' multiply defined.
-
-
-LaTeX Warning: Label `fig:CUC2' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDS1' multiply defined.
-
-
-LaTeX Warning: Label `fig:SR' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDL' multiply defined.
-
-
-LaTeX Warning: Label `fig:SDAR' multiply defined.
 
 )
 \openout1 = `main.aux'.
@@ -1422,12 +1066,15 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 11.
 LaTeX Info: Redefining \pageref on input line 11.
 LaTeX Info: Redefining \nameref on input line 11.
- (main.out) (main.out)
+
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\main
+.out")
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\main
+.out")
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-
-ABD: EveryShipout initializing macros
+ ABD: EveryShipout initializing macros
 \c@lstlisting=\count160
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 22
 .
@@ -1459,14 +1106,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
 
-<Images/SafeStreets.png, id=615, 542.025pt x 963.6pt>
+<Images/SafeStreets.png, id=115, 542.025pt x 963.6pt>
 File: Images/SafeStreets.png Graphic file (type png)
 <use Images/SafeStreets.png>
 Package pdftex.def Info: Images/SafeStreets.png  used on input line 35.
 (pdftex.def)             Requested size: 597.52782pt x 845.07408pt.
 [1{C:/Users/Maurizio Maldini/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
- <./Images/SafeStreets.png> <./Images/PolimiLogo.png>]
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/SafeStreets.png> <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaon
+e/Design/latex/Images/PolimiLogo.png>]
 ("C:\Users\MaurizioMaldini\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\o
 msptm.fd")
 
@@ -1480,11 +1129,15 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 [2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 62.
- (main.toc [3] [4] [5])
+
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\main
+.toc")
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [6] (Files/introduction.tex
+ [3]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/introduction.tex"
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
 
@@ -1493,22 +1146,36 @@ Overfull \hbox (1.98909pt too wide) in paragraph at lines 4--9
 -cal de-tails than the RASD con-cern-ing SafeStreets
  []
 
-[7
+[4
 
-] [8]) [9] (Files/architectural.tex
-<Images/desktop_common_interface.png, id=819, 617.6676pt x 151.2852pt>
+] [5]) [6]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/architectural.tex"
+<Images/desktop_common_interface.png, id=181, 617.6676pt x 151.2852pt>
 File: Images/desktop_common_interface.png Graphic file (type png)
 <use Images/desktop_common_interface.png>
 Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
-e 24.
+e 18.
+(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
+ [7
+
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/desktop_common_interface.png>]
+File: Images/desktop_common_interface.png Graphic file (type png)
+<use Images/desktop_common_interface.png>
+Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
+e 34.
+(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
+File: Images/desktop_common_interface.png Graphic file (type png)
+<use Images/desktop_common_interface.png>
+Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
+e 53.
 (pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[10
-
-]
+[8]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1516,26 +1183,28 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.45 \\T
-        ODO immagine application component
+l.62 \newline
+             
 ? 
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.52 \\T
-        ODO Web Application
-? 
-[11 <./Images/desktop_common_interface.png>]) [12] (Files/user.tex
-<Images/ux1-correct.png, id=837, 603.25375pt x 415.05063pt>
+File: Images/desktop_common_interface.png Graphic file (type png)
+<use Images/desktop_common_interface.png>
+Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
+e 65.
+(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
+File: Images/desktop_common_interface.png Graphic file (type png)
+<use Images/desktop_common_interface.png>
+Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
+e 72.
+(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
+[9] [10]) [11]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/user.tex"
+<Images/ux1-correct.png, id=210, 603.25375pt x 415.05063pt>
 File: Images/ux1-correct.png Graphic file (type png)
 <use Images/ux1-correct.png>
 Package pdftex.def Info: Images/ux1-correct.png  used on input line 14.
 (pdftex.def)             Requested size: 455.24411pt x 313.21248pt.
-<Images/ux2-correct.png, id=838, 1022.82124pt x 830.10126pt>
+<Images/ux2-correct.png, id=211, 1022.82124pt x 830.10126pt>
 File: Images/ux2-correct.png Graphic file (type png)
 <use Images/ux2-correct.png>
 Package pdftex.def Info: Images/ux2-correct.png  used on input line 20.
@@ -1544,7 +1213,7 @@ Package pdftex.def Info: Images/ux2-correct.png  used on input line 20.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/ux3-correct.png, id=839, 768.8725pt x 669.50125pt>
+<Images/ux3-correct.png, id=212, 768.8725pt x 669.50125pt>
 File: Images/ux3-correct.png Graphic file (type png)
 <use Images/ux3-correct.png>
 Package pdftex.def Info: Images/ux3-correct.png  used on input line 25.
@@ -1552,7 +1221,7 @@ Package pdftex.def Info: Images/ux3-correct.png  used on input line 25.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/ux4-correct.png, id=840, 768.8725pt x 669.50125pt>
+<Images/ux4-correct.png, id=213, 768.8725pt x 669.50125pt>
 File: Images/ux4-correct.png Graphic file (type png)
 <use Images/ux4-correct.png>
 Package pdftex.def Info: Images/ux4-correct.png  used on input line 30.
@@ -1560,449 +1229,73 @@ Package pdftex.def Info: Images/ux4-correct.png  used on input line 30.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [13
+) [12
 
- <./Images/ux1-correct.png>] [14 <./Images/ux2-correct.png>] [15 <./Images/ux3-
-correct.png>] [16 <./Images/ux4-correct.png>] (Files/requirements.tex)
-[17
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/ux1-correct.png>] [13 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/Maldin
+iPaone/Design/latex/Images/ux2-correct.png>] [14 <C:/Users/Maurizio Maldini/Des
+ktop/Pietro/Sweng/MaldiniPaone/Design/latex/Images/ux3-correct.png>]
+[15 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/I
+mages/ux4-correct.png>]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/requirements.tex") [16
 
-] (Files/implementation.tex
-<Images/login_signup.png, id=870, 388.3308pt x 387.849pt>
+]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/implementation.tex"
+<Images/login_signup.png, id=243, 388.3308pt x 387.849pt>
 File: Images/login_signup.png Graphic file (type png)
 <use Images/login_signup.png>
 Package pdftex.def Info: Images/login_signup.png  used on input line 4.
 (pdftex.def)             Requested size: 455.24411pt x 454.69879pt.
-) [18
+) [17
 
- <./Images/login_signup.png>]
-(Files/effort.tex
-<Images/effort.png, id=877, 617.30624pt x 424.58624pt>
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/login_signup.png>]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/effort.tex"
+<Images/effort.png, id=250, 617.30624pt x 424.58624pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
 (pdftex.def)             Requested size: 455.24411pt x 313.1264pt.
-) [19
+) [18
 
- <./Images/effort.png>] (Files/references.tex) [20
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/effort.png>]
+("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
+s/references.tex") [19
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 113.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 113.
-
-(main.aux)
+ (main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 113.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 113.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 419CBD3AAB4496818AB5C7D1AC27830D;1796.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: D1E1732F5BFDD6FAC73E501EF4A8A9D1;11595
-(rerunfilecheck)             After:  419CBD3AAB4496818AB5C7D1AC27830D;1796.
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 113.
  ) 
 Here is how much of TeX's memory you used:
- 22469 strings out of 492484
- 420168 string characters out of 3117066
- 480969 words of memory out of 3000000
- 26127 multiletter control sequences out of 15000+200000
+ 22200 strings out of 492484
+ 417028 string characters out of 3117066
+ 477563 words of memory out of 3000000
+ 25980 multiletter control sequences out of 15000+200000
  30645 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,20n,69p,1333b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsubsection.7.5.6} has been referenced but does
- not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.7.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.7.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.7.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.7.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.7.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6.1} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5.1} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4.1} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.3} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.6} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.5.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.4.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.4.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.2.5} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.2.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.2.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.2.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.1.4} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.1.3} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.1.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.2.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.1.2.2} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.1.1.1} has been referenced but does n
-ot exist, replaced by a fixed one
-
-{C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/bas
-e/8r.enc}<C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb><C:/Users/MaurizioMaldini/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/MaurizioMaldini/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (20 pages, 899434 bytes).
+ 66i,20n,69p,1406b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/b
+ase/8r.enc}<C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/MaurizioMaldini/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/MaurizioMaldini/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (19 pages, 830083 bytes).
 PDF statistics:
- 942 PDF objects out of 1000 (max. 8388607)
- 191 named destinations out of 1000 (max. 500000)
- 1274 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 67 named destinations out of 1000 (max. 500000)
+ 274 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -28,6 +28,7 @@ Safestreets uses a relational database to store data about users and violations 
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component view}
 In this section we present the components of SafeStreets we start from a generic point of view showing the main parts which composes our system and then we divide the system in smaller parts to analyse the behaviour of the single components and their subcomponents.
+\newline
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
@@ -41,11 +42,12 @@ The server is composed of five SubSystems and components:
 \item DataBase Connection: this component acts as a facade which separates servlets from data access logic. This component communicates with SafeStreets servlets providing them the functionalities to access data.
 It communicates to Connection subsystems which communicates with SafeStreets Database and with External Databases to get data which is required by users.
 \item SafeStreesDataBaseConnection: this component communicates with SafeStrees database executing query to update and read data from it and provide data to DataBase connection component. 
-\item ExternalDatabaseConnection: this component communicates with External databases executing query to read data from it and provide them to DataBase connection component
+\item ExternalDatabaseConnection: this component communicates with External databases executing query to read data from it and provide them to DataBase connection component.
+\end{itemize}
 SafeStreets Servlets communicates using SMTP protocol to send email to users who creates new account or forgets credentials. It also communicates with Mobile App and Web application providing them Access to their acoount data, the possibility to make reports for Citizens , to take assignments for the Authorities, to read suggestions for Municipalities and to see statistics for every type of users and visitors.
 The server also communicates with databases to retrieve and save data about violations, users and accidents.
 Mobile application and web application both communicates with Google maps API  to get maps to show to users. Mobile app also needs to communicate with functionalities given by the device such as taking Photos and retrieving position using GPS.
-\end{itemize}
+\newline
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
@@ -63,11 +65,21 @@ There are two main components :
 \caption{\label{fig:ComWI}PlaceHolder TODO web application component diagram}
 \end{figure}
 Web Application works in a similar way to the mobile app. It must retrieve static data from webServer differently from mobile app.
+\newline
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO Servlets compent show functionalities to the users}
 \end{figure}
+ SafeStreets Servlets component is composed of 5 Managers:
+\begin{itemize}
+\item User Manager: this component allows users to create handle their account informations.They can create a new account, modify their data and Login. To allow thees functionalities this component must be able to both save data and retrieve data from database.
+\item Report Manager: this component allows citizens to create reports and manage them, and also allows Authorities to take assignments and terminate them. It communicates to the notification manager when new Assignments are created.
+\item Notification Manager:This component sends notificiations to authorities about new violations. This component requires that the Mobile application opens a websocket to communicate. 
+\item Statistics Manager: This component retrieves data to make  statistics requested by Users and visitors.
+\item Sugggestion Manager: This component retrieves suggestion requested by Municipalities.
+\end{itemize}
+All components takes data and saves data using interfaces exposed by DataBase Connection componet
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Deployment view}
 Software interfaces to communicate with mapping systems, municipality databases and the algorithm to read Lisence plates are needed 
