@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.3)  6 DEC 2019 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  7 DEC 2019 00:37
 entering extended mode
 **"C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/mai
 n.tex"
@@ -1109,7 +1109,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
 <Images/SafeStreets.png, id=115, 542.025pt x 963.6pt>
 File: Images/SafeStreets.png Graphic file (type png)
 <use Images/SafeStreets.png>
-Package pdftex.def Info: Images/SafeStreets.png  used on input line 35.
+Package pdftex.def Info: Images/SafeStreets.png  used on input line 36.
 (pdftex.def)             Requested size: 597.52782pt x 845.07408pt.
 [1{C:/Users/Maurizio Maldini/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
@@ -1125,10 +1125,10 @@ We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
 
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
 [2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 62.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 63.
 
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\main
 .toc")
@@ -1157,25 +1157,7 @@ File: Images/desktop_common_interface.png Graphic file (type png)
 Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
 e 18.
 (pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
- [7
 
- <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
-es/desktop_common_interface.png>]
-File: Images/desktop_common_interface.png Graphic file (type png)
-<use Images/desktop_common_interface.png>
-Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
-e 34.
-(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
-File: Images/desktop_common_interface.png Graphic file (type png)
-<use Images/desktop_common_interface.png>
-Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
-e 53.
-(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[8]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -1183,28 +1165,82 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.62 \newline
+l.21 \newline
              
 ? 
+[7
+
+ <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
+es/desktop_common_interface.png>]
+<Images/GenericComponentDiagram.png, id=190, 605.26125pt x 281.05pt>
+File: Images/GenericComponentDiagram.png Graphic file (type png)
+<use Images/GenericComponentDiagram.png>
+Package pdftex.def Info: Images/GenericComponentDiagram.png  used on input line
+ 35.
+(pdftex.def)             Requested size: 455.24411pt x 211.39165pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--37
+
+ []
+
+[8 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Im
+ages/GenericComponentDiagram.png>]
+<Images/MobileApplicationComponent.png, id=196, 379.91937pt x 226.8475pt>
+File: Images/MobileApplicationComponent.png Graphic file (type png)
+<use Images/MobileApplicationComponent.png>
+Package pdftex.def Info: Images/MobileApplicationComponent.png  used on input l
+ine 54.
+(pdftex.def)             Requested size: 379.91843pt x 226.84694pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--56
+
+ []
+
+<Images/WebAppComponent.png, id=197, 253.94875pt x 229.85875pt>
+File: Images/WebAppComponent.png Graphic file (type png)
+<use Images/WebAppComponent.png>
+Package pdftex.def Info: Images/WebAppComponent.png  used on input line 65.
+(pdftex.def)             Requested size: 455.24411pt x 412.0759pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/I
+mages/MobileApplicationComponent.png>]
+<Images/ServletsComponent.png, id=203, 556.0775pt x 378.41376pt>
+File: Images/ServletsComponent.png Graphic file (type png)
+<use Images/ServletsComponent.png>
+Package pdftex.def Info: Images/ServletsComponent.png  used on input line 72.
+(pdftex.def)             Requested size: 455.24411pt x 309.79893pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/
+Images/WebAppComponent.png>]
 File: Images/desktop_common_interface.png Graphic file (type png)
 <use Images/desktop_common_interface.png>
 Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
-e 65.
+e 92.
 (pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
-File: Images/desktop_common_interface.png Graphic file (type png)
-<use Images/desktop_common_interface.png>
-Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
-e 72.
-(pdftex.def)             Requested size: 455.24411pt x 111.50375pt.
-[9] [10]) [11]
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--94
+
+ []
+
+[11 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/I
+mages/ServletsComponent.png>] [12]) [13]
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
 s/user.tex"
-<Images/ux1-correct.png, id=210, 603.25375pt x 415.05063pt>
+<Images/ux1-correct.png, id=224, 603.25375pt x 415.05063pt>
 File: Images/ux1-correct.png Graphic file (type png)
 <use Images/ux1-correct.png>
 Package pdftex.def Info: Images/ux1-correct.png  used on input line 14.
 (pdftex.def)             Requested size: 455.24411pt x 313.21248pt.
-<Images/ux2-correct.png, id=211, 1022.82124pt x 830.10126pt>
+<Images/ux2-correct.png, id=225, 1022.82124pt x 830.10126pt>
 File: Images/ux2-correct.png Graphic file (type png)
 <use Images/ux2-correct.png>
 Package pdftex.def Info: Images/ux2-correct.png  used on input line 20.
@@ -1213,7 +1249,7 @@ Package pdftex.def Info: Images/ux2-correct.png  used on input line 20.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/ux3-correct.png, id=212, 768.8725pt x 669.50125pt>
+<Images/ux3-correct.png, id=226, 768.8725pt x 669.50125pt>
 File: Images/ux3-correct.png Graphic file (type png)
 <use Images/ux3-correct.png>
 Package pdftex.def Info: Images/ux3-correct.png  used on input line 25.
@@ -1221,7 +1257,7 @@ Package pdftex.def Info: Images/ux3-correct.png  used on input line 25.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/ux4-correct.png, id=213, 768.8725pt x 669.50125pt>
+<Images/ux4-correct.png, id=227, 768.8725pt x 669.50125pt>
 File: Images/ux4-correct.png Graphic file (type png)
 <use Images/ux4-correct.png>
 Package pdftex.def Info: Images/ux4-correct.png  used on input line 30.
@@ -1229,62 +1265,62 @@ Package pdftex.def Info: Images/ux4-correct.png  used on input line 30.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [12
+) [14
 
  <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
-es/ux1-correct.png>] [13 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/Maldin
-iPaone/Design/latex/Images/ux2-correct.png>] [14 <C:/Users/Maurizio Maldini/Des
+es/ux1-correct.png>] [15 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/Maldin
+iPaone/Design/latex/Images/ux2-correct.png>] [16 <C:/Users/Maurizio Maldini/Des
 ktop/Pietro/Sweng/MaldiniPaone/Design/latex/Images/ux3-correct.png>]
-[15 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/I
+[17 <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/I
 mages/ux4-correct.png>]
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
-s/requirements.tex") [16
+s/requirements.tex") [18
 
 ]
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
 s/implementation.tex"
-<Images/login_signup.png, id=243, 388.3308pt x 387.849pt>
+<Images/login_signup.png, id=256, 388.3308pt x 387.849pt>
 File: Images/login_signup.png Graphic file (type png)
 <use Images/login_signup.png>
 Package pdftex.def Info: Images/login_signup.png  used on input line 4.
 (pdftex.def)             Requested size: 455.24411pt x 454.69879pt.
-) [17
+) [19
 
  <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
 es/login_signup.png>]
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
 s/effort.tex"
-<Images/effort.png, id=250, 617.30624pt x 424.58624pt>
+<Images/effort.png, id=264, 617.30624pt x 424.58624pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
 (pdftex.def)             Requested size: 455.24411pt x 313.1264pt.
-) [18
+) [20
 
  <C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex/Imag
 es/effort.png>]
 ("C:/Users/Maurizio Maldini/Desktop/Pietro/Sweng/MaldiniPaone/Design/latex\File
-s/references.tex") [19
+s/references.tex") [21
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 113.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 113.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 113.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 113.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 419CBD3AAB4496818AB5C7D1AC27830D;1796.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 113.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
  ) 
 Here is how much of TeX's memory you used:
- 22200 strings out of 492484
- 417028 string characters out of 3117066
- 477563 words of memory out of 3000000
- 25980 multiletter control sequences out of 15000+200000
+ 22228 strings out of 492484
+ 417867 string characters out of 3117066
+ 474561 words of memory out of 3000000
+ 26001 multiletter control sequences out of 15000+200000
  30645 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,20n,69p,1406b,604s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1293,9 +1329,9 @@ ase/8r.enc}<C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/MaurizioMaldini/AppData/Local/Progr
 ams/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/MaurizioMaldini/AppDa
 ta/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (19 pages, 830083 bytes).
+Output written on main.pdf (21 pages, 997865 bytes).
 PDF statistics:
- 291 PDF objects out of 1000 (max. 8388607)
- 67 named destinations out of 1000 (max. 500000)
- 274 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 70 named destinations out of 1000 (max. 500000)
+ 294 words of extra memory for PDF output out of 10000 (max. 10000000)
 

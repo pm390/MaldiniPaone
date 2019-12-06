@@ -13,7 +13,7 @@ The Application layer communicates with data access layer synchronously to retri
 This kind of architecture allows the server nodes to be replicated to improve the system scalability.
 Replicating nodes adds the need for a new component in the architecture , the load balancer, this component is responsible for distributing the working load among the replicated nodes, this approach also increases the fault tolerance of the service since a fault in a node doesn't affect the service availability. A fault in the system may increase the work load for the other nodes, the number of replications should be decided considering also this possibility to avoid the creation of a bottleneck due to a fault of the server.
 To assure security of data managed by the system the server has two firewalls to check packages exchanged with users. Both filters packages incoming and going out of the application logic one towards user devices and the other towards the data access layer.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
 \caption{\label{fig:ComWI}PlaceHolderTODO immagine coi firewall}
@@ -29,9 +29,9 @@ Safestreets uses a relational database to store data about users and violations 
 \subsection{Component view}
 In this section we present the components of SafeStreets we start from a generic point of view showing the main parts which composes our system and then we divide the system in smaller parts to analyse the behaviour of the single components and their subcomponents.
 \newline
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\includegraphics[width=\textwidth]{Images/GenericComponentDiagram.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO generic component diagram}
 \end{figure}
 In this diagram we represent a high level logic view on Subsystems and components. We show the interaction between the server and mobile app,web application, email provider and databases.
@@ -48,9 +48,9 @@ SafeStreets Servlets communicates using SMTP protocol to send email to users who
 The server also communicates with databases to retrieve and save data about violations, users and accidents.
 Mobile application and web application both communicates with Google maps API  to get maps to show to users. Mobile app also needs to communicate with functionalities given by the device such as taking Photos and retrieving position using GPS.
 \newline
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\includegraphics{Images/MobileApplicationComponent.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO mobile app component diagram}
 \end{figure}
 In this image we show how Mobile Apllication Subsystem can be seen in more detail.
@@ -59,16 +59,16 @@ There are two main components :
 \item Utils:  this component takes care of the communication of the application with SafeStreets Server and Google Maps mapping API.
 \item Services: this component communicates with Mobile phone's services which are needed for our application. Those components are GPS which is used to retrieve user position, the phone camera user to take photos of the violations and cache storage used to save locally some useful informations both for Citizens and Authorities.
 \end{itemize}
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\includegraphics{Images/WebAppComponent.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO web application component diagram}
 \end{figure}
 Web Application works in a similar way to the mobile app. It must retrieve static data from webServer differently from mobile app.
 \newline
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\includegraphics[width=\textwidth]{Images/ServletsComponent.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO Servlets compent show functionalities to the users}
 \end{figure}
  SafeStreets Servlets component is composed of 5 Managers:
@@ -86,9 +86,9 @@ All components takes data and saves data using interfaces exposed by DataBase Co
 In the following image the deployment diagram for SafeStreets shows the distribution of the system components and the different deployment nodes. We used a different color to represent External Database servers to show that the node is different, that's because the system should not implement these node but should only communicate with it.
 Google Maps API and Email Provider are not shown in this diagram to simplify it and because their interaction with our system are described in component view.
 \newline
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
+\includegraphics[width=\textwidth]{Images/Deployment.png}
 \caption{\label{fig:ComWI}PlaceHolder TODO Deployment diagram}
 \end{figure}
 This Diagram is divided in three sections to show clearly the separation of the different layers of the Application:
@@ -122,7 +122,13 @@ This also allows the separation of the presentation of data to the user from dat
 
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Other design decisions}
-
+Thin client 
+\newline
+A thin client is characterized by the fact that it's only function is to communicate with server to retrieve data and concentrates on presentation of data to the user.
+\newline
+This design choice allows us to separate the business logic from the presentation. However our Mobile application has some business logic in it so it is not purely a thin client. This choice is made to reduce drastically draining computational resources from server. The business logic in the App is the Licence plate recognition algorithm which checks if at least one photo provided by the user contains a valid licence plate, doing such a control server side would have needed to send all the photos to the server to check them and in case of failure notify the application of it and ask the user to re-take photos and send them again to the server, considering also that those kind of algorithm can take lot of time to be executed.
+To clarify this statement this example may help to understand our choice: an execution time of a millisecond on a mobile phone may be seen as a bit of lag by the user but if the algorithm runs on the server that millisecond of delay which must be mutiplied by the amount of users sending photos and the number of photos sent by them can result in a delay of seconds in the performances of application server
+Nowadays it is important to consider a lot those kind of delay since users can access any kind of application and user experience while using an application is crutial, a delay of just a couple of seconds can make a user uninstall completely an app and also discourage other people from using it.
 %---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
