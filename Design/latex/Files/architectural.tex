@@ -105,8 +105,49 @@ regarding this component at an initial phase the server will access using the pr
 To communicate the various internal parts of the S2B use HTTP and HTTPS protocol. No specific communication interface must be implemented.
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component interfaces}
-
-%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/Interfaces.png}
+\caption{\label{fig:ComWI}Component Interfaces}
+\end{figure}
+In the above picture the component interfaces of the business logic and the facade provided by data access layer are shown.
+The arrow represents dependencies between interfaces .
+All Interfaces except for ManageDataAccess and ManageNotification are required by the web servlets to respond to user Requests.
+Manage Data Acces acts as a facade provided by the Data Connection component and provides the other interfaces the needed data to respond.
+Manage Notification takes care of the notification sent to authorities , it need the  Manage Authority Position interface that informs it when an authority moves from one position to another and also it needs the ManageReportCreation  that communicates to ManageDataAccess interface to create a Report object and when the object creation is successful it asks to send notifications to every authority who is active near the location of the report.
+Those interfaces are provided by the Manager components of the system:
+\begin{itemize}
+\item User Manager: provides ManageLogin,ManageRegistration,Manage Authority Position, Manage Authority Registration and Manage Account Modification interfaces
+\item Report Manager: provides the ManageReportCreation and manage Assignment interfaces
+\item Notification Manager: provides manage Notification interface
+\item Statistics Manager:  provides Manage Statistics interface
+\item Sugggestion Manager: provides Manage Suggestion interface
+\end{itemize}
+In this diagram we used the symbol '?' after newEmail in ManageAccountModification to indicate that the old email isn't modified  if it not specified by the user. This difference is done to show how all other parameters must be provided by the Servlets which gets them from users and are mandatory for the functionalities to work.
+The most important interfaces needed by servelts to provide user the main functionalities of SafeStreets are:
+\begin{itemize}
+\item ManageReportCreation: this interface allows the Creation of requests, it needs the username of the user creating it the location of the Violation and the photos associated with it which must be more than 2 [2...n]. It creates an object of type Report and uses the method provided by Manage Data Access to create a new report in case of failure the user is notified, in case of success two different scenarios may happen, the report is linked to a new assignment or the report is linked to an already existing assignment, if the already existing assignment is being taken care by an authority the server communicates that to the user who reported the violation in all the other situations the Notification manager is asked to send notification to agents near the location of the violation and are asked to take the assignment.
+\item ManageAssignment: this interface allows authorities to find all the pending assignments which are close to their position
+\item Manage Suggestions: this interfaces is maily used to allow Municipalities to Get suggestions. Suggestions are made combining Report data and accident data close to the location of the municipality. In addition to dinamically created suggestions Citizens and authorities are able to send suggestions when sending reports for the former or terminating assignments for the latter.
+\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/Interfaces.png}
+\caption{\label{fig:ComWI}TODO // placeholder ER DIAGRAM }
+\end{figure}
+The image above represents the Entity Relation diagram of data saved on the internal database of SafeStreets. The Different kind of users all have as primary key their username, a unique email is requested for different users because when user account informations gets modified or credential are lost the right user must be notified by eamil. Municipalities have a nullable field RegisteredBy which is used to keep track if an authority registered another authority and who registered them, it can be null if the registration happens trough the system manager. To facilitate access to authorities and municipalities in a certain location the cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster,
+Static Suggestions added by users and authorities must be indexed using Cityhall as an index to make easier access to suggestions.
+Report contains a field for notes made by users to authorities to give them information they couldn't provide using photos.
+Citizens have a reliability field which represents how reliable a user is , this is used by database to ban a user when they make too many fake reports or they create too many reports in a really short time.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/Interfaces.png}
+\caption{\label{fig:ComWI}TODO // placeholder Dabase Class Diagram }
+\end{figure}
+In this picture a part of the class diagram concerning Data Access Layer is provided.
+This component provides the Business Logic (here shown as a package, the ServerPackage) an interface to access data.
+Internally different singleton classes handles the requests a first group of classes checks input data validity :DataCollector, ReportAndAssignmentUpdater and UserDataChecker. The first one communicates with Report And Assignment Database Connector to get report ,assignment and statistics from SafeStreets Database and also communicates with different External Database Connectors to get Accident data from external Databases. To communicate with external database the system has an abstract class of connector which contains the methods required by the system, for every database a different istance of child class  is needed to implement the actual connection and in case some information need further computation a factory class is needed to create Accident istances which can be used by the business logic. A connection Pool for Connecting to SafeStreets Database to allow the reuse of connection and reduce the cost of memory allocation and disallocation in the server.
+ %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Selected architectural styles and patterns}
 Multiple Servlet server
 \newline
