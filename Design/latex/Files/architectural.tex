@@ -5,6 +5,11 @@ The SafeStreets App is a distributed App with three logic software layers.
 The Presentation layer wich manages the interaction of the user with the system and is responsible of maintaining the GUI, 
 the App layer which handles the logic of the App and its functionalities the last layer is the Data access layer which manages the accesses to the database and allows the separation of concerns between business logic and data.
 This so called three-tier architecture is thought to be divided on three different hardware layers that represents a group of machines so that every logic layer has a dedicated hardware. This architecture makes it possible to guarantee scalability and flexibility of the system and also lighten the computational load of the server splitting it in two different nodes.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/3tier.png}
+\caption{\label{fig:ComWI}Three tier architecture}
+\end{figure}
 This architecture improves also security of data since users can't access directly data layer but must communicate with App layer that will retrieve only the necessary data.
 Citizens accesses the system using their mobile phone App , the App communicates with the App layer to send reports and get statistics , authorities can access the App in the same wway as citizens but they can also receive assignments, see reports and also take on assignments and finish them.
 The server of the App layer sends push notifications in asynchronous way to authorities to warn them about violations in the area.
@@ -13,10 +18,11 @@ The App layer communicates with data access layer synchronously to retrieve info
 This kind of architecture allows the server nodes to be replicated to improve the system scalability.
 Replicating nodes adds the need for a new component in the architecture , the load balancer, this component is responsible for distributing the working load among the replicated nodes, this Approach also increases the fault tolerance of the service since a fault in a node doesn't affect the service availability. A fault in the system may increase the work load for the other nodes, the number of replications should be decided considering also this possibility to avoid the creation of a bottleneck due to a fault of the server.
 To assure security of data managed by the system the server has two firewalls to check packages exchanged with users. Both filters packages incoming and going out of the App logic one towards user devices and the other towards the data access layer.
+\newpage
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/desktop_common_interface.png}
-\caption{\label{fig:ComWI}PlaceHolderTODO immagine coi firewall}
+\includegraphics[width=\textwidth]{Images/Architecture.png}
+\caption{\label{fig:ComWI}Application High Level Architecture}
 \end{figure}
 Citizen and authorities are provided of mobile Apps to access the functionalities offered by safestreets. Municipalities and system managers communicates with safestreets using a web App.
 The App layer is divided in two parts, one which sends static data (HTML,CSS,Javascript) to web App and another part which communicates with database and provides users dynamic contents.
@@ -32,7 +38,7 @@ In this section we present the components of SafeStreets we start from a generic
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/GenericComponentDiagram.png}
-\caption{\label{fig:ComWI}PlaceHolder TODO generic component diagram}
+\caption{\label{fig:ComWI}General Component diagram}
 \end{figure}
 In this diagram we represent a high level logic view on Subsystems and components. We show the interaction between the server and mobile App,web App, email provider and databases.
 The server is composed of five SubSystems and components:
@@ -51,7 +57,7 @@ Mobile App and web App both communicates with Google maps API  to get maps to sh
 \begin{figure}[H]
 \centering
 \includegraphics{Images/MobileApplicationComponent.png}
-\caption{\label{fig:ComWI}PlaceHolder TODO mobile App component diagram}
+\caption{\label{fig:ComWI} Mobile App Component Diagram}
 \end{figure}
 In this image we show how Mobile Apllication Subsystem can be seen in more detail.
 There are two main components : 
@@ -62,14 +68,14 @@ There are two main components :
 \begin{figure}[H]
 \centering
 \includegraphics{Images/WebAppComponent.png}
-\caption{\label{fig:ComWI}PlaceHolder TODO web App component diagram}
+\caption{\label{fig:ComWI}Web App Component Diagram}
 \end{figure}
 Web App works in a similar way to the mobile App. It must retrieve static data from webServer differently from mobile App.
 \subsubsection{Server Servlets Component View}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/ServletsComponent.png}
-\caption{\label{fig:ComWI}PlaceHolder TODO Servlets compent show functionalities to the users}
+\caption{\label{fig:ComWI} Servlets Compent }
 \end{figure}
  SafeStreets Servlets component is composed of 5 Managers:
 \begin{itemize}
@@ -89,7 +95,7 @@ Google Maps API and Email Provider are not shown in this diagram to simplify it 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/Deployment.png}
-\caption{\label{fig:ComWI}PlaceHolder TODO Deployment diagram}
+\caption{\label{fig:ComWI} Deployment Diagram}
 \end{figure}
 This Diagram is divided in three sections to show clearly the separation of the different layers of the App:
 \begin{itemize}
@@ -106,8 +112,8 @@ regarding this component at an initial phase the server will access using the pr
 \subsubsection{Make a report}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/Interfaces.png}
-\caption{\label{fig:ComWI}TODO placeholder sequence scenario 1}
+\includegraphics[width=\textwidth]{Images/SequenceMakeReport.png}
+\caption{\label{fig:ComWI}Sequence Diagram: Making a Report}
 \end{figure}
 In this sequence diagram the process through which a Citizen makes a report , the request is handled by server and how the authority is informed and can take the assignment corresponding to the report is shown.
 When the Citizen clicks on the Button " Make a Report" of the main creen the phone camera is opened automatically, so user is asked to take the first photo of the violation. After taking the photo it is elaborated with the Algorithm to Recognize Licence Plates if it recognises a licence plate the App gets using the GPS of the App the position of the user , in case of no recognition the user is asked to take another photo. To enrich the Report the App allows the user to write some additional notes that authorities can read and get more information about the violation. Then when the user decides to send the violation clicking on the corresponding button on the UI of the mobile phone the App handles the request and sends the report and all the needed data to the Report Manager.The Report Manager elaborates the data and sends the report to the DatabaseConnection subsystem which takes care to add the report to the DataBase, in this diagram we don't show the SafeStreets database connection subsystem to lighten the diagram and also because it would be called with the same request as the DataBaseConnection resulting in no useful information being added. The Database recognizes if the report is new and creates a new Assignment if it doesn't exist , it just adds a report connected to the assignment if it already exist. After that the Report Manager sends the notification to the notification manager which takes care to find the closest agents to thte report and to warn them using push notifications of the assignment.
@@ -116,11 +122,19 @@ Once the Authority terminates his assignment he can notify the system using the 
 \subsubsection{Login from Mobile App}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/Interfaces.png}
-\caption{\label{fig:ComWI}TODO placeholder sequence login mobile}
+\includegraphics[width=\textwidth]{Images/SequenceLogin.png}
+\caption{\label{fig:ComWI}Sequence Diagram: Mobile App Login}
 \end{figure}
 In this sequence diagram the process through which a User can Login, it shows the Mobile App process but it is the same for the Web App.
 Once users gets access to the App(Mobile or Web) they are asked to autenticate themselves in the "Login Page" inserting their credential in the dedicated text fields. Once the user submits the data pressing "Login" button data are sent to User Manager that takes care of the verification of data validity, in case of failure an error message is sent to the user who must repeat the autentication sequence otherwise the User Manager asks the Database Connection subsystem if the credentials are associated with a user also here as in the last diagram the SafeStreets DataBase Connection subsystem is not represented because it wouldn't add relevant interaction for the App. If a  user is found associated to the inserted credential the user is logged in and the homepage is shown to the user otherwise the login request is refused  and the user is notified that the inserted credential are wrong and he/she must retry the Login process.
+\subsubsection{Authority registration}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Images/SequenceAuthorityRegistration.png}
+\caption{\label{fig:ComWI}Sequence Diagram :Authority Registration}
+\end{figure}
+This sequence diagram shows the process of the registration of a new authority to SafeStreets service.
+The registration of an authority must be done by a Municipality pressing the "Add Agent" button in the Homepage of Web Application , after this the application shows a page for registrating a new authority , this page contains a form to be compiled with data caracterizing the authority(his/her email adress, username, and the boundaries of the area he/she takes care of). After that the Municipality sends the request to add the agent using the "Add" button, this sends the data from the form to the User Manager which checks if data are valid. In case data are not valid an error message is sent  to the municipality that must refill the form and redo the registration sequence. In case data are valid they are sent to the database conncetion which generates a temporary password for the authority account , after that the SafeStreets Database Connection subsystem checks the existence of an account with the same username. If there is a matching username already in the database the new authority is not registered and the Municipality gets an error message. If the creation is successfull the User Manager asks the Mail Manager to send an email with the temporary password to the Authority . If the email isn't sent and the server fails 5 times to send it, the server informs the Municipality that there are problems with the email and that the server will take care of sending the email if the authority didn't receive an email or in any case if he/she doesn't login within 24 hours. If the email is sent succesfully then authority is informed of the success of the creation of the authority account.
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component interfaces}
 \begin{figure}[H]
@@ -150,8 +164,8 @@ The most important interfaces needed by servelts to provide user the main functi
 \end{itemize}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/Interfaces.png}
-\caption{\label{fig:ComWI}TODO // placeholder ER DIAGRAM }
+\includegraphics[width=\textwidth]{Images/ER.png}
+\caption{\label{fig:ComWI}ER DIAGRAM }
 \end{figure}
 The image above represents the Entity Relation diagram of data saved on the internal database of SafeStreets. The Different kind of users all have as primary key their username, a unique email is requested for different users because when user account informations gets modified or credential are lost the right user must be notified by eamil. Municipalities have a nullable field RegisteredBy which is used to keep track if an authority registered another authority and who registered them, it can be null if the registration hAppens trough the system manager. To facilitate access to authorities and municipalities in a certain location the cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster,
 Static Suggestions added by users and authorities must be indexed using Cityhall as an index to make easier access to suggestions.
@@ -159,8 +173,8 @@ Report contains a field for notes made by users to authorities to give them info
 Citizens have a reliability field which represents how reliable a user is , this is used by database to ban a user when they make too many fake reports or they create too many reports in a really short time.
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Images/Interfaces.png}
-\caption{\label{fig:ComWI}TODO // placeholder Dabase Class Diagram }
+\includegraphics[width=\textwidth]{Images/DatabaseConnectionClassDiagram.png}
+\caption{\label{fig:ComWI}Dabase Connection Class Diagram }
 \end{figure}
 In this picture a part of the class diagram concerning Data Access Layer is provided.
 This component provides the Business Logic (here shown as a package, the ServerPackage) an interface to access data.

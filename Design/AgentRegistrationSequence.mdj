@@ -1325,7 +1325,7 @@
 												"$ref": "AAAAAAFu4GwQbL5Qi8E="
 											},
 											"font": "Arial;13;0",
-											"left": 1057,
+											"left": 1063,
 											"top": 400,
 											"width": 367.80859375,
 											"height": 13,
@@ -1348,7 +1348,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1240,
+											"left": 1246,
 											"top": 385,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1369,7 +1369,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1240,
+											"left": 1246,
 											"top": 420,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1389,7 +1389,7 @@
 												"$ref": "AAAAAAFu4GwQbL5Qi8E="
 											},
 											"font": "Arial;13;0",
-											"left": 1430,
+											"left": 1443,
 											"top": 416,
 											"width": 14,
 											"height": 49
@@ -1402,7 +1402,7 @@
 									"tail": {
 										"$ref": "AAAAAAFu4GePLr2DPKs="
 									},
-									"points": "1050:416;1430:416",
+									"points": "1050:416;1443:416",
 									"nameLabel": {
 										"$ref": "AAAAAAFu4GwQbL5SmCE="
 									},
@@ -1436,7 +1436,7 @@
 												"$ref": "AAAAAAFu4GySYL5pnkk="
 											},
 											"font": "Arial;13;0",
-											"left": 1451,
+											"left": 1458,
 											"top": 416,
 											"width": 149.55078125,
 											"height": 13,
@@ -1459,7 +1459,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1525,
+											"left": 1532,
 											"top": 401,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1480,7 +1480,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1525,
+											"left": 1532,
 											"top": 436,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1513,7 +1513,7 @@
 									"tail": {
 										"$ref": "AAAAAAFu4GgpUr2oNBk="
 									},
-									"points": "1443:432;1608:432",
+									"points": "1456:432;1608:432",
 									"nameLabel": {
 										"$ref": "AAAAAAFu4GySYL5rzt8="
 									},
@@ -1547,7 +1547,7 @@
 												"$ref": "AAAAAAFu4G3F4r6BdlA="
 											},
 											"font": "Arial;13;0",
-											"left": 1496,
+											"left": 1503,
 											"top": 472,
 											"width": 57.08447265625,
 											"height": 13,
@@ -1570,7 +1570,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1524,
+											"left": 1531,
 											"top": 467,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1591,7 +1591,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1525,
+											"left": 1532,
 											"top": 432,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1612,7 +1612,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1430,
+											"left": 1443,
 											"top": 448,
 											"width": 14,
 											"height": 25
@@ -1625,7 +1625,7 @@
 									"tail": {
 										"$ref": "AAAAAAFu4GiQgL3J7Qo="
 									},
-									"points": "1608:448;1443:448",
+									"points": "1608:448;1456:448",
 									"nameLabel": {
 										"$ref": "AAAAAAFu4G3F4r6D+GA="
 									},
@@ -1659,7 +1659,7 @@
 												"$ref": "AAAAAAFu4G3gtL6X/T8="
 											},
 											"font": "Arial;13;0",
-											"left": 1211,
+											"left": 1217,
 											"top": 460,
 											"width": 57.08447265625,
 											"height": 13,
@@ -1682,7 +1682,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1239,
+											"left": 1245,
 											"top": 475,
 											"height": 13,
 											"alpha": 1.5707963267948966,
@@ -1703,7 +1703,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1240,
+											"left": 1246,
 											"top": 440,
 											"height": 13,
 											"alpha": -1.5707963267948966,
@@ -1737,7 +1737,7 @@
 									"tail": {
 										"$ref": "AAAAAAFu4GgpUr2oNBk="
 									},
-									"points": "1430:456;1050:456",
+									"points": "1443:456;1050:456",
 									"nameLabel": {
 										"$ref": "AAAAAAFu4G3gtL6Zw44="
 									},
@@ -2010,7 +2010,7 @@
 													"font": "Arial;13;0",
 													"left": 1341,
 													"top": 45,
-													"width": 192.10791015625,
+													"width": 218.0634765625,
 													"height": 13,
 													"text": "«subsystem»"
 												},
@@ -2023,9 +2023,9 @@
 													"font": "Arial;13;1",
 													"left": 1341,
 													"top": 60,
-													"width": 192.10791015625,
+													"width": 218.0634765625,
 													"height": 13,
-													"text": "SafeStreets Database Access"
+													"text": "SafeStreets Database Connection"
 												},
 												{
 													"_type": "LabelView",
@@ -2056,7 +2056,7 @@
 											"font": "Arial;13;0",
 											"left": 1336,
 											"top": 40,
-											"width": 202.10791015625,
+											"width": 228.0634765625,
 											"height": 40,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAFu4GgpUr2kQKs="
@@ -2081,7 +2081,7 @@
 												"$ref": "AAAAAAFu4GgpUb2hH94="
 											},
 											"font": "Arial;13;0",
-											"left": 1437,
+											"left": 1450,
 											"top": 80,
 											"width": 1,
 											"height": 427
@@ -2090,7 +2090,7 @@
 									"font": "Arial;13;0",
 									"left": 1336,
 									"top": 40,
-									"width": 202.10791015625,
+									"width": 228.0634765625,
 									"height": 467,
 									"nameCompartment": {
 										"$ref": "AAAAAAFu4GgpUb2jZ/s="
@@ -3046,7 +3046,7 @@
 												"$ref": "AAAAAAFu4Hp6Ab/V0lg="
 											},
 											"edgePosition": 1,
-											"text": "15 : server side error message and retry later message"
+											"text": "15 : server side error message"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -3456,7 +3456,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFuMMI9JLR1Qxg="
 							},
-							"name": "server side error message and retry later message",
+							"name": "server side error message",
 							"source": {
 								"$ref": "AAAAAAFuMMLgUbSkQGk="
 							},
@@ -3545,7 +3545,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFuMMI9JLR1Qxg="
 							},
-							"name": "SafeStreets Database Access",
+							"name": "SafeStreets Database Connection",
 							"stereotype": "subsystem",
 							"represent": {
 								"$ref": "AAAAAAFu4GgpUb2gFcI="
@@ -3728,7 +3728,8 @@
 					"_parent": {
 						"$ref": "AAAAAAFuMMI9I7R07k8="
 					},
-					"name": "Role6"
+					"name": "Role6",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
