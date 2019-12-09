@@ -10,14 +10,22 @@ This so called three-tier architecture is thought to be divided on three differe
 \includegraphics[width=\textwidth]{Images/3tier.png}
 \caption{\label{fig:ComWI}Three tier architecture}
 \end{figure}
-This architecture improves also security of data since users can't access directly data layer but must communicate with App layer that will retrieve only the necessary data.
-Citizens accesses the system using their mobile phone App , the App communicates with the App layer to send reports and get statistics , authorities can access the App in the same wway as citizens but they can also receive assignments, see reports and also take on assignments and finish them.
-The server of the App layer sends push notifications in asynchronous way to authorities to warn them about violations in the area.
-Municipality and System manager communicates with App layer to add new municipality and authorities to the system but also to retrieve statistics and to read suggestions for improving safety on streets.
-The App layer communicates with data access layer synchronously to retrieve information and asynchronously to store information about violations.
-This kind of architecture allows the server nodes to be replicated to improve the system scalability.
-Replicating nodes adds the need for a new component in the architecture , the load balancer, this component is responsible for distributing the working load among the replicated nodes, this Approach also increases the fault tolerance of the service since a fault in a node doesn't affect the service availability. A fault in the system may increase the work load for the other nodes, the number of replications should be decided considering also this possibility to avoid the creation of a bottleneck due to a fault of the server.
-To assure security of data managed by the system the server has two firewalls to check packages exchanged with users. Both filters packages incoming and going out of the App logic one towards user devices and the other towards the data access layer.
+This architecture improves also the security of data since users can’t access directly the data layer, but have to
+communicate with the App layer that will retrieve only the necessary data. Citizens access the system using
+their mobile phone App , which communicates with the App layer to send reports and get statistics;
+authorities can access the App in the same way as citizens do, but they can also receive assignments,
+see reports and take on assignments and finish them. The server of the App layer sends push
+notifications in asynchronous way to the authorities to warn them about violations in an area. Municipality
+and System manager communicate with the App layer to add new municipality and authorities to the system, to retrieve statistics and to read suggestions for improving safety on streets. The App layer
+communicates with data access layer synchronously to obtain information and asynchronously to store
+information about violations. This kind of architecture allows the server nodes to be replicated in order to improve
+the system scalability. Replicating nodes adds the need for a new component in the architecture, the load
+balancer, that is responsible for distributing the working load among the replicated nodes. This Approach also increases the fault tolerance of the service since a fault in a node doesn’t affect the
+service availability. An error in the system may increase the work load for the other nodes, so the number of
+replications should be decided considering also this possibility to avoid the creation of a bottleneck due
+to a fault of the server. To assure security of data managed by the system the server has two firewalls to
+check packages exchanged with users. They both filter packages incoming and going out of the App logic
+one towards user devices and the other towards the data access layer.
 \newpage
 \begin{figure}[H]
 \centering
@@ -26,8 +34,9 @@ To assure security of data managed by the system the server has two firewalls to
 \end{figure}
 Citizen and authorities are provided of mobile Apps to access the functionalities offered by safestreets. Municipalities and system managers communicates with safestreets using a web App.
 The App layer is divided in two parts, one which sends static data (HTML,CSS,Javascript) to web App and another part which communicates with database and provides users dynamic contents.
-Our system uses only few caching capabilities because lot of data is dynamic and chages continuosly. The only informations we cache are informations of the violations when an authority takes the corresponding assignment ,citizens have in cache the list of reports they have done and can choose how long that list is kept in memory.
-Safestreets uses a relational database to store data about users and violations , the technology used in municipalities' databases depends on the municipality, a different interface may be used to communicate with each of them. For scaling purpouse a non relational database could be used in later releases to collect data from different databases with different structures and then uses mining techniques to find useful information and pattern in recurrent violations and information useful for building statistics may be queried on a regular basis and stored in a location which is faster to access for our system , reducing the number of queries to be done to external databases. 
+Our system uses only few caching capabilities because lot of data is dynamic and chages continuosly. 
+The only information we cache are those about the violations when an authority takes the corresponding assignment; citizens have in cache the list of reports they have done and can choose how long that list would be kept in memory.
+For scaling purpose a non relational database could be used in later releases to collect data from databases with different structures and then use mining techniques to find useful information and pattern in recurrent violations and information. This could be useful to build statistics that may be queried on a regular basis and stored in a location which is faster to access for our system, reducing the number of queries to be done to external databases.
 
 
 %TODO change image
@@ -43,16 +52,21 @@ In this section we present the components of SafeStreets we start from a generic
 In this diagram we represent a high level logic view on Subsystems and components. We show the interaction between the server and mobile App,web App, email provider and databases.
 The server is composed of five SubSystems and components:
 \begin{itemize}
-\item SafeStreets Servlets: this contains all the Servlets which allows the user to communicate with the server.To retrieve and save data this component communciates with the Database Connection subsystem. All response to the user are sent in JSON format. 
+\item  SafeStreets Servlets: this contains all the Servlets which allow the user to communicate with the server. To retrieve and save data this component communicates with the Database Connection subsystem. All responses to the user are sent in JSON format. 
 \item Web App Server: this component provides the web App the static data of the App (HTML,CSS,JAVASCRIPT), this part is separated from SafeStreets Servlets for the sake of separation of concerns, dynamic content and static contents are different so different components should get request to retrieve them.
 \item DataBase Connection: this component acts as a facade which separates servlets from data access logic. This component communicates with SafeStreets servlets providing them the functionalities to access data.
 It communicates to Connection subsystems which communicates with SafeStreets Database and with External Databases to get data which is required by users.
 \item SafeStreesDataBaseConnection: this component communicates with SafeStrees database executing query to update and read data from it and provide data to DataBase connection component. 
 \item ExternalDatabaseConnection: this component communicates with External databases executing query to read data from it and provide them to DataBase connection component.
 \end{itemize}
-SafeStreets Servlets communicates using SMTP protocol to send email to users who creates new account or forgets credentials. It also communicates with Mobile App and Web App providing them Access to their acoount data, the possibility to make reports for Citizens , to take assignments for the Authorities, to read suggestions for Municipalities and to see statistics for every type of users and visitors.
-The server also communicates with databases to retrieve and save data about violations, users and accidents.
-Mobile App and web App both communicates with Google maps API  to get maps to show to users. Mobile App also needs to communicate with functionalities given by the device such as taking Photos and retrieving position using GPS.
+SafeStreets Servlets communicates using SMTP protocol to send emails to users who have created a new account
+or have forgotten their credentials. It also communicates with Mobile App and Web App providing them with Access to
+their account data, the possibility to make reports for Citizens, to take assignments for the Authorities,
+to read suggestions for Municipalities and to see statistics for every type of users and visitors. The server
+also communicates with databases to retrieve and save data about violations, users and accidents. Mobile
+App and web App  communicate with Google maps API to get maps to show to users. Mobile App
+also needs to communicate with functionalities given by the device such as taking Photos and obtaining
+position using GPS
 \subsubsection{Mobile App and Web App  Component view}
 \begin{figure}[H]
 \centering
@@ -77,16 +91,19 @@ Web App works in a similar way to the mobile App. It must retrieve static data f
 \includegraphics[width=\textwidth]{Images/ServletsComponent.png}
 \caption{\label{fig:ComWI} Servlets Compent }
 \end{figure}
- SafeStreets Servlets component is composed of 5 Managers:
+ SafeStreets Servlets component is composed of 6 Managers:
 \begin{itemize}
 \item Mail Manager: this component allows the system to send email to Users when they create account or they modify their credentials. This component is associated with user manager which informs it when an account creation or modification is successful.
-\item User Manager: this component allows users to create handle their account informations.They can create a new account, modify their data and Login. To allow thees functionalities this component must be able to both save data and retrieve data from database.
+\item User Manager: this component allows users to create and handle their account informations. They can
+create a new account, modify their data and Login. In order to allow these functionalities, this component
+must be able to both save data and retrieve data from database.
 \item Report Manager: this component allows citizens to create reports and manage them, and also allows Authorities to take assignments and terminate them. It communicates to the notification manager when new Assignments are created.
-\item Notification Manager:This component sends notificiations to authorities about new violations. This component requires that the Mobile App opens a websocket to communicate. 
+\item Notification Manager: this component sends notifications to the authorities about new violations.
+It requires the Mobile App to open a websocket to communicate.
 \item Statistics Manager: This component retrieves data to make  statistics requested by Users and visitors.
 \item Sugggestion Manager: This component retrieves suggestion requested by Municipalities.
 \end{itemize}
-All components takes data and saves data using interfaces exposed by DataBase Connection componet
+All components take and save data using interfaces exposed by DataBase Connection component.
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Deployment view}
 In the following image the deployment diagram for SafeStreets shows the distribution of the system components and the different deployment nodes. We used a different color to represent External Database servers to show that the node is different, that's because the system should not implement these node but should only communicate with it.
@@ -182,10 +199,10 @@ Internally different singleton classes handles the requests a first group of cla
  %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Selected architectural styles and patterns}
 \subsubsection{Multiple Servlet server}
-We choose to use a server which provides multiple servlets to create different access points to the server for different requests. This choice allows us to create separation of concerns SafeStreets Server which is composed of components with few functionalities and a reduced amount of interactions between them. This Approach allows the implementation and testing of components in parallel. The only components which must be developed in advance and tested are Database and database access components. Once those components  are completed  and their functionalities are tested it is possibile to develop different functionalities of the server in parallel, the components must be tested and then integrated with database access components. This Approach allows also to make the system scalable , the different functionalities may be separated in different harware and a routing device may be used to send the request to the right machine which can answer to the request. The system can also be expanded in a really simple way since to add a new functionality a new independent servelt may be added to handle it and then a new manager to handle the request and send it correctly to the database connection components in some cases an  already existing component may be expanded to handle it.
-Since different functions of the server are separated in case the system needs to be checked because some functionalities aren't working in the correct way it is possible to pinpoint the parts of the system which aren't correctly working and fix them. For this Approach to work it is really important that the Database access components are working correctly since a bug in that component will affect the overall App making later App maintanance more costly, it is really important that this part is tested in all its functionalities and documentation must be as clear as possible to allow future maintenance and expansions the more simple as possible.
-TODO check grammar
-
+We have chosen to use a server which provides multiple servlets to create different access points to the server for different requests. This allows us to make server manage different tasks using components that have few but specific functionalities, reducing the amount of interactions between them.
+This Approach allows the implementation and testing of components in parallel. The only components that must be developed and tested in advance are Database and its access components.
+ Once those components are completed and their functionalities are tested, it is possible to develop different functionalities of the server in parallel, so the components must be tested and then integrated with the database access components. Moreover, this Approach allows us to make the system scalable: different functionalities may be separated in different hardware components and  routing devices may be used to send the request to the right machine which can satisfy the request.
+ The system can also be expanded in a really simple way: if we want to add new functionalities, new independent servlets can be added to manage them and a new manager to handle the request and send it correctly to the database connection components; as an alternative, an already existing component may be expanded to do it. Since different functions of the server are separated, in case some functionalities aren’t working in the correct way, it is possible to pinpoint the parts of the system which aren’t working correctly and fix them. For this Approach to work it is really important that the Database access components work correctly; in fact, a bug in one of those components would affect the overall App, making later maintenance more costly. So it is really important that all the functionalities of this part are tested; moreover, the documentation must be as clear as possible to allow future maintenance and expansions as simple as possible.
 \subsubsection{Three Tier Client-Server}
 
 The separation of the system in three different layers allows to makes the system more flexible and reusable.
