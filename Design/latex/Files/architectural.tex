@@ -144,18 +144,44 @@ performed which is mining this non relational Database to build suggestions for 
 \includegraphics[width=\textwidth]{Images/SequenceMakeReport.png}
 \caption{\label{fig:ComWI}Sequence Diagram: Making a Report}
 \end{figure}
-In this sequence diagram the process through which a Citizen makes a report , the request is handled by server and how the authority is informed and can take the assignment corresponding to the report is shown.
-When the Citizen clicks on the Button " Make a Report" of the main creen the phone camera is opened automatically, so user is asked to take the first photo of the violation. After taking the photo it is elaborated with the Algorithm to Recognize Licence Plates if it recognises a licence plate the App gets using the GPS of the App the position of the user , in case of no recognition the user is asked to take another photo. To enrich the Report the App allows the user to write some additional notes that authorities can read and get more information about the violation. Then when the user decides to send the violation clicking on the corresponding button on the UI of the mobile phone the App handles the request and sends the report and all the needed data to the Report Manager.The Report Manager elaborates the data and sends the report to the DatabaseConnection subsystem which takes care to add the report to the DataBase, in this diagram we don't show the SafeStreets database connection subsystem to lighten the diagram and also because it would be called with the same request as the DataBaseConnection resulting in no useful information being added. The Database recognizes if the report is new and creates a new Assignment if it doesn't exist , it just adds a report connected to the assignment if it already exist. After that the Report Manager sends the notification to the notification manager which takes care to find the closest agents to thte report and to warn them using push notifications of the assignment.
-The warned authority, who can decide to take the task, in case of acceptance sends a request tot the Report Manager that checks if the Assignment is still available in the database in that case it modifies the state of the assignment and confirms the authority to take charge of the assignment if it was still available otherwise a refusal message is sent to the Authority.
-Once the Authority terminates his assignment he can notify the system using the Button "Stop Assignment" after that the App asks the User how the assignment ended and the type of violation. Those data are sent to the Report Manager who modifies the state of the Assignment accordingly If the modification is successful the Report Manager notifies the user otherwise it retries this operation 5 times and than in case of failure it sends an error message to the authority notifing him/her that there are problems in the server and asks the user to retry later to terminate the assignment.
+In this sequence diagram is represented the process through which a Citizen makes a report, the request is handled by server and how the authority is informed and can take the assignment corresponding to the report is shown. When the Citizen clicks on the Button " Make a Report" of the main screen the phone camera is opened automatically, so user is asked to take the first photo of the violation. After taking the photo it is elaborated with the Algorithm to Recognize Licence Plates if it recognises a licence plate the App
+gets using the GPS of the App the position of the user, in case of no recognition the user is asked
+to take another photo. To enrich the Report the App allows the user to write some additional notes that
+authorities can read and get more information about the violation. Then when the user decides to send the
+violation clicking on the corresponding button on the UI of the mobile phone the App handles the request
+and sends the report and all the needed data to the Report Manager. The Report Manager elaborates the
+data and sends the report to the DatabaseConnection subsystem which takes care to add the report to the
+DataBase, in this diagram we don’t show the SafeStreets database connection subsystem to lighten the
+diagram and also because it would be called with the same request as the DataBaseConnection resulting
+in no useful information being added. The Database recognizes if the report is new and creates a new
+Assignment if it doesn’t exist, it just adds a report connected to the assignment if it already exists. After
+that the Report Manager sends the notification to the notification manager which takes care to find the
+closest agents to the report and to warn them using push notifications of the assignment. The warned
+authority, who can decide to take the task, in case of acceptance sends a request to the Report Manager
+that checks if the Assignment is still available in the database, in that case it modifies the state of the
+assignment and confirms the authority to take charge of the assignment if it was still available otherwise
+a refusal message is sent to the Authority. Once the Authority terminates his assignment, he can notify
+the system using the Button "Stop Assignment" after that the App asks the User how the assignment
+ended and the type of violation. Those data are sent to the Report Manager who modifies the state of the
+Assignment, accordingly, if the modification is successful the Report Manager notifies the user, otherwise
+it retries this operation 5 times and then in case of failure it sends an error message to the authority
+notifying him/her that there are problems in the server and asks the user to retry later to terminate the
+assignment.
 \subsubsection{Login from Mobile App}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/SequenceLogin.png}
 \caption{\label{fig:ComWI}Sequence Diagram: Mobile App Login}
 \end{figure}
-In this sequence diagram the process through which a User can Login, it shows the Mobile App process but it is the same for the Web App.
-Once users gets access to the App(Mobile or Web) they are asked to autenticate themselves in the "Login Page" inserting their credential in the dedicated text fields. Once the user submits the data pressing "Login" button data are sent to User Manager that takes care of the verification of data validity, in case of failure an error message is sent to the user who must repeat the autentication sequence otherwise the User Manager asks the Database Connection subsystem if the credentials are associated with a user also here as in the last diagram the SafeStreets DataBase Connection subsystem is not represented because it wouldn't add relevant interaction for the App. If a  user is found associated to the inserted credential the user is logged in and the homepage is shown to the user otherwise the login request is refused  and the user is notified that the inserted credential are wrong and he/she must retry the Login process.
+In this sequence diagram the process through which a User can Login, it shows the Mobile App process
+but it is the same for the Web App. Once users get access to the App (Mobile or Web) they are asked
+to authenticate themselves in the "Login Page" inserting their credential in the dedicated text fields. Once
+the user submits the data pressing "Login" button data are sent to User Manager that takes care of the
+verification of data validity, in case of failure an error message is sent to the user who must repeat the
+authentication sequence, otherwise, the User Manager asks the Database Connection subsystem if the credentials are associated with a user also here as in the last diagram the SafeStreets DataBase Connection
+subsystem is not represented because it wouldn’t add relevant interaction for the App. If a user is found
+associated to the inserted credential the user is logged in and the homepage is shown to the user otherwise
+the login request is refused, and the user is notified that the inserted credentials are wrong, and he/she must retry the Login process.
 \subsubsection{Authority registration}
 \begin{figure}[H]
 \centering
@@ -163,7 +189,21 @@ Once users gets access to the App(Mobile or Web) they are asked to autenticate t
 \caption{\label{fig:ComWI}Sequence Diagram :Authority Registration}
 \end{figure}
 This sequence diagram shows the process of the registration of a new authority to SafeStreets service.
-The registration of an authority must be done by a Municipality pressing the "Add Agent" button in the Homepage of Web Application , after this the application shows a page for registrating a new authority , this page contains a form to be compiled with data caracterizing the authority(his/her email adress, username, and the boundaries of the area he/she takes care of). After that the Municipality sends the request to add the agent using the "Add" button, this sends the data from the form to the User Manager which checks if data are valid. In case data are not valid an error message is sent  to the municipality that must refill the form and redo the registration sequence. In case data are valid they are sent to the database conncetion which generates a temporary password for the authority account , after that the SafeStreets Database Connection subsystem checks the existence of an account with the same username. If there is a matching username already in the database the new authority is not registered and the Municipality gets an error message. If the creation is successfull the User Manager asks the Mail Manager to send an email with the temporary password to the Authority . If the email isn't sent and the server fails 5 times to send it, the server informs the Municipality that there are problems with the email and that the server will take care of sending the email if the authority didn't receive an email or in any case if he/she doesn't login within 24 hours. If the email is sent succesfully then authority is informed of the success of the creation of the authority account.
+The registration of an authority must be done by a Municipality pressing the "Add Agent" button in the
+Homepage of Web Application, after this the application shows a page for registration a new authority, this page contains a form to be compiled with data characterizing the authority (his/her email address,
+username, and the boundaries of the area he/she takes care of). After that the Municipality sends the
+request to add the agent using the "Add" button, this sends the data from the form to the User Manager
+which checks if data are valid. In case data are not valid an error message is sent to the municipality that
+must refill the form and redo the registration sequence. In case data are valid they are sent to the database
+connection which generates a temporary password for the authority account , after that the SafeStreets
+Database Connection subsystem checks the existence of an account with the same username. If there
+is a matching username already in the database the new authority is not registered and the Municipality
+gets an error message. If the creation is successful, the User Manager asks the Mail Manager to send an
+email with the temporary password to the Authority. If the email isn’t sent and the server fails 5 times
+to send it, the server informs the Municipality that there are problems with the email and that the server
+will take care of sending the email if the authority didn’t receive an email or in any case if he/she doesn’t
+login within 24 hours. If the email is sent successfully then authority is informed of the success of the
+creation of the authority account.
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component interfaces}
 \begin{figure}[H]
