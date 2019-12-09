@@ -114,14 +114,26 @@ Google Maps API and Email Provider are not shown in this diagram to simplify it 
 \includegraphics[width=\textwidth]{Images/Deployment.png}
 \caption{\label{fig:ComWI} Deployment Diagram}
 \end{figure}
-This Diagram is divided in three sections to show clearly the separation of the different layers of the App:
+This Diagram is divided in three sections to show clearly the separation of the different layers of the
+App:
 \begin{itemize}
-\item Presentation : this layer containts the presentation logic. Users to access data must be provided with mobile App for Citizens and Authorities, with web App accessible by a web browser for municipalities and system managers.
-Mobile App must be available for both Android and iOS but not just newer versions to make the App the more accessible as possible, for the same reason web App should be compatible with major desktop web Browsers  : Google Chrome, Mozzilla Firefox, Safari and Microsoft Edge(at the time this document is being written).
-Communication hAppens using HTTP and HTTPS for both devices while it also hAppens through WebSockets for mobile App push notifications
-\item BusinessLogic: this layer is divided in 2 different nodes types. Web Server communicates with webApp and sends it static data needed to render static components(HTML,CSS,Javascript). App Server instead allows users of both type of App to access dynamic data acting as an intermediary to separate presentation and data but also to control access to data.
-\item Data Access: This layer excecutes a relational DBMS and provides functionalities to the Business logic to access data requested by users. We show in this layer also the external databases which are another important source of data for SafeStrees.
-regarding this component at an initial phase the server will access using the provided interfaces those external databases. When the App will grow a different Approach must be implemented to preserve performances by reducing requests to external systems. To reduce this burden a non relational Database internal to safeStreets may be used to store information from external databases using those as sources to create datamarts and use technologies optimized for Big Data. Using this Approach will add a recurring activity to be performed which is mining this non relational Database to build suggestions for municipalities.
+\item Presentation :  this layer contains the presentation logic. Users to access data must be provided
+with mobile App for Citizens and Authorities, with web App accessible by a web browser for
+municipalities and system managers. Mobile App must be available for both Android and iOS but
+not just newer versions to make the App the more accessible as possible, for the same reason web
+App should be compatible with major desktop web Browsers: Google Chrome, Mozzilla Firefox,
+Safari and Microsoft Edge (at the time this document is being written). Communication happens
+using HTTP and HTTPS for both devices while it also happens through WebSockets for mobile
+App push notifications.
+\item BusinessLogic: this layer is divided in 2 different nodes types. The first one is the web Server which communicates with web App and sends it static data needed to render static components (HTML,CSS,Javascript). The second one is the App Server instead it allows users of both type of App to access dynamic data acting as an intermediary to separate presentation and data but also to control access to data.
+\item Data Access: This layer executes a relational DBMS and provides functionalities to the Business
+logic to access data requested by users. We show in this layer also the external databases which
+are another important source of data for SafeStrees. Regarding this component at an initial phase
+the server will access using the provided interfaces those external databases. When the App will grow a different approach must be implemented to preserve performances by reducing requests to
+external systems. To reduce this burden a non relational Database internal to safeStreets may be
+used to store information from external databases using those as sources to create datamarts and
+use technologies optimized for Big Data. Using this Approach will add a recurring activity to be
+performed which is mining this non relational Database to build suggestions for municipalities.
 \end{itemize}
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \newpage
