@@ -59,17 +59,21 @@ To communicate the various internal parts of the S2B use HTTP and HTTPS protocol
 \subsection{Functional Requirements}
 \begin{itemize}
 
- \item R1) Authorities’ location must be known by the system when they are in service
-\item  R2) Data relative to the violation sent by the user must be clear
- \item R3) The right authorities are notified about violations
- \item R4) Authority must be able to provide the system how the assignment finished: resolved, no intervention needed when arrived, false report.
- \item R5) The system must make data available when asked.
- \item R6)Data and statistics are always updated when an event happens.  
-\item R7) System Manager must fill correctly the form with Municipality’s data
- \item R8) A visitor must be able to begin sign up process in the SafeStreets App.
- \item R9) When the creation is successful the system must notify the Visitor 
- \item R10) A citizen must be able to correctly report violations details
- \item R11) Authority must be able to correctly finish their assignments and specify how the violation was resolved and the correctness or non-correctness of the report
+ \item R1) Authorities’ location must be known by the system when they are in service.
+\item  R2) When a Citizen makes a report the position is correctly added with the GPS when is available.
+\item R3) The right authorities are notified about violations.
+ \item R4)  Authority must be able to provide the system how the assignment finished: resolved and the type of violation, no intervention needed when arrived, false report.
+ \item R5) The system must make Statistics available when asked.
+ \item R6)Statistics are always updated when an event happens.  
+\item R7) For registering a Municipality his/hers data must be provided to a System manager who will add those data to the service to sign up him/her.
+ \item R8) A visitor must be able to begin sign up process in the SafeStreets App filling a form with his data.
+ \item R9) When the creation of an account is successful the system must notify the Visitor sending an email to the address provided in the sign up process. 
+ \item R10) When GPS is not available the user can input the position from a map.
+ \item R11) Users must be able to login if they provide the right credentials.
+\item R12) The camera of the mobile phone must be accessible to take photos of violations.
+\item R13) Suggestions must be available when municipalities requests them.
+\item R14) The User must be able to select the licence plate between the ones in output from the Licence Plate Recognition algorithm.
+\item R15) Each Username is unique
 \end{itemize}
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsubsection{Scenrarios}
