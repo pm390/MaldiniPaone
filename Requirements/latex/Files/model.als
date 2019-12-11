@@ -37,7 +37,7 @@ sig Citizen extends User
 
 sig Authority extends User
 {
-	city: one City, //D4
+	city: one City, //D3
 	notifications: set Report,
 	municipality : one Municipality
 }
@@ -142,21 +142,15 @@ fact CredentialsArePersonal
 
 //Domain Assumptions
 
-fact UsernameAreUnique //D2
-{
-	no disj c1,c2:Credentials| c1.username=c2.username
-}
 
-fact RespectDutyOfCare //D7 if there are no Pending Assignments authority can't work on an assignment
+
+fact RespectDutyOfCare //D6 if there are no Pending Assignments authority can't work on an assignment
 {
 	all au:Authority| !IsWorking[au] implies (no re:Report| re in au.notifications and
  	(some as1:Assignment| re.assignment=as1 and as1.state=Pending))
 }
 
-fact AllCitizenLocationAreAvailableAndCorrect//D10
-{
-	all c:Citizen| FindCitizen[c]!=none and (all re:c.report | re.city=FindCitizen[c])
-}
+
 
 //Requirements
 
@@ -170,7 +164,18 @@ fact StatisticsAreAlwaysUpdated //R6
 	all as1:Assignment| (as1.state=Ended) iff (some s:Statistic| as1 in s.assignment)
 }
 
-//Goals
+fact UsernameAreUnique //R15
+{
+	no disj c1,c2:Credentials| c1.username=c2.username
+}
+
+fact AllCitizenLocationAreAvailableAndCorrect//R2 R10  position is considered only when making reports
+{
+	all c:Citizen| FindCitizen[c]!=none and (all re:c.report | re.city=FindCitizen[c])
+}
+
+//Goalsn G2 in a static situation like the one analized in this static world in alloy corresponds to 
+//"authoritymusttakeAssignments if they are available"
 assert AuthorityMustTakeAssignments 
 {
 	all a:Authority|  (IsWorking[a]) or (no as1:Assignment| as1.city=a.city and as1.state=Pending)

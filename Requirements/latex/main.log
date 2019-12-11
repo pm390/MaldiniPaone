@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  11 DEC 2019 18:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  11 DEC 2019 18:56
 entering extended mode
 **./main.tex
 (main.tex
@@ -1075,7 +1075,10 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 17.
 LaTeX Info: Redefining \pageref on input line 17.
 LaTeX Info: Redefining \nameref on input line 17.
- ABD: EveryShipout initializing macros
+
+! I can't write on file `main.pdf'.
+Please type another file name for output: main.pdf
+ABD: EveryShipout initializing macros
 \c@lstlisting=\count161
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 28
 .
@@ -1414,12 +1417,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [37])
 [38]
-<Images/alexecutionstatus.png, id=604, 280.04625pt x 303.38344pt>
+<Images/alexecutionstatus.png, id=609, 280.04625pt x 303.38344pt>
 File: Images/alexecutionstatus.png Graphic file (type png)
 <use Images/alexecutionstatus.png>
 Package pdftex.def Info: Images/alexecutionstatus.png  used on input line 19.
 (pdftex.def)             Requested size: 455.24411pt x 493.20518pt.
-<Images/alworld1.png, id=605, 755.07094pt x 411.03563pt>
+<Images/alworld1.png, id=610, 755.07094pt x 411.03563pt>
 File: Images/alworld1.png Graphic file (type png)
 <use Images/alworld1.png>
 Package pdftex.def Info: Images/alworld1.png  used on input line 24.
@@ -1428,7 +1431,7 @@ Package pdftex.def Info: Images/alworld1.png  used on input line 24.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld2.png, id=606, 704.6325pt x 379.4175pt>
+<Images/alworld2.png, id=611, 704.6325pt x 379.4175pt>
 File: Images/alworld2.png Graphic file (type png)
 <use Images/alworld2.png>
 Package pdftex.def Info: Images/alworld2.png  used on input line 30.
@@ -1436,7 +1439,7 @@ Package pdftex.def Info: Images/alworld2.png  used on input line 30.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld3.png, id=607, 552.56438pt x 427.5975pt>
+<Images/alworld3.png, id=612, 552.56438pt x 427.5975pt>
 File: Images/alworld3.png Graphic file (type png)
 <use Images/alworld3.png>
 Package pdftex.def Info: Images/alworld3.png  used on input line 38.
@@ -1446,7 +1449,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) [39 <./Images/alexecutionstatus.png>] [40 <./Images/alworld1.png> <./Images/a
 lworld2.png>] [41 <./Images/alworld3.png>] (Files/effort.tex
-<Images/effort.png, id=625, 617.30624pt x 424.58624pt>
+<Images/effort.png, id=630, 617.30624pt x 424.58624pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
@@ -1468,9 +1471,9 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 112.
  ) 
 Here is how much of TeX's memory you used:
- 23474 strings out of 492484
- 434557 string characters out of 3117066
- 659575 words of memory out of 3000000
+ 23479 strings out of 492484
+ 434637 string characters out of 3117066
+ 666601 words of memory out of 3000000
  26915 multiletter control sequences out of 15000+200000
  34106 words of font info for 61 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1489,9 +1492,9 @@ ini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/Use
 rs/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 8a.pfb><C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
 urw/times/utmr8a.pfb>
-Output written on main.pdf (43 pages, 4269475 bytes).
+Output written on main.pdf (43 pages, 4271277 bytes).
 PDF statistics:
- 920 PDF objects out of 1000 (max. 8388607)
- 364 named destinations out of 1000 (max. 500000)
+ 926 PDF objects out of 1000 (max. 8388607)
+ 369 named destinations out of 1000 (max. 500000)
  639 words of extra memory for PDF output out of 10000 (max. 10000000)
 
