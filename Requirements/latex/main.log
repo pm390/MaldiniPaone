@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  11 DEC 2019 18:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  12 DEC 2019 16:47
 entering extended mode
 **./main.tex
 (main.tex
@@ -1075,10 +1075,7 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 17.
 LaTeX Info: Redefining \pageref on input line 17.
 LaTeX Info: Redefining \nameref on input line 17.
-
-! I can't write on file `main.pdf'.
-Please type another file name for output: main.pdf
-ABD: EveryShipout initializing macros
+ ABD: EveryShipout initializing macros
 \c@lstlisting=\count161
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 28
 .
@@ -1142,7 +1139,7 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 
 ] [6] [7]) [8]
 (Files/overview.tex
-<Images/classdiagram.png, id=179, 274.02374pt x 398.48875pt>
+<Images/classdiagram.png, id=180, 274.02374pt x 398.48875pt>
 File: Images/classdiagram.png Graphic file (type png)
 <use Images/classdiagram.png>
 Package pdftex.def Info: Images/classdiagram.png  used on input line 9.
@@ -1150,12 +1147,12 @@ Package pdftex.def Info: Images/classdiagram.png  used on input line 9.
  [9
 
  <./Images/classdiagram.png>]
-<Images/statechartreport.png, id=187, 915.92188pt x 246.9225pt>
+<Images/statechartreport.png, id=188, 915.92188pt x 246.9225pt>
 File: Images/statechartreport.png Graphic file (type png)
 <use Images/statechartreport.png>
 Package pdftex.def Info: Images/statechartreport.png  used on input line 17.
 (pdftex.def)             Requested size: 455.24411pt x 122.73pt.
-<Images/statechartassignment.png, id=188, 860.21375pt x 319.69438pt>
+<Images/statechartassignment.png, id=189, 860.21375pt x 319.69438pt>
 File: Images/statechartassignment.png Graphic file (type png)
 <use Images/statechartassignment.png>
 Package pdftex.def Info: Images/statechartassignment.png  used on input line 24
@@ -1164,12 +1161,12 @@ Package pdftex.def Info: Images/statechartassignment.png  used on input line 24
  [10 <./Images/statechartreport.png> <./Images/statechartassignment.png>] [11])
  [12]
 (Files/requirements.tex
-<Images/login_signup.png, id=205, 388.3308pt x 387.849pt>
+<Images/login_signup.png, id=206, 388.3308pt x 387.849pt>
 File: Images/login_signup.png Graphic file (type png)
 <use Images/login_signup.png>
 Package pdftex.def Info: Images/login_signup.png  used on input line 9.
 (pdftex.def)             Requested size: 455.24411pt x 454.69879pt.
-<Images/user_interface.png, id=206, 582.0144pt x 387.849pt>
+<Images/user_interface.png, id=207, 582.0144pt x 387.849pt>
 File: Images/user_interface.png Graphic file (type png)
 <use Images/user_interface.png>
 Package pdftex.def Info: Images/user_interface.png  used on input line 15.
@@ -1178,7 +1175,7 @@ Package pdftex.def Info: Images/user_interface.png  used on input line 15.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/agent_interface.png, id=207, 770.3982pt x 388.8126pt>
+<Images/agent_interface.png, id=208, 770.3982pt x 388.8126pt>
 File: Images/agent_interface.png Graphic file (type png)
 <use Images/agent_interface.png>
 Package pdftex.def Info: Images/agent_interface.png  used on input line 21.
@@ -1186,7 +1183,7 @@ Package pdftex.def Info: Images/agent_interface.png  used on input line 21.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/common_interface.png, id=208, 770.3982pt x 388.3308pt>
+<Images/common_interface.png, id=209, 770.3982pt x 388.3308pt>
 File: Images/common_interface.png Graphic file (type png)
 <use Images/common_interface.png>
 Package pdftex.def Info: Images/common_interface.png  used on input line 27.
@@ -1194,7 +1191,7 @@ Package pdftex.def Info: Images/common_interface.png  used on input line 27.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/municipality_interface.png, id=209, 928.9104pt x 149.8398pt>
+<Images/municipality_interface.png, id=210, 928.9104pt x 149.8398pt>
 File: Images/municipality_interface.png Graphic file (type png)
 <use Images/municipality_interface.png>
 Package pdftex.def Info: Images/municipality_interface.png  used on input line 
@@ -1203,7 +1200,7 @@ Package pdftex.def Info: Images/municipality_interface.png  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/system_manager_interface.png, id=210, 617.1858pt x 149.8398pt>
+<Images/system_manager_interface.png, id=211, 617.1858pt x 149.8398pt>
 File: Images/system_manager_interface.png Graphic file (type png)
 <use Images/system_manager_interface.png>
 Package pdftex.def Info: Images/system_manager_interface.png  used on input lin
@@ -1212,7 +1209,7 @@ e 39.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/desktop_common_interface.png, id=211, 617.6676pt x 151.2852pt>
+<Images/desktop_common_interface.png, id=212, 617.6676pt x 151.2852pt>
 File: Images/desktop_common_interface.png Graphic file (type png)
 <use Images/desktop_common_interface.png>
 Package pdftex.def Info: Images/desktop_common_interface.png  used on input lin
@@ -1229,12 +1226,12 @@ erface.png> <./Images/system_manager_interface.png> <./Images/desktop_common_in
 terface.png>] [16
 
 ] [17] [18]
-<Images/usecase_visitor.png, id=251, 383.93437pt x 301.8778pt>
+<Images/usecase_visitor.png, id=252, 383.93437pt x 301.8778pt>
 File: Images/usecase_visitor.png Graphic file (type png)
 <use Images/usecase_visitor.png>
 Package pdftex.def Info: Images/usecase_visitor.png  used on input line 108.
 (pdftex.def)             Requested size: 383.93343pt x 301.87706pt.
-<Images/usecase_citizen.png, id=252, 455.45157pt x 296.60812pt>
+<Images/usecase_citizen.png, id=253, 455.45157pt x 296.60812pt>
 File: Images/usecase_citizen.png Graphic file (type png)
 <use Images/usecase_citizen.png>
 Package pdftex.def Info: Images/usecase_citizen.png  used on input line 113.
@@ -1243,7 +1240,7 @@ Package pdftex.def Info: Images/usecase_citizen.png  used on input line 113.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/usecase_agent.png, id=253, 385.44pt x 340.27126pt>
+<Images/usecase_agent.png, id=254, 385.44pt x 340.27126pt>
 File: Images/usecase_agent.png Graphic file (type png)
 <use Images/usecase_agent.png>
 Package pdftex.def Info: Images/usecase_agent.png  used on input line 118.
@@ -1251,7 +1248,7 @@ Package pdftex.def Info: Images/usecase_agent.png  used on input line 118.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/usecase_municipality.png, id=254, 270.25969pt x 240.14719pt>
+<Images/usecase_municipality.png, id=255, 270.25969pt x 240.14719pt>
 File: Images/usecase_municipality.png Graphic file (type png)
 <use Images/usecase_municipality.png>
 Package pdftex.def Info: Images/usecase_municipality.png  used on input line 12
@@ -1260,7 +1257,7 @@ Package pdftex.def Info: Images/usecase_municipality.png  used on input line 12
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/usecase_system_manager.png, id=255, 355.3275pt x 286.82156pt>
+<Images/usecase_system_manager.png, id=256, 355.3275pt x 286.82156pt>
 File: Images/usecase_system_manager.png Graphic file (type png)
 <use Images/usecase_system_manager.png>
 Package pdftex.def Info: Images/usecase_system_manager.png  used on input line 
@@ -1272,12 +1269,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [19 <./Images/usecase_visitor.png>] [20 <./Images/usecase_citizen.png>]
 [21 <./Images/usecase_agent.png> <./Images/usecase_municipality.png>] [22 <./Im
 ages/usecase_system_manager.png>]
-<Images/visitor_use_case.png, id=283, 566.115pt x 417.05812pt>
+<Images/visitor_use_case.png, id=284, 566.115pt x 417.05812pt>
 File: Images/visitor_use_case.png Graphic file (type png)
 <use Images/visitor_use_case.png>
 Package pdftex.def Info: Images/visitor_use_case.png  used on input line 135.
 (pdftex.def)             Requested size: 455.24411pt x 335.39063pt.
-<Images/citizen_use_case.png, id=284, 504.88625pt x 342.78062pt>
+<Images/citizen_use_case.png, id=285, 504.88625pt x 342.78062pt>
 File: Images/citizen_use_case.png Graphic file (type png)
 <use Images/citizen_use_case.png>
 Package pdftex.def Info: Images/citizen_use_case.png  used on input line 140.
@@ -1286,7 +1283,7 @@ Package pdftex.def Info: Images/citizen_use_case.png  used on input line 140.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/authority_use_case.png, id=285, 565.61313pt x 399.4925pt>
+<Images/authority_use_case.png, id=286, 565.61313pt x 399.4925pt>
 File: Images/authority_use_case.png Graphic file (type png)
 <use Images/authority_use_case.png>
 Package pdftex.def Info: Images/authority_use_case.png  used on input line 145.
@@ -1295,7 +1292,7 @@ Package pdftex.def Info: Images/authority_use_case.png  used on input line 145.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/authority_use_case2.png, id=286, 559.08875pt x 437.635pt>
+<Images/authority_use_case2.png, id=287, 559.08875pt x 437.635pt>
 File: Images/authority_use_case2.png Graphic file (type png)
 <use Images/authority_use_case2.png>
 Package pdftex.def Info: Images/authority_use_case2.png  used on input line 150
@@ -1304,7 +1301,7 @@ Package pdftex.def Info: Images/authority_use_case2.png  used on input line 150
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/Municipality_use_case2.png, id=287, 509.40312pt x 344.78813pt>
+<Images/Municipality_use_case2.png, id=288, 509.40312pt x 344.78813pt>
 File: Images/Municipality_use_case2.png Graphic file (type png)
 <use Images/Municipality_use_case2.png>
 Package pdftex.def Info: Images/Municipality_use_case2.png  used on input line 
@@ -1321,7 +1318,7 @@ Package pdftex.def Info: Images/Municipality_use_case2.png  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/system_manager_use_case.png, id=288, 510.40688pt x 333.74687pt>
+<Images/system_manager_use_case.png, id=289, 510.40688pt x 333.74687pt>
 File: Images/system_manager_use_case.png Graphic file (type png)
 <use Images/system_manager_use_case.png>
 Package pdftex.def Info: Images/system_manager_use_case.png  used on input line
@@ -1330,7 +1327,7 @@ Package pdftex.def Info: Images/system_manager_use_case.png  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/common_use_case.png, id=289, 511.9125pt x 279.0425pt>
+<Images/common_use_case.png, id=290, 511.9125pt x 279.0425pt>
 File: Images/common_use_case.png Graphic file (type png)
 <use Images/common_use_case.png>
 Package pdftex.def Info: Images/common_use_case.png  used on input line 170.
@@ -1338,7 +1335,7 @@ Package pdftex.def Info: Images/common_use_case.png  used on input line 170.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/common_use_case2.png, id=290, 553.56813pt x 207.27437pt>
+<Images/common_use_case2.png, id=291, 553.56813pt x 207.27437pt>
 File: Images/common_use_case2.png Graphic file (type png)
 <use Images/common_use_case2.png>
 Package pdftex.def Info: Images/common_use_case2.png  used on input line 175.
@@ -1352,13 +1349,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 /authority_use_case.png>] [25 <./Images/authority_use_case2.png>] [26 <./Images
 /Municipality_use_case2.png>] [27 <./Images/system_manager_use_case.png> <./Ima
 ges/common_use_case.png>] [28 <./Images/common_use_case2.png>]
-<Images/sequence_scenario1.png, id=332, 336.25626pt x 415.05063pt>
+<Images/sequence_scenario1.png, id=333, 336.25626pt x 415.05063pt>
 File: Images/sequence_scenario1.png Graphic file (type png)
 <use Images/sequence_scenario1.png>
 Package pdftex.def Info: Images/sequence_scenario1.png  used on input line 182.
 
 (pdftex.def)             Requested size: 336.25543pt x 415.0496pt.
-<Images/sequence_registration.png, id=333, 466.74374pt x 284.56313pt>
+<Images/sequence_registration.png, id=334, 466.74374pt x 284.56313pt>
 File: Images/sequence_registration.png Graphic file (type png)
 <use Images/sequence_registration.png>
 Package pdftex.def Info: Images/sequence_registration.png  used on input line 1
@@ -1372,7 +1369,7 @@ Overfull \hbox (11.49849pt too wide) in paragraph at lines 187--188
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/sequence_login.png, id=334, 364.36125pt x 309.40594pt>
+<Images/sequence_login.png, id=335, 364.36125pt x 309.40594pt>
 File: Images/sequence_login.png Graphic file (type png)
 <use Images/sequence_login.png>
 Package pdftex.def Info: Images/sequence_login.png  used on input line 192.
@@ -1380,7 +1377,7 @@ Package pdftex.def Info: Images/sequence_login.png  used on input line 192.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/sequence_agent_register.png, id=335, 420.06938pt x 319.1925pt>
+<Images/sequence_agent_register.png, id=336, 420.06938pt x 319.1925pt>
 File: Images/sequence_agent_register.png Graphic file (type png)
 <use Images/sequence_agent_register.png>
 Package pdftex.def Info: Images/sequence_agent_register.png  used on input line
@@ -1395,7 +1392,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 /Images/sequence_login.png>] [31 <./Images/sequence_agent_register.png>]
 [32
 
-] [33]) [34] (Files/alloy.tex
+] [33] [34]) [35] (Files/alloy.tex
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 12.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
@@ -1407,22 +1404,22 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) (Files/model.als
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <8> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2.
- [35
+ [36
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36]
+ [37]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37])
-[38]
-<Images/alexecutionstatus.png, id=609, 280.04625pt x 303.38344pt>
+ [38])
+[39]
+<Images/alexecutionstatus.png, id=614, 280.04625pt x 303.38344pt>
 File: Images/alexecutionstatus.png Graphic file (type png)
 <use Images/alexecutionstatus.png>
 Package pdftex.def Info: Images/alexecutionstatus.png  used on input line 19.
 (pdftex.def)             Requested size: 455.24411pt x 493.20518pt.
-<Images/alworld1.png, id=610, 755.07094pt x 411.03563pt>
+<Images/alworld1.png, id=615, 755.07094pt x 411.03563pt>
 File: Images/alworld1.png Graphic file (type png)
 <use Images/alworld1.png>
 Package pdftex.def Info: Images/alworld1.png  used on input line 24.
@@ -1431,7 +1428,7 @@ Package pdftex.def Info: Images/alworld1.png  used on input line 24.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld2.png, id=611, 704.6325pt x 379.4175pt>
+<Images/alworld2.png, id=616, 704.6325pt x 379.4175pt>
 File: Images/alworld2.png Graphic file (type png)
 <use Images/alworld2.png>
 Package pdftex.def Info: Images/alworld2.png  used on input line 30.
@@ -1439,7 +1436,7 @@ Package pdftex.def Info: Images/alworld2.png  used on input line 30.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/alworld3.png, id=612, 552.56438pt x 427.5975pt>
+<Images/alworld3.png, id=617, 552.56438pt x 427.5975pt>
 File: Images/alworld3.png Graphic file (type png)
 <use Images/alworld3.png>
 Package pdftex.def Info: Images/alworld3.png  used on input line 38.
@@ -1447,16 +1444,16 @@ Package pdftex.def Info: Images/alworld3.png  used on input line 38.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [39 <./Images/alexecutionstatus.png>] [40 <./Images/alworld1.png> <./Images/a
-lworld2.png>] [41 <./Images/alworld3.png>] (Files/effort.tex
-<Images/effort.png, id=630, 617.30624pt x 424.58624pt>
+) [40 <./Images/alexecutionstatus.png>] [41 <./Images/alworld1.png> <./Images/a
+lworld2.png>] [42 <./Images/alworld3.png>] (Files/effort.tex
+<Images/effort.png, id=635, 617.30624pt x 424.58624pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
 (pdftex.def)             Requested size: 455.24411pt x 313.1264pt.
-) [42
+) [43
 
- <./Images/effort.png>] (Files/Reference.tex) [43
+ <./Images/effort.png>] (Files/Reference.tex) [44
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 112.
@@ -1471,8 +1468,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 112.
  ) 
 Here is how much of TeX's memory you used:
- 23479 strings out of 492484
- 434637 string characters out of 3117066
+ 23481 strings out of 492484
+ 434651 string characters out of 3117066
  666601 words of memory out of 3000000
  26915 multiletter control sequences out of 15000+200000
  34106 words of font info for 61 fonts, out of 3000000 for 9000
@@ -1492,9 +1489,9 @@ ini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/Use
 rs/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 8a.pfb><C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
 urw/times/utmr8a.pfb>
-Output written on main.pdf (43 pages, 4271277 bytes).
+Output written on main.pdf (44 pages, 4272446 bytes).
 PDF statistics:
- 926 PDF objects out of 1000 (max. 8388607)
- 369 named destinations out of 1000 (max. 500000)
+ 931 PDF objects out of 1000 (max. 8388607)
+ 371 named destinations out of 1000 (max. 500000)
  639 words of extra memory for PDF output out of 10000 (max. 10000000)
 

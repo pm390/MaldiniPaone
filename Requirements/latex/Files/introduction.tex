@@ -35,6 +35,7 @@ a contractual basis.
 \item[G8-1] Suggest possible interventions
 \end{itemize}
 \item[G9] Allow municipality to register Authorities to the service
+\item[G10] Help the Municipality to make decision
 \end{itemize}
 \item	Security Goals:
 \begin{itemize}
@@ -54,9 +55,7 @@ the application. The information provided by users are integrated with other sui
 stored by the service. The system also runs an algorithm to read the license plate of the vehicle in the
 photos. All collected data can be seen by Citizens and authorities to find which streets are the safest.
 Users can have different levels of visibility: authorities must be able to know the license plates of vehicles
-in the photos, while normal users can only see data in the form of statistics. Moreover, data are sent to
-the municipal district so that important information can be extracted through statistics in order to make
-decisions to improve the safety of the area. Finally, the system will have to be easy to use, reliable
+in the photos, while normal users can only see data in the form of statistics. Moreover, data are sent to the municipal district so that important information can be extracted, and the system makes statistics and suggestion in order to make decisions to improve the safety of the area. Finally, the system will have to be easy to use, reliable
 and highly scalable to fit perfectly with the mutable context in which it will be used.
 
 %---------------------------------------------------
@@ -93,6 +92,8 @@ Shared phenomena:
 user notify the system about violation (observed by the system controlled by the world)
 \item
 send notification to authorities (controlled by system observed by world)
+\item 
+terminate assignment(controlled by world observed by the system)  
 \end{enumerate}
 \end{itemize}
 %---------------------------------------------------
@@ -103,7 +104,6 @@ send notification to authorities (controlled by system observed by world)
 \item	Report: Notification sent by Citizens to the system
 \item	Mapping System: external software that provides maps and directions to reach the position of a violation
 \item	Licence plate Recognition Algorithm: calculation process that identifies the alphanumeric number on license plate
-\item	Spam: a series of messages that are undesired
 \item	App: application software 
 \item	Blocked: means that the account is banned for a given period
 \item	Metadata: data about a violation. Position , date,  time and the username of Citizen. 
@@ -123,9 +123,9 @@ send notification to authorities (controlled by system observed by world)
 %---------------------------------------------------
 \subsubsection {Abbreviations}
 \begin{itemize}
-\item	[Gn]: n-th goal.
-\item	[Dn]: n-th domain assumption.
-\item	[Rn]: n-th requirement.
+\item	Gn: n-th goal.
+\item	Dn: n-th domain assumption.
+\item	Rn: n-th requirement.
 \item     Municipality: municipal employee.
 \end{itemize}
 %---------------------------------------------------
