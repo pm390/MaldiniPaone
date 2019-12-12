@@ -106,34 +106,21 @@ It requires the Mobile App to open a websocket to communicate.
 All components take and save data using interfaces exposed by DataBase Connection component.
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Deployment view}
-In the following image the deployment diagram for SafeStreets shows the distribution of the system components and the different deployment nodes. We used a different color to represent External Database servers to show that the node is different, that's because the system should not implement these node but should only communicate with it.
-Google Maps API and Email Provider are not shown in this diagram to simplify it and because their interaction with our system are described in component view.
+In the following image the deployment diagram for SafeStreets shows the distribution of the system components and the different deployment nodes. We have used a different color to represent External Database
+servers to show that the system should not implement these nodes but
+should only communicate with them. Google Maps API and Email Provider are not shown in this diagram
+to simplify it and because their interaction with our system is described in component view.
 \newline
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/Deployment.png}
 \caption{\label{fig:ComWI} Deployment Diagram}
 \end{figure}
-This Diagram is divided in three sections to show clearly the separation of the different layers of the
-App:
+This Diagram is divided into three sections to show clearly the separation of the different layers of the App: 
 \begin{itemize}
-\item Presentation :  this layer contains the presentation logic. Users to access data must be provided
-with mobile App for Citizens and Authorities, with web App accessible by a web browser for
-municipalities and system managers. Mobile App must be available for both Android and iOS but
-not just newer versions to make the App the more accessible as possible, for the same reason web
-App should be compatible with major desktop web Browsers: Google Chrome, Mozzilla Firefox,
-Safari and Microsoft Edge (at the time this document is being written). Communication happens
-using HTTP and HTTPS for both devices while it also happens through WebSockets for mobile
-App push notifications.
-\item BusinessLogic: this layer is divided in 2 different nodes types. The first one is the web Server which communicates with web App and sends it static data needed to render static components (HTML,CSS,Javascript). The second one is the App Server instead it allows users of both type of App to access dynamic data acting as an intermediary to separate presentation and data but also to control access to data.
-\item Data Access: This layer executes a relational DBMS and provides functionalities to the Business
-logic to access data requested by users. We show in this layer also the external databases which
-are another important source of data for SafeStrees. Regarding this component at an initial phase
-the server will access using the provided interfaces those external databases. When the App will grow a different approach must be implemented to preserve performances by reducing requests to
-external systems. To reduce this burden a non relational Database internal to safeStreets may be
-used to store information from external databases using those as sources to create datamarts and
-use technologies optimized for Big Data. Using this Approach will add a recurring activity to be
-performed which is mining this non relational Database to build suggestions for municipalities.
+\item Presentation: this layer contains the presentation logic. Users in order to access data need the mobile App for Citizens and Authorities or the web App, which is accessible through a web browser by municipalities and system managers. In order to make the Mobile App more accessible as possible, it must be available for both Android and iOS, supporting not only newer versions. For the same reason, the web App should be compatible with major desktop web Browsers: Google Chrome, Mozilla Firefox, Safari and Microsoft Edge . Connection is made using HTTP and HTTPS for both devices in the figure, whereas it is made using also WebSockets for mobile App push notifications.
+\item BusinessLogic: this layer is divided into 2 different nodes types. Web Server communicates with webApp and sends it static data needed to render static components (HTML, CSS, and Javascript). App Server instead allows users of both Apps to access dynamic data acting as an intermediary to separate presentation and data but also to control access to data. 
+\item Data Access: This layer executes a relational DBMS and provides functionalities to the Business logic to access data requested by users. In this layer, we have shown also the external databases which are another important source of data for SafeStreets. At first, the server will access external databases using the interfaces provided. Then, the App will grow and a different approach should be implemented in order to reduce requests to external systems and improve performances. In order to reduce this load, a non-relational Database internal to SafeStreets may be used to store information from external databases using them as resources to create datamarts and to exploit technologies optimized for Big Data. If we use this approach, thanks to mining techniques, this non relational Database will build suggestions for municipalities.
 \end{itemize}
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \newpage
@@ -222,13 +209,13 @@ Those interfaces are provided by the Manager components of the system:
 \item Report Manager: provides the ManageReportCreation and manage Assignment interfaces
 \item Notification Manager: provides manage Notification interface
 \item Statistics Manager:  provides Manage Statistics interface
-\item Sugggestion Manager: provides Manage Suggestion interface
+\item Suggestion Manager: provides Manage Suggestion interface
 \end{itemize}
 In this diagram we used the symbol '?' after newEmail in ManageAccountModification to indicate that the old email isn't modified  if it not specified by the user. This difference is done to show how all other parameters must be provided by the Servlets which gets them from users and are mandatory for the functionalities to work.
 The most important interfaces needed by servelts to provide user the main functionalities of SafeStreets are:
 \begin{itemize}
 \item ManageReportCreation: this interface allows the Creation of requests, it needs the username of the user creating it the location of the Violation and the photos associated with it which must be more than 2 [2...n]. It creates an object of type Report and uses the method provided by Manage Data Access to create a new report in case of failure the user is notified, in case of success two different scenarios may hAppen, the report is linked to a new assignment or the report is linked to an already existing assignment, if the already existing assignment is being taken care by an authority the server communicates that to the user who reported the violation in all the other situations the Notification manager is asked to send notification to agents near the location of the violation and are asked to take the assignment.
-\item ManageAssignment: this interface allows authorities to find all the pending assignments which are close to their position
+\item ManageAssignment: this interface allows authorities to find all the pending assignments which are close to their position. The assignments are sorted by number of associated reports within the last hour, if no assignment available respecting those criteria also assignments from before the last hour are shown but are marked as old assignments.
 \item Manage Suggestions: this interfaces is maily used to allow Municipalities to Get suggestions. Suggestions are made combining Report data and accident data close to the location of the municipality. In addition to dinamically created suggestions Citizens and authorities are able to send suggestions when sending reports for the former or terminating assignments for the latter.
 \end{itemize}
 \begin{figure}[H]
@@ -236,10 +223,10 @@ The most important interfaces needed by servelts to provide user the main functi
 \includegraphics[width=\textwidth]{Images/ER.png}
 \caption{\label{fig:ComWI}ER DIAGRAM }
 \end{figure}
-The image above represents the Entity Relation diagram of data saved on the internal database of SafeStreets. The Different kind of users all have as primary key their username, a unique email is requested for different users because when user account informations gets modified or credential are lost the right user must be notified by eamil. Municipalities have a nullable field RegisteredBy which is used to keep track if an authority registered another authority and who registered them, it can be null if the registration hAppens trough the system manager. To facilitate access to authorities and municipalities in a certain location the cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster,
+The image above represents the Entity Relation diagram of data saved on the internal database of SafeStreets. The Different kind of users all have as primary key their username, a unique email is requested for different users because when user account informations gets modified or credential are lost the right user must be notified by eamil. Municipalities have a nullable field RegisteredBy which is used to keep track if an authority registered another authority and who registered them, it can be null if the registration happens trough the system manager. To facilitate access to authorities and municipalities in a certain location the cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster,
 Static Suggestions added by users and authorities must be indexed using Cityhall as an index to make easier access to suggestions.
 Report contains a field for notes made by users to authorities to give them information they couldn't provide using photos.
-Citizens have a reliability field which represents how reliable a user is , this is used by database to ban a user when they make too many fake reports or they create too many reports in a really short time.
+Citizens have a reliability field which represents how reliable a user is , this is used by database to mark reports as "possibly unsafe"  when too many reports are done in a short time and reliability is not high enough ,meaning those reports may not be reliable and if false reports are made ban a user.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/DatabaseConnectionClassDiagram.png}
@@ -249,6 +236,7 @@ In this picture a part of the class diagram concerning Data Access Layer is prov
 This component provides the Business Logic (here shown as a package, the ServerPackage) an interface to access data.
 Internally different singleton classes handles the requests a first group of classes checks input data validity :DataCollector, ReportAndAssignmentUpdater and UserDataChecker. The first one communicates with Report And Assignment Database Connector to get report ,assignment and statistics from SafeStreets Database and also communicates with different External Database Connectors to get Accident data from external Databases. To communicate with external database the system has an abstract class of connector which contains the methods required by the system, for every database a different istance of child class  is needed to implement the actual connection and in case some information need further computation a factory class is needed to create Accident istances which can be used by the business logic. A connection Pool for Connecting to SafeStreets Database to allow the reuse of connection and reduce the cost of memory allocation and disallocation in the server.
  %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
 \subsection{Selected architectural styles and patterns}
 \subsubsection{Multiple Servlet server}
 We have chosen to use a server which provides multiple servlets to create different access points to the server for different requests. This allows us to make server manage different tasks using components that have few but specific functionalities, reducing the amount of interactions between them.
