@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  14 DEC 2019 13:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.12.7)  14 DEC 2019 15:15
 entering extended mode
 **./main.tex
 (main.tex
@@ -1446,11 +1446,11 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) [40 <./Images/alexecutionstatus.png>] [41 <./Images/alworld1.png> <./Images/a
 lworld2.png>] [42 <./Images/alworld3.png>] (Files/effort.tex
-<Images/effort.png, id=634, 617.30624pt x 424.58624pt>
+<Images/effort.png, id=634, 562.60187pt x 401.5pt>
 File: Images/effort.png Graphic file (type png)
 <use Images/effort.png>
 Package pdftex.def Info: Images/effort.png  used on input line 3.
-(pdftex.def)             Requested size: 455.24411pt x 313.1264pt.
+(pdftex.def)             Requested size: 455.24411pt x 324.88239pt.
 ) [43
 
  <./Images/effort.png>] (Files/Reference.tex) [44
@@ -1489,7 +1489,7 @@ ini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/Use
 rs/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb
 8a.pfb><C:/Users/MaurizioMaldini/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
 urw/times/utmr8a.pfb>
-Output written on main.pdf (44 pages, 4152195 bytes).
+Output written on main.pdf (44 pages, 4137119 bytes).
 PDF statistics:
  930 PDF objects out of 1000 (max. 8388607)
  371 named destinations out of 1000 (max. 500000)
