@@ -131,44 +131,14 @@ This Diagram is divided into three sections to show clearly the separation of th
 \includegraphics[width=\textwidth]{Images/SequenceMakeReport.png}
 \caption{\label{fig:ComWI}Sequence Diagram: Making a Report}
 \end{figure}
-In this sequence diagram is represented the process through which a Citizen makes a report, the request is handled by server and how the authority is informed and can take the assignment corresponding to the report is shown. When the Citizen clicks on the Button " Make a Report" of the main screen the phone camera is opened automatically, so user is asked to take the first photo of the violation. After taking the photo it is elaborated with the Algorithm to Recognize Licence Plates if it recognises a licence plate the App
-gets using the GPS of the App the position of the user, in case of no recognition the user is asked
-to take another photo. To enrich the Report the App allows the user to write some additional notes that
-authorities can read and get more information about the violation. Then when the user decides to send the
-violation clicking on the corresponding button on the UI of the mobile phone the App handles the request
-and sends the report and all the needed data to the Report Manager. The Report Manager elaborates the
-data and sends the report to the DatabaseConnection subsystem which takes care to add the report to the
-DataBase, in this diagram we don’t show the SafeStreets database connection subsystem to lighten the
-diagram and also because it would be called with the same request as the DataBaseConnection resulting
-in no useful information being added. The Database recognizes if the report is new and creates a new
-Assignment if it doesn’t exist, it just adds a report connected to the assignment if it already exists. After
-that the Report Manager sends the notification to the notification manager which takes care to find the
-closest agents to the report and to warn them using push notifications of the assignment. The warned
-authority, who can decide to take the task, in case of acceptance sends a request to the Report Manager
-that checks if the Assignment is still available in the database, in that case it modifies the state of the
-assignment and confirms the authority to take charge of the assignment if it was still available otherwise
-a refusal message is sent to the Authority. Once the Authority terminates his assignment, he can notify
-the system using the Button "Stop Assignment" after that the App asks the User how the assignment
-ended and the type of violation. Those data are sent to the Report Manager who modifies the state of the
-Assignment, accordingly, if the modification is successful the Report Manager notifies the user, otherwise
-it retries this operation 5 times and then in case of failure it sends an error message to the authority
-notifying him/her that there are problems in the server and asks the user to retry later to terminate the
-assignment.
+In this sequence diagram is represented the process of making a report by Citizen, handling a request by the server and finally managing an assignment by authority corresponding to the report created in the beginning. Everything starts when the Citizen clicks on the Button "Make a Report" on the main screen; the phone camera opens automatically, so user is asked to take the first photo of the violation. After the photo is taken, it is elaborated by the Algorithm to Recognize Licence Plates. If it recognises a licence plate, the App gets the position of the user through the phone GPS, whereas in case of no recognition the user is asked to take another photo. To enrich the Report, the App allows the user to write some additional notes that authorities can read to get more information about the violation. Then, when the user decides to send the report, he clicks on the corresponding button; the App handles the request and sends the report and all the needed data to the Report Manager. The Report Manager elaborates the data and sends the report to the DatabaseConnection subsystem which manages to add the report to the DataBase. In this diagram we don’t show the SafeStreets database connection subsystem to lighten the diagram, and also because it would be called with the same request as the DataBaseConnection resulting in no useful information being added. The Database recognizes if the report is new and creates a new Assignment if it doesn’t exist yet, or it just adds a report connected to the assignment if it does. After that, the Report Manager sends the notification to the Notification Manager which manages to find the closest agents to the location report and warn them using push notifications of the assignment. The warned authority can decide whether to take the task or not; in case of acceptance, the Mobile App sends a request to the Report Manager that checks if the Assignment is still available in the database. If it is, the Report Manager modifies the state of the assignment and confirms the authority to take charge of the assignment, otherwise a refusal message is sent to the Authority. Once the Authority terminates his assignment, he can notify the system using the Button "Stop Assignment" and, after that, the App asks the User to specify how the assignment ended and the type of violation occurred. Those data are sent to the Report Manager that modifies the state of the Assignment; if the modification is successful the Report Manager notifies the user, otherwise it retries this operation 5 times and then, in case of failure, sends an error message to the authority notifying him/her that there are problems in the server and asks the user to retry later to terminate the assignment.
 \subsubsection{Login from Mobile App}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/SequenceLogin.png}
 \caption{\label{fig:ComWI}Sequence Diagram: Mobile App Login}
 \end{figure}
-In this sequence diagram the process through which a User can Login, it shows the Mobile App process
-but it is the same for the Web App. Once users get access to the App (Mobile or Web) they are asked
-to authenticate themselves in the "Login Page" inserting their credential in the dedicated text fields. Once
-the user submits the data pressing "Login" button data are sent to User Manager that takes care of the
-verification of data validity, in case of failure an error message is sent to the user who must repeat the
-authentication sequence, otherwise, the User Manager asks the Database Connection subsystem if the credentials are associated with a user also here as in the last diagram the SafeStreets DataBase Connection
-subsystem is not represented because it wouldn’t add relevant interaction for the App. If a user is found
-associated to the inserted credential the user is logged in and the homepage is shown to the user otherwise
-the login request is refused, and the user is notified that the inserted credentials are wrong, and he/she must retry the Login process.
+This sequence diagram explains the process of a User logging through Mobile App, furthermore, this method is also used for the authentication via Web App. Once users get access to the App, they are asked to identify themselves in the "Login Page" inserting their credential in the dedicated text fields. Once the user submits the form pressing "Login" button, data are sent to User Manager that takes care of validating them. In case of failure an error message is sent to the user who must repeat the authentication sequence, otherwise, the User Manager asks the Database Connection subsystem if the credentials are associated with a user, as in the last diagram the SafeStreets DataBase Connection subsystem is not represented because it wouldn’t add relevant interaction for the App. If it is found an account who is associated to the inserted credential, the user is logged in and the homepage is shown to him, otherwise the login request is refused and the user is notified that the inserted credentials are wrong, and he/she must retry the Login process.
 \subsubsection{Authority registration}
 \begin{figure}[H]
 \centering
@@ -176,21 +146,8 @@ the login request is refused, and the user is notified that the inserted credent
 \caption{\label{fig:ComWI}Sequence Diagram :Authority Registration}
 \end{figure}
 This sequence diagram shows the process of the registration of a new authority to SafeStreets service.
-The registration of an authority must be done by a Municipality pressing the "Add Agent" button in the
-Homepage of Web Application, after this the application shows a page for registration a new authority, this page contains a form to be compiled with data characterizing the authority (his/her email address,
-username, and the boundaries of the area he/she takes care of). After that the Municipality sends the
-request to add the agent using the "Add" button, this sends the data from the form to the User Manager
-which checks if data are valid. In case data are not valid an error message is sent to the municipality that
-must refill the form and redo the registration sequence. In case data are valid they are sent to the database
-connection which generates a temporary password for the authority account , after that the SafeStreets
-Database Connection subsystem checks the existence of an account with the same username. If there
-is a matching username already in the database the new authority is not registered and the Municipality
-gets an error message. If the creation is successful, the User Manager asks the Mail Manager to send an
-email with the temporary password to the Authority. If the email isn’t sent and the server fails 5 times
-to send it, the server informs the Municipality that there are problems with the email and that the server
-will take care of sending the email if the authority didn’t receive an email or in any case if he/she doesn’t
-login within 24 hours. If the email is sent successfully then authority is informed of the success of the
-creation of the authority account.
+The registration of an authority must be done by a Municipality, which starts the task pressing the "Add Agent" button in the Homepage of Web Application. Then, the application shows a page for registering a new authority which contains a form to be compiled with his/her data (email address, username and the boundaries of the area he/she takes care of). After that, the Municipality, using the "Add" button, sends the request to add the agent to the User Manager, which checks if data are valid. In case of invalid data, an error message is sent to the municipality that must refill the form and redo the registration sequence. Otherwise, the data are sent to the database connection, which generates a temporary password for the authority account; after that, the SafeStreets Database Connection subsystem checks the existence of an account with the same username or email. If there is a match in the database, the new authority is not registered, and the Municipality gets an error message. If the creation is successful, the User Manager forwards the request to the Mail Manager to send an email to the Authority containing the temporary password. If server fails 5 times to send the email, it informs the Municipality that there are problems with the email and that it will take care of sending it. If the email is sent successfully, the authority is informed of the creation of his account.
+
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Component interfaces}
 \begin{figure}[H]
@@ -198,43 +155,48 @@ creation of the authority account.
 \includegraphics[width=\textwidth]{Images/Interfaces.png}
 \caption{\label{fig:ComWI}Component Interfaces}
 \end{figure}
-In the above picture the component interfaces of the business logic and the facade provided by data access layer are shown.
-The arrow represents dependencies between interfaces .
-All Interfaces except for ManageDataAccess and ManageNotification are required by the web servlets to respond to user Requests.
-Manage Data Acces acts as a facade provided by the Data Connection component and provides the other interfaces the needed data to respond.
-Manage Notification takes care of the notification sent to authorities , it need the  Manage Authority Position interface that informs it when an authority moves from one position to another and also it needs the ManageReportCreation  that communicates to ManageDataAccess interface to create a Report object and when the object creation is successful it asks to send notifications to every authority who is active near the location of the report.
-Those interfaces are provided by the Manager components of the system:
+In the picture above the component interfaces of the business logic and the facade provided by data access layer are shown. The arrow represents dependencies between interfaces. All interfaces, except those of ManageDataAccess and ManageNotification, are required by the web servlets to respond to user Requests. ManageDataAccess acts as a facade provided by the Data Connection component and gives the other interfaces the needed data to respond. ManageNotification takes care of the notification sent to authorities, it requires the Manage Authority Position interface that informs it when an authority moves from one position to another, and the ManageReportCreation that communicates to ManageDataAccess interface to create a Report object. When the object creation is successful, it asks the ManageNotification to send notifications to every authority who is active near the location of the report. Those interfaces are provided by the Manager components of the system:
 \begin{itemize}
-\item User Manager: provides ManageLogin,ManageRegistration,Manage Authority Position, Manage Authority Registration and Manage Account Modification interfaces
+\item User Manager: provides ManageLogin, ManageRegistration, Manage Authority Position, Manage
+Authority Registration and Manage Account Modification interfaces
 \item Report Manager: provides the ManageReportCreation and manage Assignment interfaces
 \item Notification Manager: provides manage Notification interface
-\item Statistics Manager:  provides Manage Statistics interface
+\item Statistics Manager: provides Manage Statistics interface
 \item Suggestion Manager: provides Manage Suggestion interface
 \end{itemize}
-In this diagram we used the symbol '?' after newEmail in ManageAccountModification to indicate that the old email isn't modified  if it not specified by the user. This difference is done to show how all other parameters must be provided by the Servlets which gets them from users and are mandatory for the functionalities to work.
-The most important interfaces needed by servelts to provide user the main functionalities of SafeStreets are:
+In this diagram we used the symbol ’?’ after newEmail in ManageAccountModification to indicate that
+the old email isn’t modified if it not specified by the user. This difference is done to show how all
+other parameters must be provided by the Servlets, which gets them from users and are mandatory for
+the functionalities to work. The most important interfaces needed by servlets to provide user the main
+functionalities of SafeStreets are:
 \begin{itemize}
-\item ManageReportCreation: this interface allows the Creation of requests, it needs the username of the user creating it the location of the Violation and the photos associated with it which must be more than 2 [2...n]. It creates an object of type Report and uses the method provided by Manage Data Access to create a new report in case of failure the user is notified, in case of success two different scenarios may hAppen, the report is linked to a new assignment or the report is linked to an already existing assignment, if the already existing assignment is being taken care by an authority the server communicates that to the user who reported the violation in all the other situations the Notification manager is asked to send notification to agents near the location of the violation and are asked to take the assignment.
-\item ManageAssignment: this interface allows authorities to find all the pending assignments which are close to their position. The assignments are sorted by number of associated reports within the last hour, if no assignment available respecting those criteria also assignments from before the last hour are shown but are marked as old assignments.
-\item Manage Suggestions: this interfaces is maily used to allow Municipalities to Get suggestions. Suggestions are made combining Report data and accident data close to the location of the municipality. In addition to dinamically created suggestions Citizens and authorities are able to send suggestions when sending reports for the former or terminating assignments for the latter.
+\item ManageReportCreation: this interface allows the Creation of requests, it needs the username of the user who has created the report, the location of the Violation and the photos associated with it which must be more than 2 [2...n]. It creates an object of type Report and uses the method provided by Manage Data
+Access to create a new report in case of failure the user is notified, in case of success two different
+scenarios may happen, the report is linked to a new assignment or the report is linked to an
+already existing assignment, if the already existing assignment is being taken care by an authority,
+the server communicates it to the user who reported the violation. In all the other situations the Notification manager is asked to send notification to agents near the location of the violation and are asked to take the assignment.
+\item ManageAssignment: this interface allows authorities to find all the pending assignments which
+are close to their position. The assignments are sorted by number of associated reports within the
+last hour, if no assignment available respecting those criteria, also assignments from before the last
+hour are shown but are marked as old assignments.
+\item Manage Suggestions: this interface is mainly used to allow Municipalities to Get suggestions.
+Suggestions are made combining Report data and accident data close to the location of the municipality.
+In addition to dynamically created suggestions, Citizens and authorities can send
+proposals when sending reports for the former or terminating assignments for the latter.
+
 \end{itemize}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/ER.png}
 \caption{\label{fig:ComWI}ER DIAGRAM }
 \end{figure}
-The image above represents the Entity Relation diagram of data saved on the internal database of SafeStreets. The Different kind of users all have as primary key their username, a unique email is requested for different users because when user account informations gets modified or credential are lost the right user must be notified by eamil. Municipalities have a nullable field RegisteredBy which is used to keep track if an authority registered another authority and who registered them, it can be null if the registration happens trough the system manager. To facilitate access to authorities and municipalities in a certain location the cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster,
-Static Suggestions added by users and authorities must be indexed using Cityhall as an index to make easier access to suggestions.
-Report contains a field for notes made by users to authorities to give them information they couldn't provide using photos.
-Citizens have a reliability field which represents how reliable a user is , this is used by database to mark reports as "possibly unsafe"  when too many reports are done in a short time and reliability is not high enough ,meaning those reports may not be reliable and if false reports are made ban a user.
+The image above represents the Entity Relation diagram to explain the data organization of SafeStreets database. The Different kind of users are identified by their username that works as primary key, each user has also a unique email address, because when user account information gets modified or credential are lost the right user must be notified by email. Municipalities have a nullable field RegisteredBy, which is used to keep track of who registers an authority or another municipality, it can be null if the registration happens through the system manager. To facilitate access to authorities and municipalities in a specific location the Cityhall table is used , this table must be indexed using longitude and latitude as indexes to making access to the table faster, Static Suggestions added by users and authorities must be indexed using Cityhall as an index to make easier access to suggestions. Report contains a field for notes made by users to authorities to give them information they couldn’t provide using photos. Citizens have a reliability field which represents how dependable a user is, this is used by database to mark reports as "possibly unsafe" when too many reports are done in a short time and reliability is not high enough, meaning those reports may not be consistent and if false reports are made, the user who makes them is banned.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Images/DatabaseConnectionClassDiagram.png}
-\caption{\label{fig:ComWI}Dabase Connection Class Diagram }
+\caption{\label{fig:ComWI}DataBase Connection Class Diagram }
 \end{figure}
-In this picture a part of the class diagram concerning Data Access Layer is provided.
-This component provides the Business Logic (here shown as a package, the ServerPackage) an interface to access data.
-Internally different singleton classes handles the requests a first group of classes checks input data validity :DataCollector, ReportAndAssignmentUpdater and UserDataChecker. The first one communicates with Report And Assignment Database Connector to get report ,assignment and statistics from SafeStreets Database and also communicates with different External Database Connectors to get Accident data from external Databases. To communicate with external database the system has an abstract class of connector which contains the methods required by the system, for every database a different istance of child class  is needed to implement the actual connection and in case some information need further computation a factory class is needed to create Accident istances which can be used by the business logic. A connection Pool for Connecting to SafeStreets Database to allow the reuse of connection and reduce the cost of memory allocation and disallocation in the server.
+In this picture there is represented a part of the class diagram concerning Data Access Layer. This component provides the Business Logic (here shown as a package, the ServerPackage) an interface to access data. Internally different singleton classes handle the requests and a first group of classes checks input data validity: DataCollector, ReportAndAssignmentUpdater and UserDataChecker. The first one communicates with ReportAndAssignmentDatabaseConnector to get report, assignment and statistics from SafeStreets Database, and communicates with different ExternalDatabaseConnectors to get Accident data from external Databases. To communicate with external database the system has an abstract class of connector which contains the methods required by the system, for every database a different instance of child class is needed to implement the actual connection, and in case some information need further computation, a factory class is needed to create Accident instances which can be used by the business logic. A connection Pool for Connecting to SafeStreets Database to allow the reuse of connection and reduce the cost of memory allocation and deallocation in the server.
  %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage
 \subsection{Selected architectural styles and patterns}
@@ -244,19 +206,20 @@ This Approach allows the implementation and testing of components in parallel. T
  Once those components are completed and their functionalities are tested, it is possible to develop different functionalities of the server in parallel, so the components must be tested and then integrated with the database access components. Moreover, this Approach allows us to make the system scalable: different functionalities may be separated in different hardware components and  routing devices may be used to send the request to the right machine which can satisfy the request.
  The system can also be expanded in a really simple way: if we want to add new functionalities, new independent servlets can be added to manage them and a new manager to handle the request and send it correctly to the database connection components; as an alternative, an already existing component may be expanded to do it. Since different functions of the server are separated, in case some functionalities aren’t working in the correct way, it is possible to pinpoint the parts of the system which aren’t working correctly and fix them. For this Approach to work it is really important that the Database access components work correctly; in fact, a bug in one of those components would affect the overall App, making later maintenance more costly. So it is really important that all the functionalities of this part are tested; moreover, the documentation must be as clear as possible to allow future maintenance and expansions as simple as possible.
 \subsubsection{Three Tier Client-Server}
+The separation of the system in three different layers allows to make the system more flexible and
+reusable. Together with the multiple Servlet Approach it allows to add functionalities and modifying them
+without affecting the entire App. This also allows the separation of the presentation of data to the user
+from data access using the App layer to block access to information that a user should not access (I.e. a
+citizen should not access photos of violations or assignment lists).
 
-The separation of the system in three different layers allows to makes the system more flexible and reusable.
-Together with the multiple Servlet Approach it allows to add functionalities and modifing them without affecing the entire App.
-This also allows the separation of the presentation of data to the user from data access using the App layer to block access to informations that a user should not access(I.e. a citizen should not access photos of violations or assignment lists)
 
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Other design decisions}
 \subsubsection{Thin client }
-A thin client is characterized by the fact that it's only function is to communicate with server to retrieve data and concentrates on presentation of data to the user.
+A thin client is based to performing a single function which is to communicate with server to retrieve
+data and concentrates on presentation of them to the user.
 \newline
-This design choice allows us to separate the business logic from the presentation. However our Mobile App has some business logic in it so it is not purely a thin client. This choice is made to reduce drastically draining computational resources from server. The business logic in the App is the Licence plate recognition algorithm which checks if at least one photo provided by the user contains a valid licence plate, doing such a control server side would have needed to send all the photos to the server to check them and in case of failure notify the App of it and ask the user to re-take photos and send them again to the server, considering also that those kind of algorithm can take lot of time to be executed.
-To clarify this statement this example may help to understand our choice: an execution time of a millisecond on a mobile phone may be seen as a bit of lag by the user but if the algorithm runs on the server that millisecond of delay which must be mutiplied by the amount of users sending photos and the number of photos sent by them can result in a delay of seconds in the performances of App server
-Nowadays it is important to consider a lot those kind of delay since users can access any kind of App and user experience while using an App is crutial, a delay of just a couple of seconds can make a user uninstall completely an App and also discourage other people from using it.
+Thanks to this design choice, it’s possible to separate the business logic from the presentation. However, our Mobile App contains a layer of business logic, so, it is not purely a thin client, but this alternative is made to reduce drastically the draining of computational resources from server, in fact, in the App there is the Licence plate recognition algorithm which checks if at least one photo provided by the user contains a valid licence plate. Doing such a control from server side, all the photos should be sent to the server that takes care to check them, if there is a failure it should notify to the App the problem and ask the user to re-take photos and send them again to the server, considering also that that kind of algorithm can take lot of time to be executed this would reduce system performances. To clarify this statement this example may help to understand our choice: an execution time of a millisecond on a mobile phone may be seen as a bit of lag by the user, but if the algorithm runs on the server that millisecond of delay which must be multiplied by the amount of users sending photos and the number of photos sent by them can result in a delay of seconds. It is important to consider a lot those kinds of delays because nowadays, it must be guaranteed a satisfying user experience that invites the people to continue using the app.
 %---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
