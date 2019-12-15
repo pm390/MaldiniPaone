@@ -33,7 +33,7 @@ one towards user devices and the other towards the data access layer.
 \caption{\label{fig:ComWI}Application High Level Architecture}
 \end{figure}
 Citizen and authorities are provided of mobile Apps to access the functionalities offered by safestreets. Municipalities and system managers communicates with safestreets using a web App.
-The App layer is divided in two parts, one which sends static data (HTML,CSS,Javascript) to web App and another part which communicates with database and provides users dynamic contents.
+The App layer is divided in two parts, one which sends static data (HTML, CSS, Javascript) to web App and another part which communicates with database and provides users dynamic contents.
 Our system uses only few caching capabilities because lot of data is dynamic and chages continuosly. 
 The only information we cache are those about the violations when an authority takes the corresponding assignment; citizens have in cache the list of reports they have done and can choose how long that list would be kept in memory.
 For scaling purpose a non relational database could be used in later releases to collect data from databases with different structures and then use mining techniques to find useful information and pattern in recurrent violations and information. This could be useful to build statistics that may be queried on a regular basis and stored in a location which is faster to access for our system, reducing the number of queries to be done to external databases.
@@ -53,7 +53,7 @@ In this diagram we represent a high level logic view on Subsystems and component
 The server is composed of five SubSystems and components:
 \begin{itemize}
 \item  SafeStreets Servlets: this contains all the Servlets which allow the user to communicate with the server. To retrieve and save data this component communicates with the Database Connection subsystem. All responses to the user are sent in JSON format. 
-\item Web App Server: this component provides the web App the static data of the App (HTML,CSS,JAVASCRIPT), this part is separated from SafeStreets Servlets for the sake of separation of concerns, dynamic content and static contents are different so different components should get request to retrieve them.
+\item Web App Server: this component provides the web App the static data of the App (HTML, CSS, JAVASCRIPT), this part is separated from SafeStreets Servlets for the sake of separation of concerns, dynamic content and static contents are different so different components should get request to retrieve them.
 \item DataBase Connection: this component acts as a facade which separates servlets from data access logic. This component communicates with SafeStreets servlets providing them the functionalities to access data.
 It communicates to Connection subsystems which communicates with SafeStreets Database and with External Databases to get data which is required by users.
 \item SafeStreesDataBaseConnection: this component communicates with SafeStrees database executing query to update and read data from it and provide data to DataBase connection component. 
