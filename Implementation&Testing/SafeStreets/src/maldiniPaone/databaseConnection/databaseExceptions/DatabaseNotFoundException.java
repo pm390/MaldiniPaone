@@ -7,6 +7,9 @@ package maldiniPaone.databaseConnection.databaseExceptions;
 
 public class DatabaseNotFoundException extends Exception {
 	
+	//================================================================================
+    // constructors
+    //================================================================================
 	public DatabaseNotFoundException(Exception e) {
 		super(e);
 		

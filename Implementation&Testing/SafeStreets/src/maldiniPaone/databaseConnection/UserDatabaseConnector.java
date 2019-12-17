@@ -9,9 +9,15 @@ import maldiniPaone.utilities.Location;
 
 
 public class UserDatabaseConnector {
+	//================================================================================
+    // Static variables
+    //================================================================================	
 	private static boolean verbose=true;//TODO set to false on release
 	
-	
+	//================================================================================
+    // User Adders
+    //================================================================================
+
 	/**
 	 * Adds citizen to the database , gets a connection to the database from the connection pool and executes the insertion
 	 * @param username : the user name of the citizen to be added 
@@ -24,8 +30,10 @@ public class UserDatabaseConnector {
 	{
 		boolean res=false;
 		try {
-			Connection c=ConnectionPool.getIstance().getConnection();
-			PreparedStatement ps = c.prepareStatement("insert into citizen (`username`,`password`,`email`) values (?,?,?)");
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into citizen "
+					+ "(`username`,`password`,`email`) "
+					+ "values (?,?,?)");
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
@@ -41,8 +49,6 @@ public class UserDatabaseConnector {
 		}
 		return true;
 	}
-	
-	
 	/**
 	 * Adds municipality to the database, gets a connection to the database from the connection pool and executes the insertion.
 	 * Use this method when municipality is created by another municipality
@@ -55,12 +61,14 @@ public class UserDatabaseConnector {
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
 	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
 	 **/
-	protected static boolean addMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws DatabaseNotFoundException
+	protected static boolean addMunicipalityByMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws DatabaseNotFoundException
 	{
 		boolean res=false;
 		try {
-			Connection c=ConnectionPool.getIstance().getConnection();
-			PreparedStatement ps = c.prepareStatement("insert into municipality (`username`,`password`,`email`,`employee`,`cityhall_name`,`cityhall_province`) values (?,?,?,?,?,?)");
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into municipality "
+					+ "(`username`,`password`,`email`,`employee`,`cityhall_name`,`cityhall_province`)"
+					+ " values (?,?,?,?,?,?)");
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
@@ -92,12 +100,14 @@ public class UserDatabaseConnector {
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
 	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
 	 **/
-	protected static boolean addMunicipality(String username,String password,String email,String cityName,String cityProvince) throws DatabaseNotFoundException
+	protected static boolean addMunicipalityByManager(String username,String password,String email,String cityName,String cityProvince) throws DatabaseNotFoundException
 	{
 		boolean res=false;
 		try {
-			Connection c=ConnectionPool.getIstance().getConnection();
-			PreparedStatement ps = c.prepareStatement("insert into municipality (`username`,`password`,`email`,`cityhall_name`,`cityhall_province`) values (?,?,?,?,?)");
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into municipality "
+					+ "(`username`,`password`,`email`,`cityhall_name`,`cityhall_province`) "
+					+ "values (?,?,?,?,?)");
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
@@ -116,22 +126,80 @@ public class UserDatabaseConnector {
 		return true;
 	}
 	
+	/**
+	 * Adds authority to the database, gets a connection to the database from the connection pool and executes the insertion.
+	 * @param username : the user name of the authority to be added 
+	 * @param password : the password of the authority to be added
+	 * @param email : the email address of the authority to be added
+	 * @param creator :the user name of the municipality who asked the creation of the authority
+	 * @param districtId : the id of the district in which the authority works
+	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
+	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 **/
+	protected static boolean addAuthority(String username,String password,String email,String creator,Integer districtId) throws DatabaseNotFoundException
+	{
+		boolean res=false;
+		try {
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into authority "
+					+ "(`username`,`password`,`email`,`employee`,`district_id`)"
+					+ " values (?,?,?,?,?)");
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setString(3, email);
+			ps.setString(4, creator);
+			ps.setInt(5, districtId);
+			ps.execute();
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e){
+			if(verbose)e.printStackTrace();
+			return res;
+		}
+		return true;
+	}
 	
+	/**
+	 * Adds system manager to the database, gets a connection to the database from the connection pool and executes the insertion.
+	 * @param username : the user name of the manager to be added 
+	 * @param password : the password of the manager to be added
+	 * @param email : the email address of the manager to be added
+	 * @param venueName : the name of the venue where the system manager works
+	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
+	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 **/
+	protected static boolean addManager(String username,String password,String email,String venueName) throws DatabaseNotFoundException
+	{
+		boolean res=false;
+		try {
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into manager "
+					+ "(`username`,`password`,`email`,`venue`)"
+					+ " values (?,?,?,?)");
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setString(3, email);
+			ps.setString(4, venueName);
+			ps.execute();
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e){
+			if(verbose)e.printStackTrace();
+			return res;
+		}
+		return true;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//================================================================================
+    // city hall and district adders
+    //================================================================================
+
 	/**
 	 * Adds city hall to the database , gets a connection to the database from the connection pool and executes the insertion.
 	 * @param name : the name of the city hall that must be added 
@@ -145,8 +213,10 @@ public class UserDatabaseConnector {
 	{
 		boolean res=false;
 		try {
-			Connection c=ConnectionPool.getIstance().getConnection();
-			PreparedStatement ps = c.prepareStatement("insert into cityhall (`cityhall_name`,`cityhall_province`,`region`,`latitude`,`longitude`) values (?,?,?,?,?)");
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into cityhall "
+					+ "(`cityhall_name`,`cityhall_province`,`region`,`latitude`,`longitude`) "
+					+ "values (?,?,?,?,?)");
 			ps.setString(1, name);
 			ps.setString(2, province);
 			ps.setString(3, region);
@@ -178,8 +248,10 @@ public class UserDatabaseConnector {
 	{
 		Integer res=-1;
 		try {
-			Connection c=ConnectionPool.getIstance().getConnection();
-			PreparedStatement ps = c.prepareStatement("insert into district (`cityhall_name`,`cityhall_province`,`tllatitude`,`tllongitude`,`brlatitude`,`brlongitude`) values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			Connection c=ConnectionPool.getInstance().getConnection();
+			PreparedStatement ps = c.prepareStatement("insert into district "
+					+ "(`cityhall_name`,`cityhall_province`,`tllatitude`,`tllongitude`,`brlatitude`,`brlongitude`) "
+					+ "values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, name);
 			ps.setString(2, province);
 			ps.setFloat(3, locationTopLeft.getLatitude());
@@ -203,7 +275,32 @@ public class UserDatabaseConnector {
 		}
 		return res;
 	}
+	//================================================================================
+    // login check
+    //================================================================================
+
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//================================================================================
+    // Dummy main method
+    //================================================================================
+
 	public static void main(String[] args) throws Exception
 	{
 		//UserDatabaseConnector.addCityhall("alserio", "como", "lombardia", new Location(10.0f, 20.0f));

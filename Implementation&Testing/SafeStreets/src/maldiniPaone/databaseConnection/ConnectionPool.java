@@ -13,11 +13,19 @@ import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundExcept
  * the initialization file used here must be modified(TODO insert name here)
  **/
 public class ConnectionPool {
+	//================================================================================
+    // static variables
+    //================================================================================
+
 	//TODO set verbose to false for release
 	private static Boolean verbose=true;
-	private static ConnectionPool istance;
+	private static ConnectionPool instance;
 	private static Integer INITIALSIZE=5;//TODO remember to change to bigger number for testing and actual release.
 	//low number for functionality testing	
+
+	//================================================================================
+    // instance values
+    //================================================================================
 
 	//TODO put in initialization file
 	private String driver;
@@ -26,41 +34,9 @@ public class ConnectionPool {
 	private String databaseURL;
 	private ArrayList<Connection> availableConnections; 
 
-
-
-	/**
-	 * instantiates a ConnectionPoolObject if it is not available, otherwise returns the already existing object
-	 * @return ConnectionPool
-	 * @exception DatabaseNotFoundException
-	 * @note Singleton pattern.
-	 **/
-	protected static ConnectionPool getIstance() throws DatabaseNotFoundException
-	{
-		return (istance==null)?istance=new ConnectionPool():istance;
-	}
-
-	/**
-	 * this function gets an available connection or instantiates it if no more connections are available
-	 * @return Connection: get an available connection or if not connection is available calls the instantiate 
-	 * connection method 
-	 * @throws DatabaseNotFoundException: when instantiating new connection database could not be reached
-	 **/
-	protected synchronized Connection getConnection() throws DatabaseNotFoundException
-	{
-		int size=availableConnections.size();
-		return (size>0)?availableConnections.remove(size-1):instantiateConnection();
-	}
-
-
-	/**
-	 * This function reads the connection to the available Connections
-	 * @param c : connection which is returned to the pool
-	 **/
-	protected synchronized void releaseConnection(Connection c)
-	{
-		availableConnections.add(c);
-	}	
-
+	//================================================================================
+    // constructor
+    //================================================================================
 
 	/**
 	 * This constructor is private to allow the creation of a singleton. 
@@ -96,6 +72,52 @@ public class ConnectionPool {
 		}
 		if (availableConnections.size()==0) throw new DatabaseNotFoundException();
 	}
+	
+	//================================================================================
+    // Instanter
+    //================================================================================
+	/**
+	 * instantiates a ConnectionPoolObject if it is not available, otherwise returns the already existing object
+	 * @return ConnectionPool
+	 * @exception DatabaseNotFoundException
+	 * @note Singleton pattern.
+	 **/
+	protected static ConnectionPool getInstance() throws DatabaseNotFoundException
+	{
+		return (instance==null)?instance=new ConnectionPool():instance;
+	}
+
+	//================================================================================
+    // methods to get and return connection to the pool
+    //================================================================================
+
+	/**
+	 * this function gets an available connection or instantiates it if no more connections are available
+	 * @return Connection: get an available connection or if not connection is available calls the instantiate 
+	 * connection method 
+	 * @throws DatabaseNotFoundException: when instantiating new connection database could not be reached
+	 **/
+	protected synchronized Connection getConnection() throws DatabaseNotFoundException
+	{
+		int size=availableConnections.size();
+		return (size>0)?availableConnections.remove(size-1):instantiateConnection();
+	}
+
+
+	/**
+	 * This function reads the connection to the available Connections
+	 * @param c : connection which is returned to the pool
+	 **/
+	protected synchronized void releaseConnection(Connection c)
+	{
+		availableConnections.add(c);
+	}	
+
+
+	
+	//================================================================================
+    // connection creator
+    //================================================================================
 
 	/**
 	 * Creates the actual connections using Connection Pool's parameters
@@ -113,8 +135,13 @@ public class ConnectionPool {
 		} 
 	}
 
+	
+	//================================================================================
+    // dummy main
+    //================================================================================
+
 	public static void main(String[] args) throws Exception
 	{
-		ConnectionPool.getIstance();
+		ConnectionPool.getInstance();
 	}
 }
