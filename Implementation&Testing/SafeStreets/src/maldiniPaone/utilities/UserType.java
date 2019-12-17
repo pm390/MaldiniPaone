@@ -11,7 +11,7 @@ public enum UserType {
 	
 	
 	//================================================================================
-    // useful method
+    // useful methods
     //================================================================================
 	/**
 	 * Converts a string in a user type 
@@ -20,7 +20,7 @@ public enum UserType {
 	 * 					 returns null if no matching user type exists
 	 * @note this method doesn't check if string is null: use with caution
 	 **/
-	public UserType fromString(String type)
+	public static UserType fromString(String type)
 	{
 		switch(type.toLowerCase())
 		{
@@ -29,6 +29,21 @@ public enum UserType {
 		case "municipality": return Municipality;
 		case "manager" : return Manager;
 		default: return null ;
+		}
+	}
+	/**
+	 * Converts a user type to a string
+	 * @return UserType: returns the string corresponding to the user type on which is call
+	 **/
+	public String toString()
+	{
+		switch(this)
+		{
+		case Citizen : return "citizen";
+		case Authority : return "authority";
+		case Municipality : return "municipality";
+		case Manager : return "manager";
+		default: return ""; // needed to avoid compilation error but can't be reached
 		}
 	}
 	
