@@ -24,6 +24,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	private static boolean verbose=true;//TODO set to false when release
 	private static Float euclideanCloseDistance=1f;//TODO think about the value
 	private static Integer standardLimit=20;
+	private static Float EUCLIDEANCLOSEDISTANCE_STATISTICS=0.5f;
 	
 	//================================================================================
     // Report creation and retrieve
@@ -38,7 +39,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param licencePlate : the license plate in the report in String form
 	 * @return Integer: the primary key of the bridge table between assignment and report,
 	 * 					-1 if the insertion is not possible
-	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * */
 	protected static Integer addReport(String username,Timestamp time,Location location,String note,String licensePlate) throws DatabaseNotFoundException
 	{
@@ -89,7 +90,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param licencePlate : the license plate in the report in String form
 	 * @return boolean : true if insertion is successful
 	 * 					 false otherwise
-	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 * */
 	protected static List<Report> getReports(String username) throws DatabaseNotFoundException
@@ -126,6 +127,45 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
+	/**
+	 * Gets the number of reports done close to a given location. Gets connection from connection pool and uses it to 
+	 * execute the insertion.
+	 * @param location : the location to which respect the reports are searched
+	 * @return Integer : the number of reports (0 if no match)
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	public static Integer getReports(Location location) throws DatabaseNotFoundException {
+		Integer res=0;
+		Connection c=null;
+		PreparedStatement ps =null;
+		ResultSet rs=null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();
+			ps = c.prepareStatement("select count* from report as rep"
+					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"
+					+ " and "+closeTo("rep", location,EUCLIDEANCLOSEDISTANCE_STATISTICS)
+					+ " order by rep.datetime");
+			ps.execute();
+			rs=ps.getResultSet();
+			while(rs.next()) //for each row of the result set build a report and add to the return value
+			{
+				res=rs.getInt(1);
+			}
+			ps.close();
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e){
+			if(verbose)e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
 	//================================================================================
     // Assignments
     //================================================================================	
@@ -138,7 +178,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 *	@param username : the user name of the authority taking the assignment
 	 *  @return boolean : true if the action is successful;
 	 *  				  false otherwise
-	 *  @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 *  @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
 	protected static boolean takeAssignment(Integer id,String username) throws DatabaseNotFoundException
 	{
@@ -176,7 +216,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 *	@param finishState : the state in which the user 
 	 *  @return boolean : true if the action is successful;
 	 *  				  false otherwise
-	 *  @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 *  @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
 	protected static boolean finishAssignment(Integer id,String username,State finishState) throws DatabaseNotFoundException
 	{
@@ -213,7 +253,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 *	@param username : the user name of the authority who is refusing
 	 *  @return boolean : true if the action is successful;
 	 *  				  false otherwise
-	 *  @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 *  @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
 	protected static boolean refuseAssignment(Integer id,String username) throws DatabaseNotFoundException
 	{
@@ -223,10 +263,11 @@ public class ReportAndAssignmentDatabaseConnector {
 		try {
 			c=ConnectionPool.getInstance().getConnection();
 			ps = c.prepareStatement("update assignment set state=? "
-					+ " where id=? and appointee=?" );
+					+ " where id=? and appointee=? and state=?" );
 			ps.setString(1,State.Pending.toString());
 			ps.setInt(2,id);
 			ps.setString(3, username);
+			ps.setString(4, State.Accepted.toString());
 			ps.executeUpdate();
 			res=true;
 			ps.close();
@@ -252,10 +293,10 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * the location given as parameter
 	 * @param location : the location close to which the assignments are searched
 	 * @return List of Assignments : the assignment found are returned in a List
-	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 **/
-	protected List<Assignment> GetAssignments(Location location) throws DatabaseNotFoundException
+	protected static List<Assignment> GetAssignments(Location location) throws DatabaseNotFoundException
 	{
 		List<Assignment> res=null;
 		Connection c=null;
@@ -291,10 +332,53 @@ public class ReportAndAssignmentDatabaseConnector {
 		return res;
 	}
 	//================================================================================
+    // Assignment count
+    //================================================================================	
+	/**Gets the number of assignments done close to a given location. Gets connection from connection pool and uses it to 
+	 * execute the insertion.
+	 * @param location : the location to which respect the assignments are searched
+	 * @return Integer : the number of reports (0 if no match)
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	protected static Integer GetAssignmentCount(Location location)throws DatabaseNotFoundException
+	{
+		Integer res=0;
+		Connection c=null;
+		PreparedStatement ps =null;
+		ResultSet rs=null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();
+			ps = c.prepareStatement("select count distinct arb.idassignment"
+					+ " from assignment as assign join assignmentreportbridge as arb on arb.id"
+					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7"
+					+ " and "+closeTo("assign", location,EUCLIDEANCLOSEDISTANCE_STATISTICS));
+			ps.execute();
+			rs=ps.getResultSet();
+			while(rs.next()) //for each row of the result set build a report and add to the return value
+			{
+				res=rs.getInt(1);
+			}
+			ps.close();
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e){
+			if(verbose)e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
+	//================================================================================
     // Get Statistics
     //================================================================================	
 	
 	//TODO think about how to build statistics
+	//may build them on higher levels using results from functions in this class
 	
 	//================================================================================
     // Get Suggestions
@@ -304,7 +388,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param name : the name of the city hall
 	 * @param province : the province in which the city hall is located
 	 * @return List of Strings : the suggestions given by Citizens and Authorities
-	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 **/
 	protected static List<String> GetSuggestions(String name,String province) throws DatabaseNotFoundException
@@ -350,7 +434,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param province : the province in which the city hall is located
 	 * @return boolean : true if the insertion is successful
 	 * 					 false otherwise
- 	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
+ 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
 	protected static boolean AddSuggestions(String suggestion,String name,String province) throws DatabaseNotFoundException
 	{
@@ -381,6 +465,14 @@ public class ReportAndAssignmentDatabaseConnector {
 		return res;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	//================================================================================
     // Support functions
     //================================================================================	
@@ -392,7 +484,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param location : the location with respect to the search must be done
 	 * @return CityHall : the closest city hall,
 	 * 					  null if no city hall close was found
-	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated 
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated 
 	 **/
 	protected static CityHall getClosestCityhall(Location location) throws DatabaseNotFoundException
 	{
@@ -481,7 +573,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * builds report from a row of the result set
 	 * @param rs : the result set set on the correct row
 	 * @return Report :  the report corresponding to the row of the result set
-	 * @throws SQLException : specified field are not available
+	 * @throws SQLException specified field are not available
 	 * */
 	private static Report buildReportFromResultSet(ResultSet rs) throws SQLException {
 		//initializations
@@ -502,10 +594,10 @@ public class ReportAndAssignmentDatabaseConnector {
 	 *@param rs : the result set from which the list is created 	  
 	 *@returns List of Assignment : list of assignment in the result set, 
 	 *								empty list if the result contains nothing
-	 *@throws SQLException : specified field are not available
+	 *@throws SQLException specified field are not available
 	 *@note query must return data ordered by assignment id for this method to returns correctly
 	 **/
-	private List<Assignment> buildAssignmentFromResultSet(ResultSet rs) throws SQLException {
+	private static List<Assignment> buildAssignmentFromResultSet(ResultSet rs) throws SQLException {
 		
 		//initialize return value+ check exit condition
 		List<Assignment> res=new ArrayList<Assignment>(); //initialize empty list
@@ -584,4 +676,5 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
+	
 }

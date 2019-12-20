@@ -1,57 +1,45 @@
 package maldiniPaone.utilities.beans;
 
-
-public class CityHall {
-
+public class District {
 	//================================================================================
     // Variables
     //================================================================================
 	private String name;
 	private String province;
-	private String region;
-	private Location location;
-	
-	
+	private Location locationTopLeft;
+	private Location locationBottomRight;
 	//================================================================================
     // Empty Constructor
     //================================================================================
-	public CityHall() {}
-	
-	
+	public District()
+	{}
 	//================================================================================
     // Getters
     //================================================================================
-
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
 	/**
 	 * @return the province
 	 */
 	public String getProvince() {
 		return province;
 	}
-
-
 	/**
-	 * @return the region
+	 * @return the locationTopLeft
 	 */
-	public String getRegion() {
-		return region;
+	public Location getLocationTopLeft() {
+		return locationTopLeft;
 	}
-
-
 	/**
-	 * @return the location
+	 * @return the locationBottomRight
 	 */
-	public Location getLocation() {
-		return location;
+	public Location getLocationBottomRight() {
+		return locationBottomRight;
 	}
-
 	//================================================================================
     // Setters
     //================================================================================
@@ -61,29 +49,22 @@ public class CityHall {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	/**
 	 * @param province the province to set
 	 */
 	public void setProvince(String province) {
 		this.province = province;
 	}
-	
-
 	/**
-	 * @param region the region to set
+	 * @param locationTopLeft the locationTopLeft to set
 	 */
-	public void setRegion(String region) {
-		this.region = region;
+	public void setLocationTopLeft(Location locationTopLeft) {
+		this.locationTopLeft = locationTopLeft;
 	}
-
-
 	/**
-	 * @param location the location to set
+	 * @param locationBottomRight the locationBottomRight to set
 	 */
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLocationBottomRight(Location locationBottomRight) {
+		this.locationBottomRight = locationBottomRight;
 	}
-
-
 }

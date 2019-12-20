@@ -2,6 +2,10 @@ package maldiniPaone.databaseConnection.databaseExceptions;
 
 public class ServerSideDatabaseException extends Exception{
 	
+	//================================================================================
+    // variables
+    //================================================================================
+	private static final long serialVersionUID = 1L;
 	private String note=null;
 	//================================================================================
     // constructors

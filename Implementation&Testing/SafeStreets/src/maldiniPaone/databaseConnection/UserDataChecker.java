@@ -3,13 +3,15 @@ package maldiniPaone.databaseConnection;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
+import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.Location;
 
 public class UserDataChecker {
 	//================================================================================
     // Static variables
     //================================================================================	
-	private static boolean verbose=true;//TODO set to false on release
+	//Uncomment if you find a useful point to debug code here
+	//private static boolean verbose=true;//TODO set to false on release
 	
 	
 	//================================================================================
@@ -26,8 +28,8 @@ public class UserDataChecker {
 	 * @param email : the email address of the citizen to be added
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static boolean AddCitizen(String username,String password,String email) throws InvalidParameterException, ServerSideDatabaseException
 	{
@@ -64,8 +66,8 @@ public class UserDataChecker {
 	 * @param cityProvince : the province where the city hall is located 
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static boolean addMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws  ServerSideDatabaseException, InvalidParameterException
 	{
@@ -108,8 +110,8 @@ public class UserDataChecker {
 	 * @param districtId : the district where the Authority works 
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static boolean addAuthority(String username,String password,String email,String creator,Integer districtId) throws ServerSideDatabaseException, InvalidParameterException
 	{
@@ -145,8 +147,8 @@ public class UserDataChecker {
 	 * @param venueName : the venue name of the Manager 
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static boolean addManager(String username,String password,String email,String venueName) throws ServerSideDatabaseException, InvalidParameterException
 	{
@@ -183,8 +185,8 @@ public class UserDataChecker {
 	 * @param location : the coordinates of the cityhall
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static boolean addCityhall(String name,String province,String region,Location location) throws ServerSideDatabaseException, InvalidParameterException
 	{
@@ -199,7 +201,7 @@ public class UserDataChecker {
 			}
 			catch(DatabaseNotFoundException e)
 			{
-				throw new ServerSideDatabaseException(e,"database not found when adding user");
+				throw new ServerSideDatabaseException(e,"database not found when adding cityhall");
 			}
 		}	
 		else
@@ -220,8 +222,8 @@ public class UserDataChecker {
 	 * @param locationBottomRight :the coordinates of the bottomright corner of the district
 	 * @return Integer : the id of the created district,
 	 * 					 -1 if failed
-	 * @throws ServerSideDatabaseException : when the database can't be found
-	 * @throws InvalidParameterException : when parameters are not valid(empty or null) 
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
 	protected static Integer addDistrict(String name,String province,Location locationTopLeft,Location locationBottomRight) throws ServerSideDatabaseException, InvalidParameterException
 	{
@@ -237,7 +239,7 @@ public class UserDataChecker {
 			}
 			catch(DatabaseNotFoundException e)
 			{
-				throw new ServerSideDatabaseException(e,"database not found when adding user");
+				throw new ServerSideDatabaseException(e,"database not found when adding district");
 			}
 		}	
 		else
@@ -247,4 +249,84 @@ public class UserDataChecker {
 		return res;
 	}
 	
+	//================================================================================
+    // check user type and credentials
+    //================================================================================
+	
+	/**
+	 * Calls the function to check user type inside UserDatabaseConnector
+	 * this function checks the validity of the parameters and calls the appropriate function
+	 * @param username : the username of the user to be found
+	 * @param password : the password of the user
+	 * @return UserType : the user type of the user,
+	 * 					  null if no user with those credentials exists
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static UserType checkUserCredentials(String username,String password) throws ServerSideDatabaseException, InvalidParameterException
+	{
+		UserType res=null;
+		if(username!=null&&password!=null&&//check null values
+			username!=""&&password!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				res=UserDatabaseConnector.checkUserCredentials(username, password);
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when checking user type");
+			}
+		}	
+		else
+		{
+			throw new InvalidParameterException();
+		}
+		return res;
+	}
+	//================================================================================
+    // update user
+    //================================================================================
+	/**
+	 * Calls the function to update user data inside UserDatabaseConnector
+	 * this function checks the validity of the parameters and calls the appropriate function
+	 * @param oldUsername : the old username of the user to be modified
+	 * @param oldPassword : the old password of the user
+	 * @param user : the type of the user that must be modified
+	 * @param newEmail : the new email to be set(set to null if no modification needed)
+	 * @param newUsername : the new username to be set
+	 * @param newPassword : the new password to be set
+	 * @return boolean : true if the update is successful,
+	 * 					 false otherwise
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws ServerSideDatabaseException, InvalidParameterException
+	{
+		boolean res=false;
+		if(oldUsername!=null&&oldPassword!=null&&user!=null&&newUsername!=null&&newPassword!=null&&//check null values
+			oldUsername!=""&&oldPassword!=""&&newUsername!=""&&newPassword!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				if(newEmail!=null&&newEmail!="")
+				{
+					res=UserDatabaseConnector.ModifyUser(oldUsername, oldPassword, user,newEmail, newUsername, newPassword);
+				}
+				else
+				{
+					res=UserDatabaseConnector.ModifyUser(oldUsername, oldPassword, user,newUsername, newPassword);
+				}
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when modifying user");
+			}
+		}	
+		else
+		{
+			throw new InvalidParameterException();
+		}
+		return res;
+	}
 }

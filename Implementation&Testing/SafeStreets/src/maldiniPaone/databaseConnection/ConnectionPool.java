@@ -52,7 +52,7 @@ public class ConnectionPool {
 	 * In this method user name,password and database URL are read from initialization file
 	 * (TODO insert here name)
 	 * It calls the InstantiateConnection method one time for the Initial size of the pool.
-	 * @exception DatabaseNotFoundException: no connection to the database could be instantiated
+	 * @throws DatabaseNotFoundException  no connection to the database could be instantiated
 	 **/
 	private ConnectionPool() throws DatabaseNotFoundException
 	{
@@ -83,12 +83,12 @@ public class ConnectionPool {
 	}
 	
 	//================================================================================
-    // Instanter
+    // Instantiator
     //================================================================================
 	/**
 	 * instantiates a ConnectionPoolObject if it is not available, otherwise returns the already existing object
 	 * @return ConnectionPool
-	 * @exception DatabaseNotFoundException
+	 * @throws DatabaseNotFoundException
 	 * @note Singleton pattern.
 	 **/
 	protected static ConnectionPool getInstance() throws DatabaseNotFoundException
@@ -130,7 +130,7 @@ public class ConnectionPool {
 
 	/**
 	 * Creates the actual connections using Connection Pool's parameters
-	 * @exception SQLException: database connection could not be instantiated 
+	 * @throws SQLException database connection could not be instantiated 
 	 **/
 	private Connection instantiateConnection() throws DatabaseNotFoundException
 	{
