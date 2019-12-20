@@ -16,6 +16,10 @@ public class UserDatabaseConnector {
     //================================================================================	
 	private static boolean verbose=true;//TODO set to false on release
 	
+	
+	
+	
+	
 	//================================================================================
     // User Adders
     //================================================================================
@@ -26,7 +30,7 @@ public class UserDatabaseConnector {
 	 * @param password : the password of the citizen to be added
 	 * @param email : the email address of the citizen to be added
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean AddCitizen(String username,String password,String email) throws DatabaseNotFoundException
 	{
@@ -42,6 +46,7 @@ public class UserDatabaseConnector {
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -50,9 +55,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
@@ -69,7 +74,7 @@ public class UserDatabaseConnector {
 	 * @param cityName : the name of the city hall where the municipality works
 	 * @param cityProvince : the name of the city hall's province where the municipality works
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean addMunicipalityByMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws DatabaseNotFoundException
 	{
@@ -88,6 +93,7 @@ public class UserDatabaseConnector {
 			ps.setString(5, cityName);
 			ps.setString(6, cityProvince);
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -96,9 +102,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
@@ -114,7 +120,7 @@ public class UserDatabaseConnector {
 	 * @param cityName : the name of the city hall where the municipality works
 	 * @param cityProvince : the name of the city hall's province where the municipality works
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean addMunicipalityByManager(String username,String password,String email,String cityName,String cityProvince) throws DatabaseNotFoundException
 	{
@@ -132,6 +138,7 @@ public class UserDatabaseConnector {
 			ps.setString(4, cityName);
 			ps.setString(5, cityProvince);
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -140,9 +147,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
@@ -156,7 +163,7 @@ public class UserDatabaseConnector {
 	 * @param creator :the user name of the municipality who asked the creation of the authority
 	 * @param districtId : the id of the district in which the authority works
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean addAuthority(String username,String password,String email,String creator,Integer districtId) throws DatabaseNotFoundException
 	{
@@ -174,6 +181,7 @@ public class UserDatabaseConnector {
 			ps.setString(4, creator);
 			ps.setInt(5, districtId);
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -182,9 +190,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
@@ -197,7 +205,7 @@ public class UserDatabaseConnector {
 	 * @param email : the email address of the manager to be added
 	 * @param venueName : the name of the venue where the system manager works
 	 * @return boolean: true if the creation is successful, false if there is already a user with the given user name or email
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean addManager(String username,String password,String email,String venueName) throws DatabaseNotFoundException
 	{
@@ -214,6 +222,7 @@ public class UserDatabaseConnector {
 			ps.setString(3, email);
 			ps.setString(4, venueName);
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -222,13 +231,18 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
 	}
+	
+	
+	
+	
+	
 	
 	//================================================================================
     // city hall and district adders
@@ -241,7 +255,7 @@ public class UserDatabaseConnector {
 	 * @param region : the region name in which the city hall is located
 	 * @param location :the user name of the user who asked the creation of the municipality
 	 * @return boolean: true if the creation is successful, false if there is already a city hall with the same name and province
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean addCityhall(String name,String province,String region,Location location) throws DatabaseNotFoundException
 	{
@@ -259,6 +273,7 @@ public class UserDatabaseConnector {
 			ps.setFloat(4, location.getLatitude());
 			ps.setFloat(5, location.getLongitude());
 			ps.execute();
+			res=true;
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
@@ -267,9 +282,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return true;
@@ -282,7 +297,7 @@ public class UserDatabaseConnector {
 	 * @param locationTopLeft : the coordinates of the top-left corner of the district area
 	 * @param locationBottomRight : the coordinates of the bottom-right corner of the district area
 	 * @return Integer: returns the index of the newly created district or -1 if the creation is not successful
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static Integer addDistrict(String name,String province,Location locationTopLeft,Location locationBottomRight) throws DatabaseNotFoundException
 	{
@@ -314,13 +329,18 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose) e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose) e.printStackTrace();
 			return res;
 		}
 		return res;
 	}
+	
+	
+	
+	
+	
 	//================================================================================
     // check user type and credentials
     //================================================================================
@@ -328,9 +348,9 @@ public class UserDatabaseConnector {
 	 * This method checks if a user credentials are correct and at the same time it returns its user type
 	 * @param username : the user name of the user to be checked
 	 * @param password : the password of the user to be checked
-	 * @return UserType : returns the user type of the user if the credentials are correct,
+	 * @return UserType : returns if the user type of the user the credentials are correct,
 	 * 					  null if no correspondence is found
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static UserType checkUserCredentials(String username,String password) throws DatabaseNotFoundException
 	{
@@ -355,13 +375,16 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}
 		return res;
 	}
+	
+	
+	
 	
 	//================================================================================
     // update user
@@ -375,7 +398,7 @@ public class UserDatabaseConnector {
 	 * @param newUsername : the new user name of the user
 	 * @param newPassword : the new password of the user 
 	 * @return boolean  : returns true if the modification is successful false otherwise
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws DatabaseNotFoundException
 	{
@@ -393,6 +416,7 @@ public class UserDatabaseConnector {
 			ps.setString(4, oldUsername);
 			ps.setString(5, oldPassword);
 			ps.executeUpdate();
+			res=true;
 			ps.close();
 		}
 		catch(DatabaseNotFoundException e)
@@ -400,9 +424,9 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -416,7 +440,7 @@ public class UserDatabaseConnector {
 	 * @param newUsername : the new user name of the user
 	 * @param newPassword : the new password of the user 
 	 * @return boolean  : returns true if the modification is successful false otherwise
-	 * @throws DatabaseNotFoundException: connection to database could not be instantiated
+	 * @throws DatabaseNotFoundException : the connection to the database could not be instantiated
 	 **/
 	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newUsername, String newPassword) throws DatabaseNotFoundException
 	{
@@ -433,6 +457,7 @@ public class UserDatabaseConnector {
 			ps.setString(3, oldUsername);
 			ps.setString(4, oldPassword);
 			ps.executeUpdate();
+			res=true;
 			ps.close();
 		}
 		catch(DatabaseNotFoundException e)
@@ -440,28 +465,13 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
+			if(verbose)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
 			return res;
 		}	
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//================================================================================

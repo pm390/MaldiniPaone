@@ -1,20 +1,21 @@
 package maldiniPaone.databaseConnection.databaseExceptions;
 
-/**
- * Derived from Exception interface. This exception is thrown when the Connection Pool is not able to
- * instantiate connections with the database
- * */
-
-public class DatabaseNotFoundException extends Exception {
+public class ServerSideDatabaseException extends Exception{
 	
+	private String note=null;
 	//================================================================================
     // constructors
     //================================================================================
-	public DatabaseNotFoundException(Exception e) {
+	public ServerSideDatabaseException(Exception e) {
 		super(e);
 	}
 
-	public DatabaseNotFoundException() {
+	public ServerSideDatabaseException(Exception e,String message) {
+		super(e);
+		note=message;
+	}
+	
+	public ServerSideDatabaseException() {
 		super();
 	}
 	
@@ -22,11 +23,16 @@ public class DatabaseNotFoundException extends Exception {
 	public void printStackTrace()
 	{
 		System.err.println("can add additional information here");
+		if(note!=null) System.err.println(note);
 		//can add other debug functionalities here
 		super.printStackTrace();
 	}
 	
-
-	private static final long serialVersionUID = 558315124589746276L;
-	
+	/**
+	 * @return the note added to the exception
+	 **/
+	public String getMessage()
+	{
+		return note;
+	}
 }

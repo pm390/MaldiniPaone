@@ -1,6 +1,7 @@
 package maldiniPaone.utilities.beans;
 
 import java.sql.Timestamp;
+import java.util.List;
 //TODO add some javadoc comment for bean
 public class Report  {
 	//================================================================================
@@ -8,7 +9,9 @@ public class Report  {
     //================================================================================
 	private Location location;
 	private String username;
-	private String[] photoNames;
+	private List<String> photoNames;
+	private String note;
+	private String licensePlate;
 	private Timestamp date;
 	
 	//================================================================================
@@ -37,7 +40,7 @@ public class Report  {
 	/**
 	 * @return the photoNames
 	 */
-	public String[] getPhotoNames() {
+	public List<String> getPhotoNames() {
 		return photoNames;
 	}
 
@@ -46,6 +49,20 @@ public class Report  {
 	 */
 	public Timestamp getDate() {
 		return date;
+	}
+	
+	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
+	}
+
+	/**
+	 * @return the licensePlate
+	 */
+	public String getLicensePlate() {
+		return licensePlate;
 	}
 	//================================================================================
     // Setters
@@ -65,10 +82,10 @@ public class Report  {
 	}
 
 	/**
-	 * @param photoNames : the photo names to set
+	 * @param images : the photo names to set
 	 */
-	public void setPhotoNames(String[] photoNames) {
-		this.photoNames = photoNames;
+	public void setPhotoNames(List<String> images) {
+		this.photoNames = images;
 	}
 
 	/**
@@ -77,6 +94,20 @@ public class Report  {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	/**
+	 * @param licensePlate the licensePlate to set
+	 */
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
+	}
+
 	
 	
 	

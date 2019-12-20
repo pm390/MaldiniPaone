@@ -33,7 +33,7 @@ public enum UserType {
 	}
 	/**
 	 * Converts a user type to a string
-	 * @return UserType: returns the string corresponding to the user type on which is call
+	 * @return String: returns the string corresponding to the user type on which is called
 	 **/
 	public String toString()
 	{

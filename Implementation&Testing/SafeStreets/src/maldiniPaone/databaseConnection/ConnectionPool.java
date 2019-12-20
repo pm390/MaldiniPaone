@@ -18,20 +18,29 @@ public class ConnectionPool {
     //================================================================================
 
 	//TODO set verbose to false for release
-	private static Boolean verbose=true;
+	/**if true prints errors in the console*/
+	private static Boolean verbose=true; 
+	/**instance of the connection pool*/
 	private static ConnectionPool instance;
-	private static Integer INITIALSIZE=5;//TODO remember to change to bigger number for testing and actual release.
-	//low number for functionality testing	
+	/**initial size of the connection pool*/
+	private static Integer INITIALSIZE=5;//low number for functionality testing	
+	//TODO remember to change to bigger number for testing and actual release.
+
 
 	//================================================================================
     // instance values
     //================================================================================
 
 	//TODO put in initialization file
+	/**driver to connect to database*/
 	private String driver;
+	/**user name to access database*/
 	private String username;
+	/**password to access database*/
 	private String password;
+	/**URL of the database*/
 	private String databaseURL;
+	/**stored connections*/
 	private ArrayList<Connection> availableConnections; 
 
 	//================================================================================

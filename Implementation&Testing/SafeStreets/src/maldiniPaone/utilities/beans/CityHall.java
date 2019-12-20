@@ -3,64 +3,57 @@ package maldiniPaone.utilities.beans;
 import java.util.List;
 
 import maldiniPaone.utilities.State;
-//TODO add some javadoc comment for bean
-public class Assignment{
+
+public class CityHall {
 
 	//================================================================================
     // Variables
     //================================================================================
-	private Integer id;
-	private List<Report> reports;
-	private State state;
+	private String name;
+	private String province;
+
+	
 	
 	//================================================================================
     // Empty Constructor
     //================================================================================
-	public Assignment() {}
+	public CityHall() {}
+	
+	
 	//================================================================================
     // Getters
     //================================================================================
+
 	/**
-	 * @return the id
+	 * @return the name
 	 */
-	public Integer getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
+
 	/**
-	 * @return the reports
+	 * @return the province
 	 */
-	public List<Report> getReports() {
-		return reports;
+	public String getProvince() {
+		return province;
 	}
 	
-	/**
-	 * @return the state
-	 */
-	public State getState() {
-		return state;
-	}
+	
 
 	//================================================================================
     // Setters
     //================================================================================
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
-	 * @param id the id to set
+	 * @param province the province to set
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setProvince(String province) {
+		this.province = province;
 	}
-	/**
-	 * @param state the state to set
-	 */
-	public void setState(State state) {
-		this.state = state;
-	}
-	/**
-	 * @param reports the reports to set
-	 */
-	public void setReports(List<Report> reports) {
-		this.reports = reports;
-	}
-	
 }

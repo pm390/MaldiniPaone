@@ -1,20 +1,16 @@
 package maldiniPaone.databaseConnection.databaseExceptions;
 
-/**
- * Derived from Exception interface. This exception is thrown when the Connection Pool is not able to
- * instantiate connections with the database
- * */
 
-public class DatabaseNotFoundException extends Exception {
-	
+public class InvalidParameterException extends Exception {
+
 	//================================================================================
     // constructors
     //================================================================================
-	public DatabaseNotFoundException(Exception e) {
+	public InvalidParameterException(Exception e) {
 		super(e);
 	}
 
-	public DatabaseNotFoundException() {
+	public InvalidParameterException() {
 		super();
 	}
 	
@@ -28,5 +24,4 @@ public class DatabaseNotFoundException extends Exception {
 	
 
 	private static final long serialVersionUID = 558315124589746276L;
-	
 }
