@@ -36,7 +36,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param time : the time stamp corresponding to the report
 	 * @param location : the location of the report
 	 * @param note : possible notes added by user 
-	 * @param licencePlate : the license plate in the report in String form
+	 * @param licensePlate : the license plate in the report in String form
 	 * @return Integer: the primary key of the bridge table between assignment and report,
 	 * 					-1 if the insertion is not possible
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
@@ -62,7 +62,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			ResultSet rs=ps.getGeneratedKeys();
 			while(rs.next())//get all the generated keys
 			{
-				res=rs.getInt(1); // only the last one will remain in res
+				res=rs.getInt(1); // only the last one(bridge table id) will remain in res
 			}
 			rs.close();
 			ps.close();
@@ -83,13 +83,9 @@ public class ReportAndAssignmentDatabaseConnector {
 	/**
 	 * Gets a List of reports done by the user. Gets connection from connection pool and uses it to 
 	 * execute the insertion.
-	 * @param username : the user name of the user who makes the report
-	 * @param time : the timestamp corresponding to the report
-	 * @param location : the location of the report
-	 * @param note : possible notes added by user 
-	 * @param licencePlate : the license plate in the report in String form
-	 * @return boolean : true if insertion is successful
-	 * 					 false otherwise
+	 * @param username : the user name of the user who made the reports
+	 * @return List of Reports : list of reports
+	 * 							 null if not reports found
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 * */
@@ -141,15 +137,15 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs=null;
 		try {
 			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select count* from report as rep"
+			ps = c.prepareStatement("select count(*) from report as rep"
 					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"
 					+ " and "+closeTo("rep", location,EUCLIDEANCLOSEDISTANCE_STATISTICS)
 					+ " order by rep.datetime");
 			ps.execute();
 			rs=ps.getResultSet();
-			while(rs.next()) //for each row of the result set build a report and add to the return value
+			while(rs.next()) 
 			{
-				res=rs.getInt(1);
+				res=rs.getInt(1);//get the number of reports
 			}
 			ps.close();
 			ConnectionPool.getInstance().releaseConnection(c);
@@ -304,11 +300,11 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs=null;
 		try {
 			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select assign.id,ph.image , rep.note,rep.latitude,rep.longitude "
+			ps = c.prepareStatement("select assign.id,ph.image,rep.note,rep.latitude,rep.longitude "
 					+ " from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)"
 					+ " join report as rep on rep.id=arb.idreport)"
 					+ " join photo as ph on ph.idreport=rep.id)"
-					+ " where "+closeTo("rep",location) +" and assign.state=?"
+					+ " where "+closeTo("rep",location)+" and assign.state=?"
 					+ " order by assign.id DESC, arb.timestamp DESC LIMIT "+ standardLimit*3//consider an average of 3 photos for report
 					);
 			ps.setString(1, State.Pending.toString());
@@ -348,7 +344,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs=null;
 		try {
 			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select count distinct arb.idassignment"
+			ps = c.prepareStatement("select count (distinct arb.idassignment)"
 					+ " from assignment as assign join assignmentreportbridge as arb on arb.id"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7"
 					+ " and "+closeTo("assign", location,EUCLIDEANCLOSEDISTANCE_STATISTICS));
@@ -373,12 +369,6 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
-	//================================================================================
-    // Get Statistics
-    //================================================================================	
-	
-	//TODO think about how to build statistics
-	//may build them on higher levels using results from functions in this class
 	
 	//================================================================================
     // Get Suggestions
@@ -498,7 +488,7 @@ public class ReportAndAssignmentDatabaseConnector {
 					+ "from cityhall"
 					+ "where "+closeTo("cityhall",location,2f)//2 degrees of difference are 200km of distance 
 					//TODO check if this constant is OK
-					+ "order by "+SquareDistance("cityhall",location)+" LIMIT 1"); 
+					+ "order by "+SquareDistance("cityhall",location)+" DESC LIMIT 1"); 
 			ps.execute();
 			rs=ps.getResultSet();
 			if(rs.next())

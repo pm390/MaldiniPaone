@@ -60,7 +60,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	
@@ -107,7 +107,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	/**
@@ -152,7 +152,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	/**
@@ -236,7 +236,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	
@@ -287,7 +287,7 @@ public class UserDatabaseConnector {
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
 		}
-		return true;
+		return res;
 	}
 	
 	/**
