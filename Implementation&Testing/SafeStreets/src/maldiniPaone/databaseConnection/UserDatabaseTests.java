@@ -78,7 +78,7 @@ public class UserDatabaseTests {
 			for(;i<usernames.length*3/4;++i)
 			{
 				//add authorities using username[firstMunicipalityIndex+i%municipalityCount]
-				// ass creator
+				// as creator
 			}
 			for(;i<usernames.length;++i)
 			{
