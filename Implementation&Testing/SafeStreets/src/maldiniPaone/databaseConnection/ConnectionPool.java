@@ -19,11 +19,11 @@ public class ConnectionPool {
 
 	//TODO set verbose to false for release
 	/**if true prints errors in the console*/
-	private static Boolean verbose=true; 
+	private static final Boolean VERBOSE=true; 
 	/**instance of the connection pool*/
 	private static ConnectionPool instance;
 	/**initial size of the connection pool*/
-	private static Integer INITIALSIZE=5;//low number for functionality testing	
+	private static final Integer INITIALSIZE=5;//low number for functionality testing	
 	//TODO remember to change to bigger number for testing and actual release.
 
 
@@ -67,7 +67,7 @@ public class ConnectionPool {
 		}
 		catch(Exception e)
 		{
-			if(verbose)e.printStackTrace(); 
+			if(VERBOSE)e.printStackTrace(); 
 		}
 		for(int i=0;i<INITIALSIZE;++i)
 		{
@@ -76,7 +76,7 @@ public class ConnectionPool {
 			}
 			catch(Exception e)
 			{
-				if(verbose)e.printStackTrace();
+				if(VERBOSE)e.printStackTrace();
 			}
 		}
 		if (availableConnections.size()==0) throw new DatabaseNotFoundException();
@@ -139,7 +139,7 @@ public class ConnectionPool {
 			return DriverManager.getConnection(databaseURL, username, password);
 		}catch(SQLException s)
 		{
-			if(verbose) s.printStackTrace();
+			if(VERBOSE) s.printStackTrace();
 			throw new DatabaseNotFoundException(s);
 		} 
 	}

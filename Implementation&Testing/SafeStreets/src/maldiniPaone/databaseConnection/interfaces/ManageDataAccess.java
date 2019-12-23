@@ -24,17 +24,17 @@ public interface ManageDataAccess {
 	
 	//useful to give? maybe use by municipalities to see how many reports are made in certain location? 
 	//maybe add a radius for selecting an area???
-	public Integer getReports(Location location) throws ServerSideDatabaseException, InvalidParameterException;
+	public Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public List<Statistic> getStatistics(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public List<Assignment> getAssignments(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
-	public UserType checkUserType(String username,String password) throws ServerSideDatabaseException, InvalidParameterException;
+	public UserType checkUserCredentials(String username,String password) throws ServerSideDatabaseException, InvalidParameterException;
 	
-	public List<String> GetStaticSuggestions(Location location) throws ServerSideDatabaseException, InvalidParameterException;
+	public List<String> getStaticSuggestions(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
-	public List<String> GetStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException;
+	public List<String> getStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException;
 	//================================================================================
     // Adding new data (POST requests)
     //================================================================================
@@ -53,7 +53,7 @@ public interface ManageDataAccess {
     // Modify already available data (PUT requests)
     //================================================================================
 	
-	public boolean ModifyUser(String username,String password,UserType user,String email,String newUsername,String newPassword) throws ServerSideDatabaseException, InvalidParameterException;
+	public boolean modifyUser(String username,String password,UserType user,String email,String newUsername,String newPassword) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public boolean updateAssignment(Assignment assign,State state,String username) throws ServerSideDatabaseException, InvalidParameterException;
 	

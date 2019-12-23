@@ -71,7 +71,7 @@ public class ReportAndAssignmentUpdater {
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean UpdateAssignment(Integer id,String username,State newState) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean updateAssignment(Integer id,String username,State newState) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		boolean res=false;
 		if(username!=null&&id!=null&&newState!=null&&//check null values

@@ -5,7 +5,7 @@ public class ServerSideDatabaseException extends Exception{
 	//================================================================================
     // variables
     //================================================================================
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //auto generated for serialization
 	private String note=null;
 	//================================================================================
     // constructors

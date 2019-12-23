@@ -21,7 +21,7 @@ public class DataAccessFacade implements ManageDataAccess{
 	//================================================================================
     // static variables
     //================================================================================
-	private static boolean verbose=true;//TODO set to false on relese
+	private static boolean VERBOSE=true;//TODO set to false on relese
 	private static DataAccessFacade instance=null;
 	//================================================================================
     // Empty constructor singleton design pattern
@@ -51,7 +51,7 @@ public class DataAccessFacade implements ManageDataAccess{
 	@Override
 	public List<Report> getReportsMadeBy(String username) throws ServerSideDatabaseException, InvalidParameterException 
 	{
-		return DataCollector.GetReportsMadeBy(username);
+		return DataCollector.getReportsMadeBy(username);
 	}
 
 	
@@ -67,9 +67,9 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public Integer getReports(Location location) throws ServerSideDatabaseException, InvalidParameterException 
+	public Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException 
 	{
-		return DataCollector.GetReports(location);
+		return DataCollector.getReportCountInLastWeek(location);
 	}
 
 	
@@ -88,14 +88,14 @@ public class DataAccessFacade implements ManageDataAccess{
 	@Override
 	public List<Assignment> getAssignments(Location location) throws ServerSideDatabaseException, InvalidParameterException 
 	{
-		return DataCollector.GetAssignment(location);
+		return DataCollector.getAssignment(location);
 	}
 
 	
 	
 	
 	@Override
-	public UserType checkUserType(String username, String password) throws ServerSideDatabaseException, InvalidParameterException 
+	public UserType checkUserCredentials(String username, String password) throws ServerSideDatabaseException, InvalidParameterException 
 	{
 		return UserDataChecker.checkUserCredentials(username, password);
 	}
@@ -104,13 +104,13 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public List<String> GetStaticSuggestions(Location location) throws ServerSideDatabaseException, InvalidParameterException {
+	public List<String> getStaticSuggestions(Location location) throws ServerSideDatabaseException, InvalidParameterException {
 		CityHall ch;
 		try {
 			ch = ReportAndAssignmentDatabaseConnector.getClosestCityhall(location);
-			return DataCollector.GetSuggestion(ch.getName(),ch.getProvince());
+			return DataCollector.getSuggestion(ch.getName(),ch.getProvince());
 		} catch (DatabaseNotFoundException e) {
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			throw new ServerSideDatabaseException(e, "server side error when searching closest cityhall");
 		}
 	}
@@ -118,9 +118,9 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public List<String> GetStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException
+	public List<String> getStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException
 	{
-		return DataCollector.GetSuggestion(cityHall.getName(), cityHall.getProvince());
+		return DataCollector.getSuggestion(cityHall.getName(), cityHall.getProvince());
 	}
 	
 	
@@ -173,7 +173,7 @@ public class DataAccessFacade implements ManageDataAccess{
 		}
 		catch(ServerSideDatabaseException | InvalidParameterException e)
 		{
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			throw e;
 		}
 		return UserDataChecker.addMunicipality(username, password, email, creatorUsername, cityHall.getName(), cityHall.getProvince());
@@ -188,10 +188,10 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public boolean ModifyUser(String username, String password,UserType user, String email, String newUsername, String newPassword) 
+	public boolean modifyUser(String username, String password,UserType user, String email, String newUsername, String newPassword) 
 			throws ServerSideDatabaseException, InvalidParameterException 
 	{
-		return UserDataChecker.ModifyUser(username, password, user, email, newUsername, newPassword);
+		return UserDataChecker.modifyUser(username, password, user, email, newUsername, newPassword);
 	}
 
 	
@@ -199,6 +199,6 @@ public class DataAccessFacade implements ManageDataAccess{
 	@Override
 	public boolean updateAssignment(Assignment assign, State state, String username) throws ServerSideDatabaseException, InvalidParameterException
 	{
-		return ReportAndAssignmentUpdater.UpdateAssignment(assign.getId(), username, state);
+		return ReportAndAssignmentUpdater.updateAssignment(assign.getId(), username, state);
 	}
 }

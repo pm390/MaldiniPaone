@@ -14,7 +14,7 @@ public class UserDatabaseConnector {
 	//================================================================================
     // Static variables
     //================================================================================	
-	private static boolean verbose=true;//TODO set to false on release
+	private static final boolean  VERBOSE=false;//TODO set to false on release
 	
 	
 	
@@ -38,24 +38,30 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into citizen "
-					+ "(`username`,`password`,`email`) "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into citizen "// add user 
+					+ "(`username`,`password`,`email`) " 
 					+ "values (?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
-			ps.execute();
-			res=true;
+			//execute query
+			ps.executeUpdate();
+			//if query fails for duplicate username or email exception is thrown
+			res=true; // if code reaches this line the insert is successfull
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -82,27 +88,33 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into municipality "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into municipality "//add municipality
 					+ "(`username`,`password`,`email`,`employee`,`cityhall_name`,`cityhall_province`)"
 					+ " values (?,?,?,?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.setString(4, creator);
 			ps.setString(5, cityName);
 			ps.setString(6, cityProvince);
-			ps.execute();
-			res=true;
+			//executes insertion
+			ps.executeUpdate();
+			// throws exception if fail
+			res=true; // line reached only when insertion is successful
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -128,26 +140,32 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into municipality "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into municipality " // add municipality
 					+ "(`username`,`password`,`email`,`cityhall_name`,`cityhall_province`) "
 					+ "values (?,?,?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.setString(4, cityName);
 			ps.setString(5, cityProvince);
-			ps.execute();
-			res=true;
+			//execute query
+			ps.executeUpdate();
+			//if fail throws an exception
+			res=true;//reached only on success
+			// close statement
 			ps.close();
+			//release database connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -171,26 +189,32 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into authority "
+			c=ConnectionPool.getInstance().getConnection();// get connection
+			ps = c.prepareStatement("insert into authority " //add authority
 					+ "(`username`,`password`,`email`,`employee`,`district_id`)"
 					+ " values (?,?,?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.setString(4, creator);
 			ps.setInt(5, districtId);
-			ps.execute();
-			res=true;
+			//execute query
+			ps.executeUpdate();
+			//if fails throws an exception
+			res=true;//line reached only on success
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -213,25 +237,31 @@ public class UserDatabaseConnector {
 		boolean res=false;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into manager "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into manager "//add manager
 					+ "(`username`,`password`,`email`,`venue`)"
 					+ " values (?,?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
 			ps.setString(3, email);
 			ps.setString(4, venueName);
-			ps.execute();
-			res=true;
+			//execute query
+			ps.executeUpdate();
+			//if fails throws an exception
+			res=true;//line reached only if successful
+			//close statement
 			ps.close();
+			//releases connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)	e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -263,26 +293,32 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into cityhall "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into cityhall " // add cityhall
 					+ "(`cityhall_name`,`cityhall_province`,`region`,`latitude`,`longitude`) "
 					+ "values (?,?,?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
 			ps.setString(3, region);
 			ps.setFloat(4, location.getLatitude());
 			ps.setFloat(5, location.getLongitude());
-			ps.execute();
-			res=true;
+			//ececute the inseriton
+			ps.executeUpdate();
+			// if fails throws an  exception
+			res=true; //reached only on success
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -305,31 +341,40 @@ public class UserDatabaseConnector {
 		Integer res=-1;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into district "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into district " // add district
 					+ "(`cityhall_name`,`cityhall_province`,`tllatitude`,`tllongitude`,`brlatitude`,`brlongitude`) "
-					+ "values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+					+ "values (?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);//ask the statement to return the generated keys
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
 			ps.setFloat(3, locationTopLeft.getLatitude());
 			ps.setFloat(4, locationTopLeft.getLongitude());
 			ps.setFloat(5, locationBottomRight.getLatitude());
 			ps.setFloat(6, locationBottomRight.getLongitude());
+			//exectute insertion
 			ps.executeUpdate();
-			ResultSet temp = ps.getGeneratedKeys();
+			// get result set of the query
+			ResultSet temp = ps.getGeneratedKeys();//reached only on query success
 			// get the list of indexes created by the query, so the index of the new district
 			if(temp.next())//move to the first element of the result set
+			{
 				res=temp.getInt(1);//index of the created row
+			}
+			//close result set and statement
 			temp.close();
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose) e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE) e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -358,24 +403,34 @@ public class UserDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement(" select usertype from user "
+			c=ConnectionPool.getInstance().getConnection(); // get connection
+			ps = c.prepareStatement(" select usertype from user " //get user type of the user 
+																  //with the given credentials
 					+ " where username=? and password=? ");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);
+			//execute query
 			ps.execute();
+			// get result set
 			ResultSet rs = ps.getResultSet();
 			if(rs.next())
-				res=UserType.fromString(rs.getString(1));
+			{
+				res=UserType.fromString(rs.getString(1)); // convert the string from result set to the user type 
+			}
+			//close result set and prepared statement
 			rs.close();
 			ps.close();
+			//release connection
+			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
-		catch(Exception e){
-			if(verbose)e.printStackTrace();
+		catch(Exception e)
+		{
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -400,31 +455,37 @@ public class UserDatabaseConnector {
 	 * @return boolean  : returns true if the modification is successful false otherwise
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
-	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws DatabaseNotFoundException
+	protected static boolean modifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws DatabaseNotFoundException
 	{
 		boolean res=false;
 		Connection c=null;
 		PreparedStatement ps=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("update "+user.toString()
+			c=ConnectionPool.getInstance().getConnection(); // get connection
+			ps = c.prepareStatement("update "+user.toString() // update the given user type
 					+ " set username=?, password= ?, email=? "
 					+ " where username=? and password=? ");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, newUsername);
 			ps.setString(2, newPassword);
 			ps.setString(3, newEmail);
 			ps.setString(4, oldUsername);
 			ps.setString(5, oldPassword);
+			//execute update
 			ps.executeUpdate();
-			res=true;
+			//if fails throws exception
+			res=true; // reached only on success
+			//close prepared statement
 			ps.close();
+			//release connection
+			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -442,30 +503,36 @@ public class UserDatabaseConnector {
 	 * @return boolean  : returns true if the modification is successful false otherwise
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
-	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newUsername, String newPassword) throws DatabaseNotFoundException
+	protected static boolean modifyUser(String oldUsername,String oldPassword,UserType user,String newUsername, String newPassword) throws DatabaseNotFoundException
 	{
 		boolean res=false;
 		Connection c=null;
 		PreparedStatement ps=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("update "+user.toString()
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("update "+user.toString() // update given user type
 					+ " set username=?, password=? "
 					+ " where username=? and password=? ");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, newUsername);
 			ps.setString(2, newPassword);
 			ps.setString(3, oldUsername);
 			ps.setString(4, oldPassword);
+			//execute query
 			ps.executeUpdate();
-			res=true;
+			//if fails throws an exception
+			res=true;//reached only on success
+			//close prepared statement
 			ps.close();
+			//release connection
+			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
 		{
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;

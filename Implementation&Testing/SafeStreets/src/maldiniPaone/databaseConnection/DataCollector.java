@@ -28,14 +28,14 @@ public class DataCollector {
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer GetReports(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		Integer res = 0;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)//check null values 
 			{
 				try
 				{
-					res=ReportAndAssignmentDatabaseConnector.getReports(location);
+					res=ReportAndAssignmentDatabaseConnector.getReportCountInLastWeek(location);
 				}
 				catch(DatabaseNotFoundException e)
 				{
@@ -58,14 +58,14 @@ public class DataCollector {
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static List<Report> GetReportsMadeBy(String Username) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<Report> getReportsMadeBy(String Username) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		List<Report> res = null;
 		if(Username!=null&&Username!="")
 			{
 				try
 				{
-					res=ReportAndAssignmentDatabaseConnector.getReports(Username);
+					res=ReportAndAssignmentDatabaseConnector.getReportsMadeBy(Username);
 				}
 				catch(DatabaseNotFoundException e)
 				{
@@ -89,14 +89,14 @@ public class DataCollector {
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer Getassignments(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer getAssignmentsCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		Integer res = 0;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)//check null values 
 			{
 				try
 				{
-					res=ReportAndAssignmentDatabaseConnector.GetAssignmentCount(location);
+					res=ReportAndAssignmentDatabaseConnector.getAssignmentCountInLastWeek(location);
 				}
 				catch(DatabaseNotFoundException e)
 				{
@@ -119,14 +119,14 @@ public class DataCollector {
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static List<Assignment> GetAssignment(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<Assignment> getAssignment(Location location) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		List<Assignment> res = null;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)
 			{
 				try
 				{
-					res=ReportAndAssignmentDatabaseConnector.GetAssignments(location);
+					res=ReportAndAssignmentDatabaseConnector.getAssignments(location);
 				}
 				catch(DatabaseNotFoundException e)
 				{
@@ -153,7 +153,7 @@ public class DataCollector {
 	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
 	 **/
 	
-	protected static List<String> GetSuggestion(String name,String province) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<String> getSuggestion(String name,String province) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		List<String> res = null;
 		if(name!=null&&province!=null&&
@@ -161,7 +161,7 @@ public class DataCollector {
 			{
 				try
 				{
-					res=ReportAndAssignmentDatabaseConnector.GetSuggestions(name, province);
+					res=ReportAndAssignmentDatabaseConnector.getSuggestions(name, province);
 				}
 				catch(DatabaseNotFoundException e)
 				{

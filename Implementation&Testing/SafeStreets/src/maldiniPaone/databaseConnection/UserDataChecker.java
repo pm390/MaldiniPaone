@@ -301,7 +301,7 @@ public class UserDataChecker {
 	 * @throws ServerSideDatabaseException  when the database can't be found
 	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean ModifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean modifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws ServerSideDatabaseException, InvalidParameterException
 	{
 		boolean res=false;
 		if(oldUsername!=null&&oldPassword!=null&&user!=null&&newUsername!=null&&newPassword!=null&&//check null values
@@ -311,11 +311,11 @@ public class UserDataChecker {
 			{
 				if(newEmail!=null&&newEmail!="")
 				{
-					res=UserDatabaseConnector.ModifyUser(oldUsername, oldPassword, user,newEmail, newUsername, newPassword);
+					res=UserDatabaseConnector.modifyUser(oldUsername, oldPassword, user,newEmail, newUsername, newPassword);
 				}
 				else
 				{
-					res=UserDatabaseConnector.ModifyUser(oldUsername, oldPassword, user,newUsername, newPassword);
+					res=UserDatabaseConnector.modifyUser(oldUsername, oldPassword, user,newUsername, newPassword);
 				}
 			}
 			catch(DatabaseNotFoundException e)

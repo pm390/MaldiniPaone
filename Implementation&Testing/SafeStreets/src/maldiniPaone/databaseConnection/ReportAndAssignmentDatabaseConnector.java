@@ -21,10 +21,10 @@ public class ReportAndAssignmentDatabaseConnector {
     // Static variables
     //================================================================================
 	/**if true prints errors in the console*/
-	private static boolean verbose=true;//TODO set to false when release
-	private static Float euclideanCloseDistance=1f;//TODO think about the value
-	private static Integer standardLimit=20;
-	private static Float EUCLIDEANCLOSEDISTANCE_STATISTICS=0.5f;
+	private static final boolean VERBOSE=true;//TODO set to false when release
+	private static final Float EUCLIDEAN_CLOSE_DISTANCE=1f;//TODO think about the value
+	private static final Integer STANDARD_LIMIT=20;
+	public static final Float EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS=0.5f;
 	
 	//================================================================================
     // Report creation and retrieve
@@ -47,25 +47,30 @@ public class ReportAndAssignmentDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into report "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into report " // insert new report
 					+ "(`maker`,`datetime`,`latitude`,`longitude`,`note`,`car`) "
 					+ "values (?,?,?,?,?,?)"
-					,PreparedStatement.RETURN_GENERATED_KEYS);
+					,PreparedStatement.RETURN_GENERATED_KEYS);//return generated keys
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setTimestamp(2, time);
 			ps.setFloat(3, location.getLatitude());
 			ps.setFloat(4, location.getLongitude());
 			ps.setString(5, note);
 			ps.setString(6, licensePlate);
+			//execute update
 			ps.executeUpdate();
+			//get id of the last row inserted if fails throws an exception
 			ResultSet rs=ps.getGeneratedKeys();
 			while(rs.next())//get all the generated keys
 			{
 				res=rs.getInt(1); // only the last one(bridge table id) will remain in res
 			}
+			//close result set and prepared statement
 			rs.close();
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -73,7 +78,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -89,18 +94,24 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 * */
-	protected static List<Report> getReports(String username) throws DatabaseNotFoundException
+	protected static List<Report> getReportsMadeBy(String username) throws DatabaseNotFoundException
 	{
 		List<Report> res=null;
 		Connection c=null;
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select datetime,latitude,longitude,note,car from report "
-					+ "where maker=? order by datetime desc LIMIT "+standardLimit );
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select datetime,latitude,longitude,note,car " //get reports data
+					+ "from report " 
+					+ "where maker=? " // made by the given user
+					+ "order by datetime desc" //ordered by date
+					+ " LIMIT "+STANDARD_LIMIT ); //limited to the last ones
+			//set maker
 			ps.setString(1, username);
+			//execute selection
 			ps.execute();
+			//get result set
 			rs=ps.getResultSet();
 			res=new ArrayList<Report>();
 			while(rs.next()) //for each row of the result set build a report and add to the return value
@@ -108,7 +119,9 @@ public class ReportAndAssignmentDatabaseConnector {
 				Report temp=buildReportFromResultSet(rs);//uses the current line of the 
 				res.add(temp);
 			}
+			//close statement
 			ps.close();
+			// release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -116,7 +129,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -130,24 +143,30 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @return Integer : the number of reports (0 if no match)
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
-	public static Integer getReports(Location location) throws DatabaseNotFoundException {
+	public static Integer getReportCountInLastWeek(Location location) throws DatabaseNotFoundException {
 		Integer res=0;
 		Connection c=null;
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select count(*) from report as rep"
-					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"
-					+ " and "+closeTo("rep", location,EUCLIDEANCLOSEDISTANCE_STATISTICS)
-					+ " order by rep.datetime");
+			c=ConnectionPool.getInstance().getConnection();//get conncetion 
+			ps = c.prepareStatement("select count(*) "
+					+ " from report as rep" // count reports
+					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"//within the last 7 days 
+					+ " and "+closeTo("rep", location,EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS) // within a certain radius
+					+ " order by rep.datetime");// ordered by the date the reports were made
+			//execute the query
 			ps.execute();
+			//get result set
 			rs=ps.getResultSet();
 			while(rs.next()) 
 			{
 				res=rs.getInt(1);//get the number of reports
-			}
+			}				
+			//close result statement and prepared statement
+			rs.close();
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -155,7 +174,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -182,15 +201,21 @@ public class ReportAndAssignmentDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("update assignment set state=? , appointee=? "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("update assignment " // update assignment
+					+ " set state=? , appointee=? "
 					+ " where id=?" );
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, State.Accepted.toString());
 			ps.setString(2, username);
 			ps.setInt(3,id);
+			//execute update
 			ps.executeUpdate();
+			// if fails throws an 
 			res=true;
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -198,7 +223,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);		
 			return res;
@@ -220,15 +245,21 @@ public class ReportAndAssignmentDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("update assignment set state=? "
+			c=ConnectionPool.getInstance().getConnection(); //get connection 
+			ps = c.prepareStatement("update assignment " // set assignment state
+					+ "set state=? "
 					+ " where id=? and appointee=?" );
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1,finishState.toString());
 			ps.setInt(2,id);
 			ps.setString(3, username);
+			//execute update
 			ps.executeUpdate();
+			//if fails throws an exception
 			res=true;
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -238,7 +269,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -257,16 +288,22 @@ public class ReportAndAssignmentDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("update assignment set state=? "
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("update assignment " // update assignment
+					+ " set state=? "
 					+ " where id=? and appointee=? and state=?" );
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1,State.Pending.toString());
 			ps.setInt(2,id);
 			ps.setString(3, username);
 			ps.setString(4, State.Accepted.toString());
+			//execute update
 			ps.executeUpdate();
+			//if fails throws an exception
 			res=true;
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -276,7 +313,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -292,27 +329,34 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 **/
-	protected static List<Assignment> GetAssignments(Location location) throws DatabaseNotFoundException
+	protected static List<Assignment> getAssignments(Location location) throws DatabaseNotFoundException
 	{
 		List<Assignment> res=null;
 		Connection c=null;
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
+			c=ConnectionPool.getInstance().getConnection();//get connection
 			ps = c.prepareStatement("select assign.id,ph.image,rep.note,rep.latitude,rep.longitude "
+					//join of report assignment bridge table and photos
 					+ " from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)"
 					+ " join report as rep on rep.id=arb.idreport)"
 					+ " join photo as ph on ph.idreport=rep.id)"
-					+ " where "+closeTo("rep",location)+" and assign.state=?"
-					+ " order by assign.id DESC, arb.timestamp DESC LIMIT "+ standardLimit*3//consider an average of 3 photos for report
+					+ " where "+closeTo("rep",location)+" and assign.state=?" //close to the location  
+					+ " order by assign.id DESC, arb.timestamp DESC " // ordered by assignment id and timestamp
+					+ " LIMIT "+ STANDARD_LIMIT*3// consider an average of 3 photos for report
+					//limit result to last 3*standard limit results
 					);
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, State.Pending.toString());
+			//execute qurey
 			ps.execute();
-			rs=ps.getResultSet();
+			rs=ps.getResultSet();//get result set
 			res=new ArrayList<Assignment>();
-			res=buildAssignmentFromResultSet(rs);
+			res=buildAssignmentFromResultSet(rs);//builds actual result set
+			//close statement
 			ps.close();
+			//release the connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -322,7 +366,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -336,25 +380,28 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @return Integer : the number of reports (0 if no match)
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 **/
-	protected static Integer GetAssignmentCount(Location location)throws DatabaseNotFoundException
+	protected static Integer getAssignmentCountInLastWeek(Location location)throws DatabaseNotFoundException
 	{
 		Integer res=0;
 		Connection c=null;
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select count (distinct arb.idassignment)"
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select count (distinct arb.idassignment)" //count assignment
 					+ " from assignment as assign join assignmentreportbridge as arb on arb.id"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7"
-					+ " and "+closeTo("assign", location,EUCLIDEANCLOSEDISTANCE_STATISTICS));
+					+ " and "+closeTo("assign", location,EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS));
+			//execute query
 			ps.execute();
 			rs=ps.getResultSet();
-			while(rs.next()) //for each row of the result set build a report and add to the return value
+			while(rs.next()) //get the count of the assignment
 			{
 				res=rs.getInt(1);
 			}
+			//close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -362,7 +409,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -381,25 +428,31 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
 	 * @implNote ArrayList is used 
 	 **/
-	protected static List<String> GetSuggestions(String name,String province) throws DatabaseNotFoundException
+	protected static List<String> getSuggestions(String name,String province) throws DatabaseNotFoundException
 	{
 		List<String> res=new ArrayList<String>();
 		Connection c=null;
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select note from suggestion"
-					+ " where name=? and province=? order by id DESC LIMIT "+ standardLimit);
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select note " // get notes from suggestion table
+					+ " from suggestion"
+					+ " where name=? and province=? order by id DESC LIMIT "+ STANDARD_LIMIT);
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
+			// execute query
 			ps.execute();
-			rs=ps.getResultSet();
+			rs=ps.getResultSet();//get result
 			while(rs.next())
 			{
-				res.add(rs.getString(1));
+				res.add(rs.getString(1));//for each suggestion adds it to the result
 			}
+			//close result set and statement
+			rs.close();
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -409,7 +462,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -432,14 +485,18 @@ public class ReportAndAssignmentDatabaseConnector {
 		Connection c=null;
 		PreparedStatement ps =null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("insert into suggestion"
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("insert into suggestion" // add suggestion
 					+ "(name,province,note) values (?,?,?)");
+			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
 			ps.setString(3, suggestion);
+			//execute update
 			ps.executeUpdate();
+			///close statement
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -449,7 +506,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -483,22 +540,26 @@ public class ReportAndAssignmentDatabaseConnector {
 		PreparedStatement ps =null;
 		ResultSet rs=null;
 		try {
-			c=ConnectionPool.getInstance().getConnection();
-			ps = c.prepareStatement("select cityhall_name, cityhall_province"
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select cityhall_name, cityhall_province" //get cityhall
 					+ "from cityhall"
 					+ "where "+closeTo("cityhall",location,2f)//2 degrees of difference are 200km of distance 
 					//TODO check if this constant is OK
-					+ "order by "+SquareDistance("cityhall",location)+" DESC LIMIT 1"); 
+					//TODO set a constant 
+					+ "order by "+SquareDistance("cityhall",location)+" DESC LIMIT 1");//get the one with less distance
+			//execute query
 			ps.execute();
 			rs=ps.getResultSet();
-			if(rs.next())
+			if(rs.next())// if a cityhall is in the result set create an object to contain it
 			{
 				res =  new CityHall();
 				res.setName(rs.getString(1));
 				res.setProvince(rs.getString(2));
 			}
+			//close result set and statement
 			rs.close();
 			ps.close();
+			//release connection
 			ConnectionPool.getInstance().releaseConnection(c);
 		}
 		catch(DatabaseNotFoundException e)
@@ -508,7 +569,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(verbose)e.printStackTrace();
+			if(VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -527,7 +588,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @note uses a predefined value as radius
 	 * */
 	private static String closeTo(String base,Location location) {
-		return closeTo(base,location,euclideanCloseDistance);
+		return closeTo(base,location,EUCLIDEAN_CLOSE_DISTANCE);
 	}
 	
 	/**
@@ -539,8 +600,9 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @return String : represents the condition in String usable in a MySql query
 	 * */
 	private static String closeTo(String base,Location location,Float radius) {
-		//TODO fix with better formula now is euclidean distance
-		return SquareDistance(base,location)+"<="+(Math.pow(radius, 2))+" ";
+		//TODO may fix with better formula now is euclidean distance
+		return SquareDistance(base,location)+"<="+(radius*radius)+" "; // compare square of distance with square the radius
+		//we don't use the root operation on the result for performance. would just do a useless operation
 	}
 	
 	/**
@@ -612,7 +674,8 @@ public class ReportAndAssignmentDatabaseConnector {
 		
 		//adding elements to the lists
 		res.add(assignment);// adds the assignment into the result set
-							// stores id to later control when the id changes to understand
+							// stores id to control later when the id changes to understand
+							// when a new assignment begins
 		reports.add(report);
 		
 		
