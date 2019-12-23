@@ -1,5 +1,6 @@
 package maldiniPaone.utilities.beans.users;
 
+import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 
@@ -54,5 +55,13 @@ public class Municipality extends User{
 	public void setLocation(Location location) 
 	{
 		this.location = location;
+	}
+	//================================================================================
+    // userType
+    //================================================================================
+	@Override
+	public UserType getUserType() 
+	{
+		return UserType.Municipality;
 	}	
 }

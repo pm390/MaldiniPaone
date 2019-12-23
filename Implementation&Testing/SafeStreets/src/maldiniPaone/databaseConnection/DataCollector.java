@@ -2,7 +2,7 @@ package maldiniPaone.databaseConnection;
 import java.util.List;
 
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.CityHall;
@@ -27,9 +27,9 @@ public class DataCollector {
 	 *  @param location : the location to which respect the reports are searched
 	 *  @return Integer : the number of reports (0 if no match)
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Integer res = 0;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)//check null values 
@@ -45,7 +45,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -57,9 +57,9 @@ public class DataCollector {
 	 *  @return List of Reports : the List of reports of the user 
 	 *  						  empty List if none is found
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static List<Report> getReportsMadeBy(String Username) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<Report> getReportsMadeBy(String Username) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		List<Report> res = null;
 		if(Username!=null&&Username!="")
@@ -75,7 +75,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -88,9 +88,9 @@ public class DataCollector {
 	 *  @param location : the location to which respect the assignments are searched
 	 *  @return Integer : the number of assignments (0 if no match)
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer getAssignmentsCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer getAssignmentsCountInLastWeek(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Integer res = 0;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)//check null values 
@@ -106,7 +106,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -118,9 +118,9 @@ public class DataCollector {
 	 *  @return List of Assignment : the List of assignment in the location 
 	 *  						  empty List if none is found
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static List<Assignment> getAssignment(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<Assignment> getAssignment(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		List<Assignment> res = null;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)
@@ -136,7 +136,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -151,10 +151,10 @@ public class DataCollector {
 	 *  @return List of Assignment : the List of static suggestions for the cityhall
 	 *  						  empty List if none is found
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
 	
-	protected static List<String> getSuggestion(String name,String province) throws ServerSideDatabaseException, InvalidParameterException
+	protected static List<String> getSuggestion(String name,String province) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		List<String> res = null;
 		if(name!=null&&province!=null&&
@@ -171,7 +171,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -180,7 +180,7 @@ public class DataCollector {
     // Get ClosestCityHall
     //================================================================================
 	//TODO javadoc
-	protected static CityHall getClosestCityHall(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static CityHall getClosestCityHall(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		CityHall res = null;
 		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)
@@ -196,7 +196,7 @@ public class DataCollector {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}

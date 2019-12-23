@@ -3,7 +3,7 @@ package maldiniPaone.databaseConnection;
 import java.sql.Timestamp;
 
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.beans.Location;
@@ -31,9 +31,9 @@ public class ReportAndAssignmentUpdater {
 	 *  @return boolean : true if insertion is successful
 	 * 		  			  false otherwise 
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer addReport(String username,Timestamp time,Location location,String note,String licensePlate) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer addReport(String username,Timestamp time,Location location,String note,String licensePlate) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Integer res=-1;
 		if(username!=null&&time!=null&&location!=null&&licensePlate!=null&&
@@ -52,7 +52,7 @@ public class ReportAndAssignmentUpdater {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}		
 		return res;
 	}
@@ -69,9 +69,9 @@ public class ReportAndAssignmentUpdater {
 	 *  @return boolean : true if update is successful
 	 * 		  			  false otherwise 
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean updateAssignment(Integer id,String username,State newState) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean updateAssignment(Integer id,String username,State newState) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(username!=null&&id!=null&&newState!=null&&//check null values
@@ -92,7 +92,7 @@ public class ReportAndAssignmentUpdater {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}
@@ -110,9 +110,9 @@ public class ReportAndAssignmentUpdater {
 	 *  @return boolean : true if insertion is successful
 	 * 		  			  false otherwise 
 	 *  @throws ServerSideDatabaseException when the database can't be found
-	 *  @throws InvalidParameterException when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean AddSuggestions(String suggestion,String name,String province) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean AddSuggestions(String suggestion,String name,String province) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(suggestion!=null&&name!=null&&province!=null&&//check null values
@@ -130,7 +130,7 @@ public class ReportAndAssignmentUpdater {
 			}	
 			else
 			{
-				throw new InvalidParameterException();
+				throw new IllegalParameterException();
 			}	
 		return res;
 	}

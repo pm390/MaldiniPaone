@@ -1,6 +1,6 @@
 package maldiniPaone.servlets.managers.interfaces;
 
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.UserType;
 
@@ -13,8 +13,8 @@ public interface ManageLogin
 	 *@return UserType the type of the user 
 	 *				   null if no user matches
 	 *@throws ServerSideDatabaseException  when the database can't be found
-	 *@throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 *@throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
 	public UserType login(String username,String password)
-			throws ServerSideDatabaseException, InvalidParameterException;
+			throws ServerSideDatabaseException, IllegalParameterException;
 }

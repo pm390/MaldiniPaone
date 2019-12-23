@@ -1,6 +1,6 @@
 package maldiniPaone.servlets.managers.interfaces;
 
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.beans.Location;
 
@@ -16,11 +16,11 @@ public interface ManageRegistrationByMunicipalities {
 	 * @return true if the creation is successful
 	 * 			false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
 	public boolean registerMunicipalityByMunicipality(String username,String password,
 	String email,String creator,String cityHallName,String cityHallProvince)
-			throws ServerSideDatabaseException, InvalidParameterException;
+			throws ServerSideDatabaseException, IllegalParameterException;
 	
 	/**
 	 *registers Authority by municipality in the same cityHall. 
@@ -35,10 +35,10 @@ public interface ManageRegistrationByMunicipalities {
 	 * @return true if the creation is successful
 	 * 			false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
 	public boolean registerAuthority(String username,String password,
 			String email,String creator,String cityHallName,String cityHallProvince,
 				Location topLeftDistrictBound,Location bottomRightDistrictBound)
-					throws ServerSideDatabaseException, InvalidParameterException;
+					throws ServerSideDatabaseException, IllegalParameterException;
 }

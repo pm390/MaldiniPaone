@@ -1,7 +1,7 @@
 package maldiniPaone.databaseConnection;
 
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.Location;
@@ -29,9 +29,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean AddCitizen(String username,String password,String email) throws InvalidParameterException, ServerSideDatabaseException
+	protected static boolean AddCitizen(String username,String password,String email) throws IllegalParameterException, ServerSideDatabaseException
 	{
 		boolean res=false;
 		if(username!=null&&password!=null&&email!=null&& //check null values
@@ -48,7 +48,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -67,9 +67,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean addMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws  ServerSideDatabaseException, InvalidParameterException
+	protected static boolean addMunicipality(String username,String password,String email,String creator,String cityName,String cityProvince) throws  ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(username!=null&&password!=null&&email!=null&&cityName!=null&&cityProvince!=null&& //check null values
@@ -93,7 +93,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -111,9 +111,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean addAuthority(String username,String password,String email,String creator,Integer districtId) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean addAuthority(String username,String password,String email,String creator,Integer districtId) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(username!=null&&password!=null&&email!=null&&creator!=null&&districtId!=null&& //check null values
@@ -130,7 +130,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -148,9 +148,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean addManager(String username,String password,String email,String venueName) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean addManager(String username,String password,String email,String venueName) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(username!=null&&password!=null&&email!=null&&venueName!=null&& //check null values
@@ -167,7 +167,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -186,9 +186,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the creation is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean addCityhall(String name,String province,String region,Location location) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean addCityhall(String name,String province,String region,Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(name!=null&&province!=null&&region!=null&&location!=null&&
@@ -206,7 +206,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -223,9 +223,9 @@ public class UserDataChecker {
 	 * @return Integer : the id of the created district,
 	 * 					 -1 if failed
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static Integer addDistrict(String name,String province,Location locationTopLeft,Location locationBottomRight) throws ServerSideDatabaseException, InvalidParameterException
+	protected static Integer addDistrict(String name,String province,Location locationTopLeft,Location locationBottomRight) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Integer res=-1;
 		if(name!=null&&province!=null&&locationTopLeft!=null&&locationBottomRight!=null&&
@@ -244,7 +244,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -261,9 +261,9 @@ public class UserDataChecker {
 	 * @return UserType : the user type of the user,
 	 * 					  null if no user with those credentials exists
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static UserType checkUserCredentials(String username,String password) throws ServerSideDatabaseException, InvalidParameterException
+	protected static UserType checkUserCredentials(String username,String password) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		UserType res=null;
 		if(username!=null&&password!=null&&//check null values
@@ -280,7 +280,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}
@@ -299,9 +299,9 @@ public class UserDataChecker {
 	 * @return boolean : true if the update is successful,
 	 * 					 false otherwise
 	 * @throws ServerSideDatabaseException  when the database can't be found
-	 * @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
-	protected static boolean modifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws ServerSideDatabaseException, InvalidParameterException
+	protected static boolean modifyUser(String oldUsername,String oldPassword,UserType user,String newEmail,String newUsername, String newPassword) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		boolean res=false;
 		if(oldUsername!=null&&oldPassword!=null&&user!=null&&newUsername!=null&&newPassword!=null&&//check null values
@@ -325,7 +325,7 @@ public class UserDataChecker {
 		}	
 		else
 		{
-			throw new InvalidParameterException();
+			throw new IllegalParameterException();
 		}
 		return res;
 	}

@@ -1,14 +1,14 @@
 package maldiniPaone.servlets.managers;
 
 import maldiniPaone.databaseConnection.DataAccessFacade;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Statistic;
 
 public class StatisticBuilder
 {
-	public static Statistic buildStatistic(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	public static Statistic buildStatistic(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Statistic result=new Statistic();
 		result.setLocation(location);

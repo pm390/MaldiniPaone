@@ -1,6 +1,6 @@
 package maldiniPaone.servlets.managers.interfaces;
 
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.UserType;
 
@@ -15,10 +15,10 @@ public interface ManageAccountModification
 	 *	@param newPassword : the new password to be set
 	 *	@param newEmail : the new email address to be set(null if no change)
 	 *  @throws ServerSideDatabaseException  when the database can't be found
-	 *  @throws InvalidParameterException  when parameters are not valid(empty or null) 
+	 *  @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
 	public boolean modifyUserCredentials(String oldUsername,String oldPassword,
 			String newUsername,String newPassword,String newEmail,UserType user)
-					throws ServerSideDatabaseException, InvalidParameterException;
+					throws ServerSideDatabaseException, IllegalParameterException;
 	
 }

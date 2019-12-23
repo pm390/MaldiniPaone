@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import maldiniPaone.databaseConnection.DataAccessFacade;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.interfaces.ManageAssignment;
 import maldiniPaone.servlets.managers.interfaces.ManageReportCreation;
@@ -24,7 +24,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 	
 	@Override
 	public boolean addReport(String username, Location location, List<String> photos,String licensePlate,String note)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		boolean result=false;
 		Report report=new Report();
@@ -52,7 +52,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 				nofityAssignment.run();//run a new thread to notify users when a new assignment is created
 			}
 		}
-		catch(InvalidParameterException | ServerSideDatabaseException e)
+		catch(IllegalParameterException | ServerSideDatabaseException e)
 		{
 			throw e;
 		}
@@ -64,7 +64,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 				//TODO add photo 
 			}
 		}
-		catch(InvalidParameterException | ServerSideDatabaseException e)
+		catch(IllegalParameterException | ServerSideDatabaseException e)
 		{
 			throw e;
 		}
@@ -79,7 +79,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
     //================================================================================
 	
 	@Override
-	public List<Assignment> getAssignment(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	public List<Assignment> getAssignment(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		return DataAccessFacade.getInstance().getAssignments(location);
 	}
@@ -88,19 +88,19 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
     //================================================================================
 	
 	@Override
-	public boolean refuseAssignment(Integer id, String username) throws ServerSideDatabaseException, InvalidParameterException 
+	public boolean refuseAssignment(Integer id, String username) throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataAccessFacade.getInstance().updateAssignment(id, State.Pending, username);
 	}
 
 	@Override
-	public boolean acceptAssignment(Integer id, String username)throws ServerSideDatabaseException, InvalidParameterException 
+	public boolean acceptAssignment(Integer id, String username)throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataAccessFacade.getInstance().updateAssignment(id, State.Accepted, username);
 	}
 
 	@Override
-	public boolean terminateAssignment(Integer id, String username, State finishState) throws ServerSideDatabaseException, InvalidParameterException
+	public boolean terminateAssignment(Integer id, String username, State finishState) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		return DataAccessFacade.getInstance().updateAssignment(id , finishState, username);
 	}

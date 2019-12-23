@@ -1,16 +1,16 @@
 package maldiniPaone.databaseConnection.databaseExceptions;
 
 
-public class InvalidParameterException extends Exception {
+public class IllegalParameterException extends Exception {
 
 	//================================================================================
     // constructors
     //================================================================================
-	public InvalidParameterException(Exception e) {
+	public IllegalParameterException(Exception e) {
 		super(e);
 	}
 
-	public InvalidParameterException() {
+	public IllegalParameterException() {
 		super();
 	}
 	

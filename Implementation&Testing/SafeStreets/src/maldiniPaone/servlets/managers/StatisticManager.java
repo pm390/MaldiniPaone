@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import maldiniPaone.constants.Constants;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.interfaces.ManageStatistics;
 import maldiniPaone.utilities.beans.Location;
@@ -21,7 +21,7 @@ public class StatisticManager implements ManageStatistics
 {
 
 	@Override
-	public List<Statistic> getStatistics(Location location,Float edge) throws ServerSideDatabaseException, InvalidParameterException {
+	public List<Statistic> getStatistics(Location location,Float edge) throws ServerSideDatabaseException, IllegalParameterException {
 		int subEdgeNumber=(int) (edge/(2*Constants.STATISTICS_RADIUS));
 		List<Statistic> result=new ArrayList<Statistic>(subEdgeNumber*subEdgeNumber);
 		if(subEdgeNumber==0)

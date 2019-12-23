@@ -1,5 +1,7 @@
 package maldiniPaone.utilities.beans.users;
 
+import maldiniPaone.utilities.UserType;
+
 public abstract class User 
 {
 	//================================================================================
@@ -15,21 +17,21 @@ public abstract class User
 	/**
 	 * @return the username
 	 */
-	public String getUsername() {
+	public final String getUsername() {
 		return username;
 	}
 
 	/**
 	 * @return the password
 	 */
-	public String getPassword() {
+	public final String getPassword() {
 		return password;
 	}
 
 	/**
 	 * @return the email
 	 */
-	public String getEmail() {
+	public final String getEmail() {
 		return email;
 	}
 	//================================================================================
@@ -38,21 +40,26 @@ public abstract class User
 	/**
 	 * @param username the username to set
 	 */
-	public void setUsername(String username) {
+	public final void setUsername(String username) {
 		this.username = username;
 	}
 
 	/**
 	 * @param password the password to set
 	 */
-	public void setPassword(String password) {
+	public final void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
 	 * @param email the email to set
 	 */
-	public void setEmail(String email) {
+	public final void setEmail(String email) {
 		this.email = email;
 	}
+	//================================================================================
+    // userType
+    //================================================================================
+	public abstract UserType getUserType();
+
 }

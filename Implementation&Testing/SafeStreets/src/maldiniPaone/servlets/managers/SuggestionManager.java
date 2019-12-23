@@ -5,7 +5,7 @@ import java.util.List;
 
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.DataAccessFacade;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.interfaces.ManageSuggestions;
 import maldiniPaone.utilities.beans.CityHall;
@@ -16,7 +16,7 @@ public class SuggestionManager implements ManageSuggestions
 {
 
 	@Override
-	public boolean addSuggestion(String suggestion, Location location) throws ServerSideDatabaseException, InvalidParameterException 
+	public boolean addSuggestion(String suggestion, Location location) throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		CityHall cityHall=DataAccessFacade.getInstance().getClosestCityHall(location);
 		return DataAccessFacade.getInstance().addSuggestion(suggestion,cityHall);
@@ -24,7 +24,7 @@ public class SuggestionManager implements ManageSuggestions
 
 	@Override
 	public List<String> getSuggestions(Municipality municipality) 
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		List<String> suggestions=null;
 		suggestions=DataAccessFacade.getInstance().getStaticSuggestions(municipality.getCityhall());

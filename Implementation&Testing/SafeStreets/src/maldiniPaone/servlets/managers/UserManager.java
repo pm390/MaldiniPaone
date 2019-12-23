@@ -1,7 +1,7 @@
 package maldiniPaone.servlets.managers;
 
 import maldiniPaone.databaseConnection.DataAccessFacade;
-import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
+import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.interfaces.ManageAccountModification;
 import maldiniPaone.servlets.managers.interfaces.ManageAuthorityPosition;
@@ -31,7 +31,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	
 	@Override
 	public UserType login(String username, String password)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataAccessFacade.getInstance().checkUserCredentials(username, password);
 	}
@@ -42,7 +42,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	
 	@Override
 	public boolean registerCitizen(String username, String password, String email)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataAccessFacade.getInstance().addCitizen(username, password, email);
 	}
@@ -54,7 +54,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	@Override
 	public boolean registerMunicipalityByManager(String username, String password, String email, String cityHallName,
 			String cityHallProvince, String region, Location location)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		CityHall cityHall=new CityHall();
 		cityHall.setName(cityHallName);
@@ -67,7 +67,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	@Override
 	public boolean registerMunicipalityByMunicipality(String username, String password, String email, String creator
 			,String cityHallName,String cityHallProvince)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		CityHall cityHall=new CityHall();
 		cityHall.setName(cityHallName);	
@@ -83,7 +83,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	public boolean registerAuthority(String username, String password, String email, String creator,
 			String cityHallName,String cityHallProvince,
 			Location topLeftDistrictBound, Location bottomRightDistrictBound)
-			throws ServerSideDatabaseException, InvalidParameterException 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		District district=new District();
 		district.setLocationTopLeft(topLeftDistrictBound);
@@ -101,7 +101,7 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 
 	@Override
 	public boolean modifyUserCredentials(String oldUsername, String oldPassword, String newUsername, String newPassword,
-			String newEmail,UserType user) throws ServerSideDatabaseException, InvalidParameterException 
+			String newEmail,UserType user) throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		
 		return DataAccessFacade.getInstance().modifyUser(oldUsername, oldPassword, user, newEmail, newUsername, newPassword);
@@ -112,14 +112,14 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
     // Manage authority position
     //================================================================================
 	@Override
-	public boolean addPosition(String username, Location location) throws InvalidParameterException 
+	public boolean addPosition(String username, Location location) throws IllegalParameterException 
 	{
 		// TODO Save Position on the server
 		return false;
 	}
 
 	@Override
-	public boolean updatePosition(String username, Location location) throws InvalidParameterException 
+	public boolean updatePosition(String username, Location location) throws IllegalParameterException 
 	{
 		// TODO Update position on the server
 		return false;
