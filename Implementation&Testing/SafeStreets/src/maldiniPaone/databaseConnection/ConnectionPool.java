@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
+import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 /**this class manages the creation of the connections with the database, every connection gotten using 
  * GetConnection method must be released using Release Connection method. 
@@ -17,14 +18,10 @@ public class ConnectionPool {
     // static variables
     //================================================================================
 
-	//TODO set verbose to false for release
-	/**if true prints errors in the console*/
-	private static final Boolean VERBOSE=true; 
+
 	/**instance of the connection pool*/
 	private static ConnectionPool instance;
-	/**initial size of the connection pool*/
-	private static final Integer INITIALSIZE=5;//low number for functionality testing	
-	//TODO remember to change to bigger number for testing and actual release.
+	
 
 
 	//================================================================================
@@ -60,23 +57,23 @@ public class ConnectionPool {
 		username="SafeStreets";
 		password="Safestreets1886_Server";
 		databaseURL="jdbc:mysql://localhost:3306/safestreets"+"?serverTimezone="+ TimeZone.getDefault().getID();
-		availableConnections=new ArrayList<Connection>(INITIALSIZE);
+		availableConnections=new ArrayList<Connection>(Constants.INITIALSIZE);
 		try
 		{
 			Class.forName(driver);
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace(); 
+			if(Constants.VERBOSE)e.printStackTrace(); 
 		}
-		for(int i=0;i<INITIALSIZE;++i)
+		for(int i=0;i<Constants.INITIALSIZE;++i)
 		{
 			try {
 				availableConnections.add(this.instantiateConnection());
 			}
 			catch(Exception e)
 			{
-				if(VERBOSE)e.printStackTrace();
+				if(Constants.VERBOSE)e.printStackTrace();
 			}
 		}
 		if (availableConnections.size()==0) throw new DatabaseNotFoundException();
@@ -139,7 +136,7 @@ public class ConnectionPool {
 			return DriverManager.getConnection(databaseURL, username, password);
 		}catch(SQLException s)
 		{
-			if(VERBOSE) s.printStackTrace();
+			if(Constants.VERBOSE) s.printStackTrace();
 			throw new DatabaseNotFoundException(s);
 		} 
 	}

@@ -1,6 +1,5 @@
 package maldiniPaone.databaseConnection.interfaces;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
@@ -14,6 +13,7 @@ import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
 import maldiniPaone.utilities.beans.Statistic;
+//TODO put all javadocs to methods
 public interface ManageDataAccess {
 	//================================================================================
     // retrieve data (GET requests)
@@ -26,7 +26,7 @@ public interface ManageDataAccess {
 	//maybe add a radius for selecting an area???
 	public Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
-	public List<Statistic> getStatistics(Location location) throws ServerSideDatabaseException, InvalidParameterException;
+	public Integer getAssignmentCountInLastWeek(Location lcation) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public List<Assignment> getAssignments(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
@@ -35,11 +35,14 @@ public interface ManageDataAccess {
 	public List<String> getStaticSuggestions(Location location) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public List<String> getStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException;
+	
+	public CityHall getClosestCityHall(Location location) throws ServerSideDatabaseException, InvalidParameterException; 
+	 
 	//================================================================================
     // Adding new data (POST requests)
     //================================================================================
 	
-	public Assignment addNewReport (String username,Timestamp date,Report report) throws ServerSideDatabaseException, InvalidParameterException;
+	public Assignment addNewReport (Report report) throws ServerSideDatabaseException, InvalidParameterException;
 	
 	public boolean addCitizen(String username,String password,String email) throws ServerSideDatabaseException, InvalidParameterException;
 	
@@ -49,13 +52,21 @@ public interface ManageDataAccess {
 	
 	public boolean addMunicipality(String username,String password,String email,String creatorUsername,CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException;
 
+	public boolean addMunicipalityAndCityHall(String username, String password, String email, String creatorUsername,
+			CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException;
+	
+	public boolean addSuggestion(String suggestion,CityHall cityHall)
+			throws ServerSideDatabaseException, InvalidParameterException;
+	
 	//================================================================================
     // Modify already available data (PUT requests)
     //================================================================================
 	
 	public boolean modifyUser(String username,String password,UserType user,String email,String newUsername,String newPassword) throws ServerSideDatabaseException, InvalidParameterException;
 	
-	public boolean updateAssignment(Assignment assign,State state,String username) throws ServerSideDatabaseException, InvalidParameterException;
+	public boolean updateAssignment(Integer assignmentId,State state,String username) throws ServerSideDatabaseException, InvalidParameterException;
+
+	
 	
 
 }

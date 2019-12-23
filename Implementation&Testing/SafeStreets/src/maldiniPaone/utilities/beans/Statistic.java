@@ -7,10 +7,10 @@ public class Statistic {
     //================================================================================
 	private Location location;
 	private MunicipalityBean closestMuniciaplity;
-	private Float reportCount;
-	private Float assignmentCount;
-	private Float reportForAssignmentCount;
-	private Float dailyReportCount;
+	private int reportCountLastWeek;
+	private int assignmentCountLastWeek;
+	private Float reportForAssignmentCountLastWeek;
+	private Float dailyReportCountLastWeek;
 	//================================================================================
     // Empty Constructor
     //================================================================================
@@ -33,26 +33,26 @@ public class Statistic {
 	/**
 	 * @return the reportCount
 	 */
-	public Float getReportCount() {
-		return reportCount;
+	public int getReportCountLastWeek() {
+		return reportCountLastWeek;
 	}
 	/**
 	 * @return the assignmentCount
 	 */
-	public Float getAssignmentCount() {
-		return assignmentCount;
+	public int getAssignmentCountLastWeek() {
+		return assignmentCountLastWeek;
 	}
 	/**
 	 * @return the reportForAssignmentCount
 	 */
-	public Float getReportForAssignmentCount() {
-		return reportForAssignmentCount;
+	public Float getReportForAssignmentCountLastWeek() {
+		return reportForAssignmentCountLastWeek;
 	}
 	/**
 	 * @return the dailyReportCount
 	 */
-	public Float getDailyReportCount() {
-		return dailyReportCount;
+	public Float getDailyReportCountLastWeek() {
+		return dailyReportCountLastWeek;
 	}
 	
 	//================================================================================
@@ -74,25 +74,25 @@ public class Statistic {
 	/**
 	 * @param reportCount the reportCount to set
 	 */
-	public void setReportCount(Float reportCount) {
-		this.reportCount = reportCount;
+	public void setReportCountLastWeek(int reportCount) {
+		this.reportCountLastWeek = reportCount;
 	}
 	/**
 	 * @param assignmentCount the assignmentCount to set
 	 */
-	public void setAssignmentCount(Float assignmentCount) {
-		this.assignmentCount = assignmentCount;
+	public void setAssignmentCountLastWeek(int assignmentCount) {
+		this.assignmentCountLastWeek = assignmentCount;
 	}
 	/**
 	 * @param reportForAssignmentCount the reportForAssignmentCount to set
 	 */
-	public void setReportForAssignmentCount(Float reportForAssignmentCount) {
-		this.reportForAssignmentCount = reportForAssignmentCount;
+	public void setReportForAssignmentCountLastWeek(Float reportForAssignmentCount) {
+		this.reportForAssignmentCountLastWeek = reportForAssignmentCount;
 	}
 	/**
 	 * @param dailyReportCount the dailyReportCount to set
 	 */
-	public void setDailyReportCount(Float dailyReportCount) {
-		this.dailyReportCount = dailyReportCount;
+	public void setDailyReportCountLastWeek(float dailyReportCount) {
+		this.dailyReportCountLastWeek = dailyReportCount;
 	}
 }

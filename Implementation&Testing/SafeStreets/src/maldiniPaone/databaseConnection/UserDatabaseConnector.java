@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.Location;
@@ -11,12 +12,7 @@ import maldiniPaone.utilities.beans.Location;
 //TODO fix closing of statements and result sets
 public class UserDatabaseConnector {
 	
-	//================================================================================
-    // Static variables
-    //================================================================================	
-	private static final boolean  VERBOSE=false;//TODO set to false on release
-	
-	
+
 	
 	
 	
@@ -61,7 +57,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -114,7 +110,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -165,7 +161,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -214,7 +210,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -261,7 +257,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)	e.printStackTrace();
+			if(Constants.VERBOSE)	e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -318,7 +314,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -374,7 +370,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE) e.printStackTrace();
+			if(Constants.VERBOSE) e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -430,7 +426,7 @@ public class UserDatabaseConnector {
 		}
 		catch(Exception e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -485,7 +481,7 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -532,7 +528,7 @@ public class UserDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;

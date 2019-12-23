@@ -3,6 +3,7 @@ package maldiniPaone.databaseConnection;
 import java.sql.Timestamp;
 import java.util.List;
 
+import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -21,7 +22,6 @@ public class DataAccessFacade implements ManageDataAccess{
 	//================================================================================
     // static variables
     //================================================================================
-	private static boolean VERBOSE=true;//TODO set to false on relese
 	private static DataAccessFacade instance=null;
 	//================================================================================
     // Empty constructor singleton design pattern
@@ -74,14 +74,11 @@ public class DataAccessFacade implements ManageDataAccess{
 
 	
 	
-	
 	@Override
-	public List<Statistic> getStatistics(Location location) 
+	public Integer getAssignmentCountInLastWeek(Location location) throws ServerSideDatabaseException, InvalidParameterException
 	{
-		// TODO build statistics here????????????????????
-		return null;
+		return DataCollector.getAssignmentsCountInLastWeek(location);
 	}
-
 	
 	
 	
@@ -110,7 +107,7 @@ public class DataAccessFacade implements ManageDataAccess{
 			ch = ReportAndAssignmentDatabaseConnector.getClosestCityhall(location);
 			return DataCollector.getSuggestion(ch.getName(),ch.getProvince());
 		} catch (DatabaseNotFoundException e) {
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			throw new ServerSideDatabaseException(e, "server side error when searching closest cityhall");
 		}
 	}
@@ -123,6 +120,11 @@ public class DataAccessFacade implements ManageDataAccess{
 		return DataCollector.getSuggestion(cityHall.getName(), cityHall.getProvince());
 	}
 	
+	@Override
+	public CityHall getClosestCityHall(Location location)
+			throws ServerSideDatabaseException, InvalidParameterException {
+		return DataCollector.getClosestCityHall(location);
+	}
 	
 	//================================================================================
     // New data creation(POST)
@@ -130,9 +132,10 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public Assignment addNewReport(String username, Timestamp date, Report report) throws ServerSideDatabaseException, InvalidParameterException 
+	public Assignment addNewReport(Report report) throws ServerSideDatabaseException, InvalidParameterException 
 	{
-		//Integer newAssignmentid=ReportAndAssignmentUpdater.addReport(username, date, report.getLocation(), report.getNote(), report.getLicensePlate());
+		//Integer newAssignmentid=ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(), report.getLocation(), report.getNote(), report.getLicensePlate());
+		
 		return null; //FIXME add search newly created assignment
 	}
 	
@@ -164,22 +167,37 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public boolean addMunicipality(String username, String password, String email, String creatorUsername,
+	public boolean addMunicipalityAndCityHall(String username, String password, String email, String creatorUsername,
 			CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException 
 	{
 		try 
 		{
-			UserDataChecker.addCityhall(cityHall.getName(), cityHall.getProvince(), cityHall.getRegion(), cityHall.getLocation());
+			UserDataChecker.addCityhall(cityHall.getName(), cityHall.getProvince(),
+					cityHall.getRegion(), cityHall.getLocation());
 		}
 		catch(ServerSideDatabaseException | InvalidParameterException e)
 		{
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			throw e;
 		}
-		return UserDataChecker.addMunicipality(username, password, email, creatorUsername, cityHall.getName(), cityHall.getProvince());
+		return UserDataChecker.addMunicipality(username, password, email, creatorUsername, 
+				cityHall.getName(), cityHall.getProvince());
 	}
 	
+	@Override
+	public boolean addMunicipality(String username, String password, String email, String creatorUsername,
+			CityHall cityHall) throws ServerSideDatabaseException, InvalidParameterException 
+	{
+		return UserDataChecker.addMunicipality(username, password, email, creatorUsername,
+				cityHall.getName(), cityHall.getProvince());
+	}
 	
+	@Override
+	public boolean addSuggestion(String suggestion, CityHall cityHall)
+			throws ServerSideDatabaseException, InvalidParameterException {
+		return ReportAndAssignmentUpdater.AddSuggestions(suggestion,
+				cityHall.getName(), cityHall.getProvince());
+	}
 	
 	//================================================================================
     // Data Modification(PUT)
@@ -197,8 +215,10 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public boolean updateAssignment(Assignment assign, State state, String username) throws ServerSideDatabaseException, InvalidParameterException
+	public boolean updateAssignment(Integer assignmentId, State state, String username) throws ServerSideDatabaseException, InvalidParameterException
 	{
-		return ReportAndAssignmentUpdater.updateAssignment(assign.getId(), username, state);
+		return ReportAndAssignmentUpdater.updateAssignment(assignmentId, username, state);
 	}
+	
+	
 }

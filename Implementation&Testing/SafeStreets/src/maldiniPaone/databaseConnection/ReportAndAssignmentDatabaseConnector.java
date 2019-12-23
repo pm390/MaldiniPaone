@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.beans.Assignment;
@@ -17,14 +18,8 @@ import maldiniPaone.utilities.beans.Report;
 
 public class ReportAndAssignmentDatabaseConnector {
 	
-	//================================================================================
-    // Static variables
-    //================================================================================
-	/**if true prints errors in the console*/
-	private static final boolean VERBOSE=true;//TODO set to false when release
-	private static final Float EUCLIDEAN_CLOSE_DISTANCE=1f;//TODO think about the value
-	private static final Integer STANDARD_LIMIT=20;
-	public static final Float EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS=0.5f;
+
+	
 	
 	//================================================================================
     // Report creation and retrieve
@@ -78,7 +73,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -106,7 +101,7 @@ public class ReportAndAssignmentDatabaseConnector {
 					+ "from report " 
 					+ "where maker=? " // made by the given user
 					+ "order by datetime desc" //ordered by date
-					+ " LIMIT "+STANDARD_LIMIT ); //limited to the last ones
+					+ " LIMIT "+Constants.STANDARD_QUERY_LIMIT ); //limited to the last ones
 			//set maker
 			ps.setString(1, username);
 			//execute selection
@@ -129,7 +124,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -153,7 +148,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps = c.prepareStatement("select count(*) "
 					+ " from report as rep" // count reports
 					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"//within the last 7 days 
-					+ " and "+closeTo("rep", location,EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS) // within a certain radius
+					+ " and "+closeTo("rep", location,Constants.STATISTICS_RADIUS) // within a certain radius
 					+ " order by rep.datetime");// ordered by the date the reports were made
 			//execute the query
 			ps.execute();
@@ -174,7 +169,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -223,7 +218,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);		
 			return res;
@@ -269,7 +264,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -313,7 +308,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -344,7 +339,7 @@ public class ReportAndAssignmentDatabaseConnector {
 					+ " join photo as ph on ph.idreport=rep.id)"
 					+ " where "+closeTo("rep",location)+" and assign.state=?" //close to the location  
 					+ " order by assign.id DESC, arb.timestamp DESC " // ordered by assignment id and timestamp
-					+ " LIMIT "+ STANDARD_LIMIT*3// consider an average of 3 photos for report
+					+ " LIMIT "+ Constants.STANDARD_QUERY_LIMIT*3// consider an average of 3 photos for report
 					//limit result to last 3*standard limit results
 					);
 			//set the values in the prepared statements avoid sql injection
@@ -366,7 +361,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}
 		return res;
@@ -391,7 +386,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps = c.prepareStatement("select count (distinct arb.idassignment)" //count assignment
 					+ " from assignment as assign join assignmentreportbridge as arb on arb.id"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7"
-					+ " and "+closeTo("assign", location,EUCLIDEAN_CLOSE_DISTANCE_FOR_STATISTICS));
+					+ " and "+closeTo("assign", location,Constants.STATISTICS_RADIUS));
 			//execute query
 			ps.execute();
 			rs=ps.getResultSet();
@@ -409,7 +404,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			throw e;
 		}
 		catch(Exception e){
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
 			return res;
@@ -438,7 +433,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			c=ConnectionPool.getInstance().getConnection();//get connection
 			ps = c.prepareStatement("select note " // get notes from suggestion table
 					+ " from suggestion"
-					+ " where name=? and province=? order by id DESC LIMIT "+ STANDARD_LIMIT);
+					+ " where name=? and province=? order by id DESC LIMIT "+ Constants.STANDARD_QUERY_LIMIT);
 			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
@@ -462,7 +457,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -506,7 +501,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -569,7 +564,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		catch(Exception e){
 			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
 			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
-			if(VERBOSE)e.printStackTrace();
+			if(Constants.VERBOSE)e.printStackTrace();
 			return res;
 		}	
 		return res;
@@ -588,7 +583,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @note uses a predefined value as radius
 	 * */
 	private static String closeTo(String base,Location location) {
-		return closeTo(base,location,EUCLIDEAN_CLOSE_DISTANCE);
+		return closeTo(base,location,Constants.EUCLIDEAN_CLOSE_DISTANCE);
 	}
 	
 	/**

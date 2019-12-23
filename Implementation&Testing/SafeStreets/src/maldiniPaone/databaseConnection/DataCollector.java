@@ -5,6 +5,7 @@ import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundExcept
 import maldiniPaone.databaseConnection.databaseExceptions.InvalidParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.beans.Assignment;
+import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
 
@@ -176,8 +177,28 @@ public class DataCollector {
 	}
 	
 	//================================================================================
-    // Get Statistics ??? //on higher level???
+    // Get ClosestCityHall
     //================================================================================
-	
+	//TODO javadoc
+	protected static CityHall getClosestCityHall(Location location) throws ServerSideDatabaseException, InvalidParameterException
+	{
+		CityHall res = null;
+		if(location!=null&&location.getLatitude()!=null&&location.getLongitude()!=null)
+			{
+				try
+				{
+					res=ReportAndAssignmentDatabaseConnector.getClosestCityhall(location);
+				}
+				catch(DatabaseNotFoundException e)
+				{
+					throw new ServerSideDatabaseException(e,"database not found when finding closest cityhall");
+				}
+			}	
+			else
+			{
+				throw new InvalidParameterException();
+			}	
+		return res;
+	}
 	
 }
