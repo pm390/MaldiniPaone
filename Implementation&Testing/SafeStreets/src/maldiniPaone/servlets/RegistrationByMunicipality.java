@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.text.RandomStringGenerator;
+
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.UserManager;
+import maldiniPaone.utilities.PasswordBuilder;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.users.Municipality;
@@ -76,6 +79,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 		{
 			if(targetUserType==UserType.Municipality.toString())
 			{
+				
 				if(UserManager.getIstance().registerMunicipalityByMunicipality(username, password, email, 
 						user.getUsername(), cityHall.getName(), cityHall.getProvince()))
 				{
@@ -89,11 +93,18 @@ public class RegistrationByMunicipality extends HttpServlet {
 			}
 			else if(targetUserType==UserType.Authority.toString())
 			{
+				if(password!=null)
+				{
+					//TODO json. password should be not specified for authorities
+					return;
+				}
+				//get a password
+				password=PasswordBuilder.GetRandomPassword();
 				//TODO parse additional data for authority
 				//generate temporary password
 				if(false/*add authority*/)
 				{
-					//TODO send email
+					//TODO send email of confirmation
 				}
 				else
 				{

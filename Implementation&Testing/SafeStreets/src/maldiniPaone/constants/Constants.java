@@ -13,4 +13,10 @@ public class Constants {
 	public static final Integer INITIALSIZE=5;//low number for functionality testing	
 	//TODO remember to change to bigger number for testing and actual release.
 	public static final Integer SUGGESTION_MAX_SIZE=40;
+	
+	public static final Integer TEMPORARY_PASSWORD_DIGIT_LENGHT=8;
+	
+	public static final Integer TEMPORARY_PASSWORD_LOWERCASE_LENGHT=12;
+	
+	public static final Integer TEMPORARY_PASSWORD_UPPERCASE_LENGHT=16;
 }
