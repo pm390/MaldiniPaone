@@ -369,8 +369,8 @@ public class ReportAndAssignmentDatabaseConnector {
 	//================================================================================
     // Assignment count
     //================================================================================	
-	/**Gets the number of assignments done close to a given location. Gets connection from connection pool and uses it to 
-	 * execute the insertion.
+	/**Gets the number of assignments done close to a given location. Gets connection 
+	 * from connection pool and uses it to execute the insertion.
 	 * @param location : the location to which respect the assignments are searched
 	 * @return Integer : the number of reports (0 if no match)
 	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
@@ -433,7 +433,9 @@ public class ReportAndAssignmentDatabaseConnector {
 			c=ConnectionPool.getInstance().getConnection();//get connection
 			ps = c.prepareStatement("select note " // get notes from suggestion table
 					+ " from suggestion"
-					+ " where name=? and province=? order by id DESC LIMIT "+ Constants.STANDARD_QUERY_LIMIT);
+					+ " where name=? and province=? "
+					+ " and TimestampDiff(DAY,arb.timestamp,current_timestamp())<=30" //last month
+					+ "order by id DESC LIMIT "+ Constants.STANDARD_QUERY_LIMIT);
 			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);
@@ -596,8 +598,9 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * */
 	private static String closeTo(String base,Location location,Float radius) {
 		//TODO may fix with better formula now is euclidean distance
-		return SquareDistance(base,location)+"<="+(radius*radius)+" "; // compare square of distance with square the radius
-		//we don't use the root operation on the result for performance. would just do a useless operation
+		return SquareDistance(base,location)+"<="+(radius*radius)+" ";
+		// compare square of distance with square the radius
+		//we don't use the root operation on the result for performance.
 	}
 	
 	/**
@@ -609,7 +612,8 @@ public class ReportAndAssignmentDatabaseConnector {
 	 **/
 	private static String SquareDistance(String base,Location location)
 	{
-		return "power("+base+".latitude-"+location.getLatitude()+",2)+power("+base+".longitude-"+location.getLongitude()+",2)";
+		return "power("+base+".latitude-"+location.getLatitude()+",2)+"
+				+"power("+base+".longitude-"+location.getLongitude()+",2)";
 	}
 	
 	//================================================================================
@@ -686,7 +690,8 @@ public class ReportAndAssignmentDatabaseConnector {
 		while(rs.next())
 		{
 			Integer newId=rs.getInt(1);
-			if((newId!=id)||(latitude!=rs.getFloat(4)||longitude!=rs.getFloat(5)))//new assignment or new report
+			if((newId!=id)||(latitude!=rs.getFloat(4)||longitude!=rs.getFloat(5)))
+				//new assignment or new report
 			{
 				if(newId!=id)//new assignment so it is also a new report
 				{

@@ -14,9 +14,15 @@ public class Constants {
 	//TODO remember to change to bigger number for testing and actual release.
 	public static final Integer SUGGESTION_MAX_SIZE=40;
 	
-	public static final Integer TEMPORARY_PASSWORD_DIGIT_LENGHT=8;
+	public static final Integer TEMPORARY_PASSWORD_DIGIT_LENGHT=3;
 	
-	public static final Integer TEMPORARY_PASSWORD_LOWERCASE_LENGHT=12;
+	public static final Integer TEMPORARY_PASSWORD_LOWERCASE_LENGHT=5;
 	
-	public static final Integer TEMPORARY_PASSWORD_UPPERCASE_LENGHT=16;
+	public static final Integer TEMPORARY_PASSWORD_UPPERCASE_LENGHT=8;
+	
+	public static final String MAIL_USERNAME="Safestreetssweng19.20@gmail.com";
+	
+	public static final String MAIL_PASSWORD="MaldiniPaone9897";
+	
+	public static final String SERVER_ADDRESS="http://localhost:8080/SafeStreets";
 }

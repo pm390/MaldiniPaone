@@ -14,6 +14,7 @@ import org.apache.commons.text.RandomStringGenerator;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
+import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
 import maldiniPaone.utilities.PasswordBuilder;
 import maldiniPaone.utilities.UserType;
@@ -72,18 +73,17 @@ public class RegistrationByMunicipality extends HttpServlet {
 		}
 		//now cityhall is available
 		String username=(String)request.getParameter("username");
-		String password=(String)request.getParameter("password");
+		String password=PasswordBuilder.GetRandomPassword();
 		String email=(String)request.getParameter("email");
 		String targetUserType=(String)request.getParameter("userType");
 		try
 		{
 			if(targetUserType==UserType.Municipality.toString())
 			{
-				
 				if(UserManager.getIstance().registerMunicipalityByMunicipality(username, password, email, 
 						user.getUsername(), cityHall.getName(), cityHall.getProvince()))
 				{
-					//TODO send email of confirmation
+					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				}
 				else
 				{
@@ -101,10 +101,10 @@ public class RegistrationByMunicipality extends HttpServlet {
 				//get a password
 				password=PasswordBuilder.GetRandomPassword();
 				//TODO parse additional data for authority
-				//generate temporary password
+				//TODO add district
 				if(false/*add authority*/)
 				{
-					//TODO send email of confirmation
+					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				}
 				else
 				{

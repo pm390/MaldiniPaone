@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
+import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
+import maldiniPaone.utilities.PasswordBuilder;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.User;
@@ -58,11 +60,12 @@ public class Registration extends HttpServlet {
 				if(targetUserType==UserType.Citizen.toString()&&
 						UserManager.getIstance().registerCitizen(username, password, email))
 				{
-					//TODO send email of confirmation
+					MailManager.getInstance().sendConfirmationMail(username, email);
 				}
 				else if(targetUserType==UserType.Municipality.toString())
 				{
 					User user=(User) request.getSession(true).getAttribute("user");
+					password=PasswordBuilder.GetRandomPassword();
 					String creatorUsername =(user!=null
 							&&user.getUserType()==UserType.Manager
 							)?user.getUsername():null;
@@ -70,7 +73,7 @@ public class Registration extends HttpServlet {
 							registerMunicipality(username, password, //utility static function
 									email,creatorUsername, request)) //parses request and registers municipality
 					{
-						//TODO send email of confirmation
+						MailManager.getInstance().sendConfirmationMail(username, password, email);
 					}
 					else
 					{

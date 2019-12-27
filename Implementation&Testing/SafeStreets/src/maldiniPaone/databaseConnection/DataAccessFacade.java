@@ -1,6 +1,6 @@
 package maldiniPaone.databaseConnection;
 
-import java.sql.Timestamp;
+
 import java.util.List;
 
 import maldiniPaone.constants.Constants;
@@ -16,7 +16,6 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
-import maldiniPaone.utilities.beans.Statistic;
 
 public class DataAccessFacade implements ManageDataAccess{
 	//================================================================================

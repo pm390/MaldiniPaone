@@ -12,7 +12,6 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
-import maldiniPaone.utilities.beans.Statistic;
 //TODO put all javadocs to methods
 public interface ManageDataAccess {
 	//================================================================================
