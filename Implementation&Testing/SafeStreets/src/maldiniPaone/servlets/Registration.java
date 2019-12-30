@@ -91,12 +91,14 @@ public class Registration extends HttpServlet {
 		}
 		catch (ServerSideDatabaseException e) 
 		{
+			if(Constants.VERBOSE) {e.printStackTrace();}
 			//TODO send json object to indicate an error server side(5xx)
 			//outputWriter.println(new Gson().toJson(message));
 			return;
 		}
 		catch( IllegalParameterException e)
 		{
+			if(Constants.VERBOSE) {e.printStackTrace();}
 			//TODO send json object to indicate an error in the parameters (4xx)
 			//outputWriter.println(new Gson().toJson(message));
 			return;

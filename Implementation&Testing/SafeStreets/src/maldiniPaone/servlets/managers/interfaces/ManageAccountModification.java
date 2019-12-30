@@ -20,5 +20,15 @@ public interface ManageAccountModification
 	public boolean modifyUserCredentials(String oldUsername,String oldPassword,
 			String newUsername,String newPassword,String newEmail,UserType user)
 					throws ServerSideDatabaseException, IllegalParameterException;
+	/**
+	 * Removes a user given its username and password
+	 * @param username : the user name of the user to be deleted
+	 * @param password : the password of the user to be deleted
+	 * @param user : the user type of the user to be deleted
+	 * @return boolean: true if the deletion is successful, false if fails
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	public boolean removeUser(String username,String password,UserType user) throws ServerSideDatabaseException, IllegalParameterException;
 	
 }

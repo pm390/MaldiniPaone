@@ -102,7 +102,7 @@ public class ReportAndAssignmentDatabaseConnector {
 					+ "where maker=? " // made by the given user
 					+ "order by datetime desc" //ordered by date
 					+ " LIMIT "+Constants.STANDARD_QUERY_LIMIT ); //limited to the last ones
-			//set maker
+			//set maker of the reports
 			ps.setString(1, username);
 			//execute selection
 			ps.execute();

@@ -48,7 +48,8 @@ public class DataAccessFacade implements ManageDataAccess{
 	 * @throws InvalidParameterExcpetion
 	 * */
 	@Override
-	public List<Report> getReportsMadeBy(String username) throws ServerSideDatabaseException, IllegalParameterException 
+	public List<Report> getReportsMadeBy(String username)
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataCollector.getReportsMadeBy(username);
 	}
@@ -66,7 +67,8 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public Integer getReportCountInLastWeek(Location location) throws ServerSideDatabaseException, IllegalParameterException 
+	public Integer getReportCountInLastWeek(Location location) 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataCollector.getReportCountInLastWeek(location);
 	}
@@ -74,7 +76,8 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public Integer getAssignmentCountInLastWeek(Location location) throws ServerSideDatabaseException, IllegalParameterException
+	public Integer getAssignmentCountInLastWeek(Location location) 
+			throws ServerSideDatabaseException, IllegalParameterException
 	{
 		return DataCollector.getAssignmentsCountInLastWeek(location);
 	}
@@ -82,7 +85,8 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public List<Assignment> getAssignments(Location location) throws ServerSideDatabaseException, IllegalParameterException 
+	public List<Assignment> getAssignments(Location location)
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return DataCollector.getAssignment(location);
 	}
@@ -91,7 +95,8 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public UserType checkUserCredentials(String username, String password) throws ServerSideDatabaseException, IllegalParameterException 
+	public UserType checkUserCredentials(String username, String password) 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		return UserDataChecker.checkUserCredentials(username, password);
 	}
@@ -100,7 +105,9 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public List<String> getStaticSuggestions(Location location) throws ServerSideDatabaseException, IllegalParameterException {
+	public List<String> getStaticSuggestions(Location location)
+			throws ServerSideDatabaseException, IllegalParameterException 
+	{
 		CityHall ch;
 		try {
 			ch = ReportAndAssignmentDatabaseConnector.getClosestCityhall(location);
@@ -114,16 +121,38 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public List<String> getStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, IllegalParameterException
+	public List<String> getStaticSuggestions(CityHall cityHall)
+			throws ServerSideDatabaseException, IllegalParameterException
 	{
 		return DataCollector.getSuggestion(cityHall.getName(), cityHall.getProvince());
 	}
 	
 	@Override
 	public CityHall getClosestCityHall(Location location)
-			throws ServerSideDatabaseException, IllegalParameterException {
+			throws ServerSideDatabaseException, IllegalParameterException 
+	{
 		return DataCollector.getClosestCityHall(location);
 	}
+	
+	@Override
+	public CityHall getCityHall(String username)
+			throws ServerSideDatabaseException, IllegalParameterException
+	{
+	return	UserDataChecker.getCityHall(username);
+	}
+	@Override
+	public String findUsernameByEmail(String email)
+			throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		return UserDataChecker.findUsernameByEmail(email);
+	}
+	@Override
+	public String findEmailByUsername(String username) 
+			throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		return UserDataChecker.findEmailByUsername(username);
+	}
+	
 	
 	//================================================================================
     // New data creation(POST)
@@ -131,10 +160,10 @@ public class DataAccessFacade implements ManageDataAccess{
 	
 	
 	@Override
-	public Assignment addNewReport(Report report) throws ServerSideDatabaseException, IllegalParameterException 
+	public Assignment addNewReport(Report report) 
+			throws ServerSideDatabaseException, IllegalParameterException 
 	{
 		//Integer newAssignmentid=ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(), report.getLocation(), report.getNote(), report.getLicensePlate());
-		
 		return null; //FIXME add search newly created assignment
 	}
 	
@@ -217,6 +246,15 @@ public class DataAccessFacade implements ManageDataAccess{
 	public boolean updateAssignment(Integer assignmentId, State state, String username) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		return ReportAndAssignmentUpdater.updateAssignment(assignmentId, username, state);
+	}
+	
+	//================================================================================
+    // Delete data (Delete requests)
+    //================================================================================
+	
+	public boolean removeUser(String username,String password,UserType user) throws ServerSideDatabaseException, IllegalParameterException
+	{
+		return UserDataChecker.removeUser(username, password, user);
 	}
 	
 	

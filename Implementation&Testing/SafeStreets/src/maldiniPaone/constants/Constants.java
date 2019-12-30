@@ -1,7 +1,18 @@
 package maldiniPaone.constants;
 
+import java.util.TimeZone;
+
 public class Constants {
 
+	//TODO set parameters from file
+	public static final String DB_USERNAME="SafeStreets";
+	
+	public static final String DB_PASSWORD="Safestreets1886_Server";
+	
+	public static final String DB_DRIVER="com.mysql.cj.jdbc.Driver";
+	
+	public static final String DB_URL="jdbc:mysql://localhost:3306/safestreets"+"?serverTimezone="+ TimeZone.getDefault().getID();;
+	
 	public static final float STATISTICS_RADIUS=0.5f;
 	/**if true prints errors in the console*/
 	public static final boolean VERBOSE=true;//set to true on release
@@ -25,4 +36,6 @@ public class Constants {
 	public static final String MAIL_PASSWORD="MaldiniPaone9897";
 	
 	public static final String SERVER_ADDRESS="http://localhost:8080/SafeStreets";
+
+	public static final int MAX_ATTEMPTS=5;
 }

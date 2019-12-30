@@ -1,6 +1,6 @@
 package maldiniPaone.databaseConnection;
 
-import static org.junit.Assert.*;
+
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;

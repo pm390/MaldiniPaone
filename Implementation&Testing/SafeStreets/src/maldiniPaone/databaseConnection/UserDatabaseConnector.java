@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.utilities.UserType;
+import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
+import maldiniPaone.utilities.beans.users.User;
 
 //TODO fix closing of statements and result sets
 public class UserDatabaseConnector {
@@ -378,7 +380,65 @@ public class UserDatabaseConnector {
 		return res;
 	}
 	
-	
+	//================================================================================
+    // city hall getter
+    //================================================================================
+	/**
+	 * Gets the cityhall where a municipality works
+	 * @param username: the username of the municipality whose cityhall is being searched 
+	 * @return CityHall
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	protected static CityHall getCityHall(String username) throws DatabaseNotFoundException
+	{
+		CityHall res=null;
+		Connection c=null;
+		PreparedStatement ps =null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select ch.cityhall_name, ch.cityhall_province ,ch.region"
+					+ ", ch.longitude,ch.latitude" // get cityhall
+					+ " from muncipality as mujoin cityhall as ch "
+					+ " on mu.cityhall_name=ch.cityhall_name and mu.cityhall_province=ch.cityhall_province"
+					+ " where mu.username=?");
+			//set the values in the prepared statements avoid sql injection
+			ps.setString(1, username);
+
+			//ececute the inseriton
+			ps.execute();
+			// if fails throws an  exception
+			ResultSet rs=ps.getResultSet();
+			if(rs.next())
+			{
+				res=new CityHall();
+				Location location=new Location();
+				
+				res.setName(rs.getString(1));
+				res.setProvince(rs.getString(2));
+				res.setRegion(rs.getString(3));
+				res.setLocation(location);
+				location.setLongitude(rs.getFloat(4));
+				location.setLatitude(rs.getFloat(5));
+			}
+			//close statement
+			rs.close();
+			ps.close();
+			//release connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			if(Constants.VERBOSE)e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
 	
 	
 	
@@ -537,6 +597,161 @@ public class UserDatabaseConnector {
 	}
 	
 	
+	
+	//================================================================================
+    // remove user
+    //================================================================================
+	/**
+	 * Removes a user given its username and password
+	 * @param username : the user name of the user to be deleted
+	 * @param password : the password of the user to be deleted
+	 * @param user : the user type of the user to be deleted
+	 * @return boolean: true if the deletion is successful, false if fails
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	protected static boolean removeUser(String username,String password,UserType user) throws DatabaseNotFoundException
+	{
+		Connection c=null;
+		boolean res=false;
+		PreparedStatement ps =null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("delete from "+user.toString() //delete from the right table
+					+ "where username=? and password=?");
+			//set the values in the prepared statements avoid sql injection
+			ps.setString(1, username);
+			ps.setString(2, password);
+			//execute query
+			ps.executeUpdate();
+			//if fails throws an exception
+			res=true;//line reached only if successful
+			//close statement
+			ps.close();
+			//releases connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			if(Constants.VERBOSE)	e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
+	
+	
+	//================================================================================
+    // get User data
+    //================================================================================
+	//================================================================================
+    // get email
+    //================================================================================
+	/**
+	 * Finds the email address of a user
+	 * @param username : the user name of the user whose email must be retrieved
+	 * @return String : the email of the user . null if no user exists with the given username
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	protected static String findEmailByUsername(String username) throws DatabaseNotFoundException
+	{
+		Connection c=null;
+		String res=null;
+		PreparedStatement ps =null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select email from user " //delete from the right table
+					+ "where username=?");
+			//set the values in the prepared statements avoid sql injection
+			ps.setString(1, username);
+
+			//execute query
+			ps.execute();
+			//if fails throws an exception
+			//line reached only if successful
+			ResultSet rs=ps.getResultSet();
+			if(rs.next())
+			{
+				res=rs.getString(1);
+			}
+			//close statement
+			rs.close();
+			ps.close();
+			//releases connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			if(Constants.VERBOSE)	e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
+	//================================================================================
+    // get username by email
+    //================================================================================
+	/**
+	 * Finds the username of a user
+	 * @param email : the email address of the user whose username must be retrieved
+	 * @return String : the username of the user . null if no user exists with the given email
+	 * @throws DatabaseNotFoundException the connection to the database could not be instantiated
+	 **/
+	protected static String findUsernameByEmail(String email) throws DatabaseNotFoundException
+	{
+		Connection c=null;
+		String res=null;
+		PreparedStatement ps =null;
+		try {
+			c=ConnectionPool.getInstance().getConnection();//get connection
+			ps = c.prepareStatement("select email from user " //delete from the right table
+					+ "where email=?");
+			//set the values in the prepared statements avoid sql injection
+			ps.setString(1, email);
+
+			//execute query
+			ps.execute();
+			//if fails throws an exception
+			//line reached only if successful
+			ResultSet rs=ps.getResultSet();
+			if(rs.next())
+			{
+				res=rs.getString(1);
+			}
+			//close statement
+			rs.close();
+			ps.close();
+			//releases connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		}
+		catch(DatabaseNotFoundException e)
+		{
+			throw e;
+		}
+		catch(Exception e)
+		{
+			if(Constants.VERBOSE)	e.printStackTrace();
+			if(ps!=null) try{ps.close();}catch(Exception ex){/*database didn't close the statement*/}
+			if(c!=null) ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
+	
+	
+	
+	
+	
+
 	//================================================================================
     // Dummy main method
     //================================================================================

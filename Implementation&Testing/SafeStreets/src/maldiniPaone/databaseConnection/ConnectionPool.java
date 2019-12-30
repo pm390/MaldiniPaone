@@ -53,10 +53,10 @@ public class ConnectionPool {
 	 **/
 	private ConnectionPool() throws DatabaseNotFoundException
 	{
-		driver="com.mysql.cj.jdbc.Driver";//TODO set parameters from file
-		username="SafeStreets";
-		password="Safestreets1886_Server";
-		databaseURL="jdbc:mysql://localhost:3306/safestreets"+"?serverTimezone="+ TimeZone.getDefault().getID();
+		driver=Constants.DB_DRIVER;
+		username=Constants.DB_USERNAME;
+		password=Constants.DB_PASSWORD;
+		databaseURL=Constants.DB_URL;
 		availableConnections=new ArrayList<Connection>(Constants.INITIALSIZE);
 		try
 		{

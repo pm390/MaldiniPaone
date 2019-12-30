@@ -8,13 +8,14 @@ import maldiniPaone.servlets.managers.interfaces.ManageAuthorityPosition;
 import maldiniPaone.servlets.managers.interfaces.ManageLogin;
 import maldiniPaone.servlets.managers.interfaces.ManageRegistration;
 import maldiniPaone.servlets.managers.interfaces.ManageRegistrationByMunicipalities;
+import maldiniPaone.servlets.managers.interfaces.ManageUserDataRetrieve;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 
 public class UserManager implements ManageAccountModification,ManageAuthorityPosition,
-ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
+ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities,ManageUserDataRetrieve
 {
 	private static UserManager instance;
 	
@@ -102,9 +103,15 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	@Override
 	public boolean modifyUserCredentials(String oldUsername, String oldPassword, String newUsername, String newPassword,
 			String newEmail,UserType user) throws ServerSideDatabaseException, IllegalParameterException 
-	{
-		
+	{	
 		return DataAccessFacade.getInstance().modifyUser(oldUsername, oldPassword, user, newEmail, newUsername, newPassword);
+	}
+
+
+	@Override
+	public boolean removeUser(String username, String password, UserType user)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		return DataAccessFacade.getInstance().removeUser(username, password, user);
 	}
 
 	
@@ -123,6 +130,27 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities
 	{
 		// TODO Update position on the server
 		return false;
+	}
+	//================================================================================
+    // Manage User Data Retrieve
+    //================================================================================
+	
+	@Override
+	public String findEmailByUsername(String username) throws ServerSideDatabaseException, IllegalParameterException
+	{
+		return DataAccessFacade.getInstance().findEmailByUsername(username);
+	}
+
+	@Override
+	public String findUsernameByEmail(String email) throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		return DataAccessFacade.getInstance().findUsernameByEmail(email);
+	}
+	
+	@Override
+	public CityHall getCityHall(String username)throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		return DataAccessFacade.getInstance().getCityHall(username);
 	}
 
 	

@@ -74,6 +74,32 @@ public class MailManager {
 				,mailAdress);
 	}
 	
+	public boolean sendAccountModificationMail(String mailAdress)
+	{
+		return sendMail("Account modification",
+				("Your account credentials has been modified."
+				+ "\nIf you didn't modify it please contact us at "+Constants.MAIL_USERNAME)
+				//end message
+				,mailAdress);
+	}
+	
+	public boolean sendAccountModificationMail(String oldAddress,String newAddress)
+	{
+		return sendMail("Account modification",
+				("Your account credentials has been modified."
+				+ "\nYour new email is really :"+newAddress 
+				+ "\nIf you didn't modify it please contact us at "+Constants.MAIL_USERNAME)
+				//end message
+				,oldAddress)
+				&&
+				sendMail("Account modification",
+				("Your account credentials has been modified."
+				+ "\nIf you didn't modify it please contact us at "+Constants.MAIL_USERNAME)
+				//end message
+				,newAddress)
+				;
+	}
+	
 	private boolean sendMail(String subject,String content,String mailAdress)
 	{
 		boolean result=false;

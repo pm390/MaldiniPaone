@@ -12,7 +12,6 @@ public class Citizen extends User{
 	@Override
 	public UserType getUserType() 
 	{
-		
 		return UserType.Citizen;
 	}
 	

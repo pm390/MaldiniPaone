@@ -4,6 +4,7 @@ import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundExcept
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.UserType;
+import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 
 public class UserDataChecker {
@@ -248,6 +249,38 @@ public class UserDataChecker {
 		}
 		return res;
 	}
+	//================================================================================
+    // city hall getter
+    //================================================================================
+	
+	/**
+	 * Gets the cityhall where a municipality works
+	 * @param username: the username of the municipality whose cityhall is being searched 
+	 * @return CityHall
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static CityHall getCityHall(String username) throws  ServerSideDatabaseException, IllegalParameterException
+	{
+		CityHall res=null;
+		if(username!=null&& //check null values
+			username!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				res=UserDatabaseConnector.getCityHall(username);
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when adding cityhall");
+			}
+		}	
+		else
+		{
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
 	
 	//================================================================================
     // check user type and credentials
@@ -329,4 +362,112 @@ public class UserDataChecker {
 		}
 		return res;
 	}
+	
+	//================================================================================
+	// remove user
+	//================================================================================
+	/**
+	 * Removes a user given its username and password
+	 * @param username : the user name of the user to be deleted
+	 * @param password : the password of the user to be deleted
+	 * @param user : the user type of the user to be deleted
+	 * @return boolean: true if the deletion is successful, false if fails
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static boolean removeUser(String username,String password,UserType user) throws ServerSideDatabaseException, IllegalParameterException
+	{
+		boolean res=false;
+		if(username!=null&&password!=null&&user!=null&&//check null values
+			username!=""&&password!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				res=UserDatabaseConnector.removeUser(username, password, user);
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when modifying user");
+			}
+		}	
+		else
+		{
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
+
+	//================================================================================
+	// get User data
+	//================================================================================
+	//================================================================================
+	// get email
+	//================================================================================
+	/**
+	 * Finds the email address of a user
+	 * @param username : the user name of the user whose email must be retrieved
+	 * @return String : the email of the user . null if no user exists with the given username
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static String findEmailByUsername(String username) throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		String res=null;
+		if(username!=null&&//check null values
+			username!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				res=UserDatabaseConnector.findEmailByUsername(username);
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when modifying user");
+			}
+		}	
+		else
+		{
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
+
+	//================================================================================
+	// get username by email
+	//================================================================================
+	/**
+	 * Finds the username of a user
+	 * @param email : the email address of the user whose username must be retrieved
+	 * @return String : the username of the user . null if no user exists with the given email
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	protected static String findUsernameByEmail(String email) throws ServerSideDatabaseException, IllegalParameterException 
+	{
+		String res=null;
+		if(email!=null&&//check null values
+			email!="") //check empty strings(or invalid values)
+		{
+			try
+			{
+				res=UserDatabaseConnector.findUsernameByEmail(email);
+			}
+			catch(DatabaseNotFoundException e)
+			{
+				throw new ServerSideDatabaseException(e,"database not found when modifying user");
+			}
+		}	
+		else
+		{
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
+	
+	
+	
+	
 }

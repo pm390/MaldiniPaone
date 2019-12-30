@@ -2,6 +2,7 @@ package maldiniPaone.databaseConnection.interfaces;
 
 import java.util.List;
 
+import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.utilities.State;
@@ -36,7 +37,20 @@ public interface ManageDataAccess {
 	public List<String> getStaticSuggestions(CityHall cityHall) throws ServerSideDatabaseException, IllegalParameterException;
 	
 	public CityHall getClosestCityHall(Location location) throws ServerSideDatabaseException, IllegalParameterException; 
-	 
+	
+	/**
+	 * Gets the cityhall where a municipality works
+	 * @param username: the username of the municipality whose cityhall is being searched 
+	 * @return CityHall
+	 * @throws ServerSideDatabaseException  when the database can't be found
+	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
+	 **/
+	public CityHall getCityHall(String username)throws ServerSideDatabaseException, IllegalParameterException; 
+	
+	public String findUsernameByEmail(String email) throws ServerSideDatabaseException, IllegalParameterException ;
+	
+	public String findEmailByUsername(String username) throws ServerSideDatabaseException, IllegalParameterException ;
+	
 	//================================================================================
     // Adding new data (POST requests)
     //================================================================================
@@ -66,6 +80,11 @@ public interface ManageDataAccess {
 	public boolean updateAssignment(Integer assignmentId,State state,String username) throws ServerSideDatabaseException, IllegalParameterException;
 
 	
+	//================================================================================
+    // Delete data (Delete requests)
+    //================================================================================
+	
+	public boolean removeUser(String username,String password,UserType user) throws ServerSideDatabaseException, IllegalParameterException;
 	
 
 }

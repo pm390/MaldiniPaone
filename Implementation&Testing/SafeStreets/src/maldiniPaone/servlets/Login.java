@@ -32,9 +32,7 @@ public class Login extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	/*
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException
@@ -42,10 +40,10 @@ public class Login extends HttpServlet {
 		if(Constants.VERBOSE)System.out.println("unexpected request login is post operation");
 		response.sendError(400, "Bad Request"+((Constants.VERBOSE)?"method forbidden in login servlet":""));
 	}
+	*/
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PrintWriter outputWriter = response.getWriter();
@@ -79,12 +77,14 @@ public class Login extends HttpServlet {
 		}
 		catch (ServerSideDatabaseException e) 
 		{
+			if(Constants.VERBOSE) {e.printStackTrace();}
 			//TODO send json object to indicate an error server side(5xx)
 			//outputWriter.println(new Gson().toJson(message));
 			return;
 		}
 		catch( IllegalParameterException e)
 		{
+			if(Constants.VERBOSE) {e.printStackTrace();}
 			//TODO send json object to indicate an error in the parameters (4xx)
 			//outputWriter.println(new Gson().toJson(message));
 			return;
