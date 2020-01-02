@@ -86,11 +86,14 @@ ManageLogin,ManageRegistration,ManageRegistrationByMunicipalities,ManageUserData
 			Location topLeftDistrictBound, Location bottomRightDistrictBound)
 			throws ServerSideDatabaseException, IllegalParameterException 
 	{
+		
 		District district=new District();
+		System.out.println(district);
 		district.setLocationTopLeft(topLeftDistrictBound);
 		district.setLocationBottomRight(bottomRightDistrictBound);
 		district.setName(cityHallName);
 		district.setProvince(cityHallProvince);
+		
 		return DataAccessFacade.getInstance().addAuthority(username, password, email, creator, district);
 	}
 

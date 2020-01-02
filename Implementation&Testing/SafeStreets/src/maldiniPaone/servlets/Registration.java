@@ -54,24 +54,28 @@ public class Registration extends HttpServlet {
 		String username=(String)request.getParameter("username");
 		String password=(String)request.getParameter("password");
 		String email=(String)request.getParameter("email");
-		String targetUserType=(String)request.getParameter("userType");
+		User user=(User) request.getSession(true).getAttribute("user");
 		try
 		{
-				if(targetUserType==UserType.Citizen.toString()&&
+			System.out.println("registering");
+				if(user==null&&
 						UserManager.getIstance().registerCitizen(username, password, email))
 				{
+					System.out.println("registrering citizen");
 					MailManager.getInstance().sendConfirmationMail(username, email);
 				}
-				else if(targetUserType==UserType.Municipality.toString())
+				else if(user==null)
 				{
-					User user=(User) request.getSession(true).getAttribute("user");
+					//TODO send json object to indicate an a duplicate username or email
+					//outputWriter.println(new Gson().toJson(message));
+					return;
+				}
+				else if(user.getUserType()==UserType.Manager)
+				{					
 					password=PasswordBuilder.GetRandomPassword();
-					String creatorUsername =(user!=null
-							&&user.getUserType()==UserType.Manager
-							)?user.getUsername():null;
-					if(creatorUsername!=null&&
-							registerMunicipality(username, password, //utility static function
-									email,creatorUsername, request)) //parses request and registers municipality
+					String creatorUsername =user.getUsername();
+					if(registerMunicipality(username, password, //utility static function
+									email, request)) //parses request and registers municipality
 					{
 						MailManager.getInstance().sendConfirmationMail(username, password, email);
 					}
@@ -84,7 +88,7 @@ public class Registration extends HttpServlet {
 				}
 				else
 				{
-					//TODO send json object to indicate an a duplicate username or email
+					//TODO send json object to indicate an invalid request
 					//outputWriter.println(new Gson().toJson(message));
 					return;
 				}
@@ -115,7 +119,7 @@ public class Registration extends HttpServlet {
     //================================================================================
 	//TODO javadoc here
 	private static boolean registerMunicipality(String username,String password,String email,
-			String creator,HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException
+			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		String cityHallName=(String)request.getParameter("cityHallName");
 		String cityHallProvince=(String)request.getParameter("cityHallProvince");
@@ -125,7 +129,7 @@ public class Registration extends HttpServlet {
 		Location location=new Location();
 		location.setLatitude(latitude);
 		location.setLongitude(longitude);
-		return UserManager.getIstance().registerMunicipalityByManager(username, password, email,creator,cityHallName, cityHallProvince,location);
+		return UserManager.getIstance().registerMunicipalityByManager(username, password, email,cityHallName, cityHallProvince,region,location);
 	}
 
 }

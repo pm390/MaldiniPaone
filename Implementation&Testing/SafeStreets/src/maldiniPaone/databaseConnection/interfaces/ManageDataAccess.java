@@ -16,7 +16,7 @@ import maldiniPaone.utilities.beans.Report;
 //TODO put all javadocs to methods
 public interface ManageDataAccess {
 	//================================================================================
-    // retrieve data (GET requests)
+    // retrieve data 
     //================================================================================
 	public List<Report> getReportsMadeBy(String username) throws ServerSideDatabaseException, IllegalParameterException;
 	
@@ -52,7 +52,7 @@ public interface ManageDataAccess {
 	public String findEmailByUsername(String username) throws ServerSideDatabaseException, IllegalParameterException ;
 	
 	//================================================================================
-    // Adding new data (POST requests)
+    // Adding new data 
     //================================================================================
 	
 	public Assignment addNewReport (Report report) throws ServerSideDatabaseException, IllegalParameterException;
@@ -72,7 +72,7 @@ public interface ManageDataAccess {
 			throws ServerSideDatabaseException, IllegalParameterException;
 	
 	//================================================================================
-    // Modify already available data (PUT requests)
+    // Modify already available data 
     //================================================================================
 	
 	public boolean modifyUser(String username,String password,UserType user,String email,String newUsername,String newPassword) throws ServerSideDatabaseException, IllegalParameterException;
@@ -81,7 +81,7 @@ public interface ManageDataAccess {
 
 	
 	//================================================================================
-    // Delete data (Delete requests)
+    // Delete data 
     //================================================================================
 	
 	public boolean removeUser(String username,String password,UserType user) throws ServerSideDatabaseException, IllegalParameterException;

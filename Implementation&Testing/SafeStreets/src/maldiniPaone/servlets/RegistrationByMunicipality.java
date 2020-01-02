@@ -77,8 +77,10 @@ public class RegistrationByMunicipality extends HttpServlet {
 			{
 				cityHall=UserManager.getIstance().getCityHall(user.getUsername());
 				((Municipality)user).setCityhall(cityHall);
+				
+				if(Constants.VERBOSE)System.out.println(cityHall.toString());//debug
 			}
-			if(targetUserType==UserType.Municipality.toString())
+			if(targetUserType.equals(UserType.Municipality.toString()))
 			{
 				
 				if(UserManager.getIstance().registerMunicipalityByMunicipality(username, password, email, 
@@ -92,15 +94,9 @@ public class RegistrationByMunicipality extends HttpServlet {
 					return;
 				}
 			}
-			else if(targetUserType==UserType.Authority.toString())
+			else if(targetUserType.equals(UserType.Authority.toString()))
 			{
-				if(password!=null)
-				{
-					//TODO json. password should be not specified for authorities
-					return;
-				}
-				//get a password
-				password=PasswordBuilder.GetRandomPassword();
+				if(Constants.VERBOSE)System.out.println("register authority");
 
 				//TODO parse additional data for authority
 				//TODO add district
@@ -129,6 +125,12 @@ public class RegistrationByMunicipality extends HttpServlet {
 			//outputWriter.println(new Gson().toJson(message));
 			return;
 		}
+		catch(Exception e)
+		{
+			if(Constants.VERBOSE) {e.printStackTrace();}
+			//debug purpouse
+			return;
+		}
 		//TODO send json object to indicate a successful registration
 		//outputWriter.println(new Gson().toJson(message));
 		return;
@@ -154,8 +156,9 @@ public class RegistrationByMunicipality extends HttpServlet {
 		Float bottomRightLatitude=Float.parseFloat(request.getParameter("bRLatitude"));
 		Float bottomRightLongitude=Float.parseFloat(request.getParameter("bRLongitude"));
 		Location bottomRightLocation=new Location();
-		topLeftLocation.setLatitude(bottomRightLatitude);
-		topLeftLocation.setLongitude(bottomRightLongitude);
+		bottomRightLocation.setLatitude(bottomRightLatitude);
+		bottomRightLocation.setLongitude(bottomRightLongitude);
+		
     	return UserManager.getIstance().registerAuthority(username, password, email, 
     			creator.getUsername(),cityhall.getName(), cityhall.getProvince(), 
     			topLeftLocation, bottomRightLocation);

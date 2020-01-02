@@ -19,7 +19,15 @@ import maldiniPaone.utilities.beans.Statistic;
  */
 public class StatisticManager implements ManageStatistics
 {
-
+	private static StatisticManager instance;
+	
+	private StatisticManager() {}
+	
+	public static StatisticManager getInstance()
+	{
+		return (instance==null)? instance=new StatisticManager(): instance;
+	}
+	
 	@Override
 	public List<Statistic> getStatistics(Location location,Float edge) throws ServerSideDatabaseException, IllegalParameterException {
 		int subEdgeNumber=(int) (edge/(2*Constants.STATISTICS_RADIUS));
@@ -41,7 +49,7 @@ public class StatisticManager implements ManageStatistics
 				result.add(StatisticBuilder.buildStatistic(centerOfStatistic));
 			}
 		}
-		return null;
+		return result;
 	}
 
 }

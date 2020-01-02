@@ -1,5 +1,6 @@
 package maldiniPaone.servlets.managers;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,19 +13,30 @@ import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
+import maldiniPaone.utilities.beans.Photo;
 
 public class ReportManager implements ManageReportCreation, ManageAssignment {
 	
+	private static ReportManager instance;
 	
+	private ReportManager()
+	{
+		
+	}
+	
+	public static ReportManager getInstance()
+	{
+		return (instance==null)? instance=new ReportManager():instance;
+	}
 	
 	
 	//================================================================================
-    // Report adder
+    // ReportCreation adder
     //================================================================================
 	
 	@Override
-	public boolean addReport(String username, Location location, List<String> photos,String licensePlate,String note)
-			throws ServerSideDatabaseException, IllegalParameterException 
+	public boolean addReport(String username, Location location, List<Photo> photos,String licensePlate,String note)
+			throws ServerSideDatabaseException, IllegalParameterException, IOException 
 	{
 		boolean result=false;
 		Report report=new Report();
@@ -32,21 +44,27 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 		report.setLicensePlate(licensePlate);
 		report.setLocation(location);
 		report.setNote(note);
-		report.setPhotoNames(photos);
+		report.setPhotos(photos);
 		report.setUsername(username);
-		Assignment newlyCreatedAssignment=null;
+		
 		try
 		{
-			newlyCreatedAssignment=DataAccessFacade.getInstance().addNewReport(report);
+			final Assignment newlyCreatedAssignment=DataAccessFacade.getInstance().addNewReport(report);
 			if(newlyCreatedAssignment!=null)
 			{
+				//if needed get additional informations
+				for(Photo temp : photos)//for each photo save it
+				{
+					PhotoManager.getInstance().savePhoto(username, newlyCreatedAssignment.getId(),
+							temp.getPhotoNumber(), temp.getFileExtension(), temp.getPhoto());
+				}
 				result=true;
-				Runnable nofityAssignment=new Runnable()
+				Runnable nofityAssignment=new Runnable()//notifications are sent in a separated thread 
 				{
 					public void run() 
 					{
-						//NotificationManager.getIstance().notify(location);
-						//TODO uncomment when developed
+						NotificationManager.getInstance().notify(newlyCreatedAssignment.getId(),
+								location,"placeholder"/*TODO insert message*/);
 					}
 				};
 				nofityAssignment.run();//run a new thread to notify users when a new assignment is created
@@ -75,7 +93,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 	}
 
 	//================================================================================
-    // Assignment getter
+    // AssignmentServlet getter
     //================================================================================
 	
 	@Override
@@ -84,7 +102,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 		return DataAccessFacade.getInstance().getAssignments(location);
 	}
 	//================================================================================
-    // Assignment change state
+    // AssignmentServlet change state
     //================================================================================
 	
 	@Override

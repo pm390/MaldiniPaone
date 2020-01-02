@@ -18,7 +18,7 @@ public class ReportAndAssignmentUpdater {
 	
 	
 	//================================================================================
-    // Report Adder
+    // ReportCreation Adder
     //================================================================================
 	/**
 	 *	Calls the method inside ReportAndAssignmentDatabaseConnector which adds a report to the database 
@@ -58,7 +58,7 @@ public class ReportAndAssignmentUpdater {
 	}
 
 	//================================================================================
-    // Assignment modifier
+    // AssignmentServlet modifier
     //================================================================================
 	/**
 	 *	Calls the method inside ReportAndAssignmentDatabaseConnector which updates a report's state 

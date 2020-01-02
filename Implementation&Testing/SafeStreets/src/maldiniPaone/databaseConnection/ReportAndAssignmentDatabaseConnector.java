@@ -14,6 +14,7 @@ import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
+import maldiniPaone.utilities.beans.Photo;
 import maldiniPaone.utilities.beans.Report;
 
 public class ReportAndAssignmentDatabaseConnector {
@@ -22,7 +23,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	
 	
 	//================================================================================
-    // Report creation and retrieve
+    // ReportCreation creation and retrieve
     //================================================================================	
 	/**
 	 * Adds report to the database. Gets connection from connection pool and uses it to 
@@ -180,10 +181,10 @@ public class ReportAndAssignmentDatabaseConnector {
     // Assignments
     //================================================================================	
 	//================================================================================
-    // Assignment modifiers(take,finish,refuse)
+    // AssignmentServlet modifiers(take,finish,refuse)
     //================================================================================
 	/**
-	 *	Assigns an Assignment to an authority
+	 *	Assigns an AssignmentServlet to an authority
 	 *	@param id : the id of the assignment to be taken
 	 *	@param username : the user name of the authority taking the assignment
 	 *  @return boolean : true if the action is successful;
@@ -226,7 +227,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		return res;
 	}
 	/**
-	 *	Terminate an Assignment 
+	 *	Terminate an AssignmentServlet 
 	 *	@param id : the id of the assignment to be terminated
 	 *	@param username : the user name of the authority who terminated the assignment
 	 *	@param finishState : the state in which the user 
@@ -270,7 +271,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		return res;
 	}
 	/**
-	 *	Refuse an Assignment 
+	 *	Refuse an AssignmentServlet 
 	 *	@param id : the id of the assignment to be refused
 	 *	@param username : the user name of the authority who is refusing
 	 *  @return boolean : true if the action is successful;
@@ -314,7 +315,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		return res;
 	}
 	//================================================================================
-    // Assignment list getter
+    // AssignmentServlet list getter
     //================================================================================	
 	/**
 	 * gets the list of the assignment associated with the last 100 photos submitted for assignments close to 
@@ -366,8 +367,9 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
+	
 	//================================================================================
-    // Assignment count
+    // AssignmentServlet count
     //================================================================================	
 	/**Gets the number of assignments done close to a given location. Gets connection 
 	 * from connection pool and uses it to execute the insertion.
@@ -623,7 +625,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	/**
 	 * builds report from a row of the result set
 	 * @param rs : the result set set on the correct row
-	 * @return Report :  the report corresponding to the row of the result set
+	 * @return ReportCreation :  the report corresponding to the row of the result set
 	 * @throws SQLException specified field are not available
 	 * */
 	private static Report buildReportFromResultSet(ResultSet rs) throws SQLException {
@@ -643,7 +645,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	/**
 	 *builds list of Assignments from a result rest
 	 *@param rs : the result set from which the list is created 	  
-	 *@returns List of Assignment : list of assignment in the result set, 
+	 *@returns List of AssignmentServlet : list of assignment in the result set, 
 	 *								empty list if the result contains nothing
 	 *@throws SQLException specified field are not available
 	 *@note query must return data ordered by assignment id for this method to returns correctly
@@ -659,16 +661,16 @@ public class ReportAndAssignmentDatabaseConnector {
 		Assignment assignment=new Assignment(); //creates an assignment
 		List<Report> reports=new ArrayList<Report>();
 		Report report=new Report();
-		List<String> images=new ArrayList<String>();
+		List<Photo> images=new ArrayList<Photo>();
 		Location lastLocation=new Location();
-		
+		Photo photo= new Photo();
 		
 		//get values from first result set row
 		Integer id=rs.getInt(1);
 		String lastNote=rs.getString(3);
 		Float latitude=rs.getFloat(4);
 		Float longitude=rs.getFloat(5);
-		images.add(rs.getString(2));
+		photo.setName(rs.getString(2));
 		
 		
 		//adding elements to the lists
@@ -676,13 +678,13 @@ public class ReportAndAssignmentDatabaseConnector {
 							// stores id to control later when the id changes to understand
 							// when a new assignment begins
 		reports.add(report);
-		
+		images.add(photo);
 		
 		//setting state of beans
 		assignment.setState(State.Pending);
 		assignment.setId(id);
 		assignment.setReports(reports);
-		report.setPhotoNames(images);// set the reference to the list
+		report.setPhotos(images);// set the reference to the list
 		report.setNote(lastNote);
 		lastLocation.setLatitude(latitude);
 		lastLocation.setLongitude(longitude);
@@ -708,7 +710,7 @@ public class ReportAndAssignmentDatabaseConnector {
 				}
 				//modifying values
 				report=new Report(); // section in common for both new assignment and new report
-				images=new ArrayList<String>();
+				images=new ArrayList<Photo>();
 				lastLocation=new Location();
 				//get values from first result set row
 				lastNote=rs.getString(3);
@@ -716,15 +718,17 @@ public class ReportAndAssignmentDatabaseConnector {
 				longitude=rs.getFloat(5);
 				//setting beans state
 				report.setNote(lastNote);
-				report.setPhotoNames(images);
+				report.setPhotos(images);
 				lastLocation.setLatitude(latitude);
 				lastLocation.setLongitude(longitude);
 				report.setLocation(lastLocation);
 				//adding values to lists
 				reports.add(report);
 			}
+			photo=new Photo();
+			photo.setName(rs.getString(2));
 			//adding element to List
-			images.add(rs.getString(2));// if an already inserted report it must only add the photo
+			images.add(photo);// if an already inserted report it must only add the photo
 										// part in common for all the possible situations
 		}
 		return res;

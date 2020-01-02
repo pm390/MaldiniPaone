@@ -35,7 +35,9 @@ public class Constants {
 	
 	public static final String MAIL_PASSWORD="MaldiniPaone9897";
 	
-	public static final String SERVER_ADDRESS="http://localhost:8080/SafeStreets";
+	public static final String SERVER_ADDRESS="http://localhost:8081/SafeStreets";
 
 	public static final int MAX_ATTEMPTS=5;
+
+	public static final String PHOTO_PATH = "C:\\SafeStreetsPhotos";
 }

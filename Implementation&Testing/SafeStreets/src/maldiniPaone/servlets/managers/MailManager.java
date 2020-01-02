@@ -102,27 +102,36 @@ public class MailManager {
 	
 	private boolean sendMail(String subject,String content,String mailAdress)
 	{
-		boolean result=false;
-		try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(Constants.MAIL_USERNAME));
-            message.setRecipients
-            (
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(mailAdress)
-            );
-            message.setSubject(subject);
-            message.setText(content);
-            Transport.send(message);
-
-            result=true;
-
-        } catch (MessagingException e) {
-            if(Constants.VERBOSE)e.printStackTrace();
-        }
-
-		return result;
+		if(mailAdress==null||mailAdress.equals(""))
+		{
+			if(Constants.VERBOSE) System.out.println("email not specified");
+			return false;
+		}
+		Runnable thread=new Runnable() 
+		{
+			public void run() 
+			{
+				if(Constants.VERBOSE) System.out.println("sending email to"+ mailAdress);
+				try {
+		            Message message = new MimeMessage(session);
+		            message.setFrom(new InternetAddress(Constants.MAIL_USERNAME));
+		            message.setRecipients
+		            (
+		                    Message.RecipientType.TO,
+		                    InternetAddress.parse(mailAdress)
+		            );
+		            message.setSubject(subject);
+		            message.setText(content);
+		            Transport.send(message);
+		        } 
+				catch (MessagingException e) 
+				{
+		            if(Constants.VERBOSE)e.printStackTrace();
+		        }
+			}
+		};
+		thread.run();
+		return true;
 	}
 	
 	public static void main(String[] args) {

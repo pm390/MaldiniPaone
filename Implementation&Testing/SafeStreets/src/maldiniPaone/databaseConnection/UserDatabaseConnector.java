@@ -398,7 +398,7 @@ public class UserDatabaseConnector {
 			c=ConnectionPool.getInstance().getConnection();//get connection
 			ps = c.prepareStatement("select ch.cityhall_name, ch.cityhall_province ,ch.region"
 					+ ", ch.longitude,ch.latitude" // get cityhall
-					+ " from muncipality as mujoin cityhall as ch "
+					+ " from municipality as mu join cityhall as ch "
 					+ " on mu.cityhall_name=ch.cityhall_name and mu.cityhall_province=ch.cityhall_province"
 					+ " where mu.username=?");
 			//set the values in the prepared statements avoid sql injection
@@ -617,7 +617,7 @@ public class UserDatabaseConnector {
 		try {
 			c=ConnectionPool.getInstance().getConnection();//get connection
 			ps = c.prepareStatement("delete from "+user.toString() //delete from the right table
-					+ "where username=? and password=?");
+					+ " where username=? and password=?");
 			//set the values in the prepared statements avoid sql injection
 			ps.setString(1, username);
 			ps.setString(2, password);

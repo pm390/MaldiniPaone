@@ -9,7 +9,7 @@ public class Report  {
     //================================================================================
 	private Location location;
 	private String username;
-	private List<String> photoNames;
+	private List<Photo> photoNames;
 	private String note;
 	private String licensePlate;
 	private Timestamp date;
@@ -40,7 +40,7 @@ public class Report  {
 	/**
 	 * @return the photoNames
 	 */
-	public List<String> getPhotoNames() {
+	public List<Photo> getPhotoNames() {
 		return photoNames;
 	}
 
@@ -84,7 +84,7 @@ public class Report  {
 	/**
 	 * @param images : the photo names to set
 	 */
-	public void setPhotoNames(List<String> images) {
+	public void setPhotos(List<Photo> images) {
 		this.photoNames = images;
 	}
 

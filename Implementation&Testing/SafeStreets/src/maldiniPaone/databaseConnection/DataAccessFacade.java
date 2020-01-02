@@ -163,10 +163,11 @@ public class DataAccessFacade implements ManageDataAccess{
 	public Assignment addNewReport(Report report) 
 			throws ServerSideDatabaseException, IllegalParameterException 
 	{
-		//Integer newAssignmentid=ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(), report.getLocation(), report.getNote(), report.getLicensePlate());
-		return null; //FIXME add search newly created assignment
+		Integer newAssignmentid=ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(), report.getLocation(), report.getNote(), report.getLicensePlate());
+		Assignment res=new Assignment();
+		res.setId(newAssignmentid);
+		return res; 
 	}
-	
 	
 	
 	@Override
@@ -189,6 +190,7 @@ public class DataAccessFacade implements ManageDataAccess{
 	public boolean addAuthority(String username, String password, String email,String creator, District district) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Integer districtId=UserDataChecker.addDistrict(district.getName(), district.getProvince(), district.getLocationTopLeft(), district.getLocationBottomRight());
+		System.out.println(districtId);
 		return UserDataChecker.addAuthority(username, password, email, creator, districtId);
 	}
 

@@ -19,7 +19,7 @@ public class DataCollector {
 	
 	
 	//================================================================================
-    // Get Report count  and list of reports
+    // Get ReportCreation count  and list of reports
     //================================================================================
 	/**
 	 *  Gets the number of reports done close to a given location.Calls the appropriate method in
@@ -80,7 +80,7 @@ public class DataCollector {
 		return res;
 	}
 	//================================================================================
-    // Get Assignment count  and list of Assignment
+    // Get AssignmentServlet count  and list of AssignmentServlet
     //================================================================================
 	/**
 	 *  Gets the number of Assignments done close to a given location.Calls the appropriate method in
@@ -115,7 +115,7 @@ public class DataCollector {
 	 *  Gets the List of pending Assignments in a given location.Calls the appropriate method in
 	 *  ReportAndAssignmentDatabaseConnector and checks the validity of the parameters
 	 *  @param location : the location to which respect the assignments are being searched
-	 *  @return List of Assignment : the List of assignment in the location 
+	 *  @return List of AssignmentServlet : the List of assignment in the location 
 	 *  						  empty List if none is found
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
@@ -148,7 +148,7 @@ public class DataCollector {
 	 * Gets the List of static suggestions made by user to a cityhall
 	 *  @param name : the name of the cityhall
 	 *  @param province : the name of the province where the cityhall is located
-	 *  @return List of Assignment : the List of static suggestions for the cityhall
+	 *  @return List of AssignmentServlet : the List of static suggestions for the cityhall
 	 *  						  empty List if none is found
 	 *  @throws ServerSideDatabaseException when the database can't be found
 	 *  @throws IllegalParameterException when parameters are not valid(empty or null) 
