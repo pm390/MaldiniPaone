@@ -9,6 +9,7 @@ import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
+import maldiniPaone.utilities.beans.Violation;
 
 /**
  * This class contains protected static methods which are used to retrieve data
@@ -158,6 +159,34 @@ public class DataCollector {
 		if (name != null && province != null && name != "" && province != "") {
 			try {
 				res = ReportAndAssignmentDatabaseConnector.getSuggestions(name, province);
+			} catch (DatabaseNotFoundException e) {
+				throw new ServerSideDatabaseException(e, "database not found when finding assignments");
+			}
+		} else {
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
+	// ================================================================================
+	// Get Violation Type Count
+	// ================================================================================
+	/**
+	 * gets the list of the violation associated to a given city hall
+	 * 
+	 * @param name     the name of the city hall
+	 * @param province the province in which the city hall is located
+	 * @return List of violations associated to the cityhall
+	 * @throws IllegalParameterException   when violation type is not supported
+	 * @throws ServerSideDatabaseException when database can't be found
+	 * @implNote ArrayList is used
+	 **/
+	protected static List<Violation> getViolations(String name, String province)
+			throws IllegalParameterException, ServerSideDatabaseException {
+		List<Violation> res = null;
+		if (name != null && province != null && !name.equals("") && !province.equals("")) {
+			try {
+				res = ReportAndAssignmentDatabaseConnector.getViolations(name, province);
 			} catch (DatabaseNotFoundException e) {
 				throw new ServerSideDatabaseException(e, "database not found when finding assignments");
 			}

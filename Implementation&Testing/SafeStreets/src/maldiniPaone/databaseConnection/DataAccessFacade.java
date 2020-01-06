@@ -16,13 +16,13 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
+import maldiniPaone.utilities.beans.Violation;
 
 /**
  * The DataAccessFacade as the name suggests is a facade which allows business
  * logic to access the components which communicates with the database and gets,
- * retrieves, updates and deletes data.
- * Singleton and facade design patterns are used
- * Implements {@link ManageDataAccess}
+ * retrieves, updates and deletes data. Singleton and facade design patterns are
+ * used Implements {@link ManageDataAccess}
  **/
 public class DataAccessFacade implements ManageDataAccess {
 	// ================================================================================
@@ -131,6 +131,14 @@ public class DataAccessFacade implements ManageDataAccess {
 		return UserDataChecker.findEmailByUsername(username);
 	}
 
+	@Override
+	public List<Violation> getViolations(CityHall cityHall)
+			throws IllegalParameterException, ServerSideDatabaseException {
+		if (cityHall == null) {
+			throw new IllegalParameterException();
+		}
+		return DataCollector.getViolations(cityHall.getName(), cityHall.getProvince());
+	}
 	// ================================================================================
 	// New data creation
 	// ================================================================================

@@ -13,6 +13,7 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
+import maldiniPaone.utilities.beans.Violation;
 
 /**
  * This interface provides all the methods to retrieve, save, modify and delete
@@ -166,6 +167,17 @@ public interface ManageDataAccess {
 	 **/
 	public String findEmailByUsername(String username) throws ServerSideDatabaseException, IllegalParameterException;
 
+	/**
+	 * gets the list of the violation associated to a given city hall
+	 * 
+	 * @param name     the name of the city hall
+	 * @param province the province in which the city hall is located
+	 * @return List of violations associated to the cityhall
+	 * @throws IllegalParameterException   when violation type is not supported
+	 * @throws ServerSideDatabaseException when database can't be found
+	 * @implNote ArrayList is used
+	 **/
+	public List<Violation> getViolations(CityHall cityHall) throws IllegalParameterException, ServerSideDatabaseException;
 	// ================================================================================
 	// Adding new data
 	// ================================================================================
