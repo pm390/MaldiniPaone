@@ -8,9 +8,16 @@ import org.apache.commons.text.RandomStringGenerator;
 
 import maldiniPaone.constants.Constants;
 
+/**
+ *This class contains a method to build a random password.
+ **/
 public class PasswordBuilder
 {
-
+	/**
+	 *	Uses {@link RandomStringGenerator} to build a string composed of digits,
+	 *  lowercase and uppercase characters
+	 * 
+	 **/
 	public static String GetRandomPassword()
 	{
 		StringBuilder sb = new StringBuilder(); 
@@ -46,6 +53,10 @@ public class PasswordBuilder
 		
 		return sb.toString();
 	}
+	
+	//================================================================================
+    // dummy main
+    //================================================================================
 	
 	public static void main(String[] args) 
 	{

@@ -1,7 +1,5 @@
 package maldiniPaone.databaseConnection;
 
-
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -11,7 +9,7 @@ public class ReportAndAssignmentTests {
 
 	@Test
 	public void test() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 }

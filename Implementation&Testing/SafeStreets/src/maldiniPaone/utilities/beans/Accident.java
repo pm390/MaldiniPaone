@@ -1,8 +1,11 @@
 package maldiniPaone.utilities.beans;
 
 import java.sql.Timestamp;
-
-//TODO add some javadoc comment for bean
+//FIXME think if we need to delete this or not
+/**
+ * Bean representing Accident data.
+ *
+ **/
 public class Accident {
 	//================================================================================
     // Variables

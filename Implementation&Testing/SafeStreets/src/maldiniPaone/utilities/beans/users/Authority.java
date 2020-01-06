@@ -1,13 +1,14 @@
 package maldiniPaone.utilities.beans.users;
 
 import maldiniPaone.utilities.UserType;
-
+/**
+ * Extends {@link maldiniPaone.utilities.beans.users.User}.
+ * Represents an authority
+ **/
 public class Authority extends User 
 {
 	
-	
-	
-	//TODO add code here
+
 	//================================================================================
     // userType
     //================================================================================

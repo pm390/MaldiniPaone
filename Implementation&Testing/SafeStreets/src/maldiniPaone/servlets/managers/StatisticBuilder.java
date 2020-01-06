@@ -6,8 +6,18 @@ import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseExce
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Statistic;
 
+/**
+ * Builds statistics from data retrieve from {@link DataAccessFacade} 
+ **/
 public class StatisticBuilder
 {
+	/**
+	 * Builds the statistic object 
+	 * @param location the location to which respect the statistics are searched
+	 * @return the statistic object
+	 * @throws ServerSideDatabaseException when database is not found
+	 * @throws IllegalParameterException when the provided parameters are not valid
+	 * */
 	public static Statistic buildStatistic(Location location) throws ServerSideDatabaseException, IllegalParameterException
 	{
 		Statistic result=new Statistic();

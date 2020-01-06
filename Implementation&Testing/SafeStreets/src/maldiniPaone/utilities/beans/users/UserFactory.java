@@ -2,14 +2,18 @@ package maldiniPaone.utilities.beans.users;
 
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.utilities.UserType;
-
+/**
+ * This class contains static methods to build {@link maldiniPaone.utilities.beans.users.User}
+ */
 public class UserFactory 
 {
-	//TODO javadoc here
+	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Create a user using the basic information needed.
+	 * @param username the user name of the user to be created
+	 * @param password the password of the user to be created
+	 * @param user the type of user to be created
+	 * @return User the created user
 	 * @throws IllegalParameterException if the userType is not null but has an unexpected value
 	 **/
 	public static User buildUserBase(String username,String password,UserType user) throws IllegalParameterException

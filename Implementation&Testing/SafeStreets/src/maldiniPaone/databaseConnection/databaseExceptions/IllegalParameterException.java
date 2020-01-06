@@ -1,6 +1,9 @@
 package maldiniPaone.databaseConnection.databaseExceptions;
 
-
+/**
+ * Extends {@link Exception}. This exception is thrown when 
+ * database connection methods are called using not valid parameters
+ * */
 public class IllegalParameterException extends Exception {
 
 	//================================================================================
@@ -17,7 +20,6 @@ public class IllegalParameterException extends Exception {
 	@Override
 	public void printStackTrace()
 	{
-		System.err.println("can add additional information here");
 		//can add other debug functionalities here
 		super.printStackTrace();
 	}

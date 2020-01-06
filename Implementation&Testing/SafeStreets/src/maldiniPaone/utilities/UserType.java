@@ -15,10 +15,11 @@ public enum UserType {
     //================================================================================
 	/**
 	 * Converts a string in a user type 
+	 * This method doesn't check if string is null: use with caution
 	 * @param type : user type in string form , it gets converted to lowerCase
 	 * @return UserType: returns the user type corresponding to the string it receives as parameter
 	 * 					 returns null if no matching user type exists
-	 * @note this method doesn't check if string is null: use with caution
+	 * 
 	 **/
 	public static UserType fromString(String type)
 	{

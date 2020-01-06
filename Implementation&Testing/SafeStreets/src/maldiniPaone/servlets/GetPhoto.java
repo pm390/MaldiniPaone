@@ -31,8 +31,8 @@ public class GetPhoto extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 * Retrieve a photo 
+	 **/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user= (User) request.getSession(true).getAttribute("user");
 		if(user==null||//short circuit
@@ -50,7 +50,7 @@ public class GetPhoto extends HttpServlet {
 		}
 		else
 		{
-			response.setContentType("image/"+ext);//formats accepted in upload jpg,png,gif
+			response.setContentType("image/"+ext);
 			type=ext;
 		}
 		BufferedImage image=PhotoManager.getInstance().getPhoto(name);

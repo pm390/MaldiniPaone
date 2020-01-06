@@ -4,37 +4,66 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 
 import maldiniPaone.constants.Constants;
-
+/**
+ * Manages the creation and retrieving of the photos 
+ **/
 public class PhotoManager 
 {
+	// ================================================================================
+	// Private constructor
+	// ================================================================================
 	private PhotoManager() 
 	{
+		//creates the base directory
 		File file = new File(Constants.PHOTO_PATH);
 		if(!file.exists()) file.mkdirs();
 	}
-	
+	// ================================================================================
+		// instance
+		// ================================================================================
 	private static PhotoManager instance;
-	
+	// ================================================================================
+		// Instantiator
+		// ================================================================================
+
+		/**
+		 * Gets the instance of the PhotoManager. Singleton design pattern
+		 * 
+		 * @return the instance
+		 **/
 	public static PhotoManager getInstance()
 	{
 		return (instance==null)?instance=new PhotoManager():instance;
 	}
 	
+	/**
+	 * Gets a photo in the form of BufferedImage
+	 * @param name : the name of the photo
+	 * @return the photo's BufferedImage Object
+	 * @throws IOException when the photo can't be accessed 
+	 **/
 	public BufferedImage getPhoto(String name) throws IOException
 	{
 		File foto=new File(Constants.PHOTO_PATH+File.separator+name);
 		BufferedImage image=ImageIO.read(foto);
 		return image;
 	}
-	
+	/**
+	 * Saves a photo in the system 
+	 * @param username the username of the user who adds the photo
+	 * @param assignmentId the id of the assignment to which the photo is associated
+	 * @param photoNumber the index of the photo which is added
+	 * @param fileExtension the extension of the file
+	 * @param photo  the InputStream corresponding to the photo to be saved
+	 * @return true if the creation is successful
+	 * @throws IOException when the photo can't be saved
+	 **/
 	public boolean savePhoto(String username,Integer assignmentId,Integer photoNumber,String fileExtension,InputStream photo) throws IOException
 	{
 		File foto= new File(Constants.PHOTO_PATH+File.separator+username+"-"
@@ -42,7 +71,7 @@ public class PhotoManager
 		 foto.createNewFile();
 		 Files.copy(photo, foto.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		 photo.close();
-		return false;
+		return true;
 	}
 	
 	public static void main(String[] args)

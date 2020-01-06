@@ -124,6 +124,7 @@ CREATE TABLE `authority` (
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
+INSERT INTO `authority` VALUES ('qualcuno','QhkbR5UZ9lB8lYHF','pietrohideki@gmail.com','pm390',4);
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -206,6 +207,7 @@ CREATE TABLE `citizen` (
 
 LOCK TABLES `citizen` WRITE;
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
+INSERT INTO `citizen` VALUES ('pm390','ciaopeppo',0,'pietrohideki@gmail.com',0.8);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -272,13 +274,13 @@ DROP TABLE IF EXISTS `cityhall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cityhall` (
-  `cityhall_name` varchar(20) NOT NULL,
-  `cityhall_province` varchar(20) NOT NULL,
-  `region` varchar(20) NOT NULL,
+  `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `region` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `longitude` float NOT NULL,
   `latitude` float NOT NULL,
   PRIMARY KEY (`cityhall_name`,`cityhall_province`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +289,7 @@ CREATE TABLE `cityhall` (
 
 LOCK TABLES `cityhall` WRITE;
 /*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
-INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',10,10),('anzano','sondrio','lombardia',30,30),('erba','lecco','lombardia',20,20);
+INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',9,45);
 /*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +311,7 @@ CREATE TABLE `district` (
   PRIMARY KEY (`id`),
   KEY `cityh_idx` (`cityhall_name`,`cityhall_province`),
   CONSTRAINT `cityh` FOREIGN KEY (`cityhall_name`, `cityhall_province`) REFERENCES `cityhall` (`cityhall_name`, `cityhall_province`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,6 +320,7 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
+INSERT INTO `district` VALUES (4,'alserio','como',44.5,8.5,45.4,9.4);
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,8 +418,8 @@ CREATE TABLE `municipality` (
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `employee` varchar(36) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `email` varchar(120) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `cityhall_name` varchar(20) CHARACTER SET armscii8 COLLATE armscii8_general_ci NOT NULL,
-  `cityhall_province` varchar(20) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `othermunicipality_idx` (`employee`),
@@ -430,7 +433,7 @@ CREATE TABLE `municipality` (
 
 LOCK TABLES `municipality` WRITE;
 /*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
-INSERT INTO `municipality` VALUES ('luca','l',NULL,'l@u','anzano','sondrio'),('pietro','p',NULL,'p@i','erba','lecco');
+INSERT INTO `municipality` VALUES ('pm390','o0o0o0',NULL,'pietrohideki@yahoo.it','alserio','como');
 /*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -647,7 +650,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('angelo','a','manager','a@n'),('luca','l','municipality','l@u'),('pietro','p','municipality','p@i');
+INSERT INTO `user` VALUES ('angelo','a','manager','a@n'),('pm390','o0o0o0','municipality','pietrohideki@yahoo.it'),('qualcuno','QhkbR5UZ9lB8lYHF','authority','pietrohideki@gmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -694,4 +697,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-23  2:20:57
+-- Dump completed on 2020-01-02 17:53:42

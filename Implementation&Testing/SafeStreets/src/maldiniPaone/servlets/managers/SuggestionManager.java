@@ -12,39 +12,54 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.Municipality;
 
-public class SuggestionManager implements ManageSuggestions
-{
+/**
+ * Implements {@link ManageSuggestions} Singleton design pattern
+ **/
+public class SuggestionManager implements ManageSuggestions {
+	// ================================================================================
+	// instance
+	// ================================================================================
+	private static SuggestionManager instance;
 
-	@Override
-	public boolean addSuggestion(String suggestion, Location location) throws ServerSideDatabaseException, IllegalParameterException 
-	{
-		CityHall cityHall=DataAccessFacade.getInstance().getClosestCityHall(location);
-		return DataAccessFacade.getInstance().addSuggestion(suggestion,cityHall);
+	private SuggestionManager() {
+	}
+	// ================================================================================
+	// Instantiator
+	// ================================================================================
+
+	/**
+	 * Gets the instance of the Suggestion manager. Singleton design pattern
+	 * 
+	 * @return the instance
+	 **/
+	public static SuggestionManager getIstance() {
+		return (instance == null) ? instance = new SuggestionManager() : instance;
 	}
 
 	@Override
-	public List<String> getSuggestions(Municipality municipality) 
-			throws ServerSideDatabaseException, IllegalParameterException 
-	{
-		List<String> suggestions=null;
-		suggestions=DataAccessFacade.getInstance().getStaticSuggestions(municipality.getCityhall());
-		if(suggestions!=null&&suggestions.size()>=Constants.SUGGESTION_MAX_SIZE)
-		{
+	public boolean addSuggestion(String suggestion, Location location)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		CityHall cityHall = DataAccessFacade.getInstance().getClosestCityHall(location);
+		return DataAccessFacade.getInstance().addSuggestion(suggestion, cityHall);
+	}
+
+	@Override
+	public List<String> getSuggestions(Municipality municipality)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		List<String> suggestions = null;
+		suggestions = DataAccessFacade.getInstance().getStaticSuggestions(municipality.getCityhall());
+		if (suggestions != null && suggestions.size() >= Constants.SUGGESTION_MAX_SIZE) {
 			return suggestions;
-		}
-		else if(suggestions==null)
-		{
-			suggestions=new ArrayList<String>();
+		} else if (suggestions == null) {
+			suggestions = new ArrayList<String>();
 		}
 		suggestions.addAll(GenerateSuggestions(municipality.getLocation()));
 		return suggestions;
 	}
-	
-	
-	private static List<String> GenerateSuggestions(Location location)
-	{
-		List<String> result=new ArrayList<String>();
-		//TODO think how to use results
+
+	private static List<String> GenerateSuggestions(Location location) {
+		List<String> result = new ArrayList<String>();
+		// TODO think how to use results
 		return result;
 	}
 

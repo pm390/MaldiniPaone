@@ -4,6 +4,11 @@ import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 
+/**
+ * Extends {@link maldiniPaone.utilities.beans.users.User}.
+ * Represents a Municipality.
+ * Adds additional informations needed for municipalities.
+ **/
 public class Municipality extends User{
 	//================================================================================
     // Variables

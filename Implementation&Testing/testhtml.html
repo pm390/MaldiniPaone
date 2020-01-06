@@ -1,0 +1,51 @@
+
+<!-- saved from url=(0057)file:///C:/Users/Maurizio%20Maldini/Desktop/testhtml.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>
+   <form action="http://localhost:8081/SafeStreets/Registration" method="POST">
+  username: <input type="text" name="username"><br>
+  password: <input type="text" name="password"><br>
+  email: <input type="text" name="email"> <br>
+  cityHallName: <input type="text" name="cityHallName"><br>
+  cityHallProvince: <input type="text" name="cityHallProvince"><br>
+  region: <input type="text" name="region"><br>
+ latitude: <input type="number" name="latitude" step="any"> <br>
+       longitude: <input type="number" name="longitude" step="any"> <br>
+       
+  <input type="submit" value="registration">
+</form>
+    <form action="http://localhost:8081/SafeStreets/RegistrationByMunicipality" method="POST">
+  username: <input type="text" name="username"><br>
+  password: <input type="text" name="password"><br>
+  email: <input type="text" name="email"> <br>
+  usertype: 
+  <select name="userType">
+      <option value="authority">authority</option>
+      <option value="municipality">municipality</option>
+</select>
+        <br>
+         tLlatitude: <input type="number" name="tLLatitude" step="any"> <br>
+       tLlongitude: <input type="number" name="tLLongitude" step="any"> <br>
+        bRlatitude: <input type="number" name="bRLatitude" step="any"> <br>
+       bRlongitude: <input type="number" name="bRLongitude" step="any"> <br>
+       
+  <input type="submit" value="registrationByMunicipality">
+</form>
+ <form action="http://localhost:8081/SafeStreets/Delete" method="delete">
+  <input type="submit" value="delete">
+</form>
+<form action="http://localhost:8081/SafeStreets/Login" method="post">
+  username: <input type="text" name="username"><br>
+  password: <input type="text" name="password"><br>
+  <input type="submit" value="login">
+</form>
+    <form action="http://localhost:8081/SafeStreets/Logout" method="get">
+  <input type="submit" value="logout">
+</form>
+     <form action="http://localhost:8081/SafeStreets/AccountModification" method="POST">
+  old password: <input type="text" name="oldPassword"><br>
+  username: <input type="text" name="newUsername"><br>
+  password: <input type="text" name="newPassword"><br>
+  email: <input type="text" name="newEmail"> <br>
+  <input type="submit" value="modifyUser">
+</form>
+</body></html>

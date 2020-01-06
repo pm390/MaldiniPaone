@@ -30,138 +30,130 @@ import maldiniPaone.utilities.beans.users.User;
 @WebServlet("/RegistrationByMunicipality")
 public class RegistrationByMunicipality extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegistrationByMunicipality() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-/*
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		if(Constants.VERBOSE)System.out.println("unexpected request : registration is post operation");
-		response.sendError(400, "Bad Request"+((Constants.VERBOSE)?"method forbidden in registration servlet":""));
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RegistrationByMunicipality() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-*/
-	
-    
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	/*
+	 * @Override protected void doGet(HttpServletRequest request,
+	 * HttpServletResponse response) throws ServletException, IOException {
+	 * if(Constants.VERBOSE)System.out.
+	 * println("unexpected request : registration is post operation");
+	 * response.sendError(400,
+	 * "Bad Request"+((Constants.VERBOSE)?"method forbidden in registration servlet"
+	 * :"")); }
+	 */
+
+	@Override
+	/**
+	 * Register Authority or Municipality done by a System Manager
+	 **/
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// set output to json format
 		PrintWriter outputWriter = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		User user= (User) request.getSession(true).getAttribute("user");
-		if(user==null||//short circuit
-				user.getUserType()!=UserType.Municipality)
-		{
-			//TODO send json object to indicate illegal request(not allowed)
-			//outputWriter.println(new Gson().toJson(message));
+		User user = (User) request.getSession(true).getAttribute("user");
+		if (user == null || // short circuit
+				user.getUserType() != UserType.Municipality) {
+			// TODO send json object to indicate illegal request(not allowed)
+			// outputWriter.println(new Gson().toJson(message));
 			return;
 		}
-		//here we have user != null and for sure a municipality
-		CityHall cityHall=((Municipality)user).getCityhall();
-		
-		//now cityhall is available
-		String username=(String)request.getParameter("username");
-		String password=PasswordBuilder.GetRandomPassword();
-		String email=(String)request.getParameter("email");
-		String targetUserType=(String)request.getParameter("userType");
-		try
-		{
-			if(cityHall==null)
-			//if the session doesn't contain already the cityhall of the municipality it must be retrieved
+		// here we have user != null and for sure a municipality
+		CityHall cityHall = ((Municipality) user).getCityhall();
+
+		// get needed data
+		String username = (String) request.getParameter("username");
+		String password = PasswordBuilder.GetRandomPassword();
+		String email = (String) request.getParameter("email");
+		String targetUserType = (String) request.getParameter("userType");
+		try {
+			if (cityHall == null)
+			// if the session doesn't contain already the cityhall of the municipality it
+			// must be retrieved
 			{
-				cityHall=UserManager.getIstance().getCityHall(user.getUsername());
-				((Municipality)user).setCityhall(cityHall);
-				
-				if(Constants.VERBOSE)System.out.println(cityHall.toString());//debug
+				cityHall = UserManager.getIstance().getCityHall(user.getUsername());
+				((Municipality) user).setCityhall(cityHall);
+
+				if (Constants.VERBOSE)
+					System.out.println(cityHall.toString());// debug
 			}
-			if(targetUserType.equals(UserType.Municipality.toString()))
-			{
-				
-				if(UserManager.getIstance().registerMunicipalityByMunicipality(username, password, email, 
-						user.getUsername(), cityHall.getName(), cityHall.getProvince()))
-				{
+			if (targetUserType.equals(UserType.Municipality.toString())) {
+
+				if (UserManager.getIstance().registerMunicipalityByMunicipality(username, password, email,
+						user.getUsername(), cityHall.getName(), cityHall.getProvince())) {
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
+				} else {
+					// TODO duplicate username or password JSON message
+					return;
 				}
-				else
-				{
-					//TODO duplicate username or password JSON message
+			} else if (targetUserType.equals(UserType.Authority.toString())) {
+				if (Constants.VERBOSE)
+					System.out.println("register authority");
+
+				// TODO parse additional data for authority
+				// TODO add district
+				if (registerAuthority(username, password, email, (Municipality) user, request)) {
+					MailManager.getInstance().sendConfirmationMail(username, password, email);
+				} else {
+					// TODO duplicate username or password JSON message
 					return;
 				}
 			}
-			else if(targetUserType.equals(UserType.Authority.toString()))
-			{
-				if(Constants.VERBOSE)System.out.println("register authority");
-
-				//TODO parse additional data for authority
-				//TODO add district
-				if(registerAuthority(username,password,email,(Municipality) user,request))
-				{
-					MailManager.getInstance().sendConfirmationMail(username, password, email);
-				}
-				else
-				{
-					//TODO duplicate username or password JSON message
-					return ;
-				}
+		} catch (ServerSideDatabaseException e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
 			}
-		}
-		catch (ServerSideDatabaseException e) 
-		{
-			if(Constants.VERBOSE) {e.printStackTrace();}
-			//TODO send json object to indicate an error server side(5xx)
-			//outputWriter.println(new Gson().toJson(message));
+			// TODO send json object to indicate an error server side(5xx)
+			// outputWriter.println(new Gson().toJson(message));
+			return;
+		} catch (IllegalParameterException e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			// TODO send json object to indicate an error in the parameters (4xx)
+			// outputWriter.println(new Gson().toJson(message));
+			return;
+		} catch (Exception e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			// debug purpouse
 			return;
 		}
-		catch( IllegalParameterException e)
-		{
-			if(Constants.VERBOSE) {e.printStackTrace();}
-			//TODO send json object to indicate an error in the parameters (4xx)
-			//outputWriter.println(new Gson().toJson(message));
-			return;
-		}
-		catch(Exception e)
-		{
-			if(Constants.VERBOSE) {e.printStackTrace();}
-			//debug purpouse
-			return;
-		}
-		//TODO send json object to indicate a successful registration
-		//outputWriter.println(new Gson().toJson(message));
+		// TODO send json object to indicate a successful registration
+		// outputWriter.println(new Gson().toJson(message));
 		return;
 	}
-    
-    
-    
-    //================================================================================
-    // Utility functions
-    //================================================================================
-	//TODO javadoc here
-    private static boolean registerAuthority(String username,String password,String email,
-    		Municipality creator,HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException
-    {
-    	CityHall cityhall=creator.getCityhall();
-    	
-		Float topLeftLatitude=Float.parseFloat(request.getParameter("tLLatitude"));
-		Float topLeftLongitude=Float.parseFloat(request.getParameter("tLLongitude"));
-		Location topLeftLocation=new Location();
+
+	// ================================================================================
+	// Utility functions
+	// ================================================================================
+	// TODO javadoc here
+	private static boolean registerAuthority(String username, String password, String email, Municipality creator,
+			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException {
+		CityHall cityhall = creator.getCityhall();
+
+		Float topLeftLatitude = Float.parseFloat(request.getParameter("tLLatitude"));
+		Float topLeftLongitude = Float.parseFloat(request.getParameter("tLLongitude"));
+		Location topLeftLocation = new Location();
 		topLeftLocation.setLatitude(topLeftLatitude);
 		topLeftLocation.setLongitude(topLeftLongitude);
-    	
-		Float bottomRightLatitude=Float.parseFloat(request.getParameter("bRLatitude"));
-		Float bottomRightLongitude=Float.parseFloat(request.getParameter("bRLongitude"));
-		Location bottomRightLocation=new Location();
+
+		Float bottomRightLatitude = Float.parseFloat(request.getParameter("bRLatitude"));
+		Float bottomRightLongitude = Float.parseFloat(request.getParameter("bRLongitude"));
+		Location bottomRightLocation = new Location();
 		bottomRightLocation.setLatitude(bottomRightLatitude);
 		bottomRightLocation.setLongitude(bottomRightLongitude);
-		
-    	return UserManager.getIstance().registerAuthority(username, password, email, 
-    			creator.getUsername(),cityhall.getName(), cityhall.getProvince(), 
-    			topLeftLocation, bottomRightLocation);
-    }
-	
+
+		return UserManager.getIstance().registerAuthority(username, password, email, creator.getUsername(),
+				cityhall.getName(), cityhall.getProvince(), topLeftLocation, bottomRightLocation);
+	}
+
 }

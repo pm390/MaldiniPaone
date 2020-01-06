@@ -1,8 +1,8 @@
 package maldiniPaone.servlets;
 
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,74 +25,72 @@ import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Photo;
 import maldiniPaone.utilities.beans.users.User;
 
-
-
-
-
-	@MultipartConfig
-	@WebServlet("/ReportCreation")
+@MultipartConfig
+@WebServlet("/ReportCreation")
 public class ReportCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReportCreation() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession() == null || //shortcircuit
-					request.getSession().getAttribute("user")==null)
-		{
-			//invalid access
+	public ReportCreation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	/**
+	 * Create a Report
+	 **/
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// set output to json format
+		PrintWriter outputWriter = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		if (request.getSession() == null || // shortcircuit
+				request.getSession().getAttribute("user") == null || !ServletFileUpload.isMultipartContent(request)) {
+			// invalid access
 			return;
 		}
-		if(!ServletFileUpload.isMultipartContent(request))
-		{
-			response.sendError(403, "Illegal access use the given form to send photo");
-		}
-		User user=(User)request.getSession().getAttribute("user");
-		String username=user.getUsername();
-		Location location=new Location();
-		Float latitude= Float.parseFloat(request.getParameter("latitude"));
-		Float longitude= Float.parseFloat(request.getParameter("longitude"));
-		location.setLatitude(latitude);
-		location.setLongitude(longitude);
-		String note= request.getParameter("note");
-		String licensePlate= request.getParameter("car");
-		
-		int index=0;
-		List<Photo> photos=new ArrayList<Photo>();
-		Collection<Part> parts = request.getParts();
-		for(Part x:parts)
-	    {
-	    		 if(x.getName().equals("photo"))//for each image
-	    		 {
-	    			 String image=x.getSubmittedFileName();
-	    			 Integer i=image.lastIndexOf(".");
-	    			 String fileExtension=image.substring(i);
-	    			 InputStream input = x.getInputStream();
-	    			 Photo temp=new Photo();
-	    			 temp.setFileExtension(fileExtension);
-	    			 temp.setPhoto(input);
-	    			 temp.setPhotoNumber(index++);
-	    		 }
-	    }		
-		try 
-		{
+
+		try {
+			// get needed data
+			User user = (User) request.getSession().getAttribute("user");
+			String username = user.getUsername();
+			Location location = new Location();
+			Float latitude = Float.parseFloat(request.getParameter("latitude"));
+			Float longitude = Float.parseFloat(request.getParameter("longitude"));
+			location.setLatitude(latitude);
+			location.setLongitude(longitude);
+			String note = request.getParameter("note");
+			String licensePlate = request.getParameter("car");
+
+			// get all photos
+			int index = 0;
+			List<Photo> photos = new ArrayList<Photo>();
+			Collection<Part> parts = request.getParts();
+			for (Part x : parts) {
+				if (x.getName().equals("photo" + x))// for each image
+				{
+					String image = x.getSubmittedFileName();// get filename
+					Integer i = image.lastIndexOf(".");// get last dot
+					String fileExtension = image.substring(i);// get file extension
+					InputStream input = x.getInputStream();// get input stream
+					// save data to a bean
+					Photo temp = new Photo();
+					temp.setFileExtension(fileExtension);
+					temp.setPhoto(input);
+					temp.setPhotoNumber(index++);
+				}
+			}
+
 			ReportManager.getInstance().addReport(username, location, photos, licensePlate, note);
-		} 
-		catch (ServerSideDatabaseException | IllegalParameterException e) 
-		{
-			if(Constants.VERBOSE)e.printStackTrace();
+		} catch (ServerSideDatabaseException | IllegalParameterException e) {
+			if (Constants.VERBOSE)
+				e.printStackTrace();
 		}
-		
+
 	}
 
 }

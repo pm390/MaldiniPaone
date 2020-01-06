@@ -16,10 +16,11 @@ public enum State {
     //================================================================================
 	/**
 	 * Converts a string in a State
+	 * This method doesn't check if string is null: use with caution
 	 * @param state : state in string form , it gets converted to lowerCase
 	 * @return State: returns the State corresponding to the string it receives as parameter
 	 * 					 returns null if no matching State exists
-	 * @note this method doesn't check if string is null: use with caution
+	 * 
 	 **/
 	public static State fromString(String state)
 	{

@@ -13,24 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Logout() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    @Override 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Logout() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	/**
+	 * Logout from the service
+	 **/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getSession(true).removeAttribute("user");
-		//if you want you may return an ok message. not needed
+		// if you want you may return an ok message. not needed
 		return;
 	}
 
-	
 }

@@ -1,7 +1,7 @@
 package maldiniPaone.databaseConnection.databaseExceptions;
 
 /**
- * Derived from Exception interface. This exception is thrown when the Connection Pool is not able to
+ * Extends {@link Exception}. This exception is thrown when the Connection Pool is not able to
  * instantiate connections with the database
  * */
 
@@ -21,7 +21,6 @@ public class DatabaseNotFoundException extends Exception {
 	@Override
 	public void printStackTrace()
 	{
-		System.err.println("can add additional information here");
 		//can add other debug functionalities here
 		super.printStackTrace();
 	}

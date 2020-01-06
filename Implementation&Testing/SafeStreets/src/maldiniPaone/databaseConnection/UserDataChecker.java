@@ -6,7 +6,16 @@ import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseExce
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
-
+/**
+ * This class contains protected static methods which are used to get and update data
+ * about users. Those methods checks parameters values to
+ * check data validity and avoid inconsistent data. All methods may throw
+ * exceptions if database can't be reached or parameters are not valid. The
+ * actual communication with the database happens in
+ * {@link UserDatabaseConnector}.
+ * 
+ * @see UserDatabaseConnector
+ **/
 public class UserDataChecker {
 	//================================================================================
     // Static variables
@@ -254,8 +263,8 @@ public class UserDataChecker {
     //================================================================================
 	
 	/**
-	 * Gets the cityhall where a municipality works
-	 * @param username: the username of the municipality whose cityhall is being searched 
+	 * Gets the city hall where a municipality works
+	 * @param  username : the user name of the municipality whose city hall is being searched 
 	 * @return CityHall
 	 * @throws ServerSideDatabaseException  when the database can't be found
 	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
@@ -289,7 +298,7 @@ public class UserDataChecker {
 	/**
 	 * Calls the function to check user type inside UserDatabaseConnector
 	 * this function checks the validity of the parameters and calls the appropriate function
-	 * @param username : the username of the user to be found
+	 * @param username : the user name of the user to be found
 	 * @param password : the password of the user
 	 * @return UserType : the user type of the user,
 	 * 					  null if no user with those credentials exists
@@ -323,11 +332,11 @@ public class UserDataChecker {
 	/**
 	 * Calls the function to update user data inside UserDatabaseConnector
 	 * this function checks the validity of the parameters and calls the appropriate function
-	 * @param oldUsername : the old username of the user to be modified
+	 * @param oldUsername : the old user name of the user to be modified
 	 * @param oldPassword : the old password of the user
 	 * @param user : the type of the user that must be modified
 	 * @param newEmail : the new email to be set(set to null if no modification needed)
-	 * @param newUsername : the new username to be set
+	 * @param newUsername : the new user name to be set
 	 * @param newPassword : the new password to be set
 	 * @return boolean : true if the update is successful,
 	 * 					 false otherwise
@@ -367,7 +376,7 @@ public class UserDataChecker {
 	// remove user
 	//================================================================================
 	/**
-	 * Removes a user given its username and password
+	 * Removes a user given its user name and password
 	 * @param username : the user name of the user to be deleted
 	 * @param password : the password of the user to be deleted
 	 * @param user : the user type of the user to be deleted
@@ -435,12 +444,12 @@ public class UserDataChecker {
 
 
 	//================================================================================
-	// get username by email
+	// get user name by email
 	//================================================================================
 	/**
-	 * Finds the username of a user
-	 * @param email : the email address of the user whose username must be retrieved
-	 * @return String : the username of the user . null if no user exists with the given email
+	 * Finds the user name of a user
+	 * @param email : the email address of the user whose user name must be retrieved
+	 * @return String : the user name of the user . null if no user exists with the given email
 	 * @throws ServerSideDatabaseException  when the database can't be found
 	 * @throws IllegalParameterException  when parameters are not valid(empty or null) 
 	 **/
