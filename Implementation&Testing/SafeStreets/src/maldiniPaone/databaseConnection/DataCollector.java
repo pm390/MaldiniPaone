@@ -137,6 +137,31 @@ public class DataCollector {
 		}
 		return res;
 	}
+
+	/**
+	 * Check if there are active assignment for the authority
+	 * 
+	 * @param username : the user name of the user who made the reports
+	 * @return true if there is an active assignment false otherwise
+	 * @throws DatabaseNotFoundException the connection to the database could not be
+	 *                                   instantiated
+	 * @throws IllegalParameterException if not valid coordinates are saved
+	 */
+	protected static List<Integer> checkActive(String username)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		List<Integer> res = null;
+		if (username != null && !username.equals("")) {
+			try {
+				res = ReportAndAssignmentDatabaseConnector.checkActive(username);
+			} catch (DatabaseNotFoundException e) {
+				throw new ServerSideDatabaseException(e, "database not found when finding assignments");
+			}
+		} else {
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
 	// ================================================================================
 	// Get Suggestions
 	// ================================================================================

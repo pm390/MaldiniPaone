@@ -23,61 +23,74 @@ import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.User;
 
 /**
- * Servlet implementation class Registration
+ * Servlet implementation class RegistrationByManager
  */
-@WebServlet("/Registration")
-public class Registration extends HttpServlet {
+@WebServlet("/RegistrationByManager")
+public class RegistrationByManager extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Registration() {
+	public RegistrationByManager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	/**
-	 * Register Citizen or Municipality done by a System Manager
-	 **/
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// set output to json format
 		PrintWriter outputWriter = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
+		User user = (User) request.getSession(true).getAttribute("user");
+		if (user == null || // short circuit
+				user.getUserType() != UserType.Manager) {
+			GenericResponse message = new GenericResponse(400, "invalid access");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
+			return;
+		}
 		// get needed data
 		String username = (String) request.getParameter("username");
-		String password = (String) request.getParameter("password");
+		String password = PasswordBuilder.GetRandomPassword();
 		String email = (String) request.getParameter("email");
-		User user = (User) request.getSession(true).getAttribute("user");
+		String targetUserType = (String) request.getParameter("userType");
 		try {
-			if (Constants.VERBOSE) {
-				System.out.println("registering");// debug
-			}
-			if (user == null && UserManager.getIstance().registerCitizen(username, password, email)) {
-				if (Constants.VERBOSE) {
-					System.out.println("registrering citizen");//debug
+			if (targetUserType != null) {
+				switch (UserType.fromString(targetUserType)) {
+				case Municipality:
+					if (registerMunicipality(username, password, // utility static function
+							email, request)) // parses request and registers municipality
+					{
+						MailManager.getInstance().sendConfirmationMail(username, password, email);
+					} else {
+						GenericResponse message = new GenericResponse(400, "already exist");
+						outputWriter.println(new Gson().toJson(message));
+						outputWriter.close();
+						return;
+					}
+					break;
+				case Manager:
+					String venueName=request.getParameter("venue");
+					UserManager.getIstance().registerManager(username, password, email, venueName);
+					break;
+				default:
+					GenericResponse message = new GenericResponse(400, "invalid parameters");
+					outputWriter.println(new Gson().toJson(message));
+					outputWriter.close();
+					return;
 				}
-				MailManager.getInstance().sendConfirmationMail(username, email);
-			} else if (user == null) {
-				GenericResponse message = new GenericResponse(400,"already exist");
-				outputWriter.println(new Gson().toJson(message));
-				outputWriter.close();
-				return;
-			} else {
-				GenericResponse message = new GenericResponse(400,"invalid access");
-				outputWriter.println(new Gson().toJson(message));
-				outputWriter.close();
-				return;
 			}
 		} catch (ServerSideDatabaseException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			GenericResponse message = new GenericResponse(500,"server error");
+			GenericResponse message = new GenericResponse(500, "Server side error");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();
 			return;
@@ -85,9 +98,15 @@ public class Registration extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			GenericResponse message = new GenericResponse(400, "invalid parameters");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();
+			return;
+		} catch (Exception e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			// debug purpouse
 			return;
 		}
 		GenericResponse message = new GenericResponse();

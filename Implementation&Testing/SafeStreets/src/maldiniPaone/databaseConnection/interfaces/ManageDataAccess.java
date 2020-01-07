@@ -180,6 +180,15 @@ public interface ManageDataAccess {
 	public List<Violation> getViolations(CityHall cityHall)
 			throws IllegalParameterException, ServerSideDatabaseException;
 
+	/**
+	 * Check if there are active assignment for the authority
+	 * 
+	 * @param username : the user name of the authority
+	 * @return list of id of active assignments
+	 * @throws ServerSideDatabaseException when database can't be found
+	 * @throws IllegalParameterException if parameters are not valid
+	 */
+	public  List<Integer> checkActive (String username) throws ServerSideDatabaseException, IllegalParameterException;
 	// ================================================================================
 	// Adding new data
 	// ================================================================================

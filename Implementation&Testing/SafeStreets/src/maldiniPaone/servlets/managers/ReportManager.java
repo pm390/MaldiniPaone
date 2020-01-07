@@ -16,9 +16,10 @@ import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
 import maldiniPaone.utilities.beans.Photo;
+
 /**
  * Implements {@link ManageReportCreation} and {@link ManageAssignment}.
- * Singleton design pattern 
+ * Singleton design pattern
  **/
 public class ReportManager implements ManageReportCreation, ManageAssignment {
 	// ================================================================================
@@ -124,4 +125,11 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 		return DataAccessFacade.getInstance().updateAssignment(id, finishState, username, type);
 	}
 
+	// ================================================================================
+	// AssignmentServlet check active
+	// ================================================================================
+	@Override
+	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
+		return DataAccessFacade.getInstance().checkActive(username);
+	}
 }

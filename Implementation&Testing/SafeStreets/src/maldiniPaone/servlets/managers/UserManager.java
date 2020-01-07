@@ -7,6 +7,7 @@ import maldiniPaone.servlets.managers.interfaces.ManageAccountModification;
 import maldiniPaone.servlets.managers.interfaces.ManageAuthorityPosition;
 import maldiniPaone.servlets.managers.interfaces.ManageLogin;
 import maldiniPaone.servlets.managers.interfaces.ManageRegistration;
+import maldiniPaone.servlets.managers.interfaces.ManageRegistrationByManager;
 import maldiniPaone.servlets.managers.interfaces.ManageRegistrationByMunicipalities;
 import maldiniPaone.servlets.managers.interfaces.ManageUserDataRetrieve;
 import maldiniPaone.utilities.UserType;
@@ -17,11 +18,12 @@ import maldiniPaone.utilities.beans.Location;
 /**
  * Implements {@link ManageAccountModification} ,
  * {@link ManageAuthorityPosition} , {@link ManageLogin} ,
- * {@link ManageRegistration}, {@link ManageRegistrationByMunicipalities} and
- * {@link ManageUserDataRetrieve}. Singleton design pattern
+ * {@link ManageRegistration}, {@link ManageRegistrationByMunicipalities}
+ * ,{@link ManageRegistrationByManager} and {@link ManageUserDataRetrieve}.
+ * Singleton design pattern
  **/
 public class UserManager implements ManageAccountModification, ManageAuthorityPosition, ManageLogin, ManageRegistration,
-		ManageRegistrationByMunicipalities, ManageUserDataRetrieve {
+		ManageRegistrationByMunicipalities, ManageUserDataRetrieve, ManageRegistrationByManager {
 	// ================================================================================
 	// instance
 	// ================================================================================
@@ -108,6 +110,14 @@ public class UserManager implements ManageAccountModification, ManageAuthorityPo
 	}
 
 	// ================================================================================
+	// Manage Manager Registration
+	// ================================================================================
+	@Override
+	public boolean registerManager(String username, String password, String email, String venue)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		return DataAccessFacade.getInstance().addManager(username, password, email, venue);
+	}
+	// ================================================================================
 	// Manage account modification
 	// ================================================================================
 
@@ -123,9 +133,10 @@ public class UserManager implements ManageAccountModification, ManageAuthorityPo
 			throws ServerSideDatabaseException, IllegalParameterException {
 		return DataAccessFacade.getInstance().removeUser(username, password, user);
 	}
+
 	@Override
 	public boolean forgotPassword(String oldUsername, UserType user, String newPassword)
-			throws ServerSideDatabaseException, IllegalParameterException{
+			throws ServerSideDatabaseException, IllegalParameterException {
 		return DataAccessFacade.getInstance().forgotPassword(oldUsername, user, newPassword);
 	}
 

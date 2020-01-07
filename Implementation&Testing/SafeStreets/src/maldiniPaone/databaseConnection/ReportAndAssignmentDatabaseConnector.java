@@ -477,6 +477,61 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
+	// ================================================================================
+	// Check Active State
+	// ================================================================================
+
+	/**
+	 * Check if there are active assignment for the authority
+	 * 
+	 * @param username : the user name of the authority
+	 * @return list of active assignments id
+	 * @throws DatabaseNotFoundException the connection to the database could not be
+	 *                                   instantiated
+	 * @throws IllegalParameterException if not valid coordinates are saved
+	 * @implNote ArrayList is used
+	 */
+	protected static List<Integer> checkActive(String username)
+			throws DatabaseNotFoundException, IllegalParameterException {
+		List<Integer> res = new ArrayList<Integer>();
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			c = ConnectionPool.getInstance().getConnection();// get connection
+			ps = c.prepareStatement("select id " //
+					+ "from assignment " + "where appointee=? and state=?");
+			// set maker of the reports
+			ps.setString(1, username);
+			ps.setString(2, State.Accepted.toString());
+			// execute selection
+			ps.execute();
+			// get result set
+			rs = ps.getResultSet();
+			while(rs.next()) {
+				// if no result than it is not active
+				res.add(rs.getInt(1));
+			}
+			// close statement
+			ps.close();
+			// release connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		} catch (DatabaseNotFoundException e) {
+			throw e;
+		} catch (Exception e) {
+			if (Constants.VERBOSE)
+				e.printStackTrace();
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception ex) {
+					/* database didn't close the statement */}
+			if (c != null)
+				ConnectionPool.getInstance().releaseConnection(c);
+			return res;
+		}
+		return res;
+	}
 
 	// ================================================================================
 	// Get Suggestions

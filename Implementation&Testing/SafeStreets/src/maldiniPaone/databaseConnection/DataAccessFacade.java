@@ -139,6 +139,11 @@ public class DataAccessFacade implements ManageDataAccess {
 		}
 		return DataCollector.getViolations(cityHall.getName(), cityHall.getProvince());
 	}
+
+	@Override
+	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
+		return DataCollector.checkActive(username);
+	}
 	// ================================================================================
 	// New data creation
 	// ================================================================================

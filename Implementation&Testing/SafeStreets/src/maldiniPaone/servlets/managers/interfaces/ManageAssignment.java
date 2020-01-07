@@ -62,4 +62,15 @@ public interface ManageAssignment {
 	 **/
 	public boolean terminateAssignment(Integer id, String username, State finishState, ViolationType type)
 			throws ServerSideDatabaseException, IllegalParameterException;
+
+	/**
+	 * Check if there are active assignment for the authority
+	 * 
+	 * @param username : the user name of the authority
+	 * @return list of the ids of active assignments
+	 * @throws ServerSideDatabaseException when database can't be found
+	 * @throws IllegalParameterException   if parameters are not valid
+	 */
+	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException;
+
 }
