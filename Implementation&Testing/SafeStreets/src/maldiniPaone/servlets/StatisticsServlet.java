@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import maldiniPaone.ResponseObjects.GenericResponse;
+import maldiniPaone.ResponseObjects.StatisticsResponse;
+import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.StatisticManager;
@@ -60,19 +63,25 @@ public class StatisticsServlet extends HttpServlet {
 			Float height = Float.parseFloat(request.getParameter("height"));
 			// get statistics
 			statistics = StatisticManager.getInstance().getStatistics(location, Math.max(width, height));
-		} catch (ServerSideDatabaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}  catch (ServerSideDatabaseException e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			GenericResponse message = new GenericResponse(500,"Server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
+			return;
 		} catch (IllegalParameterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (statistics == null || statistics.size() == 0) {
-			// TODO send json object to indicate no assignment in the given area
-			// outputWriter.println(new Gson().toJson(message));
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		outputWriter.println(new Gson().toJson(statistics));
+		StatisticsResponse message = new StatisticsResponse(statistics);
+		outputWriter.println(new Gson().toJson(message));
 	}
 
 }

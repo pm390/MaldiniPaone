@@ -2,6 +2,7 @@ package maldiniPaone.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import maldiniPaone.ResponseObjects.AssignmentResponse;
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -56,7 +59,9 @@ public class AssignmentServlet extends HttpServlet {
 			//check if user can access this functionality
 			if (user == null || // short circuit
 					user.getUserType() != UserType.Authority) {
-				// TODO invalid access
+				AssignmentResponse message = new AssignmentResponse(400,"invalid request");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			}
 			//get needed data
@@ -71,23 +76,25 @@ public class AssignmentServlet extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			AssignmentResponse message = new AssignmentResponse(500,"server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			AssignmentResponse message = new AssignmentResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		if (assignment == null || assignment.size() == 0) {
-			// TODO send json object to indicate no assignment in the given area
-			// outputWriter.println(new Gson().toJson(message));
-			return;
+		if (assignment == null )
+		{
+			assignment=new ArrayList<Assignment>();
 		}
-		outputWriter.println(new Gson().toJson(assignment));
+		AssignmentResponse message = new AssignmentResponse(assignment);
+		outputWriter.println(new Gson().toJson(message));
 		return;
 	}
 
@@ -106,7 +113,9 @@ public class AssignmentServlet extends HttpServlet {
 		//check if user can access this functionality
 		if (user == null || // short circuit
 				user.getUserType() != UserType.Authority) {
-			// TODO invalid access
+			GenericResponse message = new GenericResponse(400,"invalid access");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 
@@ -130,8 +139,9 @@ public class AssignmentServlet extends HttpServlet {
 				ReportManager.getInstance().terminateAssignment(id, username, finishState, type);
 				break;
 			default:
-				// TODO send json object to indicate invalid finish state
-				// outputWriter.println(new Gson().toJson(message)); ;
+				GenericResponse message = new GenericResponse(400,"invalid finish state");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			}
 
@@ -139,19 +149,22 @@ public class AssignmentServlet extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(500,"server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		// TODO send json object to indicate success
-		// outputWriter.println(new Gson().toJson(message));
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
 	}
 

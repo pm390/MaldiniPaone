@@ -1,5 +1,6 @@
 package maldiniPaone.databaseConnection;
 
+
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;

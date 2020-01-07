@@ -17,6 +17,9 @@ import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.Gson;
+
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -50,7 +53,9 @@ public class ReportCreation extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		if (request.getSession() == null || // shortcircuit
 				request.getSession().getAttribute("user") == null || !ServletFileUpload.isMultipartContent(request)) {
-			// invalid access
+			GenericResponse message = new GenericResponse(400, "invalid access");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 
@@ -86,9 +91,22 @@ public class ReportCreation extends HttpServlet {
 			}
 
 			ReportManager.getInstance().addReport(username, location, photos, licensePlate, note);
-		} catch (ServerSideDatabaseException | IllegalParameterException e) {
-			if (Constants.VERBOSE)
+		} catch (ServerSideDatabaseException e) {
+			if (Constants.VERBOSE) {
 				e.printStackTrace();
+			}
+			GenericResponse message = new GenericResponse(500, "Server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
+			return;
+		} catch (IllegalParameterException e) {
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			GenericResponse message = new GenericResponse(400, "invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
+			return;
 		}
 
 	}

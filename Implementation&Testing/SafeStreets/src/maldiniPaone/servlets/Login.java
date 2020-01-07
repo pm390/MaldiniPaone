@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import maldiniPaone.ResponseObjects.LoginResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -55,8 +58,9 @@ public class Login extends HttpServlet {
 		// get needed information
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		UserType userType;
 		try {
-			UserType userType = UserManager.getIstance().login(username, password);
+			userType = UserManager.getIstance().login(username, password);
 			if (userType != null) {
 				// build user base informations into an object when additional information are
 				// needed
@@ -65,28 +69,32 @@ public class Login extends HttpServlet {
 				// save the user object in the session
 				request.getSession().setAttribute("user", user);
 			} else {
-				// TODO send json object to indicate the credentials are wrong
-				// outputWriter.println(new Gson().toJson(message));
+				LoginResponse message = new LoginResponse(404,"user not found");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			}
 		} catch (ServerSideDatabaseException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			LoginResponse message = new LoginResponse(500,"Database not accessible");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			LoginResponse message = new LoginResponse(500,"Database not accessible");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		// TODO send json object to indicate successful login
-		// outputWriter.println(new Gson().toJson(message));
+		LoginResponse message = new LoginResponse(userType.toString());
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
-	}
+}
 
 }

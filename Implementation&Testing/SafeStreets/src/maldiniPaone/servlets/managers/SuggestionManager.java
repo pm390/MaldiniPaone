@@ -88,7 +88,7 @@ public class SuggestionManager implements ManageSuggestions {
 			case ReservedParking:
 				/*
 				 * TODO something like result.
-				 * add("should add more authorities to check ReservedParking and areas around them"
+				 * add("should add more authorities to check ReservedParking and areas around them")
 				 * )
 				 */
 			default:

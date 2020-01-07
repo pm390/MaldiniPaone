@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -46,8 +49,9 @@ public class AccountModification extends HttpServlet {
 				!user.getPassword().equals(request.getParameter("oldPassword")))
 		// check if the user inserted the correct old password
 		{
-			// TODO send json object to indicate illegal request(not allowed)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"illegalRequest");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 		try {
@@ -84,8 +88,9 @@ public class AccountModification extends HttpServlet {
 				if (Constants.VERBOSE)
 					System.out.println("modified");// debug
 			} else {
-				// TODO send json object to indicate a failed modification
-				// outputWriter.println(new Gson().toJson(message));
+				GenericResponse message = new GenericResponse(500,"modification failed");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			}
 
@@ -93,19 +98,22 @@ public class AccountModification extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(500,"server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid request");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		// TODO send json object to indicate a successful registration
-		// outputWriter.println(new Gson().toJson(message));
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
 	}
 

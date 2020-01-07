@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -34,17 +37,7 @@ public class Registration extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		if (Constants.VERBOSE)
-			System.out.println("unexpected request :registration is post operation");
-		response.sendError(400,
-				"Bad Request" + ((Constants.VERBOSE) ? "method forbidden in registration servlet" : ""));
-	}
+	
 
 	/**
 	 * Register Citizen or Municipality done by a System Manager
@@ -70,8 +63,9 @@ public class Registration extends HttpServlet {
 				}
 				MailManager.getInstance().sendConfirmationMail(username, email);
 			} else if (user == null) {
-				// TODO send json object to indicate an a duplicate username or email
-				// outputWriter.println(new Gson().toJson(message));
+				GenericResponse message = new GenericResponse(400,"already exist");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			} else if (user.getUserType() == UserType.Manager) {
 				password = PasswordBuilder.GetRandomPassword();
@@ -80,32 +74,37 @@ public class Registration extends HttpServlet {
 				{
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				} else {
-					// TODO send json object to indicate an a duplicate username or email
-					// outputWriter.println(new Gson().toJson(message));
+					GenericResponse message = new GenericResponse(400,"already exist");
+					outputWriter.println(new Gson().toJson(message));
+					outputWriter.close();
 					return;
 				}
 			} else {
-				// TODO send json object to indicate an invalid request
-				// outputWriter.println(new Gson().toJson(message));
+				GenericResponse message = new GenericResponse(400,"invalid access");
+				outputWriter.println(new Gson().toJson(message));
+				outputWriter.close();
 				return;
 			}
 		} catch (ServerSideDatabaseException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(500,"server error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		// TODO send json object to indicate a successful registration
-		// outputWriter.println(new Gson().toJson(message));
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
 	}
 

@@ -43,26 +43,24 @@ public class MailManager {
 	 * initializes the MailManager and creates a session with the mail service
 	 **/
 	private void initialize() {
-		synchronized (instance) {
-			username = Constants.MAIL_USERNAME;
-			password = Constants.MAIL_PASSWORD;
-			Properties prop = new Properties();
-			prop.put("mail.smtp.host", "smtp.gmail.com");
-			prop.put("mail.smtp.port", "587");
-			prop.put("mail.smtp.auth", "true");
-			prop.put("mail.smtp.starttls.enable", "true");
-			session = Session.getInstance(prop, new javax.mail.Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(username, password);
-				}
-			});
-		}
+		username = Constants.MAIL_USERNAME;
+		password = Constants.MAIL_PASSWORD;
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", "587");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.starttls.enable", "true");
+		session = Session.getInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 	}
 
 	/**
 	 * Sends Account creation confirmation email to a user who registered
 	 * 
-	 * @param user       the username of the user who is registered
+	 * @param user        the username of the user who is registered
 	 * @param mailAddress the mail address to be notified
 	 * @return true
 	 **/
@@ -111,20 +109,20 @@ public class MailManager {
 		// end message
 				, mailAddress);
 	}
+
 	/**
 	 * Sends password Modification email to a user who modified his/her account
 	 * 
 	 * @param mailAddress the mail address to be notified
 	 * @return true
 	 **/
-	public boolean sendPasswordModificationMail(String mailAddress,String password) {
-		return sendMail("Password modification", ("Your account credentials has been modified."
-				+ "\nYour new password is: "+password 
-				+ "\nIf you didn't modify it please contact us at " + Constants.MAIL_USERNAME)
-		// end message
+	public boolean sendPasswordModificationMail(String mailAddress, String password) {
+		return sendMail("Password modification",
+				("Your account credentials has been modified." + "\nYour new password is: " + password
+						+ "\nIf you didn't modify it please contact us at " + Constants.MAIL_USERNAME)
+				// end message
 				, mailAddress);
 	}
-
 
 	/**
 	 * Sends Account Modification email to a user who modified his/her account
@@ -173,7 +171,9 @@ public class MailManager {
 						Transport.send(message);
 					}
 				} catch (MessagingException e) {
-					initialize();// reinitialize the mail Manager
+					synchronized (instance) {
+						initialize();// reinitialize the mail Manager
+					}
 					if (Constants.VERBOSE)
 						e.printStackTrace();
 

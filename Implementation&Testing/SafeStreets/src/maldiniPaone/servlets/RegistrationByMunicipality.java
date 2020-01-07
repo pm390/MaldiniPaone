@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -59,8 +61,9 @@ public class RegistrationByMunicipality extends HttpServlet {
 		User user = (User) request.getSession(true).getAttribute("user");
 		if (user == null || // short circuit
 				user.getUserType() != UserType.Municipality) {
-			// TODO send json object to indicate illegal request(not allowed)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid access");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 		// here we have user != null and for sure a municipality
@@ -88,19 +91,22 @@ public class RegistrationByMunicipality extends HttpServlet {
 						user.getUsername(), cityHall.getName(), cityHall.getProvince())) {
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				} else {
-					// TODO duplicate username or password JSON message
+					GenericResponse message = new GenericResponse(400,"already exist");
+					outputWriter.println(new Gson().toJson(message));
+					outputWriter.close();
 					return;
 				}
 			} else if (targetUserType.equals(UserType.Authority.toString())) {
 				if (Constants.VERBOSE)
 					System.out.println("register authority");
 
-				// TODO parse additional data for authority
-				// TODO add district
+				
 				if (registerAuthority(username, password, email, (Municipality) user, request)) {
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				} else {
-					// TODO duplicate username or password JSON message
+					GenericResponse message = new GenericResponse(400,"already exist");
+					outputWriter.println(new Gson().toJson(message));
+					outputWriter.close();
 					return;
 				}
 			}
@@ -108,15 +114,17 @@ public class RegistrationByMunicipality extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(500,"Server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (Exception e) {
 			if (Constants.VERBOSE) {
@@ -125,8 +133,9 @@ public class RegistrationByMunicipality extends HttpServlet {
 			// debug purpouse
 			return;
 		}
-		// TODO send json object to indicate a successful registration
-		// outputWriter.println(new Gson().toJson(message));
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
 	}
 

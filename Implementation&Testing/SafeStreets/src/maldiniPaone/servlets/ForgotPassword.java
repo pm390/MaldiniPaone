@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import maldiniPaone.ResponseObjects.GenericResponse;
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -33,7 +36,7 @@ public class ForgotPassword extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * modifies a user who forgot password. Then it sends him/her an email with the new password
 	 */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +50,9 @@ public class ForgotPassword extends HttpServlet {
 		if(((username==null||username.equals(""))&&(email==null||email.equals("")))
 				||uType==null||UserType.fromString(uType)==null)
 		{
-			//TODO invalid request
+			GenericResponse message = new GenericResponse(400,"invalid request");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 		UserType type=UserType.fromString(uType);
@@ -66,19 +71,22 @@ public class ForgotPassword extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error server side(5xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(500,"server side error");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		} catch (IllegalParameterException e) {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			// TODO send json object to indicate an error in the parameters (4xx)
-			// outputWriter.println(new Gson().toJson(message));
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
-		// TODO send json object to indicate a successful registration
-		// outputWriter.println(new Gson().toJson(message));
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
 		return;
 	}
 
