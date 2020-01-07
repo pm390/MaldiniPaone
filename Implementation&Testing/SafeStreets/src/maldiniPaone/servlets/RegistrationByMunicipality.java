@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.text.RandomStringGenerator;
 
 import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
@@ -19,7 +18,6 @@ import maldiniPaone.servlets.managers.UserManager;
 import maldiniPaone.utilities.PasswordBuilder;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
-import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.Municipality;
 import maldiniPaone.utilities.beans.users.User;

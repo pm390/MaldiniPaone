@@ -177,7 +177,9 @@ public interface ManageDataAccess {
 	 * @throws ServerSideDatabaseException when database can't be found
 	 * @implNote ArrayList is used
 	 **/
-	public List<Violation> getViolations(CityHall cityHall) throws IllegalParameterException, ServerSideDatabaseException;
+	public List<Violation> getViolations(CityHall cityHall)
+			throws IllegalParameterException, ServerSideDatabaseException;
+
 	// ================================================================================
 	// Adding new data
 	// ================================================================================
@@ -319,6 +321,20 @@ public interface ManageDataAccess {
 	 *                                     null)
 	 **/
 	public boolean updateAssignment(Integer assignmentId, State state, String username, ViolationType type)
+			throws ServerSideDatabaseException, IllegalParameterException;
+
+	/**
+	 * Modify Account when forgot old password
+	 * 
+	 * @param oldUsername : the old user name of the user to be modified
+	 * @param user        : the type of the user that must be modified
+	 * @param newPassword : the new password to be set
+	 * @return boolean : true if the update is successful, false otherwise
+	 * @throws ServerSideDatabaseException when the database can't be found
+	 * @throws IllegalParameterException   when parameters are not valid(empty or
+	 *                                     null)
+	 **/
+	public boolean forgotPassword(String oldUsername, UserType user, String newPassword)
 			throws ServerSideDatabaseException, IllegalParameterException;
 
 	// ================================================================================

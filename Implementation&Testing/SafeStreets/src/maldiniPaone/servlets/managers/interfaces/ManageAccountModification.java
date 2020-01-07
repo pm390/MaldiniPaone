@@ -41,4 +41,18 @@ public interface ManageAccountModification {
 	public boolean removeUser(String username, String password, UserType user)
 			throws ServerSideDatabaseException, IllegalParameterException;
 
+	/**
+	 * Modify Account when forgot old password
+	 * 
+	 * @param oldUsername : the old user name of the user to be modified
+	 * @param user        : the type of the user that must be modified
+	 * @param newPassword : the new password to be set
+	 * @return boolean : true if the update is successful, false otherwise
+	 * @throws ServerSideDatabaseException when the database can't be found
+	 * @throws IllegalParameterException   when parameters are not valid(empty or
+	 *                                     null)
+	 **/
+	public boolean forgotPassword(String oldUsername, UserType user, String newPassword)
+			throws ServerSideDatabaseException, IllegalParameterException;
+
 }

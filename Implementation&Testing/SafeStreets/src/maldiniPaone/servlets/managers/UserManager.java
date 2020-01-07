@@ -123,6 +123,11 @@ public class UserManager implements ManageAccountModification, ManageAuthorityPo
 			throws ServerSideDatabaseException, IllegalParameterException {
 		return DataAccessFacade.getInstance().removeUser(username, password, user);
 	}
+	@Override
+	public boolean forgotPassword(String oldUsername, UserType user, String newPassword)
+			throws ServerSideDatabaseException, IllegalParameterException{
+		return DataAccessFacade.getInstance().forgotPassword(oldUsername, user, newPassword);
+	}
 
 	// ================================================================================
 	// Manage authority position

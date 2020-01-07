@@ -14,7 +14,6 @@ import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterExcept
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
-import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.users.User;
 
 /**

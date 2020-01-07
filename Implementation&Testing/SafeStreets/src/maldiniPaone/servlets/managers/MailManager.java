@@ -111,6 +111,20 @@ public class MailManager {
 		// end message
 				, mailAddress);
 	}
+	/**
+	 * Sends password Modification email to a user who modified his/her account
+	 * 
+	 * @param mailAddress the mail address to be notified
+	 * @return true
+	 **/
+	public boolean sendPasswordModificationMail(String mailAddress,String password) {
+		return sendMail("Password modification", ("Your account credentials has been modified."
+				+ "\nYour new password is: "+password 
+				+ "\nIf you didn't modify it please contact us at " + Constants.MAIL_USERNAME)
+		// end message
+				, mailAddress);
+	}
+
 
 	/**
 	 * Sends Account Modification email to a user who modified his/her account

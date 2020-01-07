@@ -217,6 +217,11 @@ public class DataAccessFacade implements ManageDataAccess {
 		return ReportAndAssignmentUpdater.updateAssignment(assignmentId, username, type, state);
 	}
 
+	@Override
+	public boolean forgotPassword(String oldUsername, UserType user, String newPassword)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		return UserDataChecker.forgotPassword(oldUsername, user, newPassword);
+	}
 	// ================================================================================
 	// Delete data
 	// ================================================================================
