@@ -56,11 +56,12 @@ public class StatisticsServlet extends HttpServlet {
 			// get needed data
 			Float latitude = Float.parseFloat(request.getParameter("latitude"));
 			Float longitude = Float.parseFloat(request.getParameter("longitude"));
-			location.setLatitude(latitude);
-			location.setLongitude(longitude);
 
 			Float width = Float.parseFloat(request.getParameter("width"));
 			Float height = Float.parseFloat(request.getParameter("height"));
+
+			location.setLatitude(latitude-width/2);
+			location.setLongitude(longitude-height/2);
 			// get statistics
 			statistics = StatisticManager.getInstance().getStatistics(location, Math.max(width, height));
 		}  catch (ServerSideDatabaseException e) {
@@ -82,6 +83,7 @@ public class StatisticsServlet extends HttpServlet {
 		}
 		StatisticsResponse message = new StatisticsResponse(statistics);
 		outputWriter.println(new Gson().toJson(message));
+		return;
 	}
 
 }

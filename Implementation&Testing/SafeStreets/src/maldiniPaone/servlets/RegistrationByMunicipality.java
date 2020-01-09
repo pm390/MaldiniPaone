@@ -146,21 +146,26 @@ public class RegistrationByMunicipality extends HttpServlet {
 	private static boolean registerAuthority(String username, String password, String email, Municipality creator,
 			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException {
 		CityHall cityhall = creator.getCityhall();
-
-		Float topLeftLatitude = Float.parseFloat(request.getParameter("tLLatitude"));
-		Float topLeftLongitude = Float.parseFloat(request.getParameter("tLLongitude"));
-		Location topLeftLocation = new Location();
-		topLeftLocation.setLatitude(topLeftLatitude);
-		topLeftLocation.setLongitude(topLeftLongitude);
-
-		Float bottomRightLatitude = Float.parseFloat(request.getParameter("bRLatitude"));
-		Float bottomRightLongitude = Float.parseFloat(request.getParameter("bRLongitude"));
-		Location bottomRightLocation = new Location();
-		bottomRightLocation.setLatitude(bottomRightLatitude);
-		bottomRightLocation.setLongitude(bottomRightLongitude);
-
-		return UserManager.getIstance().registerAuthority(username, password, email, creator.getUsername(),
-				cityhall.getName(), cityhall.getProvince(), topLeftLocation, bottomRightLocation);
+		try
+		{
+			Float topLeftLatitude = Float.parseFloat(request.getParameter("tLLatitude"));
+			Float topLeftLongitude = Float.parseFloat(request.getParameter("tLLongitude"));
+			Location topLeftLocation = new Location();
+			topLeftLocation.setLatitude(topLeftLatitude);
+			topLeftLocation.setLongitude(topLeftLongitude);
+	
+			Float bottomRightLatitude = Float.parseFloat(request.getParameter("bRLatitude"));
+			Float bottomRightLongitude = Float.parseFloat(request.getParameter("bRLongitude"));
+			Location bottomRightLocation = new Location();
+			bottomRightLocation.setLatitude(bottomRightLatitude);
+			bottomRightLocation.setLongitude(bottomRightLongitude);
+			return UserManager.getIstance().registerAuthority(username, password, email, creator.getUsername(),
+					cityhall.getName(), cityhall.getProvince(), topLeftLocation, bottomRightLocation);
+		}
+		catch(NumberFormatException e)//value which should have float inside aren't valid
+		{
+			throw new IllegalParameterException();
+		}		
 	}
 
 }

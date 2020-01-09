@@ -446,10 +446,13 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("select count (distinct arb.idassignment)" // count assignment
-					+ " from assignment as assign join assignmentreportbridge as arb on arb.id"
+			ps = c.prepareStatement("select COUNT(DISTINCT(arb.idassignment))" // count assignment
+					+ " from assignment as assign join assignmentreportbridge as arb "
+					+ " on arb.idassignment=assign.id"
+					+ " join report as re "
+					+ " on re.id=arb.idreport"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7" + " and "
-					+ closeTo("assign", location, Constants.STATISTICS_RADIUS));
+					+  closeTo("re", location, Constants.STATISTICS_RADIUS));
 			// execute query
 			ps.execute();
 			rs = ps.getResultSet();
@@ -555,8 +558,8 @@ public class ReportAndAssignmentDatabaseConnector {
 			c = ConnectionPool.getInstance().getConnection();// get connection
 			ps = c.prepareStatement("select note " // get notes from suggestion table
 					+ " from suggestion" + " where name=? and province=? "
-					+ " and TimestampDiff(DAY,arb.timestamp,current_timestamp())<=30" // last month
-					+ "order by id DESC LIMIT " + Constants.STANDARD_QUERY_LIMIT);
+					+ " and TimestampDiff(DAY,timestamp,current_timestamp())<=30" // last month
+					+ " order by id DESC LIMIT " + Constants.STANDARD_QUERY_LIMIT);
 			// set the values in the prepared statements avoid sql injection
 			ps.setString(1, name);
 			ps.setString(2, province);

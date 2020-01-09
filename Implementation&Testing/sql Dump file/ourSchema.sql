@@ -28,13 +28,10 @@ CREATE TABLE `assignment` (
   `state` varchar(10) COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT 'created',
   `start` timestamp NULL DEFAULT NULL,
   `end` timestamp NULL DEFAULT NULL,
-  `outcome` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `typeofviolation` varchar(20) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `appointee` (`appointee`),
-  CONSTRAINT `auth` FOREIGN KEY (`appointee`) REFERENCES `authority` (`username`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,9 +56,21 @@ if (old.appointee is not null and new.state="accepted")
 then
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'already accepted';
 end if;
+if (new.state="accepted") 
+then
+    set new.start=current_timestamp();
+end if;
 if(old.state="finished" or old.state="solved" or old.state="false")
 then 
 	SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'already finished';	
+end if;
+if(new.state="finished" or new.state="solved" or new.state="false")
+then
+	set new.end=current_timestamp();
+	if(new.typeofviolation is not null)
+    then
+		call addviolation(new.id,new.typeofviolation);
+	end if;
 end if;
 END */;;
 DELIMITER ;
@@ -86,7 +95,7 @@ CREATE TABLE `assignmentreportbridge` (
   PRIMARY KEY (`id`),
   KEY `report_idx` (`idreport`),
   CONSTRAINT `report` FOREIGN KEY (`idreport`) REFERENCES `report` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +133,6 @@ CREATE TABLE `authority` (
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
-INSERT INTO `authority` VALUES ('qualcuno','QhkbR5UZ9lB8lYHF','pietrohideki@gmail.com','pm390',4);
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -207,7 +215,6 @@ CREATE TABLE `citizen` (
 
 LOCK TABLES `citizen` WRITE;
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
-INSERT INTO `citizen` VALUES ('pm390','ciaopeppo',0,'pietrohideki@gmail.com',0.8);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -289,7 +296,6 @@ CREATE TABLE `cityhall` (
 
 LOCK TABLES `cityhall` WRITE;
 /*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
-INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',9,45);
 /*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +317,7 @@ CREATE TABLE `district` (
   PRIMARY KEY (`id`),
   KEY `cityh_idx` (`cityhall_name`,`cityhall_province`),
   CONSTRAINT `cityh` FOREIGN KEY (`cityhall_name`, `cityhall_province`) REFERENCES `cityhall` (`cityhall_name`, `cityhall_province`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +326,6 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
-INSERT INTO `district` VALUES (4,'alserio','como',44.5,8.5,45.4,9.4);
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +352,6 @@ CREATE TABLE `manager` (
 
 LOCK TABLES `manager` WRITE;
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
-INSERT INTO `manager` VALUES ('angelo','a','lombaria','a@n');
 /*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -433,7 +437,6 @@ CREATE TABLE `municipality` (
 
 LOCK TABLES `municipality` WRITE;
 /*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
-INSERT INTO `municipality` VALUES ('pm390','o0o0o0',NULL,'pietrohideki@yahoo.it','alserio','como');
 /*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -526,7 +529,7 @@ DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
   `id` int(40) NOT NULL AUTO_INCREMENT,
   `maker` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `datetime` timestamp NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
   `note` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
@@ -535,7 +538,7 @@ CREATE TABLE `report` (
   PRIMARY KEY (`id`),
   KEY `citizen` (`maker`),
   CONSTRAINT `citizen` FOREIGN KEY (`maker`) REFERENCES `citizen` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -650,13 +653,77 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('angelo','a','manager','a@n'),('pm390','o0o0o0','municipality','pietrohideki@yahoo.it'),('qualcuno','QhkbR5UZ9lB8lYHF','authority','pietrohideki@gmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `violation`
+--
+
+DROP TABLE IF EXISTS `violation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `violation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cityhall_name` varchar(20) NOT NULL,
+  `cityhall_province` varchar(20) NOT NULL,
+  `violationtype` varchar(20) NOT NULL,
+  `count` int(40) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `violation`
+--
+
+LOCK TABLES `violation` WRITE;
+/*!40000 ALTER TABLE `violation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `violation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'safestreets'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `addviolation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addviolation`(id Int, typeofviolation varchar(20))
+BEGIN
+set @varname = (select cityhall_name  from assignment as assign  
+	join assignmentreportbridge as br on assign.id=br.idassignment and assign.id=id
+    join report as re on re.id=br.idreport
+    join cityhall as ch
+	where POWER(ch.longitude-re.longitude,2)+POWER(ch.latitude-re.latitude,2) 
+	order by POWER(ch.longitude-re.longitude,2)+POWER(ch.latitude-re.latitude,2) ASC LIMIT 1);
+set @varprovince = (select cityhall_province from assignment as assign  
+	join assignmentreportbridge as br on assign.id=br.idassignment and assign.id=id
+    join report as re on re.id=br.idreport
+    join cityhall as ch
+	where POWER(ch.longitude-re.longitude,2)+POWER(ch.latitude-re.latitude,2) 
+	order by POWER(ch.longitude-re.longitude,2)+POWER(ch.latitude-re.latitude,2) ASC LIMIT 1);
+if exists (select * from violation where cityhall_name=@varname and cityhall_province=@varprovince
+			and violationtype=typeofviolation)
+	then
+			update violation set count=count+1  where cityhall_name=@varname and cityhall_province=@varprovince
+			and violationtype=typeofviolation;
+    else
+			insert into violation (cityhall_name,cityhall_province,violationtype)
+							values (@varname,@varprovince,typeofviolation);
+end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `clear_all` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -669,11 +736,6 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_all`()
 BEGIN
-delete from authority;
-delete from municipality;
-delete from manager;
-delete from citizen;
-delete from `user`;
 delete from suggestion;
 delete from assignmentreportbridge;
 delete from assignment;
@@ -681,6 +743,12 @@ delete from photo;
 delete from report;
 delete from district;
 delete from cityhall;
+delete from violation;
+delete from authority;
+delete from municipality;
+delete from manager;
+delete from citizen;
+delete from `user`;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -697,4 +765,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-02 17:53:42
+-- Dump completed on 2020-01-08 11:46:29

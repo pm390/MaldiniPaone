@@ -1,11 +1,208 @@
 @charset "ISO-8859-1";
+
+:root { 
+	--main-color: rgba(56, 71, 87, 1); 
+	--main-hover: rgba(56, 71, 87, 0.7); 
+	--second-color: rgba(75, 93, 115, 1);
+	--placeholder-text-color: rgba(75, 93, 115, 0.5);
+}
+
 body {
-    height: 100%;
-    width: 100%;
-    background-color: #384757;
-    text-align: center;
-};
-body > div {
-    margin:auto;
-    width: 50%;
-};
+	margin: 0;
+	width: 100%;
+	background-color: var(--main-color);
+	text-align: center;
+	height: 100vh;
+}
+
+#background {
+	position: absolute;
+	top: 5vh;
+	left: 5vw;
+	width: 90vw;
+	height: 90vh;
+	opacity: 0.6;
+	background-image: url("../icone/logo.png");
+	background-repeat: no-repeat;
+	background-repeat: round;
+}
+
+#additionalFunctions, #login, #registrationAuthority,
+	#registrationMunicipality, #suggestions, #registrationManager {
+	background: var(--second-color);;
+	position: absolute;
+	top: 15vh;
+	left: 15vw;
+	height: 70vh;
+	width: 70vw;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	flex: 1 1 0;
+	text-align: center;
+	align-items: center;
+}
+
+
+
+input {
+	white-space: normal;
+}
+
+body>div input[type=button],body>div input[type=submit] {
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(1vh, 1vw);
+	background-color: var(--main-color);
+	font-size: min(3vh, 3vw);
+	align-self: center;
+}
+
+.toLogin,.toAdditionalFunctions,.toHome {
+	position: absolute;
+	border: 0.5px solid #000000 !important;
+	border-radius: min(1.7vh, 1.7vw) !important;
+	left: -0.05vw;
+	top: -0.05vh;
+	background-color: var(--main-color) !important;
+}
+
+input[type=button],button,input[type=submit]
+{
+	 cursor: pointer; 	 
+	-webkit-box-shadow: min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) ; 
+	  
+	-moz-box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) ; 
+	
+	box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) ;
+	 
+	-webkit-transition: background-color 500ms,font-size 250ms cubic-bezier(0.05, 0.35, 0.4, 0.91);
+	 
+	-moz-transition: background-color 500ms,font-size 250ms cubic-bezier(0.05, 0.35, 0.4, 0.91);
+	 
+	-o-transition: background-color 500ms,font-size 250ms cubic-bezier(0.05, 0.35, 0.4, 0.91);
+	 
+	transition: background-color 500ms,font-size 250ms cubic-bezier(0.05, 0.35, 0.4, 0.91);	
+}
+
+input[type=submit]
+{
+	width:30vw;
+}
+
+input[type=button]:hover,button:hover {
+	background-color: var(--main-hover) !important;
+	font-size: min(4.5vh, 4.5vw) !important;
+}
+input[type=submit]:hover
+{
+	background-color: var(--main-hover) !important;
+}
+
+#map {
+	position: absolute;
+	top: 15vh;
+	left: 6vw;
+	height: 70vh;
+	width: 50vw;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+
+#home {
+	position: absolute;
+	background: var(--second-color);
+	margin-top: 5vh;
+	margin-left: 5vw;
+	height: 90vh;
+	width: 90vw;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+
+h1 {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	font-size: min(14vh, 14vw);
+}
+
+#statisticsPresenter {
+	position: absolute;
+	top: 45vh;
+	left: 58vw;
+	height: 40vh;
+	width: 30vw;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+
+body>div>div {
+	background-color: var(--main-color);
+}
+#additionalFunctions>input {
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(1vh, 1vw);
+	background-color: var(--main-color);
+	margin-top: 4vh;
+	height: 10vh;
+	width: 30vw;
+	font-size: min(3vh, 3vw);
+}
+form>div>input,form>div>div>input
+{
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(1vh, 1vw);
+	background-color: var(--main-color);
+	font-size: min(3vh, 3vw);
+	text-align: center;
+}
+.row
+{
+	display :flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	width: 50vw;
+	justify-content: center;
+}
+
+
+.column
+{
+	display: flex;
+	flex-direction:column;
+	flex-basis:100%;
+	justify-content: center;
+	flex:1;
+}
+.doubleColumn
+{
+	display: flex;
+	flex-direction:column;
+	flex-basis:50%;
+}
+
+::-webkit-input-placeholder { /* Edge */
+  color: var(--placeholder-text-color);
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--placeholder-text-color);
+}
+
+:-moz-input-placeholder { /* Mozilla */
+  color: var(--placeholder-text-color);
+}
+
+::placeholder {
+  color: var(--placeholder-text-color);
+}

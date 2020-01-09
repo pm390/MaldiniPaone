@@ -158,7 +158,17 @@ public class MailManager {
 		}
 		Runnable thread = new Runnable() {
 			public void run() {
-
+				try
+				{
+					InternetAddress addr=new InternetAddress(mailAddress);
+					addr.validate();
+				}
+				catch(Exception e)
+				{
+					if (Constants.VERBOSE)
+						System.out.println("email not valid");
+					return ;
+				}
 				if (Constants.VERBOSE)
 					System.out.println("sending email to" + mailAddress);
 				try {

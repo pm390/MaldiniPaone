@@ -39,8 +39,12 @@ public class Constants {
 	/**
 	 * radius used for statistics
 	 */
-	public static final float STATISTICS_RADIUS = 0.5f;
+	public static final float STATISTICS_RADIUS = 0.05f;
 
+	/**
+	 *	square root of limit of statistics size 
+	 **/
+	public static final int STATISTICS_LIMIT = 10;
 	/**
 	 * radius used to consider 2 locations close to each other
 	 **/
@@ -114,5 +118,6 @@ public class Constants {
 	 * if true prints errors in the console
 	 **/
 	public static final boolean VERBOSE = true;// set to false on release
+	
 	
 }

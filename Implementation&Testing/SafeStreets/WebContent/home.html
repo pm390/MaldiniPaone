@@ -1,107 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="./CSS/style.css">
-	<script defer src="./JS/basicFunctionalities.js"></script>
+<meta charset="ISO-8859-1">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./CSS/style.css">
+
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+	integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+	crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet-src.js"
+	integrity="sha512-IkGU/uDhB9u9F8k+2OsA6XXoowIhOuQL1NTgNZHY1nkURnqEGlDZq3GsfmdJdKFe1k1zOc6YU2K7qY+hF9AodA=="
+	crossorigin="anonymous"></script>
+
+<script defer src="./JS/map.js" type="text/javascript"></script>
+<script defer src="./JS/basicFunctionalities.js"></script>
+<link rel="icon" href="./icone/logo.png">
 </head>
 <body>
-	<div id="home" style="">
-		<input type="button" class="toLogin" value="gotoLoginPage"> <input
+	<div id="background"></div>
+	<div id="home" style="display: none;">
+		<h1>Statistiche</h1>
+		<input type="button" class="toLogin" value="Login"> <input
 			type="button" class="toAdditionalFunctions" value="registrazione"
 			style="display: none;">
 
 		<div id="map"></div>
+		<div id="statisticsPresenter" style=""></div>
 	</div>
-	<div id="additionalFunctions" style="display: none;">
+	<div id="additionalFunctions">
+		<button class="toHome">Home</button>
 		<input type="button" class="registerAuthority"
-			value="registra autorit&agrave"> <br> <input type="button"
-			class="registerMunicipality" value="registra personale municipalit&agrave">
-		<br> <input type="button" class="registerManager"
+			value="Registra autorit&agrave"> <input type="button"
+			class="registerMunicipality"
+			value="Registra personale municipalit&agrave"> <input
+			type="button" class="registerManager"
 			value="registra manager del sistema" style="display: none;">
-		<br>
-		<form id="suggestionForm" action="./Suggestions" method="GET">
-			<input type="button" class="getSuggestions"
-				value="mostraSuggerimenti" style="display: none;">
-		</form>
+		<input type="button" class="getSuggestions" value="Suggerimenti"
+			style="display: none;">
+		<form id="suggestionForm" action="./SuggestionServlet" method="GET"
+			style="display: none;"></form>
 	</div>
 	<div id="login" style="display: none;">
 		<form id="loginForm" action="./Login" method="post">
-			<label for="username">Username</label> <br> <input
-				type="text" placeholder="Enter Username" name="username" required>
-			<br> <label for="password">Password</label> <br> <input
-				type="password" placeholder="Enter Password" name="password"
-				required> <br>
-			<button class="login" type="submit">Login</button>
+			<div class="column">
+				<label for="username">Username</label> <br> <input type="text"
+					placeholder="Inserire Username" name="username" required> <br>
+				<label for="password">Password</label> <br> <input
+					type="password" placeholder="Inserire Password" name="password"
+					required> <br> <input class="login" type="submit"
+					value="Login" />
+			</div>
 		</form>
-		<button class="toHome">ritorna alla homepage</button>
+		<input type="button" class="toHome" value="Home" />
+
 
 	</div>
 
-	<div id="registrationAuthority" style="display: none;" >
-		<input type="button" class="toAdditionalFunctions"
-			value="torna indietro" style="display: none;">
+	<div id="registrationAuthority" style="display: none;">
+		<input type="button" class="toAdditionalFunctions" value="Indietro"
+			style="display: none;">
 		<form id="registerAuthorityForm" class="registrationform"
-			action="./RegistrationByMunicipality"
-			method="POST">
-			Username: <input type="text" name="username"><br>
-			password: <input type="text" name="password"><br> email:
-			<input type="text" name="email"> <br> 
-			tipo utente: 
-			<select name="userType">
-				<option value="authority">authority</option>
-				<option value="municipality">municipality</option>
-			</select> <br> tLlatitude: <input type="number" name="tLLatitude"
-				step="any"> <br> tLlongitude: <input type="number"
-				name="tLLongitude" step="any"> <br> bRlatitude: <input
-				type="number" name="bRLatitude" step="any"> <br>
-			bRlongitude: <input type="number" name="bRLongitude" step="any">
-			<br> <input id="registerAuthority" type="submit" value="registrationByMunicipality">
+			action="./RegistrationByMunicipality" method="POST" autocomplete="off">
+			<div class="column">
+
+				<input autocomplete="off" name="hidden" type="text" style="display:none;">
+				
+				Username: <input type="search" name="username" placeholder="Inserire Username">
+				Email: <input type="text" name="email" placeholder="Inserire indirizzo Email"> 
+				<input type="hidden"
+					name="userType" value="authority"> Coordinata nord distretto: <input
+					type="number" class="latitude" name="tLLatitude" step="any" max="90" min="-90"> Coordinata ovest distretto: <input
+					type="number" class="longitude"name="tLLongitude" step="any" max="180" min="-180"> Coordinata sud distretto: <input
+					type="number" class="latitude"name="bRLatitude" step="any" max="90" min="-90"> Coordinata est distretto: <input
+					type="number" class="longitude"name="bRLongitude" step="any" max="180" min="-180"> <br>
+					 <input
+					id="registerAuthority" type="submit"
+					value="Registra autorit&agrave">
+					
+			</div>
+
 		</form>
 	</div>
 	<div id="suggestions" style="display: none;">
-		<input type="button" class="toAdditionalFunctions"
-			value="torna indietro" style="display: none;">
+		<input type="button" class="toAdditionalFunctions" value="Indietro"
+			style="display: none;">
 		<ul id="suggestionList">
 
 		</ul>
 	</div>
 	<div id="registrationMunicipality" style="display: none;">
-
-		<input type="button" class="toAdditionalFunctions"
-			value="torna indietro" style="display: none;">
-		<form class="registrationform"
-			action="./Registration" method="POST">
-			Username: <input type="text" name="username"><br>
-			Password: <input type="text" name="password"><br> email:
-			<input type="text" name="email"> <br> cityHallName: <input
-				type="text" name="cityHallName"><br> cityHallProvince:
-			<input type="text" name="cityHallProvince"><br> region:
-			<input type="text" name="region"><br> latitude: <input
-				type="number" name="latitude" step="any"> <br>
-			longitude: <input type="number" name="longitude" step="any">
-			<br> <input type="submit" value="registration">
+	
+		<input type="button" class="toAdditionalFunctions" value="Indietro"
+			style="display: none;">
+		<form id="registerMunicipalityForm" action="./Registration" method="POST">
+			<div class="column">
+				<input type="hidden" name="userType" value="municipality">
+				Username: <input type="text" name="username" placeholder="Inserire Username">
+				Email: <input type="text" name="email" placeholder="Inserire indirizzo Email">
+				<div class="onlyManager column"> 
+				Comune: <input type="text" name="cityHallName" placeholder="Inserire nome Comune">
+				Provincia: <input type="text" name="cityHallProvince" placeholder="Inserire nome Provincia">
+				Regione: <input type="text" name="region" placeholder="Inserire nome Regione">
+				Latitude:	<input class="latitude" type="number" name="latitude" step="any" max="90" min="-90"> 
+				Longitude: <input class="longitude" type="number" name="longitude" step="any" max="180" min="-180">
+				 </div>
+				 <br>
+				 <input id="registerMunicipality" type="submit" value="registra municipalit&agrave">
+			</div>
 		</form>
 	</div>
 	<div id="registrationManager" style="display: none;">
 
-		<input type="button" class="toAdditionalFunctions"
-			value="torna indietro" style="display: none;">
-		<form class="registrationform" id="managerRegistrationForm"
-			action="file:///C:/RegistrationByManager" method="post">
-			<label for="username">Username</label> <br> <input
-				type="text" placeholder="inserire username" name="username" required>
-			<br> <label for="password">Password</label> <br> <input
-				type="password" placeholder="inserire password" name="password"
-				required> <br>
-				<label for="username">email</label> <br> <input
-				type="text" placeholder="inserire indirizzo email" name="email" required>
-				<br>
-				<label for="username">Venue</label> <br> <input
-				type="text" placeholder="inserire venue" name="venue" required>
-				<br>
-			<button class="login" type="submit">Login</button>
+		<input type="button" class="toAdditionalFunctions" value="Indietro"
+			style="display: none;">
+		<form id="registerManagerForm" id="managerRegistrationForm"
+			action="./RegistrationByManager" method="post">
+			<div class="column">
+				<input type="hidden" name="userType" value="manager">
+				<label for="username">Username</label> <br> <input type="text"
+					placeholder="inserire username" name="username" required> <label for="username">email</label> <br>
+				<input type="text" placeholder="inserire indirizzo email"
+					name="email" required> <br> <label for="username">Venue</label>
+				<br> <input type="text" placeholder="inserire venue"
+					name="venue" required> <br>
+				<input id="registerManager" type="submit" value="Registra Manager">
+			</div>
 		</form>
 	</div>
 </body>
