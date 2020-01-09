@@ -49,6 +49,10 @@ public class AccountModification extends HttpServlet {
 				!user.getPassword().equals(request.getParameter("oldPassword")))
 		// check if the user inserted the correct old password
 		{
+			if(Constants.VERBOSE)
+			{
+				System.out.println(user.getPassword()+"new:"+request.getParameter("oldPassword"));
+			}
 			GenericResponse message = new GenericResponse(400,"illegalRequest");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();

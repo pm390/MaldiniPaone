@@ -37,14 +37,15 @@ public class Constants {
 	// query constants
 	// ================================================================================
 	/**
-	 * radius used for statistics
+	 * radius used for statistics retrieve
 	 */
-	public static final float STATISTICS_RADIUS = 0.05f;
+	public static final float STATISTICS_RADIUS = 0.01f;
+	
 
 	/**
 	 *	square root of limit of statistics size 
 	 **/
-	public static final int STATISTICS_LIMIT = 10;
+	public static final int STATISTICS_LIMIT = 30;
 	/**
 	 * radius used to consider 2 locations close to each other
 	 **/

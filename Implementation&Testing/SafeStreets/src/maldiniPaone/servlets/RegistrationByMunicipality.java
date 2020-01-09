@@ -75,6 +75,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 		String email = (String) request.getParameter("email");
 		String targetUserType = (String) request.getParameter("userType");
 		try {
+			email=email.toLowerCase();
 			if (cityHall == null)
 			// if the session doesn't contain already the cityhall of the municipality it
 			// must be retrieved

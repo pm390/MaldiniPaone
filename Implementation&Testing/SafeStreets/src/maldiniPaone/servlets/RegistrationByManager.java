@@ -61,6 +61,7 @@ public class RegistrationByManager extends HttpServlet {
 		String email = (String) request.getParameter("email");
 		String targetUserType = (String) request.getParameter("userType");
 		try {
+			email=email.toLowerCase();
 			if (targetUserType != null) {
 				switch (UserType.fromString(targetUserType)) {
 				case Municipality:

@@ -177,7 +177,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			c = ConnectionPool.getInstance().getConnection();// get connection
 			ps = c.prepareStatement("select count(*) " + " from report as rep" // count reports
 					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"// within the last 7 days
-					+ " and " + closeTo("rep", location, Constants.STATISTICS_RADIUS) // within a certain radius
+					+ " and " + squareAreaCloseTo("rep", location, Constants.STATISTICS_RADIUS) // within a certain radius
 					+ " order by rep.datetime");// ordered by the date the reports were made
 			// execute the query
 			ps.execute();
@@ -452,7 +452,7 @@ public class ReportAndAssignmentDatabaseConnector {
 					+ " join report as re "
 					+ " on re.id=arb.idreport"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7" + " and "
-					+  closeTo("re", location, Constants.STATISTICS_RADIUS));
+					+  squareAreaCloseTo("re", location, Constants.STATISTICS_RADIUS));
 			// execute query
 			ps.execute();
 			rs = ps.getResultSet();
@@ -793,7 +793,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param base     : this variable is the name of the table in which a location
 	 *                 is stored. it must contain a longitude and a latitude column
 	 * @param location : the location with which the distance must be computed
-	 * @param raidus   : the "radius" in which a place is considered close
+	 * @param radius   : the "radius" in which a place is considered close
 	 * @return String : represents the condition in String usable in a MySql query
 	 */
 	private static String closeTo(String base, Location location, Float radius) {
@@ -801,6 +801,21 @@ public class ReportAndAssignmentDatabaseConnector {
 		return SquareDistance(base, location) + "<=" + (radius * radius) + " ";
 		// compare square of distance with square the radius
 		// we don't use the root operation on the result for performance.
+	}
+	
+	/**
+	 * defines a String in for an MySql condition for indicating a place near to the
+	 * specified location
+	 * 
+	 * @param base     : this variable is the name of the table in which a location
+	 *                 is stored. it must contain a longitude and a latitude column
+	 * @param location : the location with which the distance must be computed
+	 * @param edge  : the "radius" in which a place is considered close
+	 * @return String : represents the condition in String usable in a MySql query
+	 */
+	private static String squareAreaCloseTo(String base, Location location, Float edge) {
+		return "ABS(" + base + ".latitude-" + location.getLatitude()+")<"+edge+" and "+
+				"ABS(" + base + ".longitude-" + location.getLongitude()+")<"+edge;
 	}
 
 	/**

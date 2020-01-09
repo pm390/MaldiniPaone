@@ -3,6 +3,9 @@
  */
 package maldiniPaone.servlets.managers;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +47,18 @@ public class StatisticManager implements ManageStatistics {
 			throws ServerSideDatabaseException, IllegalParameterException {
 		int subEdgeNumber = (int) (edge / (2 * Constants.STATISTICS_RADIUS));
 		List<Statistic> result = new ArrayList<Statistic>(subEdgeNumber * subEdgeNumber);
+		
+		//drop some useless decimal for statistics
+		DecimalFormat df = new DecimalFormat("#.##");
+	    DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+	    dfs.setDecimalSeparator('.');
+	    df.setDecimalFormatSymbols(dfs);
+	    
+		df.setRoundingMode(RoundingMode.FLOOR);
+		location.setLatitude(Float.parseFloat(df.format(location.getLatitude())));
+
+		location.setLongitude(Float.parseFloat(df.format(location.getLongitude())));
+		
 		if(subEdgeNumber>Constants.STATISTICS_LIMIT)
 		{
 			return result;

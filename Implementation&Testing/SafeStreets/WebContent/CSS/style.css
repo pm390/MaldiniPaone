@@ -1,20 +1,36 @@
 @charset "ISO-8859-1";
-
+/*
+define colors 
+*/
 :root { 
 	--main-color: rgba(56, 71, 87, 1); 
 	--main-hover: rgba(56, 71, 87, 0.7); 
 	--second-color: rgba(75, 93, 115, 1);
+	--scrollbar-holder-color:grey;
+	--scrollbar-color: rgba(75,93,115,0.4);
+	--scrollbar-hover:rgba(80, 95, 130, 1);
 	--placeholder-text-color: rgba(75, 93, 115, 0.5);
+	--placeholder-text-color: rgba(75, 93, 115, 0.5);
+	--error-color:	rgba(251, 78, 78, 0.4);
+	--focus-color:	rgba(251, 78, 78, 0.2)
 }
 
+/*
+body is as big as the screen if size is not < 200px * 200px
+*/
 body {
 	margin: 0;
 	width: 100%;
 	background-color: var(--main-color);
 	text-align: center;
 	height: 100vh;
+	min-height: 200px;
+	min-width:200px;
 }
 
+/*
+background is fixed
+*/
 #background {
 	position: absolute;
 	top: 5vh;
@@ -27,8 +43,11 @@ body {
 	background-repeat: round;
 }
 
+/*
+flexboxes
+*/
 #additionalFunctions, #login, #registrationAuthority,
-	#registrationMunicipality, #suggestions, #registrationManager {
+	#registrationMunicipality, #suggestions, #registrationManager,#modifyAccount {
 	background: var(--second-color);;
 	position: absolute;
 	top: 15vh;
@@ -48,10 +67,16 @@ body {
 
 
 
+/*
+new line if text is too long
+*/
 input {
 	white-space: normal;
 }
 
+/*
+	button and submit modifiers
+*/
 body>div input[type=button],body>div input[type=submit] {
 	border: 1px solid #000000;
 	box-sizing: border-box;
@@ -60,8 +85,10 @@ body>div input[type=button],body>div input[type=submit] {
 	font-size: min(3vh, 3vw);
 	align-self: center;
 }
-
-.toLogin,.toAdditionalFunctions,.toHome {
+/*
+ top left buttons modifiers
+*/
+.toLogin,.toAdditionalFunctions,.toHome,#closeLongDescription{
 	position: absolute;
 	border: 0.5px solid #000000 !important;
 	border-radius: min(1.7vh, 1.7vw) !important;
@@ -69,7 +96,9 @@ body>div input[type=button],body>div input[type=submit] {
 	top: -0.05vh;
 	background-color: var(--main-color) !important;
 }
-
+/*
+box-shadows and transition
+*/
 input[type=button],button,input[type=submit]
 {
 	 cursor: pointer; 	 
@@ -93,15 +122,20 @@ input[type=submit]
 	width:30vw;
 }
 
-input[type=button]:hover,button:hover {
+/*
+hober and focus modifiers
+*/
+input[type=button]:hover,button:hover,input[type=button]:focus,button:focus {
 	background-color: var(--main-hover) !important;
 	font-size: min(4.5vh, 4.5vw) !important;
 }
-input[type=submit]:hover
+input[type=submit]:hover,input[type=submit]:focus
 {
 	background-color: var(--main-hover) !important;
 }
-
+/*
+leaflet map container
+*/
 #map {
 	position: absolute;
 	top: 15vh;
@@ -112,7 +146,9 @@ input[type=submit]:hover
 	box-sizing: border-box;
 	border-radius: min(2vh, 2vw);
 }
-
+/*
+homepage style
+*/
 #home {
 	position: absolute;
 	background: var(--second-color);
@@ -125,23 +161,70 @@ input[type=submit]:hover
 	border-radius: min(2vh, 2vw);
 }
 
+/*
+Title of pages and subpages
+*/
 h1 {
 	position: absolute;
+	top:0vh;
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
 	font-size: min(14vh, 14vw);
 }
+h2 {
+	position: absolute;
+	top:0vh;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	font-size: min(5vh, 5vw);
+}
+h3 {
+	top:0vh;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	font-size: min(4.5vh, 4.5vw);
+}
 
 #statisticsPresenter {
 	position: absolute;
-	top: 45vh;
+	top: 15vh;
 	left: 58vw;
-	height: 40vh;
+	height: 70vh;
 	width: 30vw;
 	border: 1px solid #000000;
 	box-sizing: border-box;
 	border-radius: min(2vh, 2vw);
+	justify-content: space-evenly;
+	flex-direction: column;
+	flex: 1 1 0;
+	text-align: center;
+	align-items: center;
+}
+.suggestionHolder{
+	position: absolute;
+	top: 10vh;
+	height: 50vh;
+	width: 50vw;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+.autoOverflow
+{
+	overflow: auto;
+}
+li {
+    padding:0px;
+    border:0px;
+    text-align:left;
+    width:90%;
+}
+ol,ul
+{
+	height:100%;
 }
 
 body>div>div {
@@ -205,4 +288,50 @@ form>div>input,form>div>div>input
 
 ::placeholder {
   color: var(--placeholder-text-color);
+}
+.error
+{
+	border: 1px solid var(--error-color);
+}
+:focus
+{
+	border: 1px solid var(--focus-color);
+	outline: 0px;
+}
+
+button:active,input:active,input:focus
+{
+	outline:0;
+	
+	-webkit-box-shadow: min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) inset; 
+	  
+	-moz-box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) inset ; 
+	
+	box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.7) inset;	
+}
+::-webkit-scrollbar {
+  width: min(4vw,4vh);
+}
+
+/* Track */
+::-webkit-scrollbar-track
+{
+  box-shadow: inset 0 0 5px var(--scrollbar-holder-color); 
+  border-radius: min(2vw,2vh);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-color); 
+  border-radius: min(2vw,2vh);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover); 
+}
+    
+/* TODO if needed change Handle leaflet marker focus */
+.leaflet-marker-pane>img:focus {
+    border: 0px;
 }
