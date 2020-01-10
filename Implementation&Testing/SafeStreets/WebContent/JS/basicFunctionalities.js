@@ -1,6 +1,8 @@
 ////////////////////////////////////////////////////////
 //initial state
 ///////////////////////////////////////////////////////
+function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
+$(document).on("keydown", disableF5);//disable reload of page with F5 avoid mistakenful reloads
 $("#closeLongDescription").hide();
 $("#home").show();
 $("#login").hide();

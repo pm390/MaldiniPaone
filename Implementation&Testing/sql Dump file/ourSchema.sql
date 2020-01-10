@@ -31,17 +31,8 @@ CREATE TABLE `assignment` (
   `typeofviolation` varchar(20) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignment`
---
-
-LOCK TABLES `assignment` WRITE;
-/*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -95,17 +86,8 @@ CREATE TABLE `assignmentreportbridge` (
   PRIMARY KEY (`id`),
   KEY `report_idx` (`idreport`),
   CONSTRAINT `report` FOREIGN KEY (`idreport`) REFERENCES `report` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignmentreportbridge`
---
-
-LOCK TABLES `assignmentreportbridge` WRITE;
-/*!40000 ALTER TABLE `assignmentreportbridge` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignmentreportbridge` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `authority`
@@ -126,15 +108,6 @@ CREATE TABLE `authority` (
   CONSTRAINT `worksunder` FOREIGN KEY (`employee`) REFERENCES `municipality` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `authority`
---
-
-LOCK TABLES `authority` WRITE;
-/*!40000 ALTER TABLE `authority` DISABLE KEYS */;
-/*!40000 ALTER TABLE `authority` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -208,15 +181,6 @@ CREATE TABLE `citizen` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `citizen`
---
-
-LOCK TABLES `citizen` WRITE;
-/*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
-/*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -291,15 +255,6 @@ CREATE TABLE `cityhall` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cityhall`
---
-
-LOCK TABLES `cityhall` WRITE;
-/*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `district`
 --
 
@@ -317,17 +272,8 @@ CREATE TABLE `district` (
   PRIMARY KEY (`id`),
   KEY `cityh_idx` (`cityhall_name`,`cityhall_province`),
   CONSTRAINT `cityh` FOREIGN KEY (`cityhall_name`, `cityhall_province`) REFERENCES `cityhall` (`cityhall_name`, `cityhall_province`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `district`
---
-
-LOCK TABLES `district` WRITE;
-/*!40000 ALTER TABLE `district` DISABLE KEYS */;
-/*!40000 ALTER TABLE `district` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `manager`
@@ -345,15 +291,6 @@ CREATE TABLE `manager` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `manager`
---
-
-LOCK TABLES `manager` WRITE;
-/*!40000 ALTER TABLE `manager` DISABLE KEYS */;
-/*!40000 ALTER TABLE `manager` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -430,15 +367,6 @@ CREATE TABLE `municipality` (
   CONSTRAINT `othermunicipality` FOREIGN KEY (`employee`) REFERENCES `municipality` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `municipality`
---
-
-LOCK TABLES `municipality` WRITE;
-/*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
-/*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -511,15 +439,6 @@ CREATE TABLE `photo` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `photo`
---
-
-LOCK TABLES `photo` WRITE;
-/*!40000 ALTER TABLE `photo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `photo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `report`
 --
 
@@ -538,17 +457,8 @@ CREATE TABLE `report` (
   PRIMARY KEY (`id`),
   KEY `citizen` (`maker`),
   CONSTRAINT `citizen` FOREIGN KEY (`maker`) REFERENCES `citizen` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `report`
---
-
-LOCK TABLES `report` WRITE;
-/*!40000 ALTER TABLE `report` DISABLE KEYS */;
-/*!40000 ALTER TABLE `report` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -618,18 +528,10 @@ CREATE TABLE `suggestion` (
   `name` varchar(20) NOT NULL,
   `province` varchar(20) NOT NULL,
   `note` varchar(200) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `suggestion`
---
-
-LOCK TABLES `suggestion` WRITE;
-/*!40000 ALTER TABLE `suggestion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `suggestion` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -648,15 +550,6 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `violation`
 --
 
@@ -672,15 +565,6 @@ CREATE TABLE `violation` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `violation`
---
-
-LOCK TABLES `violation` WRITE;
-/*!40000 ALTER TABLE `violation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `violation` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'safestreets'
@@ -765,4 +649,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-08 11:46:29
+-- Dump completed on 2020-01-10  1:33:52
