@@ -1,0 +1,108 @@
+\input{commandsFile}
+
+
+\usepackage{eso-pic,graphicx}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+    \usepackage{listings}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks,breaklinks,linkcolor=black,urlcolor=blue}
+\begin{document}
+
+%TITLE PAGE
+
+\begin{titlepage}
+
+
+
+
+{\begin{table}[t!]
+\centering
+\begin{tabu} to \textwidth { X[1.3,r,p] X[1.7,l,p] }
+\textcolor{Blue}
+{\textbf{\small{Computer science and engineering Software engineering 2 - Project 2019/2020}}} & \includegraphics[scale=0.5]{Images/PolimiLogo}
+\end{tabu}
+\end{table}}~\\ [7cm]
+
+
+\begin{flushleft}
+
+
+
+
+\end{flushleft}
+\AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{Images/SafeStreets.png}}
+\end{titlepage}
+
+
+\begin{table}[h!]
+\begin{tabu} to \textwidth { X[0.3,r,p] X[0.7,l,p] }
+\hline
+
+\textbf{Deliverable:} & DD\\
+\textbf{Title:} & Implementation and Testing Document \\
+\textbf{Authors:} & Maldini Pietro , Paone Angelo \\
+\textbf{Version:} & 1.0 \\ 
+\textbf{Date:} & 12-January-2020 \\
+\textbf{Download page:} & https://github.com/pm390/MaldiniPaone\\
+\textbf{Copyright:} & Copyright © 2020, Maldini Pietro, Paone Angelo – All rights reserved \\
+\hline
+\end{tabu}
+\end{table}
+
+
+
+
+\setcounter{page}{2}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\newpage
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Introduction and Scope}}}
+\label{sect:introduction}
+\input{Files/introduction}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Requirements and Functions}}}
+\label{sect:Requirements and Functions}
+\input{Files/requirements}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Development Choices}}}
+\label{sect:Development Choices}
+\input{Files/choices}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Structure of the source code}}}
+\label{sect:Structure of the source code}
+\input{Files/structure}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Blue}{\section{Testing}}}
+\label{sect:Testing}
+\input{Files/testing}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+\clearpage
+{\color{Blue}{\section{Installation Instructions}}}
+\label{sect:Installation Instructions}
+\input{Files/installation}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+\end{document}

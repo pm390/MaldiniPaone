@@ -1,0 +1,46 @@
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Adopted Programming Languages}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsubsection{Back End}
+For the developing of the back-end of the we used Java.
+We choose java for it being cross-platform, so the possibility of running the code on different machines. Even though the back-end prototype is developed in a single machine this choice allows with some modification to deploy different components on different machine and use functionality like Java Remote Method Invocation to communicate. The choice is also driven by the variety of functionality JEE has. JEE has components for database access but also for the creation of Http Servers.
+Another advantage of using Java is being Object Oriented and allowing Polymorphism and Inheritance allowing the user to create a structure for a general Object and expanding it in different forms. This allowed a really fast developing of the Response Objects which the server returns to the client.
+Other advantages in the development are the usage of annotations to enforce properties to functions (I.e.@Override) and last but not least automatic garbage collection.
+Garbage collection is an advantage for developing an application since it removes part of the controls the developer must perform it also adds a considerable drawback of slowing down the application if object are created and than discarded continuously.
+To remove part of this overhead the use of Object Pooling techique for the most resource consuming Objects is applied, in the project we used an Object Pool for Database Connections. 
+
+\subsubsection{Front End: Web Application}
+To develop the front end we used javascript with jquery and leaflet.
+Jquery allows to write more readable code than javascript and simplifies the developement, also caching mechanism of browsers may 
+allow users to load it from memory if it is already cached. A disadvantage is the difficulty to develop with different components and pages and in most cases the code written is only usable in one or few pages. Being the web applicaiton developed rather small it was possible to develop it without using complex frameworks.
+Leaflet is a lightweight javascript map library. It provides the functionalities required by the software with a quick loading time and an easy inclusion in the application.
+
+\subsubsection{Front End: Mobile Application}
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Software used}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsubsection{Back End}
+The Back End developement was carried on using different softwares:
+\begin{itemize}
+\item Eclipse IDE for Java EE Developers :  This IDE provides a rich environment to develop applications in Java. Eclipse has components for managing projects and the dependencies of the project . The IDE also supports JUnit Test Suite and allows to do Coverage testing.
+It also allows to work with git inside it to manage versioning of the project.
+We used it also for developing of the web App since it allows editing also of javascript ,html and css files.
+\item MySQL : MySQL is a relational DBMS easy to set-up, to export and import using MySQL workbench GUI.
+				The GUI allows also simple table creation , table value modifications, stored procedure creation and trigger creation
+				It is also easy to connect from the Java Code .
+\item Apache Tomcat : Tomcat  is an open source implementation of the Java Servlet. This software is used to deploy the Back End.
+						Using Eclipse IDE for the developement after downloading Tomcat the setup is really fast and easy.
+\end{itemize}\subsubsection{Front End}
+//TODO angelo
+
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Adopeted API}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsubsection{Back End}
+In the developement of the Back End we used the API provided by Mysql server to connect to the database , the API of tomcat servlets to develop and deploy servlets and the Java Mail Api to send emails to the users.
+\subsubsection{FrontEnd}
+In the developement of the Front End we used the API provided by openStreetMaps in the web Apllication to get the map shown with leaflet and the geolocation API provided by the browser to get the user position.//TODO angelo
+
+
