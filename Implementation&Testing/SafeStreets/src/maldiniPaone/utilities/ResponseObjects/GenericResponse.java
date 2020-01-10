@@ -1,5 +1,8 @@
 package maldiniPaone.utilities.ResponseObjects;
 
+/**
+ * Object containing the response for a generic request 
+ **/
 public  class GenericResponse {
 	// ================================================================================
 	// Variables

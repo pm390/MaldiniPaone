@@ -38,7 +38,7 @@ public class AssignmentServlet extends HttpServlet {
 	 */
 	public AssignmentServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	

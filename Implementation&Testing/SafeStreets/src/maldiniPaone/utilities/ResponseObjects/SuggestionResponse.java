@@ -2,10 +2,14 @@ package maldiniPaone.utilities.ResponseObjects;
 
 import java.util.List;
 
-
+/**
+ * Object containing the response for a request for getting suggestions
+ **/
 public class SuggestionResponse extends GenericResponse {
+
 	private List<String> suggestions;
 
+	
 	public SuggestionResponse(int code, String message) {
 		super(code, message);
 	}

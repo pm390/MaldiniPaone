@@ -37,7 +37,7 @@ public class SuggestionServlet extends HttpServlet {
 	 */
 	public SuggestionServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	/**

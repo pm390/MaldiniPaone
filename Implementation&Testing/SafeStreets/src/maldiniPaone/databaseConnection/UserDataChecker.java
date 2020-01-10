@@ -18,12 +18,7 @@ import maldiniPaone.utilities.beans.Location;
  * @see UserDatabaseConnector
  **/
 public class UserDataChecker {
-	// ================================================================================
-	// Static variables
-	// ================================================================================
-	// Uncomment if you find a useful point to debug code here
-	// private static boolean verbose=true;//TODO set to false on release
-
+	
 	// ================================================================================
 	// User Adders
 	// ================================================================================

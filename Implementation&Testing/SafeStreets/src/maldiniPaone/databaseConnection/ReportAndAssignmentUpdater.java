@@ -39,9 +39,9 @@ public class ReportAndAssignmentUpdater {
 	 * @throws IllegalParameterException   when parameters are not valid(empty or
 	 *                                     null)
 	 **/
-	protected static Integer addReport(String username, Timestamp time, Location location, String note,
+	protected static Integer[] addReport(String username, Timestamp time, Location location, String note,
 			String licensePlate) throws ServerSideDatabaseException, IllegalParameterException {
-		Integer res = -1;
+		Integer res[] = { -1, -1, -1 };
 		if (username != null && time != null && location != null && licensePlate != null
 				&& location.getLatitude() != null && location.getLongitude() != null && // check null values
 				username != "") // check empty strings
@@ -132,6 +132,38 @@ public class ReportAndAssignmentUpdater {
 
 			} catch (DatabaseNotFoundException e) {
 				throw new ServerSideDatabaseException(e, "database not found when adding a suggestion");
+			}
+		} else {
+			throw new IllegalParameterException();
+		}
+		return res;
+	}
+
+	// ================================================================================
+	// photo adder
+	// ================================================================================
+	/**
+	 * Calls the method inside ReportAndAssignmentDatabaseConnector which adds a
+	 * photo
+	 * 
+	 * @param name     : the name of the photo
+	 * @param reportId : the id of the report to which the photo must be associated
+	 * @return boolean : true if insertion is successful false otherwise
+	 * @throws ServerSideDatabaseException when the database can't be found
+	 * @throws IllegalParameterException   when parameters are not valid(empty or
+	 *                                     null)
+	 **/
+	public static boolean addNewPhoto(String name, int reportId)
+			throws ServerSideDatabaseException, IllegalParameterException {
+		boolean res = false;
+		if (name != null && reportId != -1 && // check null values
+				name != "") // check empty strings
+		{
+			try {
+				ReportAndAssignmentDatabaseConnector.addNewPhoto(name, reportId);
+
+			} catch (DatabaseNotFoundException e) {
+				throw new ServerSideDatabaseException(e, "database not found when adding a photo");
 			}
 		} else {
 			throw new IllegalParameterException();

@@ -1,7 +1,10 @@
 package maldiniPaone.servlets.managers;
 
+import java.util.List;
+
 import maldiniPaone.servlets.managers.interfaces.ManageNotification;
 import maldiniPaone.utilities.beans.Location;
+import maldiniPaone.utilities.beans.users.Authority;
 
 /**
  * Implements {@link ManageNotification} Singleton design pattern
@@ -19,6 +22,8 @@ public class NotificationManager implements ManageNotification {
 
 	@Override
 	public void notify(Integer id, Location location) {
+		//TODO use this
+		//List<Authority> temp=AuthorityLocation.getInstance().getAuthorities(location);
 		/* TODO actual notification */
 	}
 

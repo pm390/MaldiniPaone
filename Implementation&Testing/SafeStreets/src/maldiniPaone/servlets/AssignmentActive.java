@@ -33,7 +33,6 @@ public class AssignmentActive extends HttpServlet {
 	 */
 	public AssignmentActive() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

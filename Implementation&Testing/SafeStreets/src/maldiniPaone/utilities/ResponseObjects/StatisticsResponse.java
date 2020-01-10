@@ -4,6 +4,9 @@ import java.util.List;
 
 import maldiniPaone.utilities.beans.Statistic;
 
+/**
+ * Object containing the response for a request for getting statistics
+ **/
 public class StatisticsResponse extends GenericResponse {
 	private List<Statistic> statistics;
 

@@ -6,12 +6,7 @@ import java.util.TimeZone;
  * This class contains the various constants used by safeStreets back end
  **/
 public class Constants {
-	// ================================================================================
-	// initialization
-	// ================================================================================
-	static {
-		// TODO set parameters from file
-	}
+	
 	// ================================================================================
 	// database constants
 	// ================================================================================
@@ -62,7 +57,7 @@ public class Constants {
 	 * initial size of the connection pool
 	 **/
 	public static final Integer INITIALSIZE = 5;// low number for functionality testing
-	// TODO remember to change to bigger number for testing and actual release.
+	// TODO ON RELEASE remember to change to bigger number for testing and actual release.
 	/**
 	 * max number of static suggestions to show to a municipality
 	 **/
@@ -124,6 +119,12 @@ public class Constants {
 	 * 	The number of edge on the map border created to save authority location 
 	 **/
 	public static final int AUTHORITY_LOCATION_GRANULARITY = 50;
+	
+	/**
+	 * 	The number of violations after which a violation is considered severe
+	 * 	// TODO ON RELEASE increase 
+	 **/
+	public static final Integer VIOLATION_SEVERITY_LIMIT = 5;
 	
 	
 }

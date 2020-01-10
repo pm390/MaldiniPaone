@@ -167,6 +167,7 @@ public class UserManager implements ManageAccountModification, ManageAuthorityPo
 	public void removeAuthority(Authority authority)
 	{
 		AuthorityLocation.getInstance().removeAuthority(authority,authority.getLastLocationIndex());
+		authority.setLastLocationIndex(-1);
 	}
 	
 	// ================================================================================

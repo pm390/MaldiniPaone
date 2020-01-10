@@ -1,5 +1,6 @@
 package maldiniPaone.databaseConnection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
@@ -24,6 +25,7 @@ import maldiniPaone.utilities.constants.Constants;
  * retrieves, updates and deletes data. Singleton and facade design patterns are
  * used Implements {@link ManageDataAccess}
  **/
+@SuppressWarnings("deprecation")
 public class DataAccessFacade implements ManageDataAccess {
 	// ================================================================================
 	// static variables
@@ -59,7 +61,7 @@ public class DataAccessFacade implements ManageDataAccess {
 		return DataCollector.getReportsMadeBy(username);
 	}
 
-	// TODO think if keep this or not
+	
 	@Override
 	public List<Accident> getAccidents(Location location) {
 		// return DataCollector.getAccidents(location);
@@ -150,10 +152,14 @@ public class DataAccessFacade implements ManageDataAccess {
 
 	@Override
 	public Assignment addNewReport(Report report) throws ServerSideDatabaseException, IllegalParameterException {
-		Integer newAssignmentid = ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(),
+		Integer[] ids = ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(),
 				report.getLocation(), report.getNote(), report.getLicensePlate());
 		Assignment res = new Assignment();
-		res.setId(newAssignmentid);
+		res.setId(ids[ids.length-1]);
+		report.setId(ids[0]);
+		List<Report> temp=new ArrayList<Report>();
+		temp.add(report);
+		res.setReports(temp);
 		return res;
 	}
 
@@ -234,6 +240,23 @@ public class DataAccessFacade implements ManageDataAccess {
 	public boolean removeUser(String username, String password, UserType user)
 			throws ServerSideDatabaseException, IllegalParameterException {
 		return UserDataChecker.removeUser(username, password, user);
+	}
+
+	// ================================================================================
+			// photo adder
+			// ================================================================================
+		/**
+		 * Saves the photo name on the database
+		 * 
+		 * @param name       : the name of the photo
+		 * @param reportId   : the id of the report to which the photo must be associated
+		 * @return boolean : true if insertion is successful false otherwise
+		 * @throws ServerSideDatabaseException when the database can't be found
+		 * @throws IllegalParameterException   when parameters are not valid(empty or
+		 *                                     null)
+		 **/
+	public boolean addNewPhoto(String name, int reportId)throws ServerSideDatabaseException, IllegalParameterException {
+		return ReportAndAssignmentUpdater.addNewPhoto( name, reportId);
 	}
 
 }

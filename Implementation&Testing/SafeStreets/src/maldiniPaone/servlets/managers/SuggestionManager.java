@@ -71,26 +71,18 @@ public class SuggestionManager implements ManageSuggestions {
 		List<String> result = new ArrayList<String>();
 		List<Violation> violation = DataAccessFacade.getInstance().getViolations(cityHall);
 		for (Violation v : violation) {
-			//TODO check v.getCount() if value is high enough
+			if (v.getCount() < Constants.VIOLATION_SEVERITY_LIMIT)
+				continue;
 			switch (v.getViolationType()) {
 			case DoubleParking:
-				/*
-				 * TODO something like
-				 * result.add("should add more parking area to reduce double parking")
-				 */
+				result.add("Aggiungere parcheggi : i parcheggi in doppia fila sono frequenti");
 				break;
 			case ParkingWithForbiddingSignals:
-				/*
-				 * TODO something like result.
-				 * add("should add more authorities to check area where parking is forbidden")
-				 */
+				result.add("Controllare le zone con divieto di parcheggio : "
+						+ "i parcheggi in zona vietata sono frequenti");
 				break;
 			case ReservedParking:
-				/*
-				 * TODO something like result.
-				 * add("should add more authorities to check ReservedParking and areas around them")
-				 * )
-				 */
+				result.add("Controllare le zone riservate : i parcheggi in zona riservata sono frequenti");
 			default:
 				break;
 			}

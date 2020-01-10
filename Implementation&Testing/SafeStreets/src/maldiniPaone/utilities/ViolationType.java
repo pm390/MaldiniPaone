@@ -8,7 +8,7 @@ public enum ViolationType
 	DoubleParking,
 	ReservedParking,
 	ParkingWithForbiddingSignals;
-	//TODO add other type of violations
+	// TODO ON RELEASEadd other type of violations 
 	
 
 	//================================================================================

@@ -1,5 +1,9 @@
 package maldiniPaone.utilities.ResponseObjects;
 
+
+/**
+ * Object containing the response for a request for login
+ **/
 public class LoginResponse extends GenericResponse{
 
 	private String userType;

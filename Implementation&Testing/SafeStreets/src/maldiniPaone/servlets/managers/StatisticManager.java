@@ -42,7 +42,6 @@ public class StatisticManager implements ManageStatistics {
 	}
 
 	@Override
-	//TODO add some implementation notes here
 	public List<Statistic> getStatistics(Location location, Float edge)
 			throws ServerSideDatabaseException, IllegalParameterException {
 		int subEdgeNumber = (int) (edge / (2 * Constants.STATISTICS_RADIUS));

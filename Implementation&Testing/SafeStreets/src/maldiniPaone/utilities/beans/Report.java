@@ -15,7 +15,10 @@ public class Report  {
 	private String note;
 	private String licensePlate;
 	private Timestamp date;
+	private int id;
 	
+	
+
 	//================================================================================
     // Empty Constructor
     //================================================================================
@@ -24,6 +27,12 @@ public class Report  {
 	// ================================================================================
 	// Getters
 	// ================================================================================
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
 	/**
 	 * @return the location
@@ -110,7 +119,13 @@ public class Report  {
 		this.licensePlate = licensePlate;
 	}
 
-	
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	
 }

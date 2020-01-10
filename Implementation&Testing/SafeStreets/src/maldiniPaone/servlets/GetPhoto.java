@@ -27,7 +27,7 @@ public class GetPhoto extends HttpServlet {
      */
     public GetPhoto() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -38,7 +38,7 @@ public class GetPhoto extends HttpServlet {
 		if(user==null||//short circuit
 				user.getUserType()!=UserType.Authority)
 		{
-			//TODO invalid access
+			//invalid access
 			return;
 		}
 		String name=request.getParameter("file");

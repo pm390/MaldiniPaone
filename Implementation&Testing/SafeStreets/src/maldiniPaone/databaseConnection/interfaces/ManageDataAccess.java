@@ -19,6 +19,7 @@ import maldiniPaone.utilities.beans.Violation;
  * This interface provides all the methods to retrieve, save, modify and delete
  * data provided by the {@link maldiniPaone.databaseConnection} package
  */
+@SuppressWarnings("deprecation")
 public interface ManageDataAccess {
 	// ================================================================================
 	// retrieve data

@@ -36,7 +36,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 	 */
 	public RegistrationByMunicipality() {
 		super();
-		// TODO Auto-generated constructor stub
+		//
 	}
 	/*
 	 * @Override protected void doGet(HttpServletRequest request,
@@ -61,7 +61,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 		User user = (User) request.getSession(true).getAttribute("user");
 		if (user == null || // short circuit
 				user.getUserType() != UserType.Municipality) {
-			GenericResponse message = new GenericResponse(400,"invalid access");
+			GenericResponse message = new GenericResponse(400, "invalid access");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();
 			return;
@@ -75,7 +75,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 		String email = (String) request.getParameter("email");
 		String targetUserType = (String) request.getParameter("userType");
 		try {
-			email=email.toLowerCase();
+			email = email.toLowerCase();
 			if (cityHall == null)
 			// if the session doesn't contain already the cityhall of the municipality it
 			// must be retrieved
@@ -92,7 +92,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 						user.getUsername(), cityHall.getName(), cityHall.getProvince())) {
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				} else {
-					GenericResponse message = new GenericResponse(400,"already exist");
+					GenericResponse message = new GenericResponse(400, "already exist");
 					outputWriter.println(new Gson().toJson(message));
 					outputWriter.close();
 					return;
@@ -101,11 +101,10 @@ public class RegistrationByMunicipality extends HttpServlet {
 				if (Constants.VERBOSE)
 					System.out.println("register authority");
 
-				
 				if (registerAuthority(username, password, email, (Municipality) user, request)) {
 					MailManager.getInstance().sendConfirmationMail(username, password, email);
 				} else {
-					GenericResponse message = new GenericResponse(400,"already exist");
+					GenericResponse message = new GenericResponse(400, "already exist");
 					outputWriter.println(new Gson().toJson(message));
 					outputWriter.close();
 					return;
@@ -115,7 +114,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			GenericResponse message = new GenericResponse(500,"Server side error");
+			GenericResponse message = new GenericResponse(500, "Server side error");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();
 			return;
@@ -123,7 +122,7 @@ public class RegistrationByMunicipality extends HttpServlet {
 			if (Constants.VERBOSE) {
 				e.printStackTrace();
 			}
-			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			GenericResponse message = new GenericResponse(400, "invalid parameters");
 			outputWriter.println(new Gson().toJson(message));
 			outputWriter.close();
 			return;
@@ -143,18 +142,31 @@ public class RegistrationByMunicipality extends HttpServlet {
 	// ================================================================================
 	// Utility functions
 	// ================================================================================
-	// TODO javadoc here
+	/**
+	 * Utility function which handles the parsing of the request and registers an
+	 * Auhtority
+	 * 
+	 * @param username the name of the authority to be registered
+	 * @param password the password of the authority to be registered
+	 * @param email    the email address of the authority to be registered
+	 * @param creator  the creator of the municipality
+	 * @param request  the request object containing all the other data
+	 * @return true if succeeds
+	 * @throws ServerSideDatabaseException when the database can't be found
+	 * @throws IllegalParameterException   when parameters are not valid(empty or
+	 *                                     null)
+	 * 
+	 */
 	private static boolean registerAuthority(String username, String password, String email, Municipality creator,
 			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException {
 		CityHall cityhall = creator.getCityhall();
-		try
-		{
+		try {
 			Float topLeftLatitude = Float.parseFloat(request.getParameter("tLLatitude"));
 			Float topLeftLongitude = Float.parseFloat(request.getParameter("tLLongitude"));
 			Location topLeftLocation = new Location();
 			topLeftLocation.setLatitude(topLeftLatitude);
 			topLeftLocation.setLongitude(topLeftLongitude);
-	
+
 			Float bottomRightLatitude = Float.parseFloat(request.getParameter("bRLatitude"));
 			Float bottomRightLongitude = Float.parseFloat(request.getParameter("bRLongitude"));
 			Location bottomRightLocation = new Location();
@@ -162,11 +174,10 @@ public class RegistrationByMunicipality extends HttpServlet {
 			bottomRightLocation.setLongitude(bottomRightLongitude);
 			return UserManager.getIstance().registerAuthority(username, password, email, creator.getUsername(),
 					cityhall.getName(), cityhall.getProvince(), topLeftLocation, bottomRightLocation);
-		}
-		catch(NumberFormatException e)//value which should have float inside aren't valid
+		} catch (NumberFormatException e)// value which should have float inside aren't valid
 		{
 			throw new IllegalParameterException();
-		}		
+		}
 	}
 
 }

@@ -2,6 +2,9 @@ package maldiniPaone.utilities.ResponseObjects;
 
 import java.util.List;
 
+/**
+ * Object containing the response for a request for getting assignment state 
+ **/
 public class AssignmentStateResponse extends GenericResponse {
 	private List<Integer> activeIDs;
 

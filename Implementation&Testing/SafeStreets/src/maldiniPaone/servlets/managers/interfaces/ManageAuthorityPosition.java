@@ -1,6 +1,6 @@
 package maldiniPaone.servlets.managers.interfaces;
 
-import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
+
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.Authority;
 

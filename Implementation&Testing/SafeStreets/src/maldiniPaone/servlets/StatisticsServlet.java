@@ -33,7 +33,7 @@ public class StatisticsServlet extends HttpServlet {
 	 */
 	public StatisticsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		//
 	}
 
 	/**

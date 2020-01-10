@@ -46,9 +46,9 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @throws DatabaseNotFoundException the connection to the database could not be
 	 *                                   instantiated
 	 */
-	protected static Integer addReport(String username, Timestamp time, Location location, String note,
+	protected static Integer[] addReport(String username, Timestamp time, Location location, String note,
 			String licensePlate) throws DatabaseNotFoundException {
-		Integer res = -1;
+		Integer[] res = { -1, -1, -1 };
 		Connection c = null;
 		PreparedStatement ps = null;
 		try {
@@ -67,9 +67,10 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps.executeUpdate();
 			// get id of the last row inserted if fails throws an exception
 			ResultSet rs = ps.getGeneratedKeys();
+			int i = 0;
 			while (rs.next())// get all the generated keys
 			{
-				res = rs.getInt(1); // only the last one(bridge table id) will remain in res
+				res[i++] = rs.getInt(1);
 			}
 			// close result set and prepared statement
 			rs.close();
@@ -176,7 +177,8 @@ public class ReportAndAssignmentDatabaseConnector {
 			c = ConnectionPool.getInstance().getConnection();// get connection
 			ps = c.prepareStatement("select count(*) " + " from report as rep" // count reports
 					+ " where TimestampDiff(DAY,rep.datetime,current_timestamp())<=7"// within the last 7 days
-					+ " and " + squareAreaCloseTo("rep", location, Constants.STATISTICS_RADIUS) // within a certain radius
+					+ " and " + squareAreaCloseTo("rep", location, Constants.STATISTICS_RADIUS) // within a certain
+																								// radius
 					+ " order by rep.datetime");// ordered by the date the reports were made
 			// execute the query
 			ps.execute();
@@ -446,11 +448,9 @@ public class ReportAndAssignmentDatabaseConnector {
 			c = ConnectionPool.getInstance().getConnection();// get connection
 			ps = c.prepareStatement("select COUNT(DISTINCT(arb.idassignment))" // count assignment
 					+ " from assignment as assign join assignmentreportbridge as arb "
-					+ " on arb.idassignment=assign.id"
-					+ " join report as re "
-					+ " on re.id=arb.idreport"
+					+ " on arb.idassignment=assign.id" + " join report as re " + " on re.id=arb.idreport"
 					+ " where TimestampDiff(DAY,arb.timestamp,current_timestamp())<=7" + " and "
-					+  squareAreaCloseTo("re", location, Constants.STATISTICS_RADIUS));
+					+ squareAreaCloseTo("re", location, Constants.STATISTICS_RADIUS));
 			// execute query
 			ps.execute();
 			rs = ps.getResultSet();
@@ -508,7 +508,7 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps.execute();
 			// get result set
 			rs = ps.getResultSet();
-			while(rs.next()) {
+			while (rs.next()) {
 				// if no result than it is not active
 				res.add(rs.getInt(1));
 			}
@@ -705,6 +705,53 @@ public class ReportAndAssignmentDatabaseConnector {
 		}
 		return res;
 	}
+	// ================================================================================
+	// photo adder
+	// ================================================================================
+
+	/**
+	 * Saves the photo name on the database
+	 * 
+	 * @param name     : the name of the photo
+	 * @param reportId : the id of the report to which the photo must be associated
+	 * 
+	 * @return boolean : true if insertion is successful false otherwise
+	 * @throws DatabaseNotFoundException the connection to the database could not be
+	 *                                   instantiated
+	 **/
+	public static boolean addNewPhoto(String name, int reportId) throws DatabaseNotFoundException {
+		boolean res = false;
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionPool.getInstance().getConnection();// get connection
+			ps = c.prepareStatement("insert into photo" // add photo
+					+ "(idreport,name) values (?,?)");
+			// set the values in the prepared statements avoid sql injection
+			ps.setInt(1,reportId);
+			ps.setString(2, name);
+			// execute update
+			ps.executeUpdate();
+			/// close statement
+			ps.close();
+			// release connection
+			ConnectionPool.getInstance().releaseConnection(c);
+		} catch (DatabaseNotFoundException e) {
+			throw e;
+		} catch (Exception e) {
+			if (ps != null)
+				try {
+					ps.close();
+				} catch (Exception ex) {
+					/* database didn't close the statement */}
+			if (c != null)
+				ConnectionPool.getInstance().releaseConnection(c);
+			if (Constants.VERBOSE)
+				e.printStackTrace();
+			return res;
+		}
+		return res;
+	}
 
 	// ================================================================================
 	// Support functions
@@ -796,7 +843,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		// compare square of distance with square the radius
 		// we don't use the root operation on the result for performance.
 	}
-	
+
 	/**
 	 * defines a String in for an MySql condition for indicating a place near to the
 	 * specified location
@@ -804,12 +851,12 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @param base     : this variable is the name of the table in which a location
 	 *                 is stored. it must contain a longitude and a latitude column
 	 * @param location : the location with which the distance must be computed
-	 * @param edge  : the "radius" in which a place is considered close
+	 * @param edge     : the "radius" in which a place is considered close
 	 * @return String : represents the condition in String usable in a MySql query
 	 */
 	private static String squareAreaCloseTo(String base, Location location, Float edge) {
-		return "ABS(" + base + ".latitude-" + location.getLatitude()+")<"+edge+" and "+
-				"ABS(" + base + ".longitude-" + location.getLongitude()+")<"+edge;
+		return "ABS(" + base + ".latitude-" + location.getLatitude() + ")<" + edge + " and " + "ABS(" + base
+				+ ".longitude-" + location.getLongitude() + ")<" + edge;
 	}
 
 	/**
@@ -836,7 +883,8 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * @return ReportCreation : the report corresponding to the row of the result
 	 *         set
 	 * @throws SQLException              specified field are not available
-	 * @throws IllegalParameterException if the location in a report has invalid values
+	 * @throws IllegalParameterException if the location in a report has invalid
+	 *                                   values
 	 */
 	private static Report buildReportFromResultSet(ResultSet rs) throws SQLException, IllegalParameterException {
 		// initializations
@@ -857,7 +905,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 * 
 	 * @param rs : the result set from which the list is created
 	 * @return List of AssignmentServlet : list of assignment in the result set,
-	 *          empty list if the result contains nothing
+	 *         empty list if the result contains nothing
 	 * @throws SQLException              specified field are not available
 	 * @throws IllegalParameterException if location in an assignment is not valid
 	 **/

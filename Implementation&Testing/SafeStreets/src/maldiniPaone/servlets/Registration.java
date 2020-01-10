@@ -16,7 +16,6 @@ import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseExce
 import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
 import maldiniPaone.utilities.ResponseObjects.GenericResponse;
-import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.User;
 import maldiniPaone.utilities.constants.Constants;
 
@@ -32,7 +31,7 @@ public class Registration extends HttpServlet {
 	 */
 	public Registration() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	

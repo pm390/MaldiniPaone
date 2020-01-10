@@ -6,11 +6,22 @@ import java.util.List;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.Authority;
 import maldiniPaone.utilities.constants.Constants;
-
+/**
+ *	Stores several list containing the authorities. Provides methods to add, retrieve and delete
+ *	authorities in the lists.
+ *	Used for finding authorities to be notified. 
+ * 	Singleton Design Pattern.
+ **/
 public class AuthorityLocation {
 
-	private static AuthorityLocation instance=new AuthorityLocation();
+	private static AuthorityLocation instance = new AuthorityLocation();
 
+	/**
+	 * Initializes the list of lists of authorities. Divides the area in rectangles
+	 * and to each area associates a List of authorities A single list is used for
+	 * outside the considered area(outside Italy)
+	 * 
+	 **/
 	private AuthorityLocation() {
 		heightEdge = (topLeftLatitude - bottomRightLatitude) / Constants.AUTHORITY_LOCATION_GRANULARITY;
 		widthEdge = (topLeftLongitude - bottomRightLongitude) / Constants.AUTHORITY_LOCATION_GRANULARITY;
@@ -26,6 +37,12 @@ public class AuthorityLocation {
 		autorities.add(temp);
 	}
 
+	/**
+	 * gets the list of authorities associated to a given location
+	 * 
+	 * @param loc the location where the authorities are searched
+	 * @return the list of authorities
+	 **/
 	public List<Authority> getAuthorities(Location loc) {
 		if (loc.getLongitude() < bottomRightLongitude && loc.getLongitude() > topLeftLongitude && // longitude in the
 																									// square
@@ -38,6 +55,12 @@ public class AuthorityLocation {
 		return autorities.get(autorities.size() - 1);
 	}
 
+	/**
+	 * gets the index of the area in which the location is
+	 * 
+	 * @param loc the location
+	 * @return the index
+	 **/
 	public Integer getPositionIndex(Location loc) {
 		if (loc.getLongitude() < bottomRightLongitude && loc.getLongitude() > topLeftLongitude && // longitude in the
 		// square
@@ -50,6 +73,13 @@ public class AuthorityLocation {
 		return autorities.size() - 1;
 	}
 
+	/**
+	 * adds an authority to the list
+	 * 
+	 * @param authority the authority to be added
+	 * @param loc       the location where the authorities is located
+	 * @return the list of authorities
+	 **/
 	public boolean addAuthorities(Authority authority, Location loc) {
 		List<Authority> temp;
 		if (loc.getLongitude() < bottomRightLongitude && loc.getLongitude() > topLeftLongitude && // longitude in the
@@ -59,18 +89,18 @@ public class AuthorityLocation {
 			int downShift = (int) Math.floor(loc.getLongitude() / heightEdge);
 			int index = leftShift + downShift * Constants.AUTHORITY_LOCATION_GRANULARITY;
 			temp = autorities.get(index);
-			synchronized (temp) {//on the sublist to avoid blocking the entire list
+			synchronized (temp) {// on the sublist to avoid blocking the entire list
 				return temp.add(authority);
 			}
 		}
 		temp = autorities.get(autorities.size() - 1);
-		synchronized (temp) {//on the sublist to avoid blocking the entire list
+		synchronized (temp) {// on the sublist to avoid blocking the entire list
 			return temp.add(authority);
 		}
 	}
 
 	public static AuthorityLocation getInstance() {
-		return instance; //use static initialization process to avoid synchronization issues
+		return instance; // use static initialization process to avoid synchronization issues
 	}
 
 	private Float heightEdge;
@@ -87,15 +117,21 @@ public class AuthorityLocation {
 
 	private float bottomRightLongitude = 19.37f;
 
+	/**
+	 * removes an authority from the list
+	 * 
+	 * @param authority         the authority to be removed
+	 * @param lastLocationIndex the index of the array where the authority is placed
+	 * 
+	 **/
 	public void removeAuthority(Authority authority, Integer lastLocationIndex) {
-		if(lastLocationIndex>autorities.size()-1)
-		{
+		if (lastLocationIndex > autorities.size() - 1) {
 			return;
 		}
-		List<Authority> temp =autorities.get(lastLocationIndex);
-		synchronized(temp)//on the sublist to avoid blocking the entire list 
+		List<Authority> temp = autorities.get(lastLocationIndex);
+		synchronized (temp)// on the sublist to avoid blocking the entire list
 		{
-		temp.remove(authority);
+			temp.remove(authority);
 		}
 	}
 }

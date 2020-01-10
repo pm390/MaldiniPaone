@@ -3,7 +3,9 @@ package maldiniPaone.utilities.ResponseObjects;
 import java.util.List;
 
 import maldiniPaone.utilities.beans.Assignment;
-
+/**
+ * Object containing the response for a request for getting assignments 
+ **/
 public class AssignmentResponse extends GenericResponse {
 	private List<Assignment> assignments;
 

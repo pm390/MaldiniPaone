@@ -1,10 +1,10 @@
 package maldiniPaone.utilities.beans;
 
 import java.sql.Timestamp;
-//FIXME think if we need to delete this or not
 /**
+ * @deprecated 
  * Bean representing Accident data.
- *
+ * This provides the basic idea of how an accident should be represented
  **/
 public class Accident {
 	//================================================================================

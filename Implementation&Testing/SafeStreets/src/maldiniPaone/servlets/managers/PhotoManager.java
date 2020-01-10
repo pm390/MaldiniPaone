@@ -61,17 +61,18 @@ public class PhotoManager
 	 * @param photoNumber the index of the photo which is added
 	 * @param fileExtension the extension of the file
 	 * @param photo  the InputStream corresponding to the photo to be saved
-	 * @return true if the creation is successful
+	 * @return the name of the photo
 	 * @throws IOException when the photo can't be saved
 	 **/
-	public boolean savePhoto(String username,Integer assignmentId,Integer photoNumber,String fileExtension,InputStream photo) throws IOException
+	public String savePhoto(String username,Integer assignmentId,Integer photoNumber,String fileExtension,InputStream photo) throws IOException
 	{
-		File foto= new File(Constants.PHOTO_PATH+File.separator+username+"-"
-				+assignmentId+"-"+Integer.toString(photoNumber)+System.currentTimeMillis()+fileExtension);
+		String name=Constants.PHOTO_PATH+File.separator+username+"-"
+				+assignmentId+"-"+Integer.toString(photoNumber)+System.currentTimeMillis()+fileExtension;
+		File foto= new File(name);
 		 foto.createNewFile();
 		 Files.copy(photo, foto.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		 photo.close();
-		return true;
+		return name;
 	}
 	
 	public static void main(String[] args)

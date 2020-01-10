@@ -31,7 +31,6 @@ public class AccountModification extends HttpServlet {
 	 */
 	public AccountModification() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

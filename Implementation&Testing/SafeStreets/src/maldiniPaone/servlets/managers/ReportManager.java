@@ -63,13 +63,14 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 		try {
 			final Assignment newlyCreatedAssignment = DataAccessFacade.getInstance().addNewReport(report);
 			if (newlyCreatedAssignment != null) {
+				int reportId=newlyCreatedAssignment.getReports().get(0).getId();
 				// if needed get additional informations
 				for (Photo temp : photos)// for each photo save it
 				{
 					try {
-						PhotoManager.getInstance().savePhoto(username, newlyCreatedAssignment.getId(),
+						String name=PhotoManager.getInstance().savePhoto(username, newlyCreatedAssignment.getId(),
 								temp.getPhotoNumber(), temp.getFileExtension(), temp.getPhoto());
-						// TODO add photo to database
+						DataAccessFacade.getInstance().addNewPhoto(name,reportId);
 					} catch (Exception e) {
 						if (Constants.VERBOSE) {
 							System.err.println("photo couldn't be added");

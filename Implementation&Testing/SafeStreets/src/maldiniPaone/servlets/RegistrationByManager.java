@@ -34,7 +34,7 @@ public class RegistrationByManager extends HttpServlet {
 	 */
 	public RegistrationByManager() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class RegistrationByManager extends HttpServlet {
 		String email = (String) request.getParameter("email");
 		String targetUserType = (String) request.getParameter("userType");
 		try {
-			email=email.toLowerCase();
+			email = email.toLowerCase();
 			if (targetUserType != null) {
 				switch (UserType.fromString(targetUserType)) {
 				case Municipality:
@@ -77,7 +77,7 @@ public class RegistrationByManager extends HttpServlet {
 					}
 					break;
 				case Manager:
-					String venueName=request.getParameter("venue");
+					String venueName = request.getParameter("venue");
 					UserManager.getIstance().registerManager(username, password, email, venueName);
 					break;
 				default:
@@ -119,7 +119,20 @@ public class RegistrationByManager extends HttpServlet {
 	// ================================================================================
 	// Utility functions
 	// ================================================================================
-	// TODO javadoc here
+	/**
+	 * Utility function which handles the parsing of the request and registers a
+	 * municipality
+	 * 
+	 * @param username the name of the municipality to be registered
+	 * @param password the password of the municipality to be registered
+	 * @param email    the email address of the municipality to be registered
+	 * @param request  the request object containing all the other data
+	 * @return true if succeeds
+	 * @throws ServerSideDatabaseException when the database can't be found
+	 * @throws IllegalParameterException   when parameters are not valid(empty or
+	 *                                     null)
+	 * 
+	 */
 	private static boolean registerMunicipality(String username, String password, String email,
 			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException {
 		String cityHallName = (String) request.getParameter("cityHallName");
