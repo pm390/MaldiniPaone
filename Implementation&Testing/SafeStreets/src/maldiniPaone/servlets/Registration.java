@@ -15,8 +15,6 @@ import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterExcept
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
-import maldiniPaone.utilities.PasswordBuilder;
-import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.ResponseObjects.GenericResponse;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.User;
@@ -97,22 +95,6 @@ public class Registration extends HttpServlet {
 		return;
 	}
 
-	// ================================================================================
-	// Utility functions
-	// ================================================================================
-	// TODO javadoc here
-	private static boolean registerMunicipality(String username, String password, String email,
-			HttpServletRequest request) throws ServerSideDatabaseException, IllegalParameterException {
-		String cityHallName = (String) request.getParameter("cityHallName");
-		String cityHallProvince = (String) request.getParameter("cityHallProvince");
-		String region = (String) request.getParameter("region");
-		Float latitude = Float.parseFloat(request.getParameter("latitude"));
-		Float longitude = Float.parseFloat(request.getParameter("longitude"));
-		Location location = new Location();
-		location.setLatitude(latitude);
-		location.setLongitude(longitude);
-		return UserManager.getIstance().registerMunicipalityByManager(username, password, email, cityHallName,
-				cityHallProvince, region, location);
-	}
+	
 
 }

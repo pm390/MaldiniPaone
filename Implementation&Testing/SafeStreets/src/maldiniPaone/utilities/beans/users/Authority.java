@@ -8,6 +8,7 @@ import maldiniPaone.utilities.UserType;
 public class Authority extends User 
 {
 	
+	private Integer LastLocationIndex=-1;
 
 	//================================================================================
     // userType
@@ -17,4 +18,19 @@ public class Authority extends User
 	{
 		return UserType.Authority;
 	}
+
+	/**
+	 * @return the lastLocationIndex
+	 */
+	public Integer getLastLocationIndex() {
+		return LastLocationIndex;
+	}
+
+	/**
+	 * @param lastLocationIndex the lastLocationIndex to set
+	 */
+	public void setLastLocationIndex(Integer lastLocationIndex) {
+		LastLocationIndex = lastLocationIndex;
+	}
+	
 }

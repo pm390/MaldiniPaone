@@ -14,6 +14,7 @@ import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
+import maldiniPaone.utilities.beans.users.Authority;
 
 /**
  * Implements {@link ManageAccountModification} ,
@@ -144,16 +145,30 @@ public class UserManager implements ManageAccountModification, ManageAuthorityPo
 	// Manage authority position
 	// ================================================================================
 	@Override
-	public boolean addPosition(String username, Location location) throws IllegalParameterException {
-		// TODO Save Position on the server
-		return false;
+	public boolean addPosition(Authority authority, Location location) {
+		boolean res=AuthorityLocation.getInstance().addAuthorities(authority, location);
+		if(res)
+		{
+			authority.setLastLocationIndex(AuthorityLocation.getInstance().getPositionIndex(location));
+		}
+		return res;
 	}
 
 	@Override
-	public boolean updatePosition(String username, Location location) throws IllegalParameterException {
-		// TODO Update position on the server
-		return false;
+	public boolean updatePosition(Authority authority, Location location)  {
+		if(authority.getLastLocationIndex().equals(AuthorityLocation.getInstance().getPositionIndex(location)))
+		{
+			return true;
+		}
+		AuthorityLocation.getInstance().removeAuthority(authority,authority.getLastLocationIndex());
+		return AuthorityLocation.getInstance().addAuthorities(authority, location);
 	}
+	@Override
+	public void removeAuthority(Authority authority)
+	{
+		AuthorityLocation.getInstance().removeAuthority(authority,authority.getLastLocationIndex());
+	}
+	
 	// ================================================================================
 	// Manage User Data Retrieve
 	// ================================================================================

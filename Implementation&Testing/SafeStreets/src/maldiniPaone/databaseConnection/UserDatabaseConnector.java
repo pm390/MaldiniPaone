@@ -35,7 +35,7 @@ public class UserDatabaseConnector {
 	 * @throws DatabaseNotFoundException the connection to the database could not be
 	 *                                   instantiated
 	 **/
-	protected static boolean AddCitizen(String username, String password, String email)
+	protected static boolean addCitizen(String username, String password, String email)
 			throws DatabaseNotFoundException {
 		boolean res = false;
 		Connection c = null;

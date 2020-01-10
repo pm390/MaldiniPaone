@@ -47,7 +47,7 @@ public class UserDataChecker {
 				username != "" && password != "" && email != "") // check empty strings
 		{
 			try {
-				res = UserDatabaseConnector.AddCitizen(username, password, email);
+				res = UserDatabaseConnector.addCitizen(username, password, email);
 			} catch (DatabaseNotFoundException e) {
 				throw new ServerSideDatabaseException(e, "database not found when adding user");
 			}

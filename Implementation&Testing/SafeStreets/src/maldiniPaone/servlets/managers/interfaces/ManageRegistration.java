@@ -2,7 +2,6 @@ package maldiniPaone.servlets.managers.interfaces;
 
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
-import maldiniPaone.utilities.beans.Location;
 
 /**
  * This interface defines the signatures of the methods to manager registration

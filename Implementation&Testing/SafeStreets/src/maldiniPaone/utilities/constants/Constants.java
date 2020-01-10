@@ -120,5 +120,10 @@ public class Constants {
 	 **/
 	public static final boolean VERBOSE = true;// set to false on release
 	
+	/**
+	 * 	The number of edge on the map border created to save authority location 
+	 **/
+	public static final int AUTHORITY_LOCATION_GRANULARITY = 50;
+	
 	
 }
