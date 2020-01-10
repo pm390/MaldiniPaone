@@ -185,8 +185,8 @@ function showNewStatistics(data) {
 				$(div).show();
 				shownDiv = div;
 				$("#smallDescription").hide();
-				mymap.flyTo([ location["latitude"], location["longitude"] ],
-						mymap.getZoom() + 1);
+				//set zoom to the current zoom if enough zoomed else it increases zoom until the zoom is 13
+				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
 			});
 			
 			//create marker
@@ -210,7 +210,8 @@ function showNewStatistics(data) {
 
 			marker.on('click', function(e) {//when click on marker show description
 				mymap.flyTo([ location["latitude"], location["longitude"] ],
-						mymap.getZoom() + 1);
+						//set zoom to the current zoom if enough zoomed else it increases zoom until the zoom is 13
+						(mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
 				descriptionCloser.show();
 				$("#smallDescription").hide();
 				$("#longDescription").show();

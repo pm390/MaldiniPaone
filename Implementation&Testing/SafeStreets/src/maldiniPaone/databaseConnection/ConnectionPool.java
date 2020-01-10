@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * this class manages the creation of the connections with the database, every
@@ -77,11 +77,11 @@ public class ConnectionPool {
 	// ================================================================================
 	/**
 	 * instantiates a ConnectionPoolObject if it is not available, otherwise returns
-	 * the already existing object
+	 * the already existing object Singleton design pattern.
 	 * 
 	 * @return ConnectionPool
-	 * @throws DatabaseNotFoundException
-	 * @implNote Singleton design pattern.
+	 * @throws DatabaseNotFoundException if no connection could be initialized
+	 * 
 	 **/
 	protected static ConnectionPool getInstance() throws DatabaseNotFoundException {
 		return (instance == null) ? instance = new ConnectionPool() : instance;
@@ -97,8 +97,11 @@ public class ConnectionPool {
 	 * 
 	 * @return Connection: get an available connection or if not connection is
 	 *         available calls the instantiate connection method
-	 * @throws DatabaseNotFoundException: when instantiating new connection database
-	 *                                    could not be reached
+	 * @throws DatabaseNotFoundException  when instantiating new connection database
+	 *                                    could not be reached or when the
+	 *                                    connection got from the pool was closed by
+	 *                                    the database because is no longer
+	 *                                    available or for internal problems
 	 **/
 	protected synchronized Connection getConnection() throws DatabaseNotFoundException {
 		int size = availableConnections.size();
@@ -109,7 +112,8 @@ public class ConnectionPool {
 			result = instantiateConnection();
 		}
 		try {
-			if (result.isValid(0)) {
+			if (result.isValid(0)) {// check if the connection returned is valid if not valid then the database
+									// closed it
 				return result;
 			}
 		} catch (SQLException e) {
@@ -135,8 +139,8 @@ public class ConnectionPool {
 
 	/**
 	 * Creates the actual connections using Connection Pool's parameters
-	 * 
-	 * @throws SQLException database connection could not be instantiated
+	 * @return the instantiated connection
+	 * @throws DatabaseNotFoundException if database connection could not be instantiated
 	 **/
 	private Connection instantiateConnection() throws DatabaseNotFoundException {
 		try {

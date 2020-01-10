@@ -17,7 +17,7 @@ import maldiniPaone.utilities.beans.Violation;
 
 /**
  * This interface provides all the methods to retrieve, save, modify and delete
- * data provided by the {@link databaseConnection} package
+ * data provided by the {@link maldiniPaone.databaseConnection} package
  */
 public interface ManageDataAccess {
 	// ================================================================================
@@ -66,7 +66,7 @@ public interface ManageDataAccess {
 	 * @throws IllegalParameterException   if the methods are called on not valid
 	 *                                     methods
 	 */
-	public Integer getAssignmentCountInLastWeek(Location lcation)
+	public Integer getAssignmentCountInLastWeek(Location location)
 			throws ServerSideDatabaseException, IllegalParameterException;
 
 	/**
@@ -111,7 +111,7 @@ public interface ManageDataAccess {
 	 * Retrieves the suggestions made by citizens and authorities close to a given
 	 * CityHall
 	 * 
-	 * @param location the location to which respect the suggestions are searched
+	 * @param cityHall the cityhall to which respect the suggestions are searched
 	 * @return a list of String containing the suggestions found
 	 * @throws ServerSideDatabaseException if database connection is unsuccessful
 	 * @throws IllegalParameterException   if the methods are called on not valid
@@ -170,12 +170,10 @@ public interface ManageDataAccess {
 	/**
 	 * gets the list of the violation associated to a given city hall
 	 * 
-	 * @param name     the name of the city hall
-	 * @param province the province in which the city hall is located
+	 * @param cityHall the cityhall to which respect the violations are searched
 	 * @return List of violations associated to the cityhall
 	 * @throws IllegalParameterException   when violation type is not supported
 	 * @throws ServerSideDatabaseException when database can't be found
-	 * @implNote ArrayList is used
 	 **/
 	public List<Violation> getViolations(CityHall cityHall)
 			throws IllegalParameterException, ServerSideDatabaseException;
@@ -223,7 +221,7 @@ public interface ManageDataAccess {
 	 * @param username  the user name of the Manager to be added
 	 * @param password  the password of the Manager to be added
 	 * @param email     the email of the Manager to be added
-	 * @param vanueName the name of the venue of the Manager
+	 * @param venueName the name of the venue of the Manager
 	 * @return true if the creation is successful , false otherwise
 	 * @throws ServerSideDatabaseException when the database can't be found
 	 * @throws IllegalParameterException   when parameters are not valid(empty or
@@ -281,7 +279,7 @@ public interface ManageDataAccess {
 	 *                                     null)
 	 **/
 	public boolean addMunicipalityAndCityHall(String username, String password, String email, String creatorUsername,
-			CityHall CityHall) throws ServerSideDatabaseException, IllegalParameterException;
+			CityHall cityHall) throws ServerSideDatabaseException, IllegalParameterException;
 
 	/**
 	 * Adds a suggestion to a CityHall

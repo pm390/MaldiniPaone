@@ -16,23 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assignment`
+-- Dumping data for table `assignment`
 --
 
-DROP TABLE IF EXISTS `assignment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignment` (
-  `id` int(40) NOT NULL AUTO_INCREMENT,
-  `appointee` varchar(36) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `state` varchar(10) COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT 'created',
-  `start` timestamp NULL DEFAULT NULL,
-  `end` timestamp NULL DEFAULT NULL,
-  `typeofviolation` varchar(20) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `assignment` WRITE;
+/*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
+INSERT INTO `assignment` VALUES (16,NULL,'created',NULL,NULL,NULL,'10'),(17,NULL,'created',NULL,NULL,NULL,'11'),(18,NULL,'created',NULL,NULL,NULL,'11'),(19,NULL,'created',NULL,NULL,NULL,'13'),(20,NULL,'finished','2020-01-10 14:31:31','2020-01-10 14:31:40',NULL,'10'),(21,NULL,'created',NULL,NULL,NULL,'10');
+/*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -71,43 +62,24 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `assignmentreportbridge`
+-- Dumping data for table `assignmentreportbridge`
 --
 
-DROP TABLE IF EXISTS `assignmentreportbridge`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignmentreportbridge` (
-  `id` int(40) NOT NULL AUTO_INCREMENT,
-  `idassignment` int(40) NOT NULL,
-  `idreport` int(40) NOT NULL,
-  `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `report_idx` (`idreport`),
-  CONSTRAINT `report` FOREIGN KEY (`idreport`) REFERENCES `report` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `assignmentreportbridge` WRITE;
+/*!40000 ALTER TABLE `assignmentreportbridge` DISABLE KEYS */;
+INSERT INTO `assignmentreportbridge` VALUES (13,16,43,'10','2020-01-09 19:08:27'),(14,17,44,'11','2020-01-09 19:08:46'),(15,16,45,'10','2020-01-09 19:09:04'),(16,18,46,'11','2020-01-09 20:57:22'),(17,19,47,'13','2020-01-09 20:57:34'),(18,20,49,'10','2020-01-10 14:30:44'),(19,20,50,'10','2020-01-10 14:31:02'),(20,21,51,'10','2020-01-10 14:31:59');
+/*!40000 ALTER TABLE `assignmentreportbridge` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `authority`
+-- Dumping data for table `authority`
 --
 
-DROP TABLE IF EXISTS `authority`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `authority` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_cs_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `employee` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `district_id` int(20) NOT NULL,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  KEY `worksunder` (`employee`),
-  CONSTRAINT `worksunder` FOREIGN KEY (`employee`) REFERENCES `municipality` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `authority` WRITE;
+/*!40000 ALTER TABLE `authority` DISABLE KEYS */;
+INSERT INTO `authority` VALUES ('Ciao','mTrH8saHD5VDyO5Y','Sono','angelo',15),('Cocco','8aQgIL8gK3iAYbTD','sono','angelo',16);
+/*!40000 ALTER TABLE `authority` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -165,22 +137,14 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `citizen`
+-- Dumping data for table `citizen`
 --
 
-DROP TABLE IF EXISTS `citizen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `citizen` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `banstate` tinyint(4) NOT NULL DEFAULT '0',
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `reliability` float NOT NULL DEFAULT '0.8',
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `citizen` WRITE;
+/*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
+INSERT INTO `citizen` VALUES ('pm','390',0,'p',0.8);
+/*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -238,59 +202,34 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `cityhall`
+-- Dumping data for table `cityhall`
 --
 
-DROP TABLE IF EXISTS `cityhall`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cityhall` (
-  `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `region` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `longitude` float NOT NULL,
-  `latitude` float NOT NULL,
-  PRIMARY KEY (`cityhall_name`,`cityhall_province`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `cityhall` WRITE;
+/*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
+INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',9.19893,45.7773);
+/*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `district`
+-- Dumping data for table `district`
 --
 
-DROP TABLE IF EXISTS `district`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `district` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `cityhall_name` varchar(20) NOT NULL,
-  `cityhall_province` varchar(20) NOT NULL,
-  `tllatitude` float NOT NULL,
-  `tllongitude` float NOT NULL,
-  `brlatitude` float NOT NULL,
-  `brlongitude` float NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cityh_idx` (`cityhall_name`,`cityhall_province`),
-  CONSTRAINT `cityh` FOREIGN KEY (`cityhall_name`, `cityhall_province`) REFERENCES `cityhall` (`cityhall_name`, `cityhall_province`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `district` WRITE;
+/*!40000 ALTER TABLE `district` DISABLE KEYS */;
+INSERT INTO `district` VALUES (15,'alserio','como',41.9109,12.4818,41.9109,12.4818),(16,'alserio','como',41.9109,12.4818,41.9109,12.4818),(17,'alserio','como',45.7772,9.19901,45.7772,9.19901);
+/*!40000 ALTER TABLE `district` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `manager`
+-- Dumping data for table `manager`
 --
 
-DROP TABLE IF EXISTS `manager`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `manager` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `venue` varchar(60) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `manager` WRITE;
+/*!40000 ALTER TABLE `manager` DISABLE KEYS */;
+INSERT INTO `manager` VALUES ('caio','lZYB7a4YUJIbnfD1','cozza','poo'),('ciao','peppino','io','p@p');
+/*!40000 ALTER TABLE `manager` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -348,25 +287,14 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `municipality`
+-- Dumping data for table `municipality`
 --
 
-DROP TABLE IF EXISTS `municipality`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `municipality` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `employee` varchar(36) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  KEY `othermunicipality_idx` (`employee`),
-  CONSTRAINT `othermunicipality` FOREIGN KEY (`employee`) REFERENCES `municipality` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `municipality` WRITE;
+/*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
+INSERT INTO `municipality` VALUES ('angelo','paons',NULL,'ciao','alserio','como');
+/*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -424,41 +352,23 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `photo`
+-- Dumping data for table `photo`
 --
 
-DROP TABLE IF EXISTS `photo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `photo` (
-  `id` int(40) NOT NULL,
-  `idreport` int(40) NOT NULL,
-  `image` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `photo` WRITE;
+/*!40000 ALTER TABLE `photo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `photo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `report`
+-- Dumping data for table `report`
 --
 
-DROP TABLE IF EXISTS `report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `report` (
-  `id` int(40) NOT NULL AUTO_INCREMENT,
-  `maker` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `latitude` float NOT NULL,
-  `longitude` float NOT NULL,
-  `note` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `certifies` float DEFAULT NULL,
-  `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `citizen` (`maker`),
-  CONSTRAINT `citizen` FOREIGN KEY (`maker`) REFERENCES `citizen` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `report` WRITE;
+/*!40000 ALTER TABLE `report` DISABLE KEYS */;
+INSERT INTO `report` VALUES (43,'pm','2020-01-09 19:08:27',45.77,9.2,'ciao',0.8,'10'),(44,'pm','2020-01-09 19:08:46',45.77,9.2,NULL,0.8,'11'),(45,'pm','2020-01-09 19:09:04',45.77,9.2,NULL,0.8,'10'),(46,'pm','2020-01-09 20:57:22',45.77,9.2,NULL,0.8,'11'),(47,'pm','2020-01-09 20:57:34',45.77,9.2,NULL,0.8,'13'),(49,'pm','2020-01-10 14:30:44',10,20,NULL,0.8,'10'),(50,'pm','2020-01-10 14:31:02',10,20,NULL,0.8,'10'),(51,'pm','2020-01-10 14:31:59',10,20,NULL,0.8,'10');
+/*!40000 ALTER TABLE `report` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -488,15 +398,19 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `report_AFTER_INSERT` AFTER INSERT ON `report` FOR EACH ROW BEGIN
 if exists(select idassignment as x
 from assignmentreportbridge as bridge 
-where car=new.car and timestampdiff(HOUR,`bridge`.`timestamp`,new.datetime)<1 
+join assignment as assign on bridge.idassignment=assign.id 
+where bridge.car=new.car and timestampdiff(HOUR,`bridge`.`timestamp`,new.datetime)<1 
+and assign.state="created"
 order by bridge.timestamp desc limit 1
 ) 
 then 
 	begin
-		set @x=(select idassignment
-		from assignmentreportbridge as bridge 
-		where car=new.car and timestampdiff(HOUR,`bridge`.`timestamp`,new.datetime)<1 
-		order by bridge.timestamp desc limit 1
+		set @x=(select idassignment as x
+			from assignmentreportbridge as bridge 
+			join assignment as assign on bridge.idassignment=assign.id 
+			where bridge.car=new.car and timestampdiff(HOUR,`bridge`.`timestamp`,new.datetime)<1 
+			and assign.state="created"
+			order by bridge.timestamp desc limit 1
 		);
 		insert into assignmentreportbridge 
         (timestamp,idassignment,idreport,car)
@@ -517,54 +431,33 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `suggestion`
+-- Dumping data for table `suggestion`
 --
 
-DROP TABLE IF EXISTS `suggestion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `suggestion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
-  `province` varchar(20) NOT NULL,
-  `note` varchar(200) DEFAULT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `suggestion` WRITE;
+/*!40000 ALTER TABLE `suggestion` DISABLE KEYS */;
+INSERT INTO `suggestion` VALUES (2,'alserio','como','fate qualcosa','2020-01-09 17:04:13'),(3,'alserio','como','caio','2020-01-09 17:20:11'),(4,'alserio','como','io','2020-01-09 17:20:11'),(5,'alserio','como','ciao','2020-01-09 17:20:11'),(6,'alserio','como','coniglio','2020-01-09 17:20:11'),(7,'alserio','como','costanzo','2020-01-09 17:20:11'),(8,'alserio','como','carciofo','2020-01-09 17:20:11'),(9,'alserio','como','fate qualcosa','2020-01-09 17:04:13'),(10,'alserio','como','caio','2020-01-09 17:20:11'),(11,'alserio','como','io','2020-01-09 17:20:11'),(12,'alserio','como','ciao','2020-01-09 17:20:11'),(13,'alserio','como','coniglio','2020-01-09 17:20:11'),(14,'alserio','como','costanzo','2020-01-09 17:20:11'),(15,'alserio','como','carciofo','2020-01-09 17:20:11'),(16,'alserio','como','carciofo','2020-01-09 17:20:11'),(111,'alserio','como','caio','2020-01-09 17:20:11'),(112,'alserio','como','io','2020-01-09 17:20:11'),(113,'alserio','como','ciao','2020-01-09 17:20:11'),(114,'alserio','como','coniglio','2020-01-09 17:20:11'),(115,'alserio','como','costanzo','2020-01-09 17:20:11'),(116,'alserio','como','carciofo','2020-01-09 17:20:11'),(171,'alserio','como','fate qualcosa','2020-01-09 17:04:13');
+/*!40000 ALTER TABLE `suggestion` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Dumping data for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `usertype` varchar(15) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('angelo','paons','municipality','ciao'),('caio','lZYB7a4YUJIbnfD1','manager','poo'),('ciao','peppino','manager','p@p'),('Ciao','mTrH8saHD5VDyO5Y','authority','sono'),('pm','390','citizen','p');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Table structure for table `violation`
+-- Dumping data for table `violation`
 --
 
-DROP TABLE IF EXISTS `violation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `violation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cityhall_name` varchar(20) NOT NULL,
-  `cityhall_province` varchar(20) NOT NULL,
-  `violationtype` varchar(20) NOT NULL,
-  `count` int(40) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `violation` WRITE;
+/*!40000 ALTER TABLE `violation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `violation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'safestreets'
@@ -649,4 +542,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-10  1:33:52
+-- Dump completed on 2020-01-10 17:06:18

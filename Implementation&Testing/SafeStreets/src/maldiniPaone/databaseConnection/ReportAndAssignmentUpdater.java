@@ -33,7 +33,7 @@ public class ReportAndAssignmentUpdater {
 	 * @param time         : the timestamp corresponding to the report
 	 * @param location     : the location of the report
 	 * @param note         : possible notes added by user
-	 * @param licencePlate : the license plate in the report in String form
+	 * @param licensePlate : the license plate in the report in String form
 	 * @return boolean : true if insertion is successful false otherwise
 	 * @throws ServerSideDatabaseException when the database can't be found
 	 * @throws IllegalParameterException   when parameters are not valid(empty or
@@ -68,6 +68,7 @@ public class ReportAndAssignmentUpdater {
 	 * to the database.
 	 * 
 	 * @param username : the user name of the user who is modifying the state
+	 * @param type     :the type of the violation
 	 * @param id       : the id of the assignment to be modified
 	 * @param newState : the new state of the assignment
 	 * @return boolean : true if update is successful false otherwise

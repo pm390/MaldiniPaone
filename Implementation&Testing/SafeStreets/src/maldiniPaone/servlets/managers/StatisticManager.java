@@ -9,12 +9,12 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.interfaces.ManageStatistics;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Statistic;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Implements {@link ManageStatistics} Singleton design pattern

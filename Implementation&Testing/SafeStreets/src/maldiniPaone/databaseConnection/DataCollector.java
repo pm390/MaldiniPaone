@@ -143,7 +143,7 @@ public class DataCollector {
 	 * 
 	 * @param username : the user name of the user who made the reports
 	 * @return true if there is an active assignment false otherwise
-	 * @throws DatabaseNotFoundException the connection to the database could not be
+	 * @throws ServerSideDatabaseException the connection to the database could not be
 	 *                                   instantiated
 	 * @throws IllegalParameterException if not valid coordinates are saved
 	 */
@@ -204,7 +204,6 @@ public class DataCollector {
 	 * @return List of violations associated to the cityhall
 	 * @throws IllegalParameterException   when violation type is not supported
 	 * @throws ServerSideDatabaseException when database can't be found
-	 * @implNote ArrayList is used
 	 **/
 	protected static List<Violation> getViolations(String name, String province)
 			throws IllegalParameterException, ServerSideDatabaseException {
@@ -227,10 +226,8 @@ public class DataCollector {
 	/**
 	 * Gets the closest cityhall if one exists
 	 * 
-	 * @param name     : the name of the cityhall
-	 * @param province : the name of the province where the cityhall is located
-	 * @return List of AssignmentServlet : the List of static suggestions for the
-	 *         cityhall empty List if none is found
+	 * @param location the location which respect the cityhall is searched
+	 * @return the cityhall if exists any otherwise null
 	 * @throws ServerSideDatabaseException when the database can't be found
 	 * @throws IllegalParameterException   when parameters are not valid(empty or
 	 *                                     null)

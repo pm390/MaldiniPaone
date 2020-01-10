@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import maldiniPaone.ResponseObjects.GenericResponse;
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.MailManager;
 import maldiniPaone.servlets.managers.UserManager;
 import maldiniPaone.utilities.PasswordBuilder;
 import maldiniPaone.utilities.UserType;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Servlet implementation class ForgotPassword

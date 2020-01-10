@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.text.RandomStringGenerator;
 
-import maldiniPaone.constants.Constants;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  *This class contains a method to build a random password.
@@ -16,6 +16,7 @@ public class PasswordBuilder
 	/**
 	 *	Uses {@link RandomStringGenerator} to build a string composed of digits,
 	 *  lowercase and uppercase characters
+	 *  @return the generated password
 	 * 
 	 **/
 	public static String GetRandomPassword()

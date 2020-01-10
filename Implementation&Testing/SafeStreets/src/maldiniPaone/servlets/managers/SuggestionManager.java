@@ -3,7 +3,6 @@ package maldiniPaone.servlets.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.DataAccessFacade;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -12,6 +11,7 @@ import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Violation;
 import maldiniPaone.utilities.beans.users.Municipality;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Implements {@link ManageSuggestions} Singleton design pattern

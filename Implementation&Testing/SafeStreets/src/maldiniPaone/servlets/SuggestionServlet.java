@@ -12,18 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import maldiniPaone.ResponseObjects.GenericResponse;
-import maldiniPaone.ResponseObjects.SuggestionResponse;
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.SuggestionManager;
 import maldiniPaone.servlets.managers.UserManager;
 import maldiniPaone.utilities.UserType;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
+import maldiniPaone.utilities.ResponseObjects.SuggestionResponse;
 import maldiniPaone.utilities.beans.CityHall;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.Municipality;
 import maldiniPaone.utilities.beans.users.User;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Servlet implementation class SuggestionServlet

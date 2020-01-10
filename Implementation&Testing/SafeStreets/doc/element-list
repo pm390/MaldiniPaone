@@ -1,0 +1,12 @@
+maldiniPaone.databaseConnection
+maldiniPaone.databaseConnection.databaseExceptions
+maldiniPaone.databaseConnection.interfaces
+maldiniPaone.servlets
+maldiniPaone.servlets.managers
+maldiniPaone.servlets.managers.interfaces
+maldiniPaone.testSuite
+maldiniPaone.utilities
+maldiniPaone.utilities.beans
+maldiniPaone.utilities.beans.users
+maldiniPaone.utilities.constants
+maldiniPaone.utilities.ResponseObjects

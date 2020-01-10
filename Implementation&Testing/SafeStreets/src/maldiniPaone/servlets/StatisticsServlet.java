@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import maldiniPaone.ResponseObjects.GenericResponse;
-import maldiniPaone.ResponseObjects.StatisticsResponse;
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.StatisticManager;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
+import maldiniPaone.utilities.ResponseObjects.StatisticsResponse;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Statistic;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Servlet implementation class StatisticsServlet

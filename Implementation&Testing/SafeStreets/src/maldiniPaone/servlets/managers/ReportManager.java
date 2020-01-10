@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.DataAccessFacade;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -15,6 +14,7 @@ import maldiniPaone.utilities.ViolationType;
 import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
+import maldiniPaone.utilities.constants.Constants;
 import maldiniPaone.utilities.beans.Photo;
 
 /**

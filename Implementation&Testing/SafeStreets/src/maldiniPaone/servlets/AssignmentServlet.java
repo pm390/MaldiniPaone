@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import maldiniPaone.ResponseObjects.AssignmentResponse;
-import maldiniPaone.ResponseObjects.GenericResponse;
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.ReportManager;
 import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.ViolationType;
+import maldiniPaone.utilities.ResponseObjects.AssignmentResponse;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
 import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.users.User;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * Servlet implementation class AssignmentServlet

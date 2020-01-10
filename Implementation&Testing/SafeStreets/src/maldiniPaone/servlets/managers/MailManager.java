@@ -1,9 +1,11 @@
 package maldiniPaone.servlets.managers;
 
-import maldiniPaone.constants.Constants;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import maldiniPaone.utilities.constants.Constants;
+
 import java.util.Properties;
 
 /**
@@ -114,6 +116,7 @@ public class MailManager {
 	 * Sends password Modification email to a user who modified his/her account
 	 * 
 	 * @param mailAddress the mail address to be notified
+	 * @param password    the password to be sent to the user
 	 * @return true
 	 **/
 	public boolean sendPasswordModificationMail(String mailAddress, String password) {
@@ -158,16 +161,13 @@ public class MailManager {
 		}
 		Runnable thread = new Runnable() {
 			public void run() {
-				try
-				{
-					InternetAddress addr=new InternetAddress(mailAddress);
+				try {
+					InternetAddress addr = new InternetAddress(mailAddress);
 					addr.validate();
-				}
-				catch(Exception e)
-				{
+				} catch (Exception e) {
 					if (Constants.VERBOSE)
 						System.out.println("email not valid");
-					return ;
+					return;
 				}
 				if (Constants.VERBOSE)
 					System.out.println("sending email to" + mailAddress);

@@ -19,14 +19,14 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.Gson;
 
-import maldiniPaone.ResponseObjects.GenericResponse;
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
 import maldiniPaone.servlets.managers.ReportManager;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Photo;
 import maldiniPaone.utilities.beans.users.User;
+import maldiniPaone.utilities.constants.Constants;
 
 @MultipartConfig
 @WebServlet("/ReportCreation")

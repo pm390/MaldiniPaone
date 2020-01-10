@@ -2,7 +2,6 @@ package maldiniPaone.databaseConnection;
 
 import java.util.List;
 
-import maldiniPaone.constants.Constants;
 import maldiniPaone.databaseConnection.databaseExceptions.DatabaseNotFoundException;
 import maldiniPaone.databaseConnection.databaseExceptions.IllegalParameterException;
 import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseException;
@@ -17,6 +16,7 @@ import maldiniPaone.utilities.beans.District;
 import maldiniPaone.utilities.beans.Location;
 import maldiniPaone.utilities.beans.Report;
 import maldiniPaone.utilities.beans.Violation;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * The DataAccessFacade as the name suggests is a facade which allows business

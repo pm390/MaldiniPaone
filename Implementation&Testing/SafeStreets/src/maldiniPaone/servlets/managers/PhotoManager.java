@@ -9,7 +9,7 @@ import java.nio.file.StandardCopyOption;
 
 import javax.imageio.ImageIO;
 
-import maldiniPaone.constants.Constants;
+import maldiniPaone.utilities.constants.Constants;
 /**
  * Manages the creation and retrieving of the photos 
  **/

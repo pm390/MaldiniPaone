@@ -55,7 +55,7 @@ public class Location {
 
 	/**
 	 * @param latitude : the latitude to set
-	 * @throws IllegalParameterException
+	 * @throws IllegalParameterException if the values are not valid
 	 */
 	public void setLatitude(Float latitude) throws IllegalParameterException {
 		if(Math.abs(latitude)<=180)

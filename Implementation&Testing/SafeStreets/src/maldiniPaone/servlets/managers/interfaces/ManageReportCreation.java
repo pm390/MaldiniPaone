@@ -23,6 +23,7 @@ public interface ManageReportCreation {
 	 * @return true if the creation is successful , false otherwise
 	 * @throws IllegalParameterException   if the provided parameters are invalid
 	 * @throws ServerSideDatabaseException if the database can't be found
+	 * @throws IOException                 if the photos couldn't be saved
 	 **/
 	public boolean addReport(String username, Location location, List<Photo> photos, String licensePlate, String note)
 			throws ServerSideDatabaseException, IllegalParameterException, IOException;
