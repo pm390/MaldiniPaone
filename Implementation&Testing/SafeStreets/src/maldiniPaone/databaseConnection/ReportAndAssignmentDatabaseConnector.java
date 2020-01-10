@@ -726,7 +726,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
 			ps = c.prepareStatement("insert into photo" // add photo
-					+ "(idreport,name) values (?,?)");
+					+ "(idreport,image) values (?,?)");
 			// set the values in the prepared statements avoid sql injection
 			ps.setInt(1,reportId);
 			ps.setString(2, name);

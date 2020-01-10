@@ -21,7 +21,6 @@
 
 LOCK TABLES `assignment` WRITE;
 /*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
-INSERT INTO `assignment` VALUES (16,NULL,'created',NULL,NULL,NULL,'10'),(17,NULL,'created',NULL,NULL,NULL,'11'),(18,NULL,'created',NULL,NULL,NULL,'11'),(19,NULL,'created',NULL,NULL,NULL,'13'),(20,NULL,'finished','2020-01-10 14:31:31','2020-01-10 14:31:40',NULL,'10'),(21,NULL,'created',NULL,NULL,NULL,'10');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -67,7 +66,6 @@ DELIMITER ;
 
 LOCK TABLES `assignmentreportbridge` WRITE;
 /*!40000 ALTER TABLE `assignmentreportbridge` DISABLE KEYS */;
-INSERT INTO `assignmentreportbridge` VALUES (13,16,43,'10','2020-01-09 19:08:27'),(14,17,44,'11','2020-01-09 19:08:46'),(15,16,45,'10','2020-01-09 19:09:04'),(16,18,46,'11','2020-01-09 20:57:22'),(17,19,47,'13','2020-01-09 20:57:34'),(18,20,49,'10','2020-01-10 14:30:44'),(19,20,50,'10','2020-01-10 14:31:02'),(20,21,51,'10','2020-01-10 14:31:59');
 /*!40000 ALTER TABLE `assignmentreportbridge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,7 +75,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
-INSERT INTO `authority` VALUES ('Ciao','mTrH8saHD5VDyO5Y','Sono','angelo',15),('Cocco','8aQgIL8gK3iAYbTD','sono','angelo',16);
+INSERT INTO `authority` VALUES ('alberigo','a','u','o',143),('aldo','a','q','i',128),('annibale','p','r','l',135),('caldo','c','w','q',130),('calzolaio','m','t','n',130),('distruttore','l','s','m',135),('ermenegildo','c','v','p',138);
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -142,7 +140,7 @@ DELIMITER ;
 
 LOCK TABLES `citizen` WRITE;
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
-INSERT INTO `citizen` VALUES ('pm','390',0,'p',0.8);
+INSERT INTO `citizen` VALUES ('angelo','a',0,'a@n',0.8),('antonio','a',0,'a@nt',0.8),('calogero','c',0,'c@a',0.8),('carciofo','c',0,'c@ar',0.8),('luca','l',0,'l@u',0.8),('matteo','m',0,'m@a',0.8),('pietro','p',0,'p@i',0.8);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -207,7 +205,7 @@ DELIMITER ;
 
 LOCK TABLES `cityhall` WRITE;
 /*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
-INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',9.19893,45.7773);
+INSERT INTO `cityhall` VALUES ('alserio','como','lombardia',120,50),('anzano','sondrio','lombardia',120,50),('erba','lecco','lombardia',40,40);
 /*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +215,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
-INSERT INTO `district` VALUES (15,'alserio','como',41.9109,12.4818,41.9109,12.4818),(16,'alserio','como',41.9109,12.4818,41.9109,12.4818),(17,'alserio','como',45.7772,9.19901,45.7772,9.19901);
+INSERT INTO `district` VALUES (128,'alserio','como',10,10,10,10),(129,'alserio','como',30,10,50,60),(130,'alserio','como',20,50,180,30),(131,'alserio','como',60,40,60,60),(132,'alserio','como',180,50,60,60),(133,'alserio','como',30,20,40,10),(134,'alserio','como',10,20,40,30),(135,'alserio','como',20,10,50,50),(136,'alserio','como',20,20,10,20),(137,'alserio','como',30,50,40,120),(138,'alserio','como',50,60,180,20),(139,'alserio','como',10,30,60,60),(140,'alserio','como',30,50,30,40),(141,'alserio','como',180,10,10,120),(142,'alserio','como',20,40,10,30),(143,'alserio','como',180,30,40,10);
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +225,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `manager` WRITE;
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
-INSERT INTO `manager` VALUES ('caio','lZYB7a4YUJIbnfD1','cozza','poo'),('ciao','peppino','io','p@p');
+INSERT INTO `manager` VALUES ('a','a','lombaria','h'),('b','p','lombaria','i'),('c','l','lombaria','l'),('d','m','lombaria','m'),('e','a','lombaria','n'),('f','c','lombaria','o'),('h','c','lombaria','p');
 /*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -292,7 +290,7 @@ DELIMITER ;
 
 LOCK TABLES `municipality` WRITE;
 /*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
-INSERT INTO `municipality` VALUES ('angelo','paons',NULL,'ciao','alserio','como');
+INSERT INTO `municipality` VALUES ('i','a',NULL,'a','alserio','como'),('l','p',NULL,'b','erba','lecco'),('m','l',NULL,'c','anzano','sondrio'),('n','m',NULL,'d','alserio','como'),('o','a',NULL,'e','erba','lecco'),('p','c',NULL,'f','anzano','sondrio'),('q','c',NULL,'g','alserio','como');
 /*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -366,7 +364,6 @@ UNLOCK TABLES;
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` VALUES (43,'pm','2020-01-09 19:08:27',45.77,9.2,'ciao',0.8,'10'),(44,'pm','2020-01-09 19:08:46',45.77,9.2,NULL,0.8,'11'),(45,'pm','2020-01-09 19:09:04',45.77,9.2,NULL,0.8,'10'),(46,'pm','2020-01-09 20:57:22',45.77,9.2,NULL,0.8,'11'),(47,'pm','2020-01-09 20:57:34',45.77,9.2,NULL,0.8,'13'),(49,'pm','2020-01-10 14:30:44',10,20,NULL,0.8,'10'),(50,'pm','2020-01-10 14:31:02',10,20,NULL,0.8,'10'),(51,'pm','2020-01-10 14:31:59',10,20,NULL,0.8,'10');
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -436,7 +433,6 @@ DELIMITER ;
 
 LOCK TABLES `suggestion` WRITE;
 /*!40000 ALTER TABLE `suggestion` DISABLE KEYS */;
-INSERT INTO `suggestion` VALUES (2,'alserio','como','fate qualcosa','2020-01-09 17:04:13'),(3,'alserio','como','caio','2020-01-09 17:20:11'),(4,'alserio','como','io','2020-01-09 17:20:11'),(5,'alserio','como','ciao','2020-01-09 17:20:11'),(6,'alserio','como','coniglio','2020-01-09 17:20:11'),(7,'alserio','como','costanzo','2020-01-09 17:20:11'),(8,'alserio','como','carciofo','2020-01-09 17:20:11'),(9,'alserio','como','fate qualcosa','2020-01-09 17:04:13'),(10,'alserio','como','caio','2020-01-09 17:20:11'),(11,'alserio','como','io','2020-01-09 17:20:11'),(12,'alserio','como','ciao','2020-01-09 17:20:11'),(13,'alserio','como','coniglio','2020-01-09 17:20:11'),(14,'alserio','como','costanzo','2020-01-09 17:20:11'),(15,'alserio','como','carciofo','2020-01-09 17:20:11'),(16,'alserio','como','carciofo','2020-01-09 17:20:11'),(111,'alserio','como','caio','2020-01-09 17:20:11'),(112,'alserio','como','io','2020-01-09 17:20:11'),(113,'alserio','como','ciao','2020-01-09 17:20:11'),(114,'alserio','como','coniglio','2020-01-09 17:20:11'),(115,'alserio','como','costanzo','2020-01-09 17:20:11'),(116,'alserio','como','carciofo','2020-01-09 17:20:11'),(171,'alserio','como','fate qualcosa','2020-01-09 17:04:13');
 /*!40000 ALTER TABLE `suggestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,7 +442,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('angelo','paons','municipality','ciao'),('caio','lZYB7a4YUJIbnfD1','manager','poo'),('ciao','peppino','manager','p@p'),('Ciao','mTrH8saHD5VDyO5Y','authority','sono'),('pm','390','citizen','p');
+INSERT INTO `user` VALUES ('a','a','manager','h'),('alberigo','a','authority','u'),('aldo','a','authority','q'),('angelo','a','citizen','a@n'),('annibale','p','authority','r'),('antonio','a','citizen','a@nt'),('b','p','manager','i'),('c','l','manager','l'),('caldo','c','authority','w'),('calogero','c','citizen','c@a'),('calzolaio','m','authority','t'),('carciofo','c','citizen','c@ar'),('d','m','manager','m'),('distruttore','l','authority','s'),('e','a','manager','n'),('ermenegildo','c','authority','v'),('f','c','manager','o'),('h','c','manager','p'),('i','a','municipality','a'),('l','p','municipality','b'),('luca','l','citizen','l@u'),('m','l','municipality','c'),('matteo','m','citizen','m@a'),('n','m','municipality','d'),('o','a','municipality','e'),('p','c','municipality','f'),('pietro','p','citizen','p@i'),('q','c','municipality','g');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -542,4 +538,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-10 17:06:18
+-- Dump completed on 2020-01-10 22:12:48
