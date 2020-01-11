@@ -76,7 +76,8 @@ public class ReportCreation extends HttpServlet {
 			List<Photo> photos = new ArrayList<Photo>();
 			Collection<Part> parts = request.getParts();
 			for (Part x : parts) {
-				if (x.getName().equals("photo" + x))// for each image
+				System.out.println(x.getName());
+				if (x.getName().equals("photo"))// for each image
 				{
 					String image = x.getSubmittedFileName();// get filename
 					Integer i = image.lastIndexOf(".");// get last dot
@@ -87,6 +88,7 @@ public class ReportCreation extends HttpServlet {
 					temp.setFileExtension(fileExtension);
 					temp.setPhoto(input);
 					temp.setPhotoNumber(index++);
+					photos.add(temp);
 				}
 			}
 
@@ -108,7 +110,10 @@ public class ReportCreation extends HttpServlet {
 			outputWriter.close();
 			return;
 		}
-
+		GenericResponse message = new GenericResponse();
+		outputWriter.println(new Gson().toJson(message));
+		outputWriter.close();
+		return;
 	}
 
 }
