@@ -48,7 +48,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 */
 	protected static Integer[] addReport(String username, Timestamp time, Location location, String note,
 			String licensePlate) throws DatabaseNotFoundException {
-		Integer[] res = { -1, -1, -1 };
+		Integer[] res = { -1, -1 };
 		Connection c = null;
 		PreparedStatement ps = null;
 		try {
@@ -67,10 +67,25 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps.executeUpdate();
 			// get id of the last row inserted if fails throws an exception
 			ResultSet rs = ps.getGeneratedKeys();
-			int i = 0;
 			while (rs.next())// get all the generated keys
 			{
-				res[i++] = rs.getInt(1);
+				res[0]=rs.getInt(1);
+			}
+			// close result set and prepared statement
+			rs.close();
+			ps.close();
+			//find assignment bridge id
+			ps = c.prepareStatement("select id from assignmentreportbridge" // insert new report
+					+ " where idreport=?");// return generated keys
+			// set the values in the prepared statements avoid SQL injection
+			ps.setInt(1,res[0]);
+			// execute update
+			ps.execute();
+			// get id of the last row inserted if fails throws an exception
+			rs = ps.getResultSet();
+			while (rs.next())// get all the generated keys
+			{
+				res[1]=rs.getInt(1);
 			}
 			// close result set and prepared statement
 			rs.close();
@@ -394,13 +409,13 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("select assign.id,ph.image,rep.note,rep.latitude,rep.longitude "
+			ps = c.prepareStatement("Select arb.id,ph.image,rep.note,rep.latitude,rep.longitude" + 
 					// join of report assignment bridge table and photos
-					+ " from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)"
-					+ " join report as rep on rep.id=arb.idreport)" + " join photo as ph on ph.idreport=rep.id)"
-					+ " where " + closeTo("rep", location) + " and assign.state=?" // close to the location
-					+ " order by assign.id DESC, arb.timestamp DESC " // ordered by assignment id and timestamp
-					+ " LIMIT " + Constants.STANDARD_QUERY_LIMIT * 3// consider an average of 3 photos for report
+					" from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)" + 
+					" join report as rep on rep.id=arb.idreport) ) left join photo as ph on ph.idreport=rep.id" + 
+					" where "+  closeTo("rep", location)+" and assign.state=?" +// close to the location 
+					" order by assign.id DESC, arb.timestamp DESC"+// ordered by assignment id and timestamp
+					" LIMIT " + Constants.STANDARD_QUERY_LIMIT * 3// consider an average of 3 photos for report
 			// limit result to last 3*standard limit results
 			);
 			// set the values in the prepared statements avoid sql injection
@@ -512,8 +527,12 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("select id " //
-					+ "from assignment " + "where appointee=? and state=?");
+			ps = c.prepareStatement("select max(br.id) " //
+					+ " from assignment as assign join assignmentreportbridge as br"
+					+ " on assign.id=br.idassignment "
+					+ " where appointee=? and state=?"
+					+ " group by br.idassignment"
+					);
 			// set maker of the reports
 			ps.setString(1, username);
 			ps.setString(2, State.Accepted.toString());
@@ -852,7 +871,7 @@ public class ReportAndAssignmentDatabaseConnector {
 	 */
 	private static String closeTo(String base, Location location, Float radius) {
 
-		return SquareDistance(base, location) + "<=" + (radius * radius) + " ";
+		return "( "+ SquareDistance(base, location) + " ) <=" + (radius * radius) + " ";
 		// compare square of distance with square the radius
 		// we don't use the root operation on the result for performance.
 	}
@@ -1003,6 +1022,22 @@ public class ReportAndAssignmentDatabaseConnector {
 								// part in common for all the possible situations
 		}
 		return res;
+	}
+	
+	
+
+	// ================================================================================
+	// Dummy main method
+	// ================================================================================
+
+	public static void main(String[] args) throws Exception {
+		System.out.println("inizio");
+		Location loc=new Location();
+		loc.setLongitude(30f);
+		loc.setLatitude(40f);
+		List<Assignment> assign=getAssignments(loc);
+		for(Assignment a:assign)
+			System.out.println(a);
 	}
 
 }

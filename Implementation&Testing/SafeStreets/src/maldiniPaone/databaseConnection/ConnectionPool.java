@@ -125,6 +125,7 @@ public class ConnectionPool {
 				e.printStackTrace();
 			}
 		}
+		System.err.println("database can't be reached");
 		throw new DatabaseNotFoundException();
 	}
 

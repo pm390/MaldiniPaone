@@ -1,14 +1,16 @@
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The System is divided in various subsystems:
-\begin{itemize}
-\item Mobile App
-\item Web Application
-\item Web Server
-\item Application Server
-\item DataBase Connection
-\item DataBase Server 
-\item External Systems:Google Maps,External DataBases
-\end{itemize}
-The subsystems not external will be implemented and tested. They will also be integrated together, and with external systems. Since the Web Server provides user only static data (HTML, CSS, JavaScript) and is deployed to a different device than the web Application, this component can be implemented and tested in any moment during the development but the integration must be done when the full application is implemented. Given our design choice of having a multiple servlet server which communicates with DataBase through a facade, our implementation must have as a starting point the implementation of the DataBase Server and the connection with it.
+\subSection{Back end Testing}
+For the Backend testing we created two jUnit test classes to test functionalities of user creation and creation and modification of reports and assignments. Here we first created some random Location objects and we checked that location with invalid coordinates can't be created using a coverage test to see if the test case actually tries to create them and the correct exception is cached. After this some users of every type are created. Every time a new user is created we try to create a second copy and check if that is not possible.
+After creating users the reports are created using a username of the citizens created.
+Later we make authorities accept the assignments created when adding the repots , than we make them terminate them.
+Every time we update the state of an assignment we try to re-do the action to test if invalid modifications are not possible and are correctly handled.
+For lack of time we didn't create actual test cases for functionalities outside the database connection package. 
+For controlling functionalities we used console logging to try out functionalities and debug the system.
+We tried different inputs and invalid inputs checking if the outputs are correct and if the error messages are correctly shown to the user.
+For a final test we gathered a little group of people and we made them test the system on our computer giving them instructions to use the system.
+If we had more time we would have created a full test suite containing also tests for servlets package instead of using only log functions. 
+\subSection{Front End Testing}
+For front end testing we covered the functionalities we wanted to offer to clients on the target devices to see if the interaction were correctly implemented. We controlled also that all the possible error messages were displayed to the user.
+We were also helped by the group of people we gathered who provided us useful feedbacks for improving the user experience for later release. With more time we would have done a rework on the user interface to improve the experience of using our system.
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

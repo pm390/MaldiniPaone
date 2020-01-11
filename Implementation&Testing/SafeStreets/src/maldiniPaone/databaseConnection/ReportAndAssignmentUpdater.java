@@ -8,6 +8,7 @@ import maldiniPaone.databaseConnection.databaseExceptions.ServerSideDatabaseExce
 import maldiniPaone.utilities.State;
 import maldiniPaone.utilities.ViolationType;
 import maldiniPaone.utilities.beans.Location;
+import maldiniPaone.utilities.constants.Constants;
 
 /**
  * This class contains protected static methods which are used to update data
@@ -41,7 +42,7 @@ public class ReportAndAssignmentUpdater {
 	 **/
 	protected static Integer[] addReport(String username, Timestamp time, Location location, String note,
 			String licensePlate) throws ServerSideDatabaseException, IllegalParameterException {
-		Integer res[] = { -1, -1, -1 };
+		Integer res[] = { -1, -1};
 		if (username != null && time != null && location != null && licensePlate != null
 				&& location.getLatitude() != null && location.getLongitude() != null && // check null values
 				username != "") // check empty strings
@@ -80,9 +81,10 @@ public class ReportAndAssignmentUpdater {
 			throws ServerSideDatabaseException, IllegalParameterException {
 		boolean res = false;
 		if (username != null && id != null && newState != null && // check null values
-				id != -1 && username != "") // check empty strings
+				id != -1 && !username.equals("")) // check empty strings
 		{
 			try {
+				if(Constants.VERBOSE)System.out.println(username+id);
 				switch (newState) {
 				case Accepted:
 					res = ReportAndAssignmentDatabaseConnector.takeAssignment(id, username);

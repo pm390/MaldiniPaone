@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.TimeZone;
 
+import maldiniPaone.databaseConnection.ReportAndAssignmentDatabaseConnector;
+
 /**
  * This class contains the various constants used by safeStreets back end
  **/
@@ -56,6 +58,13 @@ public class Constants {
 
 			VIOLATION_SEVERITY_LIMIT = 5;
 		}
+		try
+		{
+			ReportAndAssignmentDatabaseConnector.main(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	// ================================================================================
