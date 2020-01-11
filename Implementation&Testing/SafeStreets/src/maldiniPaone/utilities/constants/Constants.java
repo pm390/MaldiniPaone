@@ -14,6 +14,9 @@ import maldiniPaone.databaseConnection.ReportAndAssignmentDatabaseConnector;
 public class Constants {
 	static {
 		System.err.println("init");
+		//set database driver
+		DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+		
 		String root = System.getProperty("catalina.home");
 
 		System.err.println("reading init parameters from: "+ root + File.separator + "configuration.txt");
@@ -58,12 +61,8 @@ public class Constants {
 
 			VIOLATION_SEVERITY_LIMIT = 5;
 		}
-		try
-		{
-			ReportAndAssignmentDatabaseConnector.main(null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		System.err.println("finished init");
 		
 	}
 
@@ -81,7 +80,7 @@ public class Constants {
 	/**
 	 * driver to access database
 	 */
-	public static String DB_DRIVER = "com.mysql.cj.jdbc.Driver"; ;
+	public static String DB_DRIVER = "com.mysql.cj.jdbc.Driver"; 
 	/**
 	 * database url
 	 */

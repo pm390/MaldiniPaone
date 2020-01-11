@@ -49,15 +49,14 @@ public class ConnectionPool {
 	 *                                   instantiated
 	 **/
 	private ConnectionPool() throws DatabaseNotFoundException {
+		System.err.println("init Connection Pool");
 		driver = Constants.DB_DRIVER;
 		username = Constants.DB_USERNAME;
 		password = Constants.DB_PASSWORD;
 		databaseURL = Constants.DB_URL;
+		
 		availableConnections = new ArrayList<Connection>(Constants.INITIALSIZE);
-		if(Constants.VERBOSE)
-		{
-			System.out.println(driver+"\n"+username+"\n"+password+"\n"+databaseURL);
-		}
+		
 		try {
 			Class.forName(driver);
 		} catch (Exception e) {
@@ -74,6 +73,7 @@ public class ConnectionPool {
 		}
 		if (availableConnections.size() == 0)
 			throw new DatabaseNotFoundException();
+		System.err.println("finished initialization");
 	}
 
 	// ================================================================================

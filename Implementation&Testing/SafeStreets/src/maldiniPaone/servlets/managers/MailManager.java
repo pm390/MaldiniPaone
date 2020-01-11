@@ -45,6 +45,8 @@ public class MailManager {
 	 * initializes the MailManager and creates a session with the mail service
 	 **/
 	private void initialize() {
+
+		System.err.println("initialize mail manager");
 		username = Constants.MAIL_USERNAME;
 		password = Constants.MAIL_PASSWORD;
 		Properties prop = new Properties();
@@ -57,6 +59,8 @@ public class MailManager {
 				return new PasswordAuthentication(username, password);
 			}
 		});
+
+		System.err.println("finished mail manager initialization");
 	}
 
 	/**
