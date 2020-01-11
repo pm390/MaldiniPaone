@@ -230,8 +230,11 @@ public class ReportAndAssignmentDatabaseConnector {
 		PreparedStatement ps = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("update assignment " // update assignment
-					+ " set state=? , appointee=? " + " where id=?");
+			ps = c.prepareStatement("update assignment as assign join "
+					+ " assignmentreportbridge as bridge" // update assignment
+					+ " set assign.state=? , assign.appointee=? " 
+					+ " where assign.id=bridge.idassignment "
+					+ " and bridge.id=?");
 			// set the values in the prepared statements avoid SQL injection
 			ps.setString(1, State.Accepted.toString());
 			ps.setString(2, username);
@@ -280,13 +283,18 @@ public class ReportAndAssignmentDatabaseConnector {
 		PreparedStatement ps = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection(); // get connection
-			ps = c.prepareStatement("update assignment " // set assignment state
-					+ "set state=? , typeofviolation=? " + " where id=? and appointee=?");
+			ps = c.prepareStatement("update assignment as assign join "
+					+ " assignmentreportbridge as bridge" // update assignment
+					+ " set assign.state=? ,assign.typeofviolation=?" 
+					+ " where assign.id=bridge.idassignment "
+					+ "	and assign.appointee=?"
+					+ " and bridge.id=?");
 			// set the values in the prepared statements avoid SQL injection
 			ps.setString(1, finishState.toString());
 			ps.setString(2, type);
-			ps.setInt(3, id);
-			ps.setString(4, username);
+			ps.setString(3, username);
+			ps.setInt(4, id);
+
 			// execute update
 			ps.executeUpdate();
 			// if fails throws an exception
@@ -327,13 +335,18 @@ public class ReportAndAssignmentDatabaseConnector {
 		PreparedStatement ps = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("update assignment " // update assignment
-					+ " set state=? " + " where id=? and appointee=? and state=?");
+			ps = c.prepareStatement("update assignment as assign join "
+					+ " assignmentreportbridge as bridge" // update assignment
+					+ " set assign.state=? , assign.appointee=? " 
+					+ " where assign.id=bridge.idassignment "
+					+ "	and assign.state=?"
+					+ " and bridge.id=?");
 			// set the values in the prepared statements avoid sql injection
 			ps.setString(1, State.Pending.toString());
-			ps.setInt(2, id);
-			ps.setString(3, username);
-			ps.setString(4, State.Accepted.toString());
+			ps.setString(2, username);
+			ps.setString(3, State.Accepted.toString());
+			ps.setInt(4, id);
+		
 			// execute update
 			ps.executeUpdate();
 			// if fails throws an exception

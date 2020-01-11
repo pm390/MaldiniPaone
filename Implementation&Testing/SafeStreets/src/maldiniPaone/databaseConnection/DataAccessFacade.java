@@ -155,7 +155,7 @@ public class DataAccessFacade implements ManageDataAccess {
 		Integer[] ids = ReportAndAssignmentUpdater.addReport(report.getUsername(), report.getDate(),
 				report.getLocation(), report.getNote(), report.getLicensePlate());
 		Assignment res = new Assignment();
-		res.setId(ids[ids.length-1]);
+		res.setId(ids[ids.length-1]);//last id is bridge id use it to accept or not assignments
 		report.setId(ids[0]);
 		List<Report> temp=new ArrayList<Report>();
 		temp.add(report);

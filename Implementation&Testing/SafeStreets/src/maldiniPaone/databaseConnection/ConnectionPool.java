@@ -54,6 +54,10 @@ public class ConnectionPool {
 		password = Constants.DB_PASSWORD;
 		databaseURL = Constants.DB_URL;
 		availableConnections = new ArrayList<Connection>(Constants.INITIALSIZE);
+		if(Constants.VERBOSE)
+		{
+			System.out.println(driver+"\n"+username+"\n"+password+"\n"+databaseURL);
+		}
 		try {
 			Class.forName(driver);
 		} catch (Exception e) {
@@ -152,6 +156,21 @@ public class ConnectionPool {
 		}
 	}
 
+
+	protected void finalize() throws Exception {
+		for (Connection c : availableConnections) {
+			try {
+				System.out.println("closing connections");
+				c.close();
+			} catch (Exception e) {
+
+			}
+		}
+	}
+	
+	
+	
+	
 	// ================================================================================
 	// dummy main
 	// ================================================================================
