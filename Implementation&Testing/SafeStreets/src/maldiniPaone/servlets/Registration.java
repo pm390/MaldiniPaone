@@ -51,7 +51,7 @@ public class Registration extends HttpServlet {
 		String email = (String) request.getParameter("email");
 		User user = (User) request.getSession(true).getAttribute("user");
 		try {
-			email=email.toLowerCase();
+			if(email==null) throw new IllegalParameterException();
 			if (Constants.VERBOSE) {
 				System.out.println("registering");// debug
 			}

@@ -219,7 +219,7 @@ CREATE TABLE `citizen` (
 
 LOCK TABLES `citizen` WRITE;
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
-INSERT INTO `citizen` VALUES ('angelo','a',0,'a@n',0.8),('antonio','a',0,'a@nt',0.8),('asichuiqbiu','yuguhuiugvyh',0,'pietrohideki@yahoo.it',0.8),('calogero','c',0,'c@a',0.8),('carciofo','c',0,'c@ar',0.8),('luca','l',0,'l@u',0.8),('matteo','m',0,'m@a',0.8),('pietro','p',0,'p@i',0.8);
+INSERT INTO `citizen` VALUES ('angelo','a',0,'a@n',0.8),('antonio','a',0,'a@nt',0.8),('asichuiqbiu','yuguhuiugvyh',0,'pietrohideki@yahoo.it',0.8),('calogero','c',0,'c@a',0.8),('carciofo','c',0,'c@ar',0.8),('dsfjkbkj','bnjiibibih',0,'iubhibuibihb',0.8),('hgvhjgjjjvj','bhjbhjgvhjgv',0,'hjgvhjgvh',0.8),('iuvubuhjh','a',0,'ciaoohqio',0.8),('luca','l',0,'l@u',0.8),('matteo','m',0,'m@a',0.8),('oiuhiuuhibhi','a',0,'igyuiigvyuighvh',0.8),('oiuijbh jbhvhjbhjv','hgvhbjhbjhbjbjih',0,'gvhjhjvghjhkj',0.8),('pietro','p',0,'p@i',0.8);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -669,7 +669,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('a','a','manager','h'),('alberigo','a','authority','u'),('aldo','a','authority','q'),('angelo','a','citizen','a@n'),('annibale','p','authority','r'),('antonio','a','citizen','a@nt'),('asichuiqbiu','yuguhuiugvyh','citizen','pietrohideki@yahoo.it'),('b','p','manager','i'),('c','l','manager','l'),('caldo','c','authority','w'),('calogero','c','citizen','c@a'),('calzolaio','m','authority','t'),('carciofo','c','citizen','c@ar'),('d','m','manager','m'),('distruttore','l','authority','s'),('e','a','manager','n'),('ermenegildo','c','authority','v'),('f','c','manager','o'),('h','c','manager','p'),('i','a','municipality','a'),('l','p','municipality','b'),('luca','l','citizen','l@u'),('m','l','municipality','c'),('matteo','m','citizen','m@a'),('n','m','municipality','d'),('o','a','municipality','e'),('p','c','municipality','f'),('pietro','p','citizen','p@i'),('q','c','municipality','g');
+INSERT INTO `user` VALUES ('a','a','manager','h'),('alberigo','a','authority','u'),('aldo','a','authority','q'),('angelo','a','citizen','a@n'),('annibale','p','authority','r'),('antonio','a','citizen','a@nt'),('asichuiqbiu','yuguhuiugvyh','citizen','pietrohideki@yahoo.it'),('b','p','manager','i'),('c','l','manager','l'),('caldo','c','authority','w'),('calogero','c','citizen','c@a'),('calzolaio','m','authority','t'),('carciofo','c','citizen','c@ar'),('d','m','manager','m'),('distruttore','l','authority','s'),('dsfjkbkj','bnjiibibih','citizen','iubhibuibihb'),('e','a','manager','n'),('ermenegildo','c','authority','v'),('f','c','manager','o'),('h','c','manager','p'),('hgvhjgjjjvj','bhjbhjgvhjgv','citizen','hjgvhjgvh'),('i','a','municipality','a'),('iuvubuhjh','a','citizen','ciaoohqio'),('l','p','municipality','b'),('luca','l','citizen','l@u'),('m','l','municipality','c'),('matteo','m','citizen','m@a'),('n','m','municipality','d'),('o','a','municipality','e'),('oiuhiuuhibhi','a','citizen','igyuiigvyuighvh'),('oiuijbh jbhvhjbhjv','hgvhbjhbjhbjbjih','citizen','gvhjhjvghjhkj'),('p','c','municipality','f'),('pietro','p','citizen','p@i'),('q','c','municipality','g');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -783,4 +783,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-12 20:58:13
+-- Dump completed on 2020-01-12 21:43:58
