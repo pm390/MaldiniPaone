@@ -15,7 +15,8 @@ Jquery allows to write more readable code than javascript and simplifies the dev
 allow users to load it from memory if it is already cached. A disadvantage is the difficulty to develop with different components and pages and in most cases the code written is only usable in one or few pages. Being the web applicaiton developed rather small it was possible to develop it without using complex frameworks.
 Leaflet is a lightweight javascript map library. It provides the functionalities required by the software with a quick loading time and an easy inclusion in the application.
 
-\subsubsection{Front End: Mobile Application}
+\subsubsection{Front End: Why no Mobile Application in the prototype?}
+We have chosen not to implement the mobile application because its only use was to communicate with the server and show data to the users. This functionalities can be found in the web interface; in fact, in order to test and develop the prototype, we have chosen only the web interface to uniform the front end structure. In ths way, we can also reuse components employed in interactions through the users
 
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Software used}
@@ -31,8 +32,9 @@ We used it also for developing of the web App since it allows editing also of ja
 				It is also easy to connect from the Java Code .
 \item Apache Tomcat : Tomcat  is an open source implementation of the Java Servlet. This software is used to deploy the Back End.
 						Using Eclipse IDE for the developement after downloading Tomcat the setup is really fast and easy.
-\end{itemize}\subsubsection{Front End}
-//TODO angelo
+\end{itemize}
+\subsubsection{Front End}
+The front end was developed using Eclipse IDE (described before).
 
 
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +43,6 @@ We used it also for developing of the web App since it allows editing also of ja
 \subsubsection{Back End}
 In the developement of the Back End we used the API provided by Mysql server to connect to the database , the API of tomcat servlets to develop and deploy servlets and the Java Mail Api to send emails to the users.
 \subsubsection{FrontEnd}
-In the developement of the Front End we used the API provided by openStreetMaps in the web Application to get the map shown with leaflet and the geolocation API provided by the browser to get the user position.//TODO angelo
+FIn the developement of the Front End we used the API provided by openStreetMaps in the web Application to get the map shown with leaflet and the geolocation API provided by the browser to get the user position. We also used APIs provided by OpenALPR in order to recognize licence plate thought Optical Character Recognition technology.
 
 

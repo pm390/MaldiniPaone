@@ -3,17 +3,14 @@
 In this section we present the requirements debated in the RASD and DD and we analize if they are present in the prototype developed.
 \begin{itemize}
 \item R1) Authorities’ location must be known by the system when they are in service:
-//TODO angelo
-
+This requirement is very important for the application, because if the authorities are trackable, they can receive their assignments in real time. The device measures their position every minute and sends it to the system.
 \item R2) When a Citizen makes a report the position is correctly added with the GPS when is available:
-//TODO angelo
+When a citizen makes a report, the device measures his current position; this is important in order to know the place where the violation occurs.
+\item R3) The right authorities are notified about violations: in the implementation of the prototype, this requirement was not developed; however in the back-end there are some functionalities that implement this requirement.
+\item R4) Authority must be able to provide the system how the assignment finished, resolved and the type of violation, no intervention needed when arrived, false report: 
+The system must know whether the assignment is taken, resolved or it was a false report.
+The system must be informed about the state of each assignment. If an assignment is correctly resolved (or there was no intervention needed), the system changes its state in unavailable. Moreover, the authority who resolved it, gives the system all the details about his work in order to create suggestions. Oppositely, if an assignment is refused, the system flags it as available, in order to let other authorities take it. Finally, in case of a false report the user who made it loses his trust and the assignment is marked as terminated. The Report manager handles the assignment and communicates with DatabaseAccessFacade to terminate correctly an assignment.
 
-\item R3) The right authorities are notified about violations:
-//TODO angelo
-
-\item R4) Authority must be able to provide the system how the assignment finished, resolved and the
-type of violation, no intervention needed when arrived, false report: //TODO angelo+"DatabaseAccessFacade provides 
-the functionalities to terminate correctly an assignment"
 
 \item R5) The system must make Statistics available when asked: This requirement is developed it costitutes an important part
 for behaviour analysis so it is available in the prototype in order to show how the system could analyse data.
@@ -29,8 +26,7 @@ fills all the fields in a form he/she gains access when successfully logging in.
 allow the submission of the form. Even if the form is submitted disabling javascript from the browser the Server side controls the 
 validity of the data and in case of invalid data it informs the client with an appropriate error message.
 
-\item  R8) A visitor must be able to begin sign up process in the SafeStreets App filling a form with his
-data: //TODO angelo
+\item R8) A visitor must be able to begin sign up process in the SafeStreets App filling a form with his data: the device first shows the user the statistics, then the visitor can access the sign-up page where he has to fill the form correctly in order to register. The system controls whether the data inserted are valid and the User Manager, through the DatabaseAccessFacade, makes sure there is not another user with the same name.
 
 \item  R9) When the creation of an account is successful the system must notify the Visitor sending an
 email to the address provided in the sign up process: The creation of an account is handled by the appropriate servlet depending on the creator of the account. After the creation of an account an email is sent to the email address of the user. The MailManager
@@ -39,17 +35,17 @@ For showing an additional idea we added a link to delete the account if the crea
 But for the lack of an actual server with an univoke name to which deploy our prototype the link is only symbolic.
 
 
-\item  R10) When GPS is not available the user can input the position from a map: //TODO angelo
+\item  R10) When GPS is not available the user can input the position from a map: 
+In some cases the device is not able to trace the position of the citizen; so the user can select his current position though the APIs provided by the map.
 
 \item  R11)Users to use the full service must be able to login providing the right credentials: This functionality is provided by the
 access control done in all the servlets which does the controls of the user session. For the functionalities which are only for a given type of user an additional check on the user type in the session is made to avoid illegal access to the application. If a user accesses the application without permission (not logged in or access functionalities he/she can't access) than an error is returned with a message informing that the access to the functionalities is not allowed. 
 
-\item  R12) The camera of the mobile phone must be accessible to take photos of violations: //TODO angelo
+\item  R12) The camera of the mobile phone must be accessible to take photos of violations: this functionality is not implemented because the app runs on a device that has no camera. However, this is overcame because there is the possibility to upload photos that are stored in the device.
 
 \item  R13) Suggestions must be available when municipalities request them: We included two parts of this functionality in the prototype. A static part which allows Citizens and authority to send suggestions to a municipality and a dynamic part which takes statistics around the municipality to build the suggestions. Comments are placed where the last part which uses data about accidents to build statistics could be placed in the StatisticsBuilder class.
 
-\item  R14) The User must be able to select the licence plate between the ones in output from the Licence
-Plate Recognition algorithm://TODO angelo
+\item  R14) R14) The User must be able to select the licence plate between the ones in output from the Licence Plate Recognition algorithm: if the algorithm makes a mistake in identifying a licence plate, the user has the possibility to input it in a text box.
 
 \item  R15) Each Username is unique:  This requirement is enforced by the structure of the Database used.
 \end{itemize}
