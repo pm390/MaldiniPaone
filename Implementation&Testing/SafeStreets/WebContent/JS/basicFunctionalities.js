@@ -50,7 +50,7 @@ $("h3.onlyAuthority").click(function() {
 });
 
 $("#reportSender").submit(function(e) {
-	focusFirst("#reportSender", e, "error")
+	focusFirst("reportSender", e, "error")
 });
 // //////////////////////////////////////////////////////
 // utility function
@@ -170,6 +170,7 @@ $(".login").click(
 							$("#homeTitle").html("Segnalazioni");
 							$(".onlyAuthority").show();
 							$(".onlyCitizen").hide();
+							$("#statisticDiv").hide();
 							becameAuthority();
 						} else if (json["userType"] == "citizen") {// show
 							// citizen
@@ -185,6 +186,7 @@ $(".login").click(
 							$("#homeTitle").html("Statistiche");
 							$(".onlyAuthority").hide();
 							$(".onlyCitizen").show();
+							$("#statisticDiv").hide();
 						}
 
 					}).fail(function() {// failure
@@ -196,32 +198,7 @@ $(".login").click(
 ////////////////////////////////////////////////////////
 //Send report
 ///////////////////////////////////////////////////////
-$("#reportSender").submit(
-		function(e) {
-			if (focusFirst("#reportSender", e, "error"))
-				return;
-			var action = $("#reportSender").prop('action');
-			// disable submit until response returns
-			var target = $(event.target).children("input[type=submit]").attr(
-					'disabled', 'disabled');
-			e.preventDefault();
-			// send post request
-			$.post(action, $("#reportSender").serialize()).done(function(data) {
-				var json = data;
-				$(target).removeAttr('disabled');// enable the submit
-				// button
-				if (!json["error"]) {// login success
-					$("#reportSender")[0].reset();
-					alert("report sent");
-				} else {// error occured. printed as alert
-					alert(json["errorCode"].toString() + json["errorMessage"]);
-					return;
-				}
-			}).fail(function() {// failure
-				alert("Server non disponibile");
-				$(target).removeAttr('disabled');
-			});
-		});
+
 // //////////////////////////////////////////////////////
 // bind button clicks with right parts of page showing and disappearing
 // /////////////////////////////////////////////////////

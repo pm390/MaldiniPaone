@@ -24,8 +24,8 @@ var becameAuthority=function()
 		}
 		if(json["activeIDs"])	
 		{
-			$("#assignmentId").val(json["activeIDS"]["id"]);
-			var reports= json["activeIDS"]["reports"];
+			$("#assignmentId").val(json["activeIDs"]["id"]);
+			var reports= json["activeIDs"]["reports"];
 			var location= reports[0]["location"];
 			mymap.flyTo([ location["latitude"], location["longitude"] ],15);
 			$("#activeAssignment").show();
@@ -37,7 +37,8 @@ var becameAuthority=function()
 	
 	function UpdateAssignements(center)
 	{
-		//TODO put correct code here
+		if($("noActive:hidden").length===0) // do if no active assignment div is
+											// showing
 		$.get("./AssignmentServlet", {
 			"latitude" : center.lat,
 			"longitude" : center.lng
@@ -47,28 +48,18 @@ var becameAuthority=function()
 				alert(json["errorCode"].toString() + json["errorMessage"]);
 				return;
 			}
-			showNewAssignements(json);// shows statistics on the page from the
+			showNewAssignments(json);// shows statistics on the page from the
 										// given json
 		}).fail(function() {
 			console.log("error");
 		});
 	};
-	// set time out
 	mymap.on('dragend', function onDragEnd(e) {
-		var width = mymap.getBounds().getEast() - mymap.getBounds().getWest();
-		var height = mymap.getBounds().getNorth()
-				- mymap.getBounds().getSouth();
-		var center = mymap.getCenter();
-		if (Math.abs(lastCenter.lat - center.lat) > width / 2
-				|| Math.abs(lastCenter.lng - center.lng) > height / 2
-				|| Math.abs(lastWidth - width) > 0.5
-				|| Math.abs(lastHeight - height) > 0.5) {
-			UpdateAssignements(center);
-			lastCenter = center;
-			lastWidth = width;
-			lastHeight = height;
-		}
-
+		if($("noActive:hidden").length===0)
+			{
+				var center = mymap.getCenter();
+				UpdateAssignements(center);
+			}
 	});	
 	
 	function updatePosition(position)
@@ -76,9 +67,11 @@ var becameAuthority=function()
 		temp.setLatLng([ posizione.coords["latitude"], posizione.coords["longitude"] ]);
 		var center={};
 		center.lat=posizione.coords["latitude"];
-		center.lng=posizione.coords["longitudine"];
+		center.lng=posizione.coords["longitude"];
 		UpdateAssignements(center);
 	}
+
+	// set interval
 	setInterval(function()
 			{
 		if (navigator.geolocation) {
@@ -231,6 +224,16 @@ var authorityIcon = L.icon({
 	tooltipAnchor : [ 16, -28 ],
 	shadowSize : [ 41, 41 ]
 });
+var violationIcon = L.icon({
+	iconUrl : './icone/violationicon.png',
+	shadowUrl : './icone/ombra.png',
+
+	iconSize : [ 25, 41 ],
+	iconAnchor : [ 12, 41 ],
+	popupAnchor : [ 1, -34 ],
+	tooltipAnchor : [ 16, -28 ],
+	shadowSize : [ 41, 41 ]
+});
 // useful function for further updates
 function reverseGeocode(c) {
 	fetch(
@@ -311,7 +314,6 @@ function showNewStatistics(data) {
 				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
 			});
 			
-			// create marker
 			var marker;
 			var icona;
 			// depending on the
@@ -329,6 +331,7 @@ function showNewStatistics(data) {
 					}).addTo(mymap).bindPopup(
 					"<b>" + statistic["reportCountLastWeek"].toString()
 							+ " Report</b>");
+
 
 			marker.on('click', function(e) {// when click on marker show
 											// description
@@ -347,54 +350,87 @@ function showNewStatistics(data) {
 		}
 	}
 }
-function showNewStatistics(data) {
-	for (var i = 0; i < data.statistics.length; ++i) {
-		var statistic = data.statistics[i];
-		if (statistic["reportCountLastWeek"] == 0)
+function showNewAssignments(data) {
+	let shownDiv;
+	$("#smallAssignmentDescription").html("");
+	$("#longAssignmentDescription").html('<input type="button" id="closeLongAssignmentDescription" value="X">');
+	var assignments=data.assignments;
+	if(!assignments)return;
+	for (var i = 0; i < assignments.length; ++i) {
+		var assign = assignments[i];
+		if (!assign.reports||assign.reports.lenght == 0)
 			continue; // empty statistic
 		else {
-			let number = identifier++;// assign new number to each useful line
-			let location = statistic["location"];
-			if(statisticList.some(item =>Math.abs(item[0]-location["latitude"])<=0.02
-											&&Math.abs(item[1]-location["longitude"])<=0.02)) continue;// already
-																										// exist
-			statisticList.push([ location["latitude"], location["longitude"] ]);// add
-																				// location
-																				// to
-																				// the
-																				// list
-																				// of
-																				// statistics
-			let item = $("<li id='smallStat" + number.toString() // create
-																	// list item
-																	// to be
-																	// added
-					+ "'>latitudine: " + location["latitude"].toString()
+			let id = assign.id;// assignment
+			let location = assign.reports[0]["location"];
+			let div=$("<div>"+assign.reports[0].licensePlate+"</div>");
+			let accept=$("<button value='Accetta'></button>");
+			let photoContainer=$("<div class='horizontalScroll'></div>");
+			let notesContainer=$("<div class='horizontalScroll'></div>");
+			for(var j=0;j<assign.reports.lenght;++j)
+				{
+				for(var k=0;k<assign.reports.photoNames.lenght;++k)
+					{
+						let photo=("<img data-src='.\GetPhoto?file="+assign.reports.photoNames[k]["name"]+"'>");
+						photoContainer.append(photo);
+						$(this).attr("src",$(this).attr("data-src"));
+					}
+					// TODO show notes if useful
+				}
+			div.append(accept);
+			div.append(photoContainer);
+				let item = $("<li>latitudine: " + location["latitude"].toString()
 					+ " longitudine: " + location["longitude"].toString()
+					+ " numero report: "+ assign.reports.lenght
 					+ "</li>");
-			let div = createDiv(number, statistic["reportCountLastWeek"],// create
-																			// div
-					statistic["assignmentCountLastWeek"],
-					statistic["reportForAssignmentCountLastWeek"],
-					statistic["dailyReportCountLastWeek"]);
-			$("#smallDescription").append(item);
-			$("#longDescription").append(div);
-			$(div).hide();// to avoid browser which doesn't allow inline style
+				accept.click(
+						function(e)
+						{
+							$("#activeAssignment").show();
+							div.hide();
+							$("#assignmentIdAccept").val(id);
+							$("#assignmentId").val(id);
+							$.post("./AssignmentServlet",$("#assignmentFormAccept").serialize())
+							.done(
+							function(data) {
+										var json = data;
+										// button
+										if (!json["error"]) {// login success
+											$("#noActive").hide();
+											$("#activeAssignment").show();
+										} else {// error occured. printed as
+												// alert
+											alert(json["errorCode"].toString()
+									+ json["errorMessage"]);
+							return;
+						}
+							
+						}
+					);
+							});
+				
+			$("#smallAssignmentDescription").append(item);
+			$("#longAssignmentDescription").append(div);
+			$(div).hide();
 			item.hover(function(e) { // when hover a statistics move to that
 										// point on the map
 				mymap.flyTo([ location["latitude"], location["longitude"] ],
 						mymap.getZoom() );
 				}
 			);
+			let shown=false;
 			item.click(function(e) { // /when click move on that point on the
 										// map and show description
-				$("#longDescription").show();
+				if(!shown)
+					$(photoContainer).children().attr("src",$(photoContainer).children().attr("data-src"));
+				shown=true;
+				$("#longAssignmentDescription").show();
 				descriptionCloser.show();
 				if (shownDiv)
 					$(shownDiv).hide();
 				$(div).show();
 				shownDiv = div;
-				$("#smallDescription").hide();
+				$("#smallAssignmentDescription").hide();
 				// set zoom to the current zoom if enough zoomed else it
 				// increases zoom until the zoom is 13
 				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
@@ -402,36 +438,17 @@ function showNewStatistics(data) {
 			
 			// create marker
 			var marker;
-			var icona;
-			// depending on the
-			if (statistic["reportCountLastWeek"] < lowReport)
-			{
-				icona=greenIcon;
-			} else if (statistic["reportCountLastWeek"] < highReport) {
-				icona=yellowIcon;
-			} else {
-				icona=redIcon;
-			}
+			
 			marker = L.marker(
 					[ location["latitude"], location["longitude"] ], {
-						icon : icona
+						icon : violationIcon
 					}).addTo(mymap).bindPopup(
-					"<b>" + statistic["reportCountLastWeek"].toString()
+					"<b> numero Report" +assign.reports.length.toString()
 							+ " Report</b>");
 
 			marker.on('click', function(e) {// when click on marker show
 											// description
-				mymap.flyTo([ location["latitude"], location["longitude"] ],
-						// set zoom to the current zoom if enough zoomed else it
-						// increases zoom until the zoom is 13
-						(mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
-				descriptionCloser.show();
-				$("#smallDescription").hide();
-				$("#longDescription").show();
-				if (shownDiv)
-					$(shownDiv).hide();
-				$(div).show();
-				shownDiv = div;
+				item.trigger("click");
 			})
 		}
 	}
@@ -446,4 +463,54 @@ descriptionCloser.click(function() {
 		$(shownDiv).hide();
 	shownDiv = null;
 })
+
+$("#ModifyAssignment").click(function(e)
+		{
+	$.post("./AssignmentServlet",$("#assignmentForm").serialize())
+	.done(
+	function(data) {
+				var json = data;
+				// button
+				if (!json["error"]) {// login success
+					$("#noActive").show();
+					$("#activeAssignment").hide();
+					$("#longAssignmentDescription").hide();
+					$("#smallAssignmentDescription").hide();
+				} else {// error occured. printed as
+						// alert
+					alert(json["errorCode"].toString()
+			+ json["errorMessage"]);
+	return;
+}
+	
+}
+);
+		})
+$("#reportSender").submit
+( function (e)
+		{
+		e.preventDefault();
+		var data = new FormData($('#reportSender')[0]);
+		jQuery.ajax({
+		    url: $("#reportSender").attr('action'),
+		    data: data,
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    type: 'POST',
+		    success: function(data) {
+				var json = data;
+				// button
+				if (!json["error"]) {// login success
+					alert("report is sent");
+					$("#reportSender")[0].reset();
+				} else {// error occured. printed as
+						// alert
+					alert(json["errorCode"].toString()
+			+ json["errorMessage"]);
+	return;
+};
+		}});
+			
+		});
 

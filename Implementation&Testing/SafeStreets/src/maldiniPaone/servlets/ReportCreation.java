@@ -80,7 +80,17 @@ public class ReportCreation extends HttpServlet {
 				if (x.getName().equals("photo"))// for each image
 				{
 					String image = x.getSubmittedFileName();// get filename
+					
 					Integer i = image.lastIndexOf(".");// get last dot
+					if(Constants.VERBOSE)
+						{
+						System.out.println(image);
+						System.out.println(i);
+						}
+					if(image=="")
+					{
+						continue;
+					}
 					String fileExtension = image.substring(i);// get file extension
 					InputStream input = x.getInputStream();// get input stream
 					// save data to a bean

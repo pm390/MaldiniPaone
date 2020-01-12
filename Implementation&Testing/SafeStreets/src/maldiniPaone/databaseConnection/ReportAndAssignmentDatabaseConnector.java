@@ -409,7 +409,23 @@ public class ReportAndAssignmentDatabaseConnector {
 		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("Select arb.id,ph.image,rep.note,rep.latitude,rep.longitude" + 
+			if(Constants.VERBOSE)
+				
+				
+				//debug 
+				
+				System.out.println("Select arb.id,ph.image,rep.note,rep.latitude,rep.longitude,assign.id" + 
+					// join of report assignment bridge table and photos
+					" from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)" + 
+					" join report as rep on rep.id=arb.idreport) ) left join photo as ph on ph.idreport=rep.id" + 
+					" where "+  closeTo("rep", location)+" and assign.state=?" +// close to the location 
+					" order by assign.id DESC, arb.timestamp DESC"+// ordered by assignment id and timestamp
+					" LIMIT " + Constants.STANDARD_QUERY_LIMIT * 3);
+			
+			
+			
+			
+			ps = c.prepareStatement("Select arb.id,ph.image,rep.note,rep.latitude,rep.longitude,assign.id" + 
 					// join of report assignment bridge table and photos
 					" from (((assignment as assign join assignmentreportbridge as arb on assign.id=arb.idassignment)" + 
 					" join report as rep on rep.id=arb.idreport) ) left join photo as ph on ph.idreport=rep.id" + 
@@ -969,11 +985,12 @@ public class ReportAndAssignmentDatabaseConnector {
 		Photo photo = new Photo();
 
 		// get values from first result set row
-		Integer id = rs.getInt(1);
+		Integer id = rs.getInt(6);
 		String lastNote = rs.getString(3);
 		Float latitude = rs.getFloat(4);
 		Float longitude = rs.getFloat(5);
 		photo.setName(rs.getString(2));
+		int bridgeId=rs.getInt(1);
 
 		// adding elements to the lists
 		res.add(assignment);// adds the assignment into the result set
@@ -984,7 +1001,7 @@ public class ReportAndAssignmentDatabaseConnector {
 
 		// setting state of beans
 		assignment.setState(State.Pending);
-		assignment.setId(id);
+		assignment.setId(bridgeId);
 		assignment.setReports(reports);
 		report.setPhotos(images);// set the reference to the list
 		report.setNote(lastNote);
@@ -992,7 +1009,7 @@ public class ReportAndAssignmentDatabaseConnector {
 		lastLocation.setLongitude(longitude);
 		report.setLocation(lastLocation);
 		while (rs.next()) {
-			Integer newId = rs.getInt(1);
+			Integer newId = rs.getInt(6);
 			if ((newId != id) || (latitude != rs.getFloat(4) || longitude != rs.getFloat(5)))
 			// new assignment or new report
 			{
@@ -1002,9 +1019,10 @@ public class ReportAndAssignmentDatabaseConnector {
 					assignment = new Assignment();
 					reports = new ArrayList<Report>();
 					id = newId;
+					bridgeId=rs.getInt(1);
 					// setting beans state
 					assignment.setState(State.Pending);
-					assignment.setId(id);
+					assignment.setId(bridgeId);
 					assignment.setReports(reports);
 					// adding values to lists
 					res.add(assignment);

@@ -20,8 +20,12 @@
 <link rel="icon" href="./icone/logo.png">
 </head>
 <body>
-<form id="assignmentForm"style="display:none;">
-<input type="hidden">
+<form id="assignmentForm" style="display:none;">
+<input id="assignmentId" type="hidden" name="assignmentId">
+</form>
+<form id="assignmentFormAccept"style="display:none;">
+<input id="assignmentIdAccept" type="hidden" name="assignmentId">
+<input type="hidden" name="newState" value="accepted">
 </form>
 	<div id="background"></div>
 	<div id="home" style="display: none;">
@@ -54,7 +58,19 @@
 					<input type="button" id="closeLongAssignmentDescription" value="X">
 				</div>
 				</div>
-				<div id="activeAssignment">
+				<div style="display:none" id="activeAssignment">
+					<select name="newState" form="assignmentForm">
+					  <option value="finished">Terminato con successo</option>
+ 						 <option value="false">Report falso</option>
+  						<option value="solved">Risolto quando arrivato sul posto</optiom>
+						<option value="created">Rifiuta</optiom>
+					</select>
+					<select name="type" form="assignmentForm">
+					  <option value="double">Parcheggio in doppia fila</option>
+ 						 <option value="reserved">Parcheggio in zona riservata</option>
+  						<option value="forbidden">Parcheggio in zona vietata</option>
+					</select>
+					<input type="button" id="ModifyAssignment" value="termina">
 				</div>
 				</div>
 			<div id="reportDiv" style="display: none;"
@@ -68,8 +84,8 @@
 						max="180" min="-180"><br> note <input type="text"
 						name="note"><br>targa<input type="text" name="car">
 					<label for="file1">Scegli una foto</label><input id="file1"
-						type="file" name="photo" required><br><label for="file2">
-						Scegli una foto</label><input id="file2" type="file" name="photo" required><br>
+						type="file" name="photo" ><br><label for="file2">
+						Scegli una foto</label><input id="file2" type="file" name="photo" ><br>
 						 <input 
 						type="submit" value="Submit">
 				</form>

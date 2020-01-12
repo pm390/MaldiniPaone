@@ -26,7 +26,7 @@ public enum State {
 	{
 		switch(state.toLowerCase())
 		{
-		case "pending":return Pending;
+		case "created":return Pending;
 		case "accepted":return Accepted;
 		case "finished":return CorrectlyFinished;
 		case "solved":return AlreadySolved;
@@ -42,7 +42,7 @@ public enum State {
 	{
 		switch(this)
 		{
-		case Pending:return "pending";
+		case Pending:return "created";
 		case Accepted:return "accepted";
 		case CorrectlyFinished:return "finished";
 		case AlreadySolved:return "solved";

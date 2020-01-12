@@ -162,6 +162,17 @@ public class AssignmentServlet extends HttpServlet {
 			outputWriter.close();
 			return;
 		}
+		catch(Exception e)
+		{
+			if (Constants.VERBOSE) {
+				e.printStackTrace();
+			}
+			GenericResponse message = new GenericResponse(400,"invalid parameters");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
+			return;
+		}
+		
 		GenericResponse message = new GenericResponse();
 		outputWriter.println(new Gson().toJson(message));
 		outputWriter.close();
