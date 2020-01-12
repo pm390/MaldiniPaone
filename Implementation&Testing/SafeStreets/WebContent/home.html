@@ -128,17 +128,27 @@
 			style="display: none;"></form>
 	</div>
 	<div id="login" style="display: none;">
-		<h1>Login</h1>
+		<h1 id="LoginTitle">Login</h1>
 		<form id="loginForm" action="./Login" method="post">
 			<div class="column">
 				<label for="username">Username</label> <br> <input type="text"
 					placeholder="Inserire Username" name="username" required> <br>
 				<label for="password">Password</label> <br> <input
 					type="password" placeholder="Inserire Password" name="password"
-					required> <br> <input class="login" type="submit"
+					required> <br> 
+					<div class="onlyRegistration" style= "display:none;" >
+					<label for="email">Email</label> <br> <input type="text"
+					placeholder="Inserire email" name="username" required> <br>
+					</div>
+					<div class="row">
+					<input id="loginSubmitButton" class="login" type="submit"
 					value="Login" />
+					<input class="registration inactive" type="submit"
+					value="Registrazione" />
+					</div>
 			</div>
 		</form>
+				
 		<input type="button" class="toHome" value="Home" />
 
 

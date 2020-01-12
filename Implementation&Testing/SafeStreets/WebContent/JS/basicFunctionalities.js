@@ -3,11 +3,11 @@
 ///////////////////////////////////////////////////////
 
 /*function disableF5(e) {
-	if ((e.which || e.keyCode) == 116)
-		e.preventDefault();
-};
-$(document).on("keydown", disableF5);// disable reload of page with F5 avoid
-*/
+ if ((e.which || e.keyCode) == 116)
+ e.preventDefault();
+ };
+ $(document).on("keydown", disableF5);// disable reload of page with F5 avoid
+ */
 // mistakenful reloads
 $("#closeLongDescription").hide();
 $("#closeLongAssignmentDescription").hide();
@@ -23,6 +23,25 @@ $(".registerManager").hide();// Shown only if manager gets access
 $(".getSuggestions").hide();// Shown only if municipality gets access
 $(".onlyAuthority").hide();
 $(".onlyCitizen").hide();
+
+$(".registration").click(function() {
+	if ($(".registration").hasClass("inactive")){
+		$(".registration").removeClass("inactive");
+		$(".registration").val("vai al login");
+		$(".onlyRegistration").show();
+		$("#loginForm").prop('action', './Registration');
+		$(".loginSubmitButton").val("Registrati");
+		$("#LoginTitle").html("Registrazione");
+		
+	} else {
+		$(".registration").add("inactive");
+		$(".registration").val("Registrazione");
+		$(".onlyRegistration").show();
+		$("#loginForm").prop('action', './Login');
+		$(".loginSubmitButton").val("Login");
+		$("#LoginTitle").html("Login");
+	}
+});
 
 $(".toLogin").click(function() {
 	$("#home").hide();
@@ -51,7 +70,6 @@ $("h3.onlyAuthority").click(function() {
 	$("h3.onlyAuthority").addClass("selected");
 });
 
-
 // //////////////////////////////////////////////////////
 // utility function
 // /////////////////////////////////////////////////////
@@ -77,7 +95,7 @@ function focusFirst(formId, e, classname) {
 	// if input is filled remove the classname if any
 	for (let i = 0; i < input.length; ++i) {
 		if (input[i].value === "") {
-			if ($(input[i]).is(":hidden")||$(input[i]).attr("type")=="file")
+			if ($(input[i]).is(":hidden") || $(input[i]).attr("type") == "file")
 				continue;
 			if (classname)
 				$(input[i]).addClass(classname);// if defined add the error
@@ -132,6 +150,11 @@ $(".login").click(
 									+ json["errorMessage"]);
 							return;
 						}
+						if(!json.userType)
+							{
+							alert("registration succeded");
+							$(".registration").trigger("click");
+							}
 						if (json["userType"] == "manager") {// show manager
 							// functionalities
 							$("#registerMunicipalityForm").attr("action",
@@ -195,9 +218,9 @@ $(".login").click(
 			});
 		});
 
-////////////////////////////////////////////////////////
-//Send report
-///////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////
+// Send report
+// /////////////////////////////////////////////////////
 
 // //////////////////////////////////////////////////////
 // bind button clicks with right parts of page showing and disappearing
@@ -412,9 +435,8 @@ $(".getSuggestions").click(function(e) {
 
 });
 
-
 $("input[type=file]").change(
-	function(event){
-		var label = $("label[for='" + event.target.id + "']").html("cliccare per modificare");
-		}		
-);
+		function(event) {
+			var label = $("label[for='" + event.target.id + "']").html(
+					"cliccare per modificare");
+		});
