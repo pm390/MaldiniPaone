@@ -350,6 +350,7 @@ function showNewStatistics(data) {
 		}
 	}
 }
+var cleaner;
 function showNewAssignments(data) {
 	let shownDiv;
 	$("#smallAssignmentDescription").html("");
@@ -386,6 +387,10 @@ function showNewAssignments(data) {
 				accept.click(
 						function(e)
 						{
+							cleaner=function()
+							{
+								item.hide();
+							}
 							$("#activeAssignment").show();
 							div.hide();
 							$("#assignmentIdAccept").val(id);
@@ -475,12 +480,17 @@ $("#ModifyAssignment").click(function(e)
 					$("#noActive").show();
 					$("#activeAssignment").hide();
 					$("#longAssignmentDescription").hide();
-					$("#smallAssignmentDescription").hide();
+					$("#smallAssignmentDescription").show();
+					if($("State").val()!="created"&&cleaner)
+					{
+					cleaner();
+					}
 				} else {// error occured. printed as
 						// alert
 					alert(json["errorCode"].toString()
 			+ json["errorMessage"]);
 	return;
+	
 }
 	
 }
