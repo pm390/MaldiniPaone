@@ -7,9 +7,10 @@ var lowReport = 5;// TODO change to
 var highReport = 10;// TODO change to higher number
 var mymap;
 var statisticList=new Array();
-
+var canUpdate=true;
 var becameAuthority=function()
 {
+	UpdateAssignements(mymap.getCenter());
 	var temp=L.marker(
 			[ posizione.coords["latitude"], posizione.coords["longitude"] ], {
 				icon : authorityIcon
@@ -29,15 +30,16 @@ var becameAuthority=function()
 			var location= reports[0]["location"];
 			mymap.flyTo([ location["latitude"], location["longitude"] ],15);
 			$("#activeAssignment").show();
+			$("#noActive").hide();
 		}
 	}).fail(function() {
 		console.log("error");
 	});
 	
 	
-	function UpdateAssignements(center)
+function UpdateAssignements(center)
 	{
-		if($("noActive:hidden").length===0) // do if no active assignment div is
+		if(canUpdate) // do if no active assignment div is
 											// showing
 		$.get("./AssignmentServlet", {
 			"latitude" : center.lat,
@@ -61,7 +63,6 @@ var becameAuthority=function()
 				UpdateAssignements(center);
 			}
 	});	
-	
 	function updatePosition(position)
 	{
 		temp.setLatLng([ posizione.coords["latitude"], posizione.coords["longitude"] ]);
@@ -86,6 +87,7 @@ var becameAuthority=function()
 		}
 			}, 1*60*1000);
 };
+
 
 
 function init(position) {
@@ -197,7 +199,7 @@ var yellowIcon = L.icon({
 	iconUrl : './icone/yellow.png',
 	shadowUrl : './icone/ombra.png',
 
-	iconSize : [ 25, 41 ],
+	iconSize : [25,41],
 	iconAnchor : [ 12, 41 ],
 	popupAnchor : [ 1, -34 ],
 	tooltipAnchor : [ 16, -28 ],
@@ -208,7 +210,7 @@ var redIcon = L.icon({
 	iconUrl : './icone/red.png',
 	shadowUrl : './icone/ombra.png',
 
-	iconSize : [ 25, 41 ],
+	iconSize : [25,41],
 	iconAnchor : [ 12, 41 ],
 	popupAnchor : [ 1, -34 ],
 	tooltipAnchor : [ 16, -28 ],
@@ -218,7 +220,7 @@ var authorityIcon = L.icon({
 	iconUrl : './icone/currentpositionicon.png',
 	shadowUrl : './icone/ombra.png',
 
-	iconSize : [ 25, 41 ],
+	iconSize : [25,41],//[25,41]
 	iconAnchor : [ 12, 41 ],
 	popupAnchor : [ 1, -34 ],
 	tooltipAnchor : [ 16, -28 ],
@@ -228,7 +230,7 @@ var violationIcon = L.icon({
 	iconUrl : './icone/violationicon.png',
 	shadowUrl : './icone/ombra.png',
 
-	iconSize : [ 25, 41 ],
+	iconSize : [25,41],
 	iconAnchor : [ 12, 41 ],
 	popupAnchor : [ 1, -34 ],
 	tooltipAnchor : [ 16, -28 ],
@@ -355,34 +357,40 @@ function showNewAssignments(data) {
 	let shownDiv;
 	$("#smallAssignmentDescription").html("");
 	$("#longAssignmentDescription").html('<input type="button" id="closeLongAssignmentDescription" value="X">');
+	$("#longAssignmentDescription").click(function(e)
+			{
+		$("#longAssignmentDescription").hide();
+		$("#smallAssignmentDescription").show();
+		canUpdate=true;
+			});
 	var assignments=data.assignments;
 	if(!assignments)return;
 	for (var i = 0; i < assignments.length; ++i) {
 		var assign = assignments[i];
-		if (!assign.reports||assign.reports.lenght == 0)
+		if (!assign.reports||assign.reports.length == 0)
 			continue; // empty statistic
 		else {
 			let id = assign.id;// assignment
 			let location = assign.reports[0]["location"];
-			let div=$("<div>"+assign.reports[0].licensePlate+"</div>");
-			let accept=$("<button value='Accetta'></button>");
+			let div=$("<div></div>");
+			let accept=$("<button value='Accetta'>Accetta</button>");
 			let photoContainer=$("<div class='horizontalScroll'></div>");
 			let notesContainer=$("<div class='horizontalScroll'></div>");
-			for(var j=0;j<assign.reports.lenght;++j)
+			for(var j=0;j<assign.reports.length;++j)
 				{
-				for(var k=0;k<assign.reports.photoNames.lenght;++k)
+				for(var k=0;k<assign.reports[j].photoNames.length;++k)
 					{
-						let photo=("<img data-src='.\GetPhoto?file="+assign.reports.photoNames[k]["name"]+"'>");
+						let photo=("<img data-src='.\\GetPhoto?file="+assign.reports[j].photoNames[k]["name"]+"'>");
 						photoContainer.append(photo);
 						$(this).attr("src",$(this).attr("data-src"));
 					}
 					// TODO show notes if useful
 				}
-			div.append(accept);
 			div.append(photoContainer);
+			div.append(accept);
 				let item = $("<li>latitudine: " + location["latitude"].toString()
 					+ " longitudine: " + location["longitude"].toString()
-					+ " numero report: "+ assign.reports.lenght
+					+ " numero report: "+ assign.reports.length
 					+ "</li>");
 				accept.click(
 						function(e)
@@ -435,10 +443,12 @@ function showNewAssignments(data) {
 					$(shownDiv).hide();
 				$(div).show();
 				shownDiv = div;
+				$("#closeLongAssignmentDescription").show();
 				$("#smallAssignmentDescription").hide();
 				// set zoom to the current zoom if enough zoomed else it
 				// increases zoom until the zoom is 13
 				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
+				canUpdate=false;
 			});
 			
 			// create marker
@@ -448,12 +458,15 @@ function showNewAssignments(data) {
 					[ location["latitude"], location["longitude"] ], {
 						icon : violationIcon
 					}).addTo(mymap).bindPopup(
-					"<b> numero Report" +assign.reports.length.toString()
-							+ " Report</b>");
+					"<b> numero Report : " +assign.reports.length.toString()
+							+"</b>");
 
 			marker.on('click', function(e) {// when click on marker show
 											// description
 				item.trigger("click");
+				mymap.flyTo([ location["latitude"], location["longitude"] ],
+				mymap.getZoom() );
+				
 			})
 		}
 	}
@@ -481,6 +494,7 @@ $("#ModifyAssignment").click(function(e)
 					$("#activeAssignment").hide();
 					$("#longAssignmentDescription").hide();
 					$("#smallAssignmentDescription").show();
+					canUpdate=true;
 					if($("State").val()!="created"&&cleaner)
 					{
 					cleaner();
@@ -496,10 +510,25 @@ $("#ModifyAssignment").click(function(e)
 }
 );
 		})
-$("#reportSender").submit
-( function (e)
+$("#reportSubmit").click(
+		function (e)
 		{
-		e.preventDefault();
+			e.preventDefault();
+			if($("#licensePlate").val()==""||$("#fileL").val()=="") 
+			{
+			alert("inserire foto");
+			return;
+			}
+		if($(".latitude.mapClickModifiable").val()=="")
+		{
+			$(".latitude.mapClickModifiable").focus();
+			return;
+		}
+		if($(".longitude.mapClickModifiable").val()=="")
+		{
+			$(".longitude.mapClickModifiable").focus();
+			return;
+		}
 		var data = new FormData($('#reportSender')[0]);
 		jQuery.ajax({
 		    url: $("#reportSender").attr('action'),
@@ -518,9 +547,11 @@ $("#reportSender").submit
 						// alert
 					alert(json["errorCode"].toString()
 			+ json["errorMessage"]);
-	return;
-};
-		}});
-			
-		});
+					return;
+		}
+				}
+		}
+		);
+		}
+)
 

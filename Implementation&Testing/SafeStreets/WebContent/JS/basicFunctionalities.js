@@ -1,11 +1,13 @@
 ////////////////////////////////////////////////////////
 //initial state
 ///////////////////////////////////////////////////////
-function disableF5(e) {
+
+/*function disableF5(e) {
 	if ((e.which || e.keyCode) == 116)
 		e.preventDefault();
 };
 $(document).on("keydown", disableF5);// disable reload of page with F5 avoid
+*/
 // mistakenful reloads
 $("#closeLongDescription").hide();
 $("#closeLongAssignmentDescription").hide();
@@ -49,9 +51,7 @@ $("h3.onlyAuthority").click(function() {
 	$("h3.onlyAuthority").addClass("selected");
 });
 
-$("#reportSender").submit(function(e) {
-	focusFirst("reportSender", e, "error")
-});
+
 // //////////////////////////////////////////////////////
 // utility function
 // /////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ function focusFirst(formId, e, classname) {
 	// if input is filled remove the classname if any
 	for (let i = 0; i < input.length; ++i) {
 		if (input[i].value === "") {
-			if ($(input[i]).is(":hidden"))
+			if ($(input[i]).is(":hidden")||$(input[i]).attr("type")=="file")
 				continue;
 			if (classname)
 				$(input[i]).addClass(classname);// if defined add the error
@@ -411,3 +411,10 @@ $(".getSuggestions").click(function(e) {
 	});
 
 });
+
+
+$("input[type=file]").change(
+	function(event){
+		var label = $("label[for='" + event.target.id + "']").html("cliccare per modificare");
+		}		
+);

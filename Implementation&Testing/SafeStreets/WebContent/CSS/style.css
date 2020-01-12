@@ -13,7 +13,8 @@ define colors
 	--placeholder-text-color: rgba(75, 93, 115, 0.5);
 	--placeholder-text-color: rgba(75, 93, 115, 0.5);
 	--error-color:	rgba(251, 78, 78, 0.4);
-	--focus-color:	rgba(251, 78, 78, 0.2)
+	--focus-color:	rgba(251, 78, 78, 0.2);
+	--select-option: rgba(21, 127, 241, 0.4);
 }
 
 /*
@@ -389,4 +390,38 @@ input#closeLongAssignmentDescription,input#closeLongDescription{
 h1,h2,h3,input,form
 {
 	overflow:auto;
+}
+div#noActive {
+	overflow:scroll;
+    height: 65vh;
+}
+#noActive img {width: 20vh;}
+#noActive button
+{
+	background:var(--second-color);
+		border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+#activeAssignment select
+{
+	background:var(--second-color);
+		border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+#activeAssignment option
+{
+	background:var(--select-option);
+}
+.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive
+{
+	box-sizing: border-box;
+	border-radius: min(3vh, 3vw);
+		-webkit-box-shadow: min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.1) ; 
+	  
+	-moz-box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.1) ; 
+	
+	box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.3) ;
+	
 }
