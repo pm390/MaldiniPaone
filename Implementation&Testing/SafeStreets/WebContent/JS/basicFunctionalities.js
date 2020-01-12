@@ -35,7 +35,7 @@ $(".registration").click(function(e) {
 		$("#LoginTitle").html("Registrazione");
 		
 	} else {
-		$(".registration").add("inactive");
+		$(".registration").addClass("inactive");
 		$(".registration").val("Registrazione");
 		$(".onlyRegistration").hide();
 		$("#loginForm").prop('action', './/Login');

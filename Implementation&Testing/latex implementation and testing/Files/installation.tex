@@ -104,11 +104,18 @@ Type in your search bar mysql you should get an entry called mysql 8.0 command l
 
 \clearpage
 \subsection{Configure SafeStreets}
-From our directory get the DB.sql file and paste it inside the bin directory you can find in the mysql installation forlder.
+From our directory get the DB.sql file and paste it inside the bin directory that you can find inside the mysql installation forlder.
 You should find the folder inside your program folder.
-Now open mysql command line client. Once you log in type the commands create schema safestreets; and the command 
-use safestreets; and final command source DB.sql;.
-This should install the database. Try the command select * from authority; if a table is returned than the import is successful.
+Now open mysql command line client. Once you log in type the commands  
+\newline 
+\newline create schema safestreets;
+\newline use safestreets; 
+\newline source DB.sql;.
+\newline
+\newline 
+Don't forget the semicolon(;) at the end of the commands.
+This should install the database. Try the command \newline select * from authority;  
+\newline if a table is returned than the import is successful.
 
 After this open the configuration.txt file in our directory.
 Don't delete the text on the left part and always keep at least a white space between left part and right part.
@@ -121,3 +128,13 @@ Now put the SafeStreets.war file from our directory in the webapps folder. Now e
 For a first check go to webapps folder and see if along with the SafeStreets app there is now a SafeStreets folder. After that open a browser search  http://localhost:8080/SafeStreets/ you should be seeing now our homepage.
 On tomcat console some setup messages are shown if any error occures check out if there are errors printed there.
 Whenever you want to stop the server execute the shutdown.bat or shutdown.sh in the bin folder of tomcat and the server will go oflline.
+To Start testing you can get some accounts credentials executing from mysql command line the commands.
+\newline 
+\newline
+use safestreets; 
+\newline
+select * from user;
+\newline 
+\newline
+You may register as a new Citizen from the login and registration page. Other users can be registered only by other users. Authorities only by municipality. Municipality only from municipalities and Managers . Managers only by managers.
+ 
