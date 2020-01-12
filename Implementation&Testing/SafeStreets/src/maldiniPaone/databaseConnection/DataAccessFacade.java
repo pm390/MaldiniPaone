@@ -143,7 +143,7 @@ public class DataAccessFacade implements ManageDataAccess {
 	}
 
 	@Override
-	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
+	public Assignment checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
 		return DataCollector.checkActive(username);
 	}
 	// ================================================================================

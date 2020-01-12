@@ -130,7 +130,7 @@ public class ReportManager implements ManageReportCreation, ManageAssignment {
 	// AssignmentServlet check active
 	// ================================================================================
 	@Override
-	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
+	public Assignment checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException {
 		return DataAccessFacade.getInstance().checkActive(username);
 	}
 }

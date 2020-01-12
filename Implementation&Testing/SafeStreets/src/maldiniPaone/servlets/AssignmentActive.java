@@ -2,7 +2,6 @@ package maldiniPaone.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +17,7 @@ import maldiniPaone.servlets.managers.ReportManager;
 import maldiniPaone.utilities.UserType;
 import maldiniPaone.utilities.ResponseObjects.AssignmentStateResponse;
 import maldiniPaone.utilities.ResponseObjects.GenericResponse;
+import maldiniPaone.utilities.beans.Assignment;
 import maldiniPaone.utilities.beans.users.User;
 import maldiniPaone.utilities.constants.Constants;
 
@@ -54,7 +54,7 @@ public class AssignmentActive extends HttpServlet {
 			outputWriter.close();
 			return;
 		}
-		List<Integer> active=null;
+		Assignment active=null;
 		try {
 			active=ReportManager.getInstance().checkActive(user.getUsername());
 		} catch (ServerSideDatabaseException e) {

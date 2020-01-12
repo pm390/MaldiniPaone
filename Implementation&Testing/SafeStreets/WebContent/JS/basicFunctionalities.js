@@ -6,8 +6,9 @@ function disableF5(e) {
 		e.preventDefault();
 };
 $(document).on("keydown", disableF5);// disable reload of page with F5 avoid
-										// mistakenful reloads
+// mistakenful reloads
 $("#closeLongDescription").hide();
+$("#closeLongAssignmentDescription").hide();
 $("#home").show();
 $("#login").hide();
 $("#registrationAuthority").hide();// Shown only if municipality gets access
@@ -46,6 +47,10 @@ $("h3.onlyAuthority").click(function() {
 	$("#dataTitle").removeClass("selected");
 	$("h3.onlyCitizen").removeClass("selected");
 	$("h3.onlyAuthority").addClass("selected");
+});
+
+$("#reportSender").submit(function(e) {
+	focusFirst("#reportSender", e, "error")
 });
 // //////////////////////////////////////////////////////
 // utility function
@@ -117,7 +122,7 @@ $(".login").click(
 					function(data) {
 						var json = data;
 						$(target).removeAttr('disabled');// enable the submit
-															// button
+						// button
 						if (!json["error"]) {// login success
 							$("#login").hide();
 							$("#home").show();
@@ -128,7 +133,7 @@ $(".login").click(
 							return;
 						}
 						if (json["userType"] == "manager") {// show manager
-															// functionalities
+							// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByManager");
 							$(".toAdditionalFunctions").show();
@@ -139,8 +144,8 @@ $(".login").click(
 							$(".onlyAuthority").hide();
 							$(".onlyCitizen").hide();
 						} else if (json["userType"] == "municipality") {// show
-																		// municipality
-																		// functionalities
+							// municipality
+							// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByMunicipality");
 							$(".toAdditionalFunctions").show();
@@ -152,8 +157,8 @@ $(".login").click(
 							$(".onlyAuthority").hide();
 							$(".onlyCitizen").hide();
 						} else if (json["userType"] == "authority") {// show
-																		// authority
-																		// functionalities
+							// authority
+							// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByMunicipality");
 							$(".toAdditionalFunctions").show();
@@ -165,9 +170,10 @@ $(".login").click(
 							$("#homeTitle").html("Segnalazioni");
 							$(".onlyAuthority").show();
 							$(".onlyCitizen").hide();
+							becameAuthority();
 						} else if (json["userType"] == "citizen") {// show
-																	// citizen
-																	// functionalities
+							// citizen
+							// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByMunicipality");
 							$(".toAdditionalFunctions").show();
@@ -187,6 +193,35 @@ $(".login").click(
 			});
 		});
 
+////////////////////////////////////////////////////////
+//Send report
+///////////////////////////////////////////////////////
+$("#reportSender").submit(
+		function(e) {
+			if (focusFirst("#reportSender", e, "error"))
+				return;
+			var action = $("#reportSender").prop('action');
+			// disable submit until response returns
+			var target = $(event.target).children("input[type=submit]").attr(
+					'disabled', 'disabled');
+			e.preventDefault();
+			// send post request
+			$.post(action, $("#reportSender").serialize()).done(function(data) {
+				var json = data;
+				$(target).removeAttr('disabled');// enable the submit
+				// button
+				if (!json["error"]) {// login success
+					$("#reportSender")[0].reset();
+					alert("report sent");
+				} else {// error occured. printed as alert
+					alert(json["errorCode"].toString() + json["errorMessage"]);
+					return;
+				}
+			}).fail(function() {// failure
+				alert("Server non disponibile");
+				$(target).removeAttr('disabled');
+			});
+		});
 // //////////////////////////////////////////////////////
 // bind button clicks with right parts of page showing and disappearing
 // /////////////////////////////////////////////////////
@@ -388,10 +423,10 @@ $(".getSuggestions").click(function(e) {
 		for (var i = 0; i < json.suggestions.length; ++i) {
 			var suggestion = json.suggestions[i];
 			$("#suggestionList").append('<li>' + suggestion + '</a></li>');// append
-																			// suggestion
-																			// to
-																			// the
-																			// list
+			// suggestion
+			// to
+			// the
+			// list
 		}
 	}).fail(function() {
 		alert("Server non disponibile");

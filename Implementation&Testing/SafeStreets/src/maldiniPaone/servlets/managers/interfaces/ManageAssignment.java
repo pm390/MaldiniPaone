@@ -71,6 +71,6 @@ public interface ManageAssignment {
 	 * @throws ServerSideDatabaseException when database can't be found
 	 * @throws IllegalParameterException   if parameters are not valid
 	 */
-	public List<Integer> checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException;
+	public Assignment checkActive(String username) throws ServerSideDatabaseException, IllegalParameterException;
 
 }

@@ -147,9 +147,9 @@ public class DataCollector {
 	 *                                   instantiated
 	 * @throws IllegalParameterException if not valid coordinates are saved
 	 */
-	protected static List<Integer> checkActive(String username)
+	protected static Assignment checkActive(String username)
 			throws ServerSideDatabaseException, IllegalParameterException {
-		List<Integer> res = null;
+		Assignment res = null;
 		if (username != null && !username.equals("")) {
 			try {
 				res = ReportAndAssignmentDatabaseConnector.checkActive(username);

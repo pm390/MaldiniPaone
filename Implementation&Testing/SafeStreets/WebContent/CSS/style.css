@@ -110,7 +110,7 @@ input[type=file]
 /*
  top left buttons modifiers
 */
-.toLogin,.toAdditionalFunctions,.toHome,#closeLongDescription{
+.toLogin,.toAdditionalFunctions,.toHome,#closeLongDescription,#closeLongAssignmentDescription{
 	position: absolute;
 	border: 0.5px solid #000000 !important;
 	border-radius: min(1.7vh, 1.7vw) !important;
@@ -381,4 +381,12 @@ button:active,input:active,input:focus
 /* TODO if needed change Handle leaflet marker focus */
 .leaflet-marker-pane>img:focus {
     border: 0px;
+}
+input#closeLongAssignmentDescription,input#closeLongDescription{
+    position: absolute;
+    top: 5vh;
+}
+h1,h2,h3,input,form
+{
+	overflow:auto;
 }

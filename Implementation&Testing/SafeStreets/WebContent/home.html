@@ -20,6 +20,9 @@
 <link rel="icon" href="./icone/logo.png">
 </head>
 <body>
+<form id="assignmentForm"style="display:none;">
+<input type="hidden">
+</form>
 	<div id="background"></div>
 	<div id="home" style="display: none;">
 		<h1 id="homeTitle">Statistiche</h1>
@@ -43,15 +46,26 @@
 				</div>
 			</div>
 			<div id="assignementDiv" style="display: none;"
-				class="onlyAuthority column autoOverflow"></div>
+				class="onlyAuthority column autoOverflow">
+				<div id="noActive">
+				<ul id="smallAssignmentDescription">
+				</ul>
+				<div id="longAssignmentDescription">
+					<input type="button" id="closeLongAssignmentDescription" value="X">
+				</div>
+				</div>
+				<div id="activeAssignment">
+				</div>
+				</div>
 			<div id="reportDiv" style="display: none;"
 				class="onlyCitizen column autoOverflow">
-				<form class="column" action="./ReportCreation" method="post"
+				<form id="reportSender" class="column" action="./ReportCreation" method="post"
 					enctype="multipart/form-data">
 					latitudine <input class="latitude mapClickModifiable" type="number"
-						name="latitude"><br>longitudine<input
+						name="latitude" step="any" max="90" min="-90"><br>longitudine<input
 						class="longitude mapClickModifiable" type="number"
-						name="longitude"><br> note <input type="text"
+						name="longitude" step="any"
+						max="180" min="-180"><br> note <input type="text"
 						name="note"><br>targa<input type="text" name="car">
 					<label for="file1">Scegli una foto</label><input id="file1"
 						type="file" name="photo" required><br><label for="file2">

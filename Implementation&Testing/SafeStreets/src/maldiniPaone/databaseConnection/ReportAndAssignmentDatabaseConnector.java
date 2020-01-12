@@ -519,17 +519,18 @@ public class ReportAndAssignmentDatabaseConnector {
 	 *                                   instantiated
 	 * @throws IllegalParameterException if not valid coordinates are saved
 	 */
-	protected static List<Integer> checkActive(String username)
+	protected static Assignment checkActive(String username)
 			throws DatabaseNotFoundException, IllegalParameterException {
-		List<Integer> res = new ArrayList<Integer>();
+		Assignment res =null;
 		Connection c = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().getConnection();// get connection
-			ps = c.prepareStatement("select max(br.id) " //
+			ps = c.prepareStatement("select max(br.id) ,re.latitude,re.longitude " //
 					+ " from assignment as assign join assignmentreportbridge as br"
 					+ " on assign.id=br.idassignment "
+					+ " join report as re on re.id=br.idreport "
 					+ " where appointee=? and state=?"
 					+ " group by br.idassignment"
 					);
@@ -540,9 +541,19 @@ public class ReportAndAssignmentDatabaseConnector {
 			ps.execute();
 			// get result set
 			rs = ps.getResultSet();
-			while (rs.next()) {
+			if (rs.next()) {
 				// if no result than it is not active
-				res.add(rs.getInt(1));
+				res=new Assignment();
+				res.setId(rs.getInt(1));
+				Report temp=new Report();
+				Location loc=new Location();
+				loc.setLatitude(rs.getFloat(2));
+				loc.setLongitude(rs.getFloat(3));
+				temp.setLocation(loc);
+				temp.setLocation(loc);
+				List<Report> temp2=new ArrayList<Report>();
+				temp2.add(temp);
+				res.setReports(temp2);
 			}
 			// close statement
 			ps.close();

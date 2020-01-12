@@ -63,9 +63,7 @@ public class ReportAndAssignmentTests {
 			//should be able to accept the assignment
 			assertEquals(true,ReportAndAssignmentUpdater.updateAssignment(ids[ids.length-1], 
 					UserDatabaseTests.authorityNames[i], null, State.Accepted));
-			//should have one active assignment
-			assertEquals(1,ReportAndAssignmentDatabaseConnector.checkActive(UserDatabaseTests.authorityNames[i]).size()
-					);
+		
 			//can't reaccept the same assignment
 			assertEquals(false,ReportAndAssignmentUpdater.updateAssignment(ids[ids.length-1], 
 					UserDatabaseTests.authorityNames[i], null, State.Accepted));

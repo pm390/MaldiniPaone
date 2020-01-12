@@ -1,19 +1,20 @@
 package maldiniPaone.utilities.ResponseObjects;
 
-import java.util.List;
+
+import maldiniPaone.utilities.beans.Assignment;
 
 /**
  * Object containing the response for a request for getting assignment state 
  **/
 public class AssignmentStateResponse extends GenericResponse {
-	private List<Integer> activeIDs;
+	private Assignment activeIDs;
 
 	public AssignmentStateResponse(int code, String message) {
 		super(code, message);
 	}
 
 
-	public AssignmentStateResponse(List<Integer> ids) {
+	public AssignmentStateResponse(Assignment ids) {
 		super();
 		activeIDs=ids;
 	}
@@ -21,14 +22,14 @@ public class AssignmentStateResponse extends GenericResponse {
 	/**
 	 * @return true if active
 	 */
-	public List<Integer> getState() {
+	public Assignment getState() {
 		return activeIDs;
 	}
 
 	/**
 	 * @param ids the id list  to set
 	 */
-	public void setState(List<Integer> ids) {
+	public void setState(Assignment ids) {
 		this.activeIDs = ids;
 	}
 }

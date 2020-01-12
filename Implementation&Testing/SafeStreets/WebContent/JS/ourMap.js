@@ -4,26 +4,111 @@
 var lowReport = 5;// TODO change to
 // higher number
 // on release
-var highReport = 10;//TODO change to higher number
+var highReport = 10;// TODO change to higher number
 var mymap;
 var statisticList=new Array();
+
+var becameAuthority=function()
+{
+	var temp=L.marker(
+			[ posizione.coords["latitude"], posizione.coords["longitude"] ], {
+				icon : authorityIcon
+			});
+	temp.addTo(mymap).bindPopup(
+	"<b> Posizione attuale </b>");
+	$.get("./AssignmentActive").done(function(data) {
+		var json = data;
+		if (json["error"]) {
+			alert(json["errorCode"].toString() + json["errorMessage"]);
+			return;
+		}
+		if(json["activeIDs"])	
+		{
+			$("#assignmentId").val(json["activeIDS"]["id"]);
+			var reports= json["activeIDS"]["reports"];
+			var location= reports[0]["location"];
+			mymap.flyTo([ location["latitude"], location["longitude"] ],15);
+			$("#activeAssignment").show();
+		}
+	}).fail(function() {
+		console.log("error");
+	});
+	
+	
+	function UpdateAssignements(center)
+	{
+		//TODO put correct code here
+		$.get("./AssignmentServlet", {
+			"latitude" : center.lat,
+			"longitude" : center.lng
+		}).done(function(data) {
+			var json = data;
+			if (json["error"]) {
+				alert(json["errorCode"].toString() + json["errorMessage"]);
+				return;
+			}
+			showNewAssignements(json);// shows statistics on the page from the
+										// given json
+		}).fail(function() {
+			console.log("error");
+		});
+	};
+	// set time out
+	mymap.on('dragend', function onDragEnd(e) {
+		var width = mymap.getBounds().getEast() - mymap.getBounds().getWest();
+		var height = mymap.getBounds().getNorth()
+				- mymap.getBounds().getSouth();
+		var center = mymap.getCenter();
+		if (Math.abs(lastCenter.lat - center.lat) > width / 2
+				|| Math.abs(lastCenter.lng - center.lng) > height / 2
+				|| Math.abs(lastWidth - width) > 0.5
+				|| Math.abs(lastHeight - height) > 0.5) {
+			UpdateAssignements(center);
+			lastCenter = center;
+			lastWidth = width;
+			lastHeight = height;
+		}
+
+	});	
+	
+	function updatePosition(position)
+	{
+		temp.setLatLng([ posizione.coords["latitude"], posizione.coords["longitude"] ]);
+		var center={};
+		center.lat=posizione.coords["latitude"];
+		center.lng=posizione.coords["longitudine"];
+		UpdateAssignements(center);
+	}
+	setInterval(function()
+			{
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(updatePosition, noValidCoordinates);
+		} else {
+			posizione.coords = {// if no geolocation initialize map with
+								// coordinates of Rome
+				"latitude" : 41.9109,
+				"longitude" : 12.4818
+			};
+			updatePosition(posizione);
+		}
+			}, 1*60*1000);
+};
+
+
 function init(position) {
 	mymap = L.map('map').setView(
 			[ position.coords.latitude, position.coords.longitude ], 12);
-	L
-			.tileLayer(
-					'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
-					{
-						noWrap : true,
-						maxZoom : 18,
-						minZoom : 1,
-						attribution : 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, '
-								+ '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
-								+ 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-						id : 'mapbox.streets'
-					}).addTo(mymap);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		noWrap: true,
+		maxZoom: 18,
+		minZoom:1,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+		'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox.streets'
+	}).addTo(mymap);
 
-	//update position when click on map
+	// update position when click on map
 	mymap.on('click', function(e)
 			{
 				$(".latitude.mapClickModifiable").val(e.latlng.lat);
@@ -48,14 +133,16 @@ function init(position) {
 				alert(json["errorCode"].toString() + json["errorMessage"]);
 				return;
 			}
-			showNewStatistics(json);//shows statistics on the page from the given json
+			showNewStatistics(json);// shows statistics on the page from the
+									// given json
 		}).fail(function() {
 			console.log("error");
 		});
 	};
-	//update the statistic when load
+	// update the statistic when load
 	UpdateStatistics(width, height, center);
-	//set event listener of dragend to call the update statistics if the map has been moved enough
+	// set event listener of dragend to call the update statistics if the map
+	// has been moved enough
 	mymap.on('dragend', function onDragEnd(e) {
 		var width = mymap.getBounds().getEast() - mymap.getBounds().getWest();
 		var height = mymap.getBounds().getNorth()
@@ -78,29 +165,30 @@ function init(position) {
 
 }
 
-//position
+// position
 var posizione = {};
-//when load initialize map with navigator.geolocation
+// when load initialize map with navigator.geolocation
 window.onload = function() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(init, noValidCoordinates);
 	} else {
-		position.coords = {//if no geolocation initialize map with coordinates of Rome
+		posizione.coords = {// if no geolocation initialize map with coordinates
+							// of Rome
 			"latitude" : 41.9109,
 			"longitude" : 12.4818
 		};
-		init(position);
+		init(posizione);
 	}
 }
-//fallback if error in geolocation
+// fallback if error in geolocation
 function noValidCoordinates(error) {
 	posizione.coords = {
 		"latitude" : 41.9109,
 		"longitude" : 12.4818
 	};
-	init(posizione);
+	if(!mymap)init(posizione);
 }
-//marker icon initialization
+// marker icon initialization
 var greenIcon = L.icon({
 	iconUrl : './icone/green.png',
 	shadowUrl : './icone/ombra.png',
@@ -133,21 +221,31 @@ var redIcon = L.icon({
 	tooltipAnchor : [ 16, -28 ],
 	shadowSize : [ 41, 41 ]
 });
-//useful function for further updates
+var authorityIcon = L.icon({
+	iconUrl : './icone/currentpositionicon.png',
+	shadowUrl : './icone/ombra.png',
+
+	iconSize : [ 25, 41 ],
+	iconAnchor : [ 12, 41 ],
+	popupAnchor : [ 1, -34 ],
+	tooltipAnchor : [ 16, -28 ],
+	shadowSize : [ 41, 41 ]
+});
+// useful function for further updates
 function reverseGeocode(c) {
 	fetch(
 			'http://nominatim.openstreetmap.org/reverse?format=json&lon='
 					+ c.lng + '&lat=' + c.lat).then(function(response) {
-		var json=response.json();//if useful
-		//TODO put something if useful
+		var json=response.json();// if useful
+		// TODO put something if useful
 	});
 }
 
 
-//statistics description closer
+// statistics description closer
 var descriptionCloser=$("#closeLongDescription");
 var identifier = 0;
-//create div with description of a statistic object
+// create div with description of a statistic object
 function createDiv(id, rCount, aCount, rFA, dRC) {
 	var div = "<div id='bigStat" + id.toString() + "' style='display:none'>"
 			+ "<div class='column'>" + "<p>Segnalazioni Create: "
@@ -159,7 +257,7 @@ function createDiv(id, rCount, aCount, rFA, dRC) {
 	return $(div);
 }
 var shownDiv = null;
-//show statistics given a json input
+// show statistics given a json input
 function showNewStatistics(data) {
 	for (var i = 0; i < data.statistics.length; ++i) {
 		var statistic = data.statistics[i];
@@ -169,25 +267,38 @@ function showNewStatistics(data) {
 			let number = identifier++;// assign new number to each useful line
 			let location = statistic["location"];
 			if(statisticList.some(item =>Math.abs(item[0]-location["latitude"])<=0.02
-											&&Math.abs(item[1]-location["longitude"])<=0.02)) continue;//already exist
-			statisticList.push([ location["latitude"], location["longitude"] ]);//add location to the list of statistics
-			let item = $("<li id='smallStat" + number.toString() //create list item to be added
+											&&Math.abs(item[1]-location["longitude"])<=0.02)) continue;// already
+																										// exist
+			statisticList.push([ location["latitude"], location["longitude"] ]);// add
+																				// location
+																				// to
+																				// the
+																				// list
+																				// of
+																				// statistics
+			let item = $("<li id='smallStat" + number.toString() // create
+																	// list item
+																	// to be
+																	// added
 					+ "'>latitudine: " + location["latitude"].toString()
 					+ " longitudine: " + location["longitude"].toString()
 					+ "</li>");
-			let div = createDiv(number, statistic["reportCountLastWeek"],//create div 
+			let div = createDiv(number, statistic["reportCountLastWeek"],// create
+																			// div
 					statistic["assignmentCountLastWeek"],
 					statistic["reportForAssignmentCountLastWeek"],
 					statistic["dailyReportCountLastWeek"]);
 			$("#smallDescription").append(item);
 			$("#longDescription").append(div);
 			$(div).hide();// to avoid browser which doesn't allow inline style
-			item.hover(function(e) { //when hover a statistics move to that point on the map
+			item.hover(function(e) { // when hover a statistics move to that
+										// point on the map
 				mymap.flyTo([ location["latitude"], location["longitude"] ],
 						mymap.getZoom() );
 				}
 			);
-			item.click(function(e) { ///when click move on that point on the map and show description
+			item.click(function(e) { // /when click move on that point on the
+										// map and show description
 				$("#longDescription").show();
 				descriptionCloser.show();
 				if (shownDiv)
@@ -195,14 +306,15 @@ function showNewStatistics(data) {
 				$(div).show();
 				shownDiv = div;
 				$("#smallDescription").hide();
-				//set zoom to the current zoom if enough zoomed else it increases zoom until the zoom is 13
+				// set zoom to the current zoom if enough zoomed else it
+				// increases zoom until the zoom is 13
 				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
 			});
 			
-			//create marker
+			// create marker
 			var marker;
 			var icona;
-			//depending on the 
+			// depending on the
 			if (statistic["reportCountLastWeek"] < lowReport)
 			{
 				icona=greenIcon;
@@ -218,9 +330,100 @@ function showNewStatistics(data) {
 					"<b>" + statistic["reportCountLastWeek"].toString()
 							+ " Report</b>");
 
-			marker.on('click', function(e) {//when click on marker show description
+			marker.on('click', function(e) {// when click on marker show
+											// description
 				mymap.flyTo([ location["latitude"], location["longitude"] ],
-						//set zoom to the current zoom if enough zoomed else it increases zoom until the zoom is 13
+						// set zoom to the current zoom if enough zoomed else it
+						// increases zoom until the zoom is 13
+						(mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
+				descriptionCloser.show();
+				$("#smallDescription").hide();
+				$("#longDescription").show();
+				if (shownDiv)
+					$(shownDiv).hide();
+				$(div).show();
+				shownDiv = div;
+			})
+		}
+	}
+}
+function showNewStatistics(data) {
+	for (var i = 0; i < data.statistics.length; ++i) {
+		var statistic = data.statistics[i];
+		if (statistic["reportCountLastWeek"] == 0)
+			continue; // empty statistic
+		else {
+			let number = identifier++;// assign new number to each useful line
+			let location = statistic["location"];
+			if(statisticList.some(item =>Math.abs(item[0]-location["latitude"])<=0.02
+											&&Math.abs(item[1]-location["longitude"])<=0.02)) continue;// already
+																										// exist
+			statisticList.push([ location["latitude"], location["longitude"] ]);// add
+																				// location
+																				// to
+																				// the
+																				// list
+																				// of
+																				// statistics
+			let item = $("<li id='smallStat" + number.toString() // create
+																	// list item
+																	// to be
+																	// added
+					+ "'>latitudine: " + location["latitude"].toString()
+					+ " longitudine: " + location["longitude"].toString()
+					+ "</li>");
+			let div = createDiv(number, statistic["reportCountLastWeek"],// create
+																			// div
+					statistic["assignmentCountLastWeek"],
+					statistic["reportForAssignmentCountLastWeek"],
+					statistic["dailyReportCountLastWeek"]);
+			$("#smallDescription").append(item);
+			$("#longDescription").append(div);
+			$(div).hide();// to avoid browser which doesn't allow inline style
+			item.hover(function(e) { // when hover a statistics move to that
+										// point on the map
+				mymap.flyTo([ location["latitude"], location["longitude"] ],
+						mymap.getZoom() );
+				}
+			);
+			item.click(function(e) { // /when click move on that point on the
+										// map and show description
+				$("#longDescription").show();
+				descriptionCloser.show();
+				if (shownDiv)
+					$(shownDiv).hide();
+				$(div).show();
+				shownDiv = div;
+				$("#smallDescription").hide();
+				// set zoom to the current zoom if enough zoomed else it
+				// increases zoom until the zoom is 13
+				mymap.setZoom((mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
+			});
+			
+			// create marker
+			var marker;
+			var icona;
+			// depending on the
+			if (statistic["reportCountLastWeek"] < lowReport)
+			{
+				icona=greenIcon;
+			} else if (statistic["reportCountLastWeek"] < highReport) {
+				icona=yellowIcon;
+			} else {
+				icona=redIcon;
+			}
+			marker = L.marker(
+					[ location["latitude"], location["longitude"] ], {
+						icon : icona
+					}).addTo(mymap).bindPopup(
+					"<b>" + statistic["reportCountLastWeek"].toString()
+							+ " Report</b>");
+
+			marker.on('click', function(e) {// when click on marker show
+											// description
+				mymap.flyTo([ location["latitude"], location["longitude"] ],
+						// set zoom to the current zoom if enough zoomed else it
+						// increases zoom until the zoom is 13
 						(mymap.getZoom()<13)?Math.min(mymap.getZoom() + 1,13):mymap.getZoom());
 				descriptionCloser.show();
 				$("#smallDescription").hide();
@@ -234,7 +437,7 @@ function showNewStatistics(data) {
 	}
 }
 
-//description closer closes description and reshows the list of statistics
+// description closer closes description and reshows the list of statistics
 descriptionCloser.click(function() {
 	descriptionCloser.hide();
 	$("#longDescription").hide();
