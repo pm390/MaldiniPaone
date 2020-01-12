@@ -1,8 +1,12 @@
 ////////////////////////////////////////////////////////
 //initial state
 ///////////////////////////////////////////////////////
-function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); };
-$(document).on("keydown", disableF5);//disable reload of page with F5 avoid mistakenful reloads
+function disableF5(e) {
+	if ((e.which || e.keyCode) == 116)
+		e.preventDefault();
+};
+$(document).on("keydown", disableF5);// disable reload of page with F5 avoid
+										// mistakenful reloads
 $("#closeLongDescription").hide();
 $("#home").show();
 $("#login").hide();
@@ -14,19 +18,47 @@ $(".toAdditionalFunctions").hide();
 $("#registrationManager").hide();
 $(".registerManager").hide();// Shown only if manager gets access
 $(".getSuggestions").hide();// Shown only if municipality gets access
+$(".onlyAuthority").hide();
+$(".onlyCitizen").hide();
 
 $(".toLogin").click(function() {
 	$("#home").hide();
 	$("#login").show();
+});
+$("#dataTitle").click(function() {
+	$("#statisticDiv").show();
+	$("#reportDiv").hide();
+	$("#assignementDiv").hide();
+	$("#dataTitle").addClass("selected");
+	$("h3.onlyCitizen").removeClass("selected");
+	$("h3.onlyAuthority").removeClass("selected");
+});
+$("h3.onlyCitizen").click(function() {
+	$("#statisticDiv").hide();
+	$("#reportDiv").show();
+	$("#dataTitle").removeClass("selected");
+	$("h3.onlyCitizen").addClass("selected");
+	$("h3.onlyAuthority").removeClass("selected");
+});
+$("h3.onlyAuthority").click(function() {
+	$("#statisticDiv").hide();
+	$("#assignementDiv").show();
+	$("#dataTitle").removeClass("selected");
+	$("h3.onlyCitizen").removeClass("selected");
+	$("h3.onlyAuthority").addClass("selected");
 });
 // //////////////////////////////////////////////////////
 // utility function
 // /////////////////////////////////////////////////////
 /**
  * Focuses the first input not hidden child of formId which is not filled
- * @param formId the id of the form 
- * @param e the event to be prevented if modifications occurs
- * @param classname the class to apply to elements which are not filled
+ * 
+ * @param formId
+ *            the id of the form
+ * @param e
+ *            the event to be prevented if modifications occurs
+ * @param classname
+ *            the class to apply to elements which are not filled
  * @return true if modifications occurs , false otherwise
  */
 function focusFirst(formId, e, classname) {
@@ -47,7 +79,7 @@ function focusFirst(formId, e, classname) {
 			// class
 			if (!modified)
 				$(input[i]).focus(); // if no focus were made than focus
-			if (!classname) {//if no classname the method can terminate
+			if (!classname) {// if no classname the method can terminate
 				if (e)
 					e.preventDefault();
 				return true;
@@ -59,7 +91,7 @@ function focusFirst(formId, e, classname) {
 	}
 	if (modified && e) {
 		e.preventDefault(); // if there is an event to be prevented and a
-							// modification occured
+		// modification occured
 		// prevent the default action
 	}
 	return modified;
@@ -77,31 +109,38 @@ $(".login").click(
 			}
 			// get action
 			var action = $("#loginForm").prop('action');
-			//disable submit until response returns
+			// disable submit until response returns
 			var target = $(event.target).attr('disabled', 'disabled');
 			e.preventDefault();
-			//send post request
+			// send post request
 			$.post(action, $("#loginForm").serialize()).done(
 					function(data) {
 						var json = data;
-						$(target).removeAttr('disabled');//enable the submit button
-						if (!json["error"]) {//login success
+						$(target).removeAttr('disabled');// enable the submit
+															// button
+						if (!json["error"]) {// login success
 							$("#login").hide();
 							$("#home").show();
 							$(".toLogin").hide();
-						} else {//error occured. printed as aler
+						} else {// error occured. printed as alert
 							alert(json["errorCode"].toString()
 									+ json["errorMessage"]);
 							return;
 						}
-						if (json["userType"] == "manager") {//show manager functionalities
+						if (json["userType"] == "manager") {// show manager
+															// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByManager");
 							$(".toAdditionalFunctions").show();
 							$(".registerManager").show();
 							$(".registerAuthority").hide();
 							$(".onlyManager").show();
-						} else if (json["userType"] == "municipality") {//show municipality functionalities
+							$("#homeTitle").html("Statistiche");
+							$(".onlyAuthority").hide();
+							$(".onlyCitizen").hide();
+						} else if (json["userType"] == "municipality") {// show
+																		// municipality
+																		// functionalities
 							$("#registerMunicipalityForm").attr("action",
 									"./RegistrationByMunicipality");
 							$(".toAdditionalFunctions").show();
@@ -109,9 +148,40 @@ $(".login").click(
 							$(".registerManager").hide();
 							$(".registerAuthority").show();
 							$(".onlyManager").hide();
+							$("#homeTitle").html("Statistiche");
+							$(".onlyAuthority").hide();
+							$(".onlyCitizen").hide();
+						} else if (json["userType"] == "authority") {// show
+																		// authority
+																		// functionalities
+							$("#registerMunicipalityForm").attr("action",
+									"./RegistrationByMunicipality");
+							$(".toAdditionalFunctions").show();
+							$(".getSuggestions").hide();
+							$(".registerMunicipality").hide();
+							$(".registerManager").hide();
+							$(".registerAuthority").hide();
+							$(".onlyManager").hide();
+							$("#homeTitle").html("Segnalazioni");
+							$(".onlyAuthority").show();
+							$(".onlyCitizen").hide();
+						} else if (json["userType"] == "citizen") {// show
+																	// citizen
+																	// functionalities
+							$("#registerMunicipalityForm").attr("action",
+									"./RegistrationByMunicipality");
+							$(".toAdditionalFunctions").show();
+							$(".getSuggestions").hide();
+							$(".registerMunicipality").hide();
+							$(".registerManager").hide();
+							$(".registerAuthority").hide();
+							$(".onlyManager").hide();
+							$("#homeTitle").html("Statistiche");
+							$(".onlyAuthority").hide();
+							$(".onlyCitizen").show();
 						}
 
-					}).fail(function() {//failure
+					}).fail(function() {// failure
 				alert("Server non disponibile");
 				$(target).removeAttr('disabled');
 			});
@@ -211,13 +281,13 @@ var posizione = {};
 if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(fillCoordinates, noCoordinates);
 } else {
-	posizione.coords = {//fallback if no geolocation
+	posizione.coords = {// fallback if no geolocation
 		"latitude" : 41.9109,
 		"longitude" : 12.4818
 	};
 	fillCoordinates(posizione);
 }
-//fallback in case of geolocation error
+// fallback in case of geolocation error
 function noCoordinates(error) {
 	posizione.coords = {
 		"latitude" : 41.9109,
@@ -225,7 +295,7 @@ function noCoordinates(error) {
 	};
 	fillCoordinates(posizione);
 }
-//set coordinates to all inputs which has coordinates value
+// set coordinates to all inputs which has coordinates value
 function fillCoordinates(position) {
 	posizione = position;
 	$(".latitude").each(function(index, element) {
@@ -244,7 +314,8 @@ $("#modification").click(function(e) {
 	var modified = false;
 	for (let i = 0; i < input.length; ++i) {
 		if (input[i].value === "" && $(input[i]).attr("name") != "newEmail") {
-			//check if input is empty and not newEmail which is not a mandatory value
+			// check if input is empty and not newEmail which is not a mandatory
+			// value
 			if ($(input[i]).is(":hidden"))
 				continue;
 			$(input[i]).addClass("error");
@@ -260,7 +331,7 @@ $("#modification").click(function(e) {
 		return;
 	}
 	var passwordsHolders = $("#modificationForm .newPassword");
-	//check new password is equal to the rewriting of it
+	// check new password is equal to the rewriting of it
 	if ($(passwordsHolders[0]).val() != $(passwordsHolders[1]).val()) {
 		$(passwordsHolders[1]).addClss("error");
 		$(passwordsHolders[1]).focus();
@@ -316,7 +387,11 @@ $(".getSuggestions").click(function(e) {
 		gotSuggestions = true;
 		for (var i = 0; i < json.suggestions.length; ++i) {
 			var suggestion = json.suggestions[i];
-			$("#suggestionList").append('<li>' + suggestion + '</a></li>');//append suggestion to the list
+			$("#suggestionList").append('<li>' + suggestion + '</a></li>');// append
+																			// suggestion
+																			// to
+																			// the
+																			// list
 		}
 	}).fail(function() {
 		alert("Server non disponibile");

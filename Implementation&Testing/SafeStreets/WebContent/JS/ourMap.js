@@ -22,6 +22,13 @@ function init(position) {
 								+ 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 						id : 'mapbox.streets'
 					}).addTo(mymap);
+
+	//update position when click on map
+	mymap.on('click', function(e)
+			{
+				$(".latitude.mapClickModifiable").val(e.latlng.lat);
+				$(".longitude.mapClickModifiable").val(e.latlng.lng);
+			});
 	var width = mymap.getBounds().getEast() - mymap.getBounds().getWest();
 	var height = mymap.getBounds().getNorth() - mymap.getBounds().getSouth();
 	var center = mymap.getCenter();
@@ -49,11 +56,14 @@ function init(position) {
 	//update the statistic when load
 	UpdateStatistics(width, height, center);
 	//set event listener of dragend to call the update statistics if the map has been moved enough
-	mymap.on('dragend', function onDragEnd() {
+	mymap.on('dragend', function onDragEnd(e) {
 		var width = mymap.getBounds().getEast() - mymap.getBounds().getWest();
 		var height = mymap.getBounds().getNorth()
 				- mymap.getBounds().getSouth();
 		var center = mymap.getCenter();
+
+		$(".latitude.mapClickModifiable").val(center.lat);
+		$(".longitude.mapClickModifiable").val(center.lng);
 		if (Math.abs(lastCenter.lat - center.lat) > width / 2
 				|| Math.abs(lastCenter.lng - center.lng) > height / 2
 				|| Math.abs(lastWidth - width) > 0.5
@@ -233,3 +243,4 @@ descriptionCloser.click(function() {
 		$(shownDiv).hide();
 	shownDiv = null;
 })
+

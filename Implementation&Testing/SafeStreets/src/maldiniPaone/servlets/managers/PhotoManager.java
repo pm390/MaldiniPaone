@@ -79,9 +79,10 @@ public class PhotoManager {
 	 **/
 	public String savePhoto(String username, Integer assignmentId, Integer photoNumber, String fileExtension,
 			InputStream photo) throws IOException {
-		String name;
+		String res =username + "-" + assignmentId + "-"
+				+ Integer.toString(photoNumber) + System.currentTimeMillis() + fileExtension ;
 		try {
-			name = Constants.PHOTO_PATH + File.separator + username + "-" + assignmentId + "-"
+		String name = Constants.PHOTO_PATH + File.separator + username + "-" + assignmentId + "-"
 					+ Integer.toString(photoNumber) + System.currentTimeMillis() + fileExtension;
 			File foto = new File(name);
 			foto.createNewFile();
@@ -92,7 +93,7 @@ public class PhotoManager {
 			System.err.println("failed to save photo");
 			throw e;
 		}
-		return name;
+		return res;
 	}
 
 	public static void main(String[] args) {

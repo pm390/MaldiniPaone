@@ -3,6 +3,7 @@ package maldiniPaone.servlets;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -11,8 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import maldiniPaone.servlets.managers.PhotoManager;
 import maldiniPaone.utilities.UserType;
+import maldiniPaone.utilities.ResponseObjects.GenericResponse;
 import maldiniPaone.utilities.beans.users.User;
 
 /**
@@ -38,7 +42,12 @@ public class GetPhoto extends HttpServlet {
 		if(user==null||//short circuit
 				user.getUserType()!=UserType.Authority)
 		{
-			//invalid access
+			PrintWriter outputWriter = response.getWriter();
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			GenericResponse message = new GenericResponse(400, "invalid access");
+			outputWriter.println(new Gson().toJson(message));
+			outputWriter.close();
 			return;
 		}
 		String name=request.getParameter("file");

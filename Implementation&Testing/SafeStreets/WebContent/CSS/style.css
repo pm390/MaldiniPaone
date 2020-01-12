@@ -6,6 +6,7 @@ define colors
 	--main-color: rgba(56, 71, 87, 1); 
 	--main-hover: rgba(56, 71, 87, 0.7); 
 	--second-color: rgba(75, 93, 115, 1);
+	--second-color-select: rgba(60, 74, 93, 1);
 	--scrollbar-holder-color:grey;
 	--scrollbar-color: rgba(75,93,115,0.4);
 	--scrollbar-hover:rgba(80, 95, 130, 1);
@@ -77,13 +78,34 @@ input {
 /*
 	button and submit modifiers
 */
-body>div input[type=button],body>div input[type=submit] {
+body>div input[type=button],body>div input[type=submit],body>div input[type=number],body>div input[type=mail]{
 	border: 1px solid #000000;
 	box-sizing: border-box;
 	border-radius: min(1vh, 1vw);
 	background-color: var(--main-color);
 	font-size: min(3vh, 3vw);
 	align-self: center;
+}
+
+#reportDiv form
+{
+	position: relative;
+	margin: auto;
+	width:80%;
+}
+#reportDiv form input[type="submit"] {
+    width: 100%;
+    bottom: 1vh;
+    position: relative;
+}
+#reportDiv form input{
+    width: 100%;
+    position: relative;
+    background: var(--second-color) !important;
+}
+input[type=file]
+{
+	display:none;
 }
 /*
  top left buttons modifiers
@@ -182,10 +204,10 @@ h2 {
 }
 h3 {
 	top:0vh;
-	margin: 0px;
+	margin: auto;
 	padding: 0px;
-	width: 100%;
-	font-size: min(4.5vh, 4.5vw);
+	width: 50%;
+	font-size: min(3.5vh, 3.5vw);
 }
 
 #statisticsPresenter {
@@ -240,7 +262,7 @@ body>div>div {
 	width: 30vw;
 	font-size: min(3vh, 3vw);
 }
-form>div>input,form>div>div>input
+form>div>input,form>div>div>input,#reportDiv>form>input
 {
 	border: 1px solid #000000;
 	box-sizing: border-box;
@@ -249,14 +271,7 @@ form>div>input,form>div>div>input
 	font-size: min(3vh, 3vw);
 	text-align: center;
 }
-.row
-{
-	display :flex;
-	flex-direction:row;
-	flex-wrap:wrap;
-	width: 50vw;
-	justify-content: center;
-}
+
 
 
 .column
@@ -267,6 +282,38 @@ form>div>input,form>div>div>input
 	justify-content: center;
 	flex:1;
 }
+
+.row
+{
+	display: flex;
+    align-items: stretch; /* Default */
+    justify-content: space-between;
+    width: 100%;
+    background:var(--main-color);
+    margin: 0;
+    padding: 0;
+    border: 0.2px solid rgba(0,0,0,0.4);
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+}
+.row>h3
+{
+	margin: auto;
+	border: 1px solid #000000;
+	box-sizing: border-box;
+	border-radius: min(2vh, 2vw);
+	display: block;
+    flex: 0 1 auto; /* Default */
+    list-style-type: none;
+    width:50%;
+    background: var(--second-color);
+}
+
+.row>h3.selected
+{
+	background: var(--second-color-select);
+}
+
 .doubleColumn
 {
 	display: flex;
