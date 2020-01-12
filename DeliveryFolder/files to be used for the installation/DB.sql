@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: safestreets
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,17 +21,17 @@
 
 DROP TABLE IF EXISTS `assignment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `assignment` (
   `id` int(40) NOT NULL AUTO_INCREMENT,
-  `appointee` varchar(36) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `state` varchar(10) COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT 'created',
+  `appointee` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
+  `state` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT 'created',
   `start` timestamp NULL DEFAULT NULL,
   `end` timestamp NULL DEFAULT NULL,
-  `typeofviolation` varchar(20) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
+  `typeofviolation` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `car` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `assignment` (
 
 LOCK TABLES `assignment` WRITE;
 /*!40000 ALTER TABLE `assignment` DISABLE KEYS */;
+INSERT INTO `assignment` VALUES (132,'teresa','accepted','2020-01-12 21:45:11',NULL,NULL,'FK896AE');
 /*!40000 ALTER TABLE `assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -86,7 +87,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `assignmentreportbridge`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `assignmentreportbridge` (
   `id` int(40) NOT NULL AUTO_INCREMENT,
   `idassignment` int(40) NOT NULL,
@@ -96,7 +97,7 @@ CREATE TABLE `assignmentreportbridge` (
   PRIMARY KEY (`id`),
   KEY `report_idx` (`idreport`),
   CONSTRAINT `report` FOREIGN KEY (`idreport`) REFERENCES `report` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +106,7 @@ CREATE TABLE `assignmentreportbridge` (
 
 LOCK TABLES `assignmentreportbridge` WRITE;
 /*!40000 ALTER TABLE `assignmentreportbridge` DISABLE KEYS */;
+INSERT INTO `assignmentreportbridge` VALUES (258,132,303,'FK896AE','2020-01-12 21:41:22');
 /*!40000 ALTER TABLE `assignmentreportbridge` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,12 +116,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `authority`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `authority` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `username` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_cs_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `employee` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
+  `employee` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `district_id` int(20) NOT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -134,6 +136,7 @@ CREATE TABLE `authority` (
 
 LOCK TABLES `authority` WRITE;
 /*!40000 ALTER TABLE `authority` DISABLE KEYS */;
+INSERT INTO `authority` VALUES ('federico','XsMsIRUKQKgt0j59','federico@mail.com','angelo',451),('francesco','4vnoY7MJpAO3SsFN','francesco@mail.com','angelo',453),('giorgio','QIWfKknKjpU6X33K','giorgio@mail.com','angelo',449),('giuseppe','C9uesVRUIZ5Hle6R','giuseppe@mail.com','angelo',455),('mario','X8PhBw4LsAOagK5O','mario@rossi','angelo',448),('pasquale','n4mkpUhFI1HTNZP0','pasquale@mail.com','angelo',454),('teresa','M2MJARNEa1xn9Ujo','teresa@mail.com','angelo',452);
 /*!40000 ALTER TABLE `authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -198,12 +201,12 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `citizen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `citizen` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `username` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `banstate` tinyint(4) NOT NULL DEFAULT '0',
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `reliability` float NOT NULL DEFAULT '0.8',
   PRIMARY KEY (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -216,6 +219,7 @@ CREATE TABLE `citizen` (
 
 LOCK TABLES `citizen` WRITE;
 /*!40000 ALTER TABLE `citizen` DISABLE KEYS */;
+INSERT INTO `citizen` VALUES ('antonio','paone',0,'antonio@mail.com',0.8),('margherita','mancuso',0,'margherita@mail.com',0.8),('marina','grillo',0,'marina@mail.com',0.8),('nicola','paone',0,'nicola@mail.com',0.8),('stefano','feliciano',0,'stefano@mail.com',0.8);
 /*!40000 ALTER TABLE `citizen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -280,7 +284,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `cityhall`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cityhall` (
   `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -297,6 +301,7 @@ CREATE TABLE `cityhall` (
 
 LOCK TABLES `cityhall` WRITE;
 /*!40000 ALTER TABLE `cityhall` DISABLE KEYS */;
+INSERT INTO `cityhall` VALUES ('alserio','CO','lombardia',9.20729,45.7923);
 /*!40000 ALTER TABLE `cityhall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +311,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `district`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `district` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `cityhall_name` varchar(20) NOT NULL,
@@ -318,7 +323,7 @@ CREATE TABLE `district` (
   PRIMARY KEY (`id`),
   KEY `cityh_idx` (`cityhall_name`,`cityhall_province`),
   CONSTRAINT `cityh` FOREIGN KEY (`cityhall_name`, `cityhall_province`) REFERENCES `cityhall` (`cityhall_name`, `cityhall_province`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=448 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=456 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,6 +332,7 @@ CREATE TABLE `district` (
 
 LOCK TABLES `district` WRITE;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
+INSERT INTO `district` VALUES (448,'alserio','CO',45.7923,9.20729,45.7963,9.20769),(449,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(450,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(451,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(452,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(453,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(454,'alserio','CO',45.7923,9.20729,45.7923,9.20729),(455,'alserio','CO',45.7923,9.20729,45.7923,9.20729);
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,12 +342,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `manager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `manager` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `username` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `venue` varchar(60) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `venue` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -353,6 +359,7 @@ CREATE TABLE `manager` (
 
 LOCK TABLES `manager` WRITE;
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
+INSERT INTO `manager` VALUES ('paons','paons','alserio','paons@mail.com'),('pietro','YLqqB4eYF1aPs2GJ','alserio','pietro@mail.com');
 /*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -417,12 +424,12 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `municipality`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `municipality` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `username` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `employee` varchar(36) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
+  `employee` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
+  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs DEFAULT NULL,
   `cityhall_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `cityhall_province` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`username`),
@@ -438,6 +445,7 @@ CREATE TABLE `municipality` (
 
 LOCK TABLES `municipality` WRITE;
 /*!40000 ALTER TABLE `municipality` DISABLE KEYS */;
+INSERT INTO `municipality` VALUES ('alessandra','V2NN9CEnqNKt6cGc',NULL,'alessandra@mail.com','alserio','co'),('angelo','3AuY6nHrUSy4QNlC',NULL,'angelo@mail.com','alserio','co'),('davide','BW56dmDtcxPFCZ2Q',NULL,'davide@mail.com','alserio','co'),('donato','EuK197TwAZxuZSDo',NULL,'donato@mail.com','alserio','co'),('stefanoc','QaI8dPNYo6bM4SsT',NULL,'stefanoc@mail.com','alserio','CO');
 /*!40000 ALTER TABLE `municipality` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -502,13 +510,13 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `photo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `photo` (
   `id` int(40) NOT NULL AUTO_INCREMENT,
   `idreport` int(40) NOT NULL,
   `image` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -517,6 +525,7 @@ CREATE TABLE `photo` (
 
 LOCK TABLES `photo` WRITE;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
+INSERT INTO `photo` VALUES (26,303,'stefano-258-01578865282181.jpg');
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,10 +535,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `report`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `report` (
   `id` int(40) NOT NULL AUTO_INCREMENT,
-  `maker` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `maker` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
@@ -539,7 +548,7 @@ CREATE TABLE `report` (
   PRIMARY KEY (`id`),
   KEY `citizen` (`maker`),
   CONSTRAINT `citizen` FOREIGN KEY (`maker`) REFERENCES `citizen` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,6 +557,7 @@ CREATE TABLE `report` (
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
+INSERT INTO `report` VALUES (303,'stefano','2020-01-12 21:41:22',45.7923,9.20729,'',0.8,'FK896AE');
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -617,7 +627,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `suggestion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `suggestion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -643,12 +653,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `username` varchar(36) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `username` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   `password` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `usertype` varchar(15) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `email` varchar(120) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `usertype` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `email` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -659,6 +669,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('alessandra','V2NN9CEnqNKt6cGc','municipality','alessandra@mail.com'),('angelo','3AuY6nHrUSy4QNlC','municipality','angelo@mail.com'),('antonio','paone','citizen','antonio@mail.com'),('davide','BW56dmDtcxPFCZ2Q','municipality','davide@mail.com'),('donato','EuK197TwAZxuZSDo','municipality','donato@mail.com'),('federico','XsMsIRUKQKgt0j59','authority','federico@mail.com'),('francesco','4vnoY7MJpAO3SsFN','authority','francesco@mail.com'),('giorgio','QIWfKknKjpU6X33K','authority','giorgio@mail.com'),('giuseppe','C9uesVRUIZ5Hle6R','authority','giuseppe@mail.com'),('margherita','mancuso','citizen','margherita@mail.com'),('marina','grillo','citizen','marina@mail.com'),('mario','X8PhBw4LsAOagK5O','authority','mario@rossi'),('nicola','paone','citizen','nicola@mail.com'),('paons','paons','manager','paons@mail.com'),('pasquale','n4mkpUhFI1HTNZP0','authority','pasquale@mail.com'),('pietro','YLqqB4eYF1aPs2GJ','manager','pietro@mail.com'),('stefano','feliciano','citizen','stefano@mail.com'),('stefanoc','QaI8dPNYo6bM4SsT','municipality','stefanoc@mail.com'),('teresa','M2MJARNEa1xn9Ujo','authority','teresa@mail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -668,7 +679,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `violation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `violation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cityhall_name` varchar(20) NOT NULL,
@@ -771,4 +782,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-12 22:10:28
+-- Dump completed on 2020-01-12 22:50:05
