@@ -1,6 +1,6 @@
 %.-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\subSection{Back end Testing}
+\subsection{Back end Testing}
 For the Backend testing we created two jUnit test classes to test functionalities of user creation and creation and modification of reports and assignments. Here we first created some random Location objects and we checked that location with invalid coordinates can't be created using a coverage test to see if the test case actually tries to create them and the correct exception is cached. After this some users of every type are created. Every time a new user is created we try to create a second copy and check if that is not possible.
 After creating users the reports are created using a username of the citizens created.
 Later we make authorities accept the assignments created when adding the repots , than we make them terminate them.
@@ -10,7 +10,7 @@ For controlling functionalities we used console logging to try out functionaliti
 We tried different inputs and invalid inputs checking if the outputs are correct and if the error messages are correctly shown to the user.
 For a final test we gathered a little group of people and we made them test the system on our computer giving them instructions to use the system.
 If we had more time we would have created a full test suite containing also tests for servlets package instead of using only log functions. 
-\subSection{Front End Testing}
+\subsection{Front End Testing}
 For front end testing we covered the functionalities we wanted to offer to clients on the target devices to see if the interaction were correctly implemented. We controlled also that all the possible error messages were displayed to the user.
 We were also helped by the group of people we gathered who provided us useful feedbacks for improving the user experience for later release. With more time we would have done a rework on the user interface to improve the experience of using our system.
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
