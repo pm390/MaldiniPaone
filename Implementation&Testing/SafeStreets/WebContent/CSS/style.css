@@ -193,7 +193,7 @@ h1 {
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
-	font-size: min(14vh, 14vw);
+	font-size: min(12vh, 12vw);
 }
 h2 {
 	position: absolute;
@@ -425,3 +425,6 @@ div#noActive {
 	box-shadow:  min(0.5vh,0.5vw) min(0.5vh,0.5vw) min(0.5vh,0.5vw) 0 rgba(0,0,0,0.3) ;
 	
 }
+.onlyRegistration input[type="text"] {
+	width: 60vw;
+	}

@@ -24,21 +24,22 @@ $(".getSuggestions").hide();// Shown only if municipality gets access
 $(".onlyAuthority").hide();
 $(".onlyCitizen").hide();
 
-$(".registration").click(function() {
+$(".registration").click(function(e) {
+	e.preventDefault();
 	if ($(".registration").hasClass("inactive")){
 		$(".registration").removeClass("inactive");
 		$(".registration").val("vai al login");
 		$(".onlyRegistration").show();
-		$("#loginForm").prop('action', './Registration');
-		$(".loginSubmitButton").val("Registrati");
+		$("#loginForm").prop('action', './/Registration');
+		$("#loginSubmitButton").val("Registrati");
 		$("#LoginTitle").html("Registrazione");
 		
 	} else {
 		$(".registration").add("inactive");
 		$(".registration").val("Registrazione");
-		$(".onlyRegistration").show();
-		$("#loginForm").prop('action', './Login');
-		$(".loginSubmitButton").val("Login");
+		$(".onlyRegistration").hide();
+		$("#loginForm").prop('action', './/Login');
+		$("#loginSubmitButton").val("Login");
 		$("#LoginTitle").html("Login");
 	}
 });
@@ -141,11 +142,12 @@ $(".login").click(
 						var json = data;
 						$(target).removeAttr('disabled');// enable the submit
 						// button
-						if (!json["error"]) {// login success
+						if (!json["error"]&&json.userType) {// login success
 							$("#login").hide();
 							$("#home").show();
 							$(".toLogin").hide();
-						} else {// error occured. printed as alert
+						}
+						if(json["error"]){// error occured. printed as alert
 							alert(json["errorCode"].toString()
 									+ json["errorMessage"]);
 							return;
@@ -154,6 +156,7 @@ $(".login").click(
 							{
 							alert("registration succeded");
 							$(".registration").trigger("click");
+							return;
 							}
 						if (json["userType"] == "manager") {// show manager
 							// functionalities
