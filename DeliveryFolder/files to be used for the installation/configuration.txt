@@ -13,7 +13,7 @@ TEMPORARY_PASSWORD_LOWERCASE_LENGHT      5
 TEMPORARY_PASSWORD_UPPERCASE_LENGHT      8  
 MAIL_USERNAME    			 Safestreetssweng19.20@gmail.com
 MAIL_PASSWORD   			 MaldiniPaone9897 
-SERVER_ADDRESS     			 http://localhost:8081/SafeStreets   //useful for later release now only to show an idea
+SERVER_ADDRESS     			 http://localhost:8080/SafeStreets   //useful for later release now only to show an idea
 PHOTO_PATH     				 C:\\SafeStreetsPhotos
 VERBOSE    				 true                                 //set to false on release
 AUTHORITY_LOCATION_GRANULARITY   	 50  
