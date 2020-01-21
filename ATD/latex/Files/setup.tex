@@ -1,0 +1,21 @@
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Back-end setup}
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+In this phase of setup, it is required a software called docker that could be preinstalled. The installation process of this prerequisites could be explained because, during this configuration part we have found some complications: 
+At first time, we’ve tried to install docker provided from the official web site but, the installation is interrupted, because Docker Desktop requires Windows 10 Pro or Enterprise version 15063 to run, therefore the versions of the operating system of our devices can’t guest the software. At second time, after consulting of forum web site we have found on https://github.com/docker/toolbox/releases the installer that could by pass the prerequisites of the operating system version. We have downloaded DockerToolbox-19.03.1.exe and we’ve executed it and done the full installation setup. After that, we have run the Docker Quickstart Terminal which during his initial setup it have downloaded some files, when finished his initial phase we have copied the docker-compose.yml from package given by the other team (… -> DeliveryFolder -> implementation -> back) and pasted to the folder of Docker Toolbox (C: Program Files -> Docker Toolbox). Subsequently  we have run the command “docker-compose up”, on docker terminal, (indicated in the section 6 from ITD document) and when docker have finished his set up, we have tested on the browser the link given by the other team http://localhost:8080/auth/ping with success.  Immediately we have tried to connect the mobile app but without success and then we have created and executed a file.bat which use “NETSH PORTPROXY” command to create a bridge from virtual machine to subnet and then we have tried again to establish the connection with mobile app with result success.
+
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Front-end setup}
+In this phase of setup, we have followed the instructions (indicated in the section 6 from ITD document) with result success about the installation of mobile app.
+%.-------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsubsection{Setup conclusion}
+In the document, about back-end setup lacks explanations of how to install correctly the software and it should give some directions to install in another way the software in case of the customer doesn’t have the compatible operating system. 
+
+
+
+
+
+
+
+
+
